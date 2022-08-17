@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>  
+    <script src="https://cdn.tailwindcss.com?plugins=typography,line-clamp"></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PBO Tool</title>
+    <style>
+      #wrapper-page-breadcrumbs li:before {
+	content: '›';
+	display: inline;
+	color: #AAA;
+	padding: 0 0.5em 0 0.5em;
+}
+  </style>
+  </head>
+  <body class="bg-gray-100">
+    <main class="bg-white container mt-8 p-8 border border-t border-gray-100 mx-auto flex flex-col gap-4">
+      
+      <nav class="flex flex-row gap-2">
+        <a href="#">🏠</a>
+        <ul id="wrapper-page-breadcrumbs"  class="flex flex-row gap-2"></ul>
+      </nav>
+
+      <h1 class="leading-none font-thin mb-4 text-4xl" id="wrapper-page-title"></h1>
+      
+      <pbotool-sample></pbotool-sample>
+    
+    
+    </main>
+    <script>
+      document.addEventListener('navigation-context-update', (e) =>{
+        
+        // Update the page title
+        if (e.detail.pageTitle) {
+          document.getElementById('wrapper-page-title').innerText = e.detail.pageTitle;
+        }
+
+        if (e.detail.breadcrumbStack) {
+          
+          // Empty the breadcrumb stack
+          document.getElementById("wrapper-page-breadcrumbs").innerHTML = "";
+
+          e.detail.breadcrumbStack.forEach(element => {
+            let elLi = document.createElement('li');
+            if (element.url) {
+              let elLiUrl = document.createElement('a');
+              elLiUrl.setAttribute('href', element.url);
+              elLiUrl.innerText = element.name;
+              elLi.appendChild(elLiUrl);
+            } else {
+              elLi.innerText = element.name;
+            }
+           
+            document.getElementById("wrapper-page-breadcrumbs").appendChild(elLi);
+          });
+
+          
+        }
+        
+        
+
+
+
+      });
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
