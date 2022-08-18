@@ -1,38 +1,53 @@
 <template>
-<div class="flex flex-col justify-center items-center gap-8">
-  <img alt="Vue logo" :src="logoUrl" class="w-64" />
-  <ToolSplash />
-  </div>
+<Suspense>
+<div>
+  <FilePicker v-if="!shouldDisplayEditor && !pbomlDocument" @pick=""></FilePicker>
+  <Editor v-if="shouldDisplayEditor && pbomlDocument"></Editor>
+  <Renderer v-if="!shouldDisplayEditor && pbomlDocument" :pboml-document="pbomlDocument"></Renderer>
+</div>
+<template #fallback>
+  <LoadingIndicator class="w-8 h-8" />
 </template>
+</Suspense>
+</template>
+<script setup>
+import yaml from 'js-yaml'
 
-<script>
-import logoUrl from "./assets/logo.svg?url";
-import ToolSplash from './components/ToolSplash.vue'
-import WrapperEventDispatcher from "./WrapperEventDispatcher.js"
+import { ref, defineAsyncComponent, computed } from 'vue'
+import LoadingIndicator from './components/LoadingIndicator.vue'
+import Renderer from './components/Renderer/Renderer.vue'
 
-const language = document.documentElement.lang;
+const Editor = defineAsyncComponent(() =>
+  import('./components/Editor/Editor.vue')
+)
 
-export default {
-  data() {
-    return {
-      language: language,
-    };
-  },
-  computed: {
-    logoUrl() {
-      return logoUrl
-    }
-  },
-  components: {
-    ToolSplash,
-  },
-  mounted() {
+const FilePicker = defineAsyncComponent(() =>
+  import('./components/FilePicker/FilePicker.vue')
+)
 
-    const pageTitle = this.language === 'fr' ? 'Gabarit' : 'Boilerplate';
-    (new WrapperEventDispatcher(pageTitle, null)).dispatch();
+const props = defineProps({
+    payload: {
+      type: String, required: false
+    }, 
+    edit: {
+      type: Boolean,
+      required: false
+  }});
 
-  }
-};
+let pbomlDocument;
+if (props.payload) {
+  pbomlDocument = ref(yaml.loadAll(props.payload));
+} else {
+  pbomlDocument = ref(null);
+}
+
+const language = (document.documentElement.lang)
+
+const shouldDisplayEditor = computed(() => {
+  return props.edit ? true : false;
+})
+
+
 </script>
 <style>
 @import "./index.css";
