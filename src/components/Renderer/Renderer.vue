@@ -1,9 +1,12 @@
 <template>
-  {{ pbomlVersion }}
+  <component :is="rendererName"></component>
 </template>
 
 
 <script>
+//var semver = require('semver');
+import Renderer1 from "./1.0/Renderer1.vue";
+
 export default {
     props: {
         pbomlDocument:{
@@ -13,8 +16,20 @@ export default {
     },
     computed: {
         pbomlVersion() {
-            return this.pbomlDocument.find(element => element.pboml?.version)?.pboml.version
+            const v = this.pbomlDocument.find(element => element.pboml?.version)?.pboml.version;
+            return v;
+        },
+        rendererName() {
+            if (!this.pbomlVersion)
+                return null;
+
+            if (`${this.pbomlVersion}` === "1.0" || `${this.pbomlVersion}`.startsWith('1.0.'))
+                return "Renderer1";
+           return null;
         }
+    },
+    components: {
+        Renderer1
     }
 };
 </script>
