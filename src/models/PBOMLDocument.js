@@ -1,4 +1,5 @@
 import MarkdownSlice from "./contents/MarkdownSlice";
+import TableSlice from "./contents/TableSlice";
 
 export default class PBOMLDocument {
     constructor(payload) {
@@ -18,6 +19,8 @@ export default class PBOMLDocument {
             switch (sliceType) {
                 case 'markdown':
                     return new MarkdownSlice(el);
+                case 'table':
+                    return new TableSlice(el);
             }
 
         }).filter(n => n);
