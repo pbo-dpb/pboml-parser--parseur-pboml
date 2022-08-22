@@ -15,7 +15,7 @@ import yaml from 'js-yaml'
 
 import { ref, defineAsyncComponent, computed } from 'vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
-import Renderer from './components/Renderer/Renderer.vue'
+import Renderer from './components/Renderer/Renderer.js'
 import PBOMLDocument from './models/PBOMLDocument';
 
 const Editor = defineAsyncComponent(() =>
