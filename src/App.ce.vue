@@ -16,6 +16,7 @@ import yaml from 'js-yaml'
 import { ref, defineAsyncComponent, computed } from 'vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
 import Renderer from './components/Renderer/Renderer.vue'
+import PBOMLDocument from './models/PBOMLDocument';
 
 const Editor = defineAsyncComponent(() =>
   import('./components/Editor/Editor.vue')
@@ -36,7 +37,8 @@ const props = defineProps({
 
 let pbomlDocument;
 if (props.payload) {
-  pbomlDocument = ref(yaml.loadAll(props.payload));
+  let payload = yaml.loadAll(props.payload);
+  pbomlDocument = ref(new PBOMLDocument(payload));
 } else {
   pbomlDocument = ref(null);
 }

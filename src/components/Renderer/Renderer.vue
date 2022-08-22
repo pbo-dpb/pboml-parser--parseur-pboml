@@ -1,29 +1,26 @@
 <template>
-  <component :is="rendererName"></component>
+  <component :is="rendererName" :pboml-document="pbomlDocument"></component>
 </template>
 
 
 <script>
-//var semver = require('semver');
+import PBOMLDocument from "../../models/PBOMLDocument";
 import Renderer1 from "./1.0/Renderer1.vue";
 
 export default {
     props: {
         pbomlDocument:{
-            type: Array,
+            type: PBOMLDocument,
             required: true
         }
     },
     computed: {
-        pbomlVersion() {
-            const v = this.pbomlDocument.find(element => element.pboml?.version)?.pboml.version;
-            return v;
-        },
+        
         rendererName() {
-            if (!this.pbomlVersion)
+            if (!this.pbomlDocument.version)
                 return null;
 
-            if (`${this.pbomlVersion}` === "1.0" || `${this.pbomlVersion}`.startsWith('1.0.'))
+            if (`${this.pbomlDocument.version}` === "1.0" || `${this.pbomlDocument.version}`.startsWith('1.0.'))
                 return "Renderer1";
            return null;
         }
