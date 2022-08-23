@@ -4,7 +4,7 @@ import { Remarkable } from 'remarkable';
 
 
 export default class TableSliceVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center';
 
     constructor(payload) {
         this.label = {
@@ -20,12 +20,12 @@ export default class TableSliceVariable {
 
 
 
-    getTableHeaderVnode() {
+    getTableHeaderVnode(scope = null) {
         const md = new Remarkable({ breaks: false, });
-        return h('th', { class: TableSliceVariable.#cellBaseClass, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
+        return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
-    getTableCellVnode(value) {
+    getTableCellVnode(value, scope = null) {
 
         let innerHTML;
         switch (this.type) {
@@ -40,7 +40,7 @@ export default class TableSliceVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: TableSliceVariable.#cellBaseClass, innerHTML });
+        return h(this.is_descriptive ? 'th' : 'td', { class: TableSliceVariable.#cellBaseClass, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 
