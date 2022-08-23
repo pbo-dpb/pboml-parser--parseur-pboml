@@ -53,4 +53,7 @@ const shouldDisplayEditor = computed(() => {
 </script>
 <style>
 @import "./index.css";
+th {
+  @apply font-semibold;
+}
 </style>
