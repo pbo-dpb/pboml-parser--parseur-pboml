@@ -1,3 +1,4 @@
+import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
 
@@ -21,6 +22,8 @@ export default class PBOMLDocument {
                     return new MarkdownSlice(el);
                 case 'table':
                     return new TableSlice(el);
+                case 'kvlist':
+                    return new KvListSlice(el);
             }
 
         }).filter(n => n);
