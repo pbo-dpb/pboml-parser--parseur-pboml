@@ -24,7 +24,7 @@ export default class TableSliceVariable {
         return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
-    getTableCellVnode(value, scope = null, language) {
+    getTableCellVnode(value, scope = null, print = false, language) {
 
         let innerHTML;
         switch (this.type) {
@@ -33,13 +33,17 @@ export default class TableSliceVariable {
                 innerHTML = md.render(value[language] ? value[language] : value)
                 break;
             case 'number':
-                innerHTML = (new Intl.NumberFormat(language)).format(value);
+                // Patches an issue with jsPDF where french numbers (eg. 12 345) are inconsistently rendered with slashes (12/345)
+                if (print && language === 'fr')
+                    innerHTML = (value);
+                else
+                    innerHTML = (new Intl.NumberFormat(language)).format(value);
                 break;
             default:
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: TableSliceVariable.#cellBaseClass, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableSliceVariable.#cellBaseClass} ${print ? 'py-2' : ''}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 

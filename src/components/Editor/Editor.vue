@@ -3,11 +3,11 @@
 <editor-download-pdf-button @click="downloadPdf"></editor-download-pdf-button>
 
 <div ref="renderedEn">
-    <Renderer :pboml-document="pbomlDocument" language="en"></Renderer>
+    <Renderer :pboml-document="pbomlDocument" language="en" :print="true"></Renderer>
 </div>
 
 <div ref="renderedFr">
-    <Renderer :pboml-document="pbomlDocument" language="fr"></Renderer>
+    <Renderer :pboml-document="pbomlDocument" language="fr" :print="true"></Renderer>
 </div>
 
 </template>

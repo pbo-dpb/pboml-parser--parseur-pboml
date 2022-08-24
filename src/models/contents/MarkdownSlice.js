@@ -13,8 +13,8 @@ export default class MarkdownSlice extends Slice {
     }
 
 
-    _buildVnodes(language) {
-        let vnodes = super._buildVnodes();
+    _buildVnodes(print, language) {
+        let vnodes = super._buildVnodes(print, language);
         const md = new Remarkable();
         vnodes.push(h('div', { class: "prose dark:prose-invert max-w-none prose-headings:font-thin", innerHTML: md.render(this.content[language]) }));
         return vnodes;

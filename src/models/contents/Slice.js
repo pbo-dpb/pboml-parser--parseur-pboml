@@ -17,13 +17,13 @@ export default class Slice {
         return h('h2', { innerHTML: this.label[language], class: "text-2xl font-thin" });
     }
 
-    _buildVnodes(language) {
+    _buildVnodes(print, language) {
         return [
             this._renderLabelTitleVnode(language),
         ];
     }
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h('div', { class: 'flex flex-col gap-4' }, this._buildVnodes(language));
+        return h('div', { class: 'flex flex-col gap-4' }, this._buildVnodes(print, language));
     }
 }
