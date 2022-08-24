@@ -2,7 +2,7 @@
 <Suspense>
 <div>
   <FilePicker v-if="!shouldDisplayEditor && !pbomlDocument" @pick=""></FilePicker>
-  <Editor v-if="shouldDisplayEditor && pbomlDocument"></Editor>
+  <Editor v-if="shouldDisplayEditor && pbomlDocument" :pboml-document="pbomlDocument"></Editor>
   <Renderer v-if="!shouldDisplayEditor && pbomlDocument" :pboml-document="pbomlDocument"></Renderer>
 </div>
 <template #fallback>
@@ -31,7 +31,6 @@ const props = defineProps({
       type: String, required: false
     }, 
     edit: {
-      type: Boolean,
       required: false
   }});
 

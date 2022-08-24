@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --port 8080",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "js-yaml": "^4.1.0",
+    "jspdf": "^2.5.1",
     "remarkable": "^2.0.1",
     "vue": "^3.2.25"
   },
