@@ -2,8 +2,12 @@
 
 <editor-download-pdf-button @click="downloadPdf"></editor-download-pdf-button>
 
-<div ref="hello">
-    <Renderer :pboml-document="pbomlDocument"></Renderer>
+<div ref="renderedEn">
+    <Renderer :pboml-document="pbomlDocument" language="en"></Renderer>
+</div>
+
+<div ref="renderedFr">
+    <Renderer :pboml-document="pbomlDocument" language="fr"></Renderer>
 </div>
 
 </template>
@@ -23,7 +27,7 @@ export default {
     },
     methods: {
         downloadPdf(root){
-            const renderer = new PdfRenderer(this.pbomlDocument, this.$refs.hello);
+            const renderer = new PdfRenderer(this.pbomlDocument, {en: this.$refs.renderedEn, fr: this.$refs.renderedFr});
             renderer.download();
         }
     }

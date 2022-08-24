@@ -1,5 +1,4 @@
 import { h } from 'vue'
-const language = document.documentElement.lang;
 import { Remarkable } from 'remarkable';
 
 
@@ -20,12 +19,12 @@ export default class TableSliceVariable {
 
 
 
-    getTableHeaderVnode(scope = null) {
+    getTableHeaderVnode(scope = null, language) {
         const md = new Remarkable({ breaks: false, });
         return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
-    getTableCellVnode(value, scope = null) {
+    getTableCellVnode(value, scope = null, language) {
 
         let innerHTML;
         switch (this.type) {

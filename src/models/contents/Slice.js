@@ -1,5 +1,4 @@
 import { h } from 'vue'
-const language = document.documentElement.lang;
 
 export default class Slice {
     constructor(payload) {
@@ -13,18 +12,18 @@ export default class Slice {
         this.content = payload.content;
     }
 
-    _renderLabelTitleVnode() {
+    _renderLabelTitleVnode(language) {
         if (!this.display_label) return null;
         return h('h2', { innerHTML: this.label[language], class: "text-2xl font-thin" });
     }
 
-    _buildVnodes() {
+    _buildVnodes(language) {
         return [
-            this._renderLabelTitleVnode(),
+            this._renderLabelTitleVnode(language),
         ];
     }
 
-    renderAsVnode() {
-        return h('div', { class: 'flex flex-col gap-4' }, this._buildVnodes());
+    renderAsVnode(print = false, language = document.documentElement.lang) {
+        return h('div', { class: 'flex flex-col gap-4' }, this._buildVnodes(language));
     }
 }

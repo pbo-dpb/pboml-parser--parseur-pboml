@@ -28,11 +28,11 @@ export default class KvListSlice extends Slice {
     }
 
 
-    _buildVnodes() {
-        let vnodes = super._buildVnodes();
+    _buildVnodes(language) {
+        let vnodes = super._buildVnodes(language);
 
         vnodes.push(h('dl', { 'class': 'flex flex-col gap-2' }, this.content.map((kv) => {
-            return kv.getKvNode();
+            return kv.getKvNode(language);
         })));
 
         return vnodes;

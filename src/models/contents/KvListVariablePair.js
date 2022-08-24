@@ -1,5 +1,4 @@
 import { h } from 'vue'
-const language = document.documentElement.lang;
 import { Remarkable } from 'remarkable';
 
 
@@ -19,7 +18,7 @@ export default class KvListVariablePair {
 
     }
 
-    renderKeyOrValueContentToHtml(type, value) {
+    renderKeyOrValueContentToHtml(type, value, language) {
         let innerHTML;
 
         switch (type) {
@@ -36,26 +35,26 @@ export default class KvListVariablePair {
         return innerHTML;
     }
 
-    getKeyVnode() {
+    getKeyVnode(language) {
 
         return h('dt', { class: "" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label) }) : null,
-            h('span', { class: "font-semibold text-gray-800 text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.key.type, this.key.content) })
+            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label, language) }) : null,
+            h('span', { class: "font-semibold text-gray-800 text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.key.type, this.key.content, language) })
         ]);
     }
 
-    getValueVnode() {
+    getValueVnode(language) {
         return h('dd', { class: "col-span-2" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label) }) : null,
-            h('span', { class: "text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.value.type, this.value.content) })
+            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label, language) }) : null,
+            h('span', { class: "text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.value.type, this.value.content, language) })
         ]);
     }
 
-    getKvNode() {
+    getKvNode(language) {
         return h('div', { 'class': 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' },
             [
-                this.getKeyVnode(),
-                this.getValueVnode()
+                this.getKeyVnode(language),
+                this.getValueVnode(language)
             ]);
     }
 

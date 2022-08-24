@@ -1,6 +1,5 @@
 import { h } from 'vue'
 import Slice from "./Slice";
-const language = document.documentElement.lang;
 import { Remarkable } from 'remarkable';
 
 
@@ -14,7 +13,7 @@ export default class MarkdownSlice extends Slice {
     }
 
 
-    _buildVnodes() {
+    _buildVnodes(language) {
         let vnodes = super._buildVnodes();
         const md = new Remarkable();
         vnodes.push(h('div', { class: "prose dark:prose-invert max-w-none prose-headings:font-thin", innerHTML: md.render(this.content[language]) }));
