@@ -1,0 +1,214 @@
+- pboml:
+    version: 1.0.0
+  document:
+    form: EPC_2021
+    type:
+      en: Cost Estimate of Election Campaign Proposal
+      fr: Estimation du coût d'une promesse électorale
+    copyright:
+      en: © Office of the Parliamentary Budget Officer, Ottawa, Canada, 2021
+      fr: © Bureau du directeur parlementaire du budget, Ottawa, Canada, 2021
+  slices:
+    - type: markdown
+      readonly: false
+      display_label: true
+      label:
+        en: Description
+        fr: Description
+      content:
+        en: >-
+          Introducing a financial transaction tax (FTT) on all financial
+          transactions in Canada at 0.5% of transaction value. This proposal
+          will be effective January 1, 2022.
+        fr: >-
+          Il s'agit d'instaurer une taxe sur toutes les transactions financières
+          au Canada à hauteur de 0,5 % de la valeur de la transaction. La
+          proposition prendrait effet le 1er janvier 2022.
+    - type: table
+      readonly: false
+      display_label: true
+      label:
+        en: Cost of Proposed Measure
+        fr: Coût de la mesure proposée
+      content:
+        - fiscalyear:
+            en: 2020-21
+            fr: 2020-2021
+          totalcost: -7574
+        - fiscalyear:
+            en: 2021-22
+            fr: 2021-2022
+          totalcost: -30874
+        - fiscalyear:
+            en: 2022-23
+            fr: 2022-2023
+          totalcost: -33236
+        - fiscalyear:
+            en: 2023-24
+            fr: 2023-2024
+          totalcost: -35784
+        - fiscalyear:
+            en: 2025-26
+            fr: 2025-2026
+          totalcost: -38532
+        - fiscalyear:
+            en: Total
+            fr: Total
+          totalcost: -146000
+      variables:
+        fiscalyear:
+          label:
+            en: Fiscal Year
+            fr: Année fiscale
+          type: markdown
+          readonly: true
+          display_label: false
+          is_descriptive: true
+        totalcost:
+          label:
+            en: Total cost
+            fr: Coût total
+          type: number
+          readonly: false
+          display_label: true
+    - type: markdown
+      readonly: false
+      display_label: false
+      label:
+        en: Notes
+        fr: Notes
+      content:
+        en: >
+          - Estimates are presented on an accrual basis as would appear in the
+          budget and public accounts.
+
+          - A positive number implies a reduction in the budgetary balance
+          (lower revenues or higher spending). A negative number implies an
+          increase in the budgetary balance (higher revenues or lower spending).
+
+          - *[-]* = PBO does not expect a financial cost
+        fr: >
+          - Les estimations sont présentées selon la méthode de la comptabilité
+          d'exercice comme cela apparaît dans le budget et les comptes publics
+
+          - Un nombre positif indique une diminution du solde budgétaire (en
+          raison d'une baisse des revenus ou d'une hausse des dépenses). Un
+          nombre négatif indique une augmentation du solde budgétaire (en raison
+          d'une hausse des revenus ou d'une baisse des dépenses).
+
+          - « - » = Le DPB ne prévoit pas de coût financier.
+    - type: markdown
+      readonly: false
+      display_label: true
+      label:
+        en: Estimation and projection method
+        fr: Méthode d'évaluation et d'établissement des projections
+      content:
+        en: >-
+          The tax base was estimated using transaction volumes for equity
+          trading, bond trading, exchange traded derivatives, over-the-counter
+          (OTC) derivatives, foreign exchange (FX) spot market, FX swaps, FX
+          outright forwards, FX OTC and the money market. Potential revenue from
+          the proposal was estimated using the methodology in European
+          Commission report's Securities and Exchange Commission (2011) 1102
+          final. Growth in transactions was projected based on recent trends.
+          Relocation and fiscal evasion between 10% to 90% was assumed depending
+          on the financial product.
+        fr: >-
+          L'assiette fiscale a été estimée à partir du nombre de transactions
+          sur le marché boursier, le marché des obligations, le marché des
+          produits dérivés cotés en bourse, le marché de produits dérivés de gré
+          à gré, le marché au comptant en devises étrangères, les swaps de
+          devises, les opérations à terme sec en devises étrangères, les
+          produits de gré à gré en devises étrangères et le marché monétaire.
+          Les recettes éventuelles de la proposition ont été calculées à l'aide
+          de la méthodologie employée dans le rapport de la Commission
+          européenne sur les valeurs mobilières no SEC(2011) 1102 final.
+          L'augmentation des transactions a d'ailleurs été extrapolée. On a
+          supposé que la délocalisation et l'évasion fiscale oscillaient entre
+          10 et 90 % selon le produit financier.
+    - type: markdown
+      readonly: false
+      display_label: false
+      label:
+        en: Source of Uncertainty
+        fr: Source d'incertitude
+      content:
+        en: >-
+          The main sources of uncertainty relate to the magnitude of the
+          behavioural responses and to the trend projection of financial
+          transactions.
+        fr: >-
+          Les principales sources d’incertitude tiennent à l’ampleur des
+          réactions comportementales et à l’extrapolation des transactions
+          financières.
+    - type: kvlist
+      readonly: false
+      display_label: true
+      label:
+        en: Data Sources
+        fr: Sources des données
+      content:
+        - key:
+            content:
+              en: Equity market transactions
+              fr: Transactions sur le marché boursier
+          value:
+            content:
+              en: >-
+                Bank of Canada, Investment Industry Regulatory Organization of
+                Canada
+              fr: >-
+                Banque du Canada, Organisme canadien de réglementation du
+                commerce des valeurs mobilières
+        - key:
+            content:
+              en: Bond market transactions
+              fr: Transactions sur le marché des obligations
+          value:
+            content:
+              en: >-
+                Bank of Canada, Investment Industry Regulatory Organization of
+                Canada
+              fr: >-
+                Banque du Canada, Organisme canadien de réglementation du
+                commerce des valeurs mobilières
+        - key:
+            content:
+              en: Money market transactions
+              fr: Transactions sur les marchés monétaires
+          value:
+            content:
+              en: >-
+                Bank of Canada, Investment Industry Regulatory Organization of
+                Canada
+              fr: >-
+                Banque du Canada, Organisme canadien de réglementation du
+                commerce des valeurs mobilières
+        - key:
+            content:
+              en: Derivative transactions
+              fr: Transactions sur des produits dérivés
+          value:
+            content:
+              en: >-
+                Bank for International Settlements, Depository Trust and
+                Clearing Corporation
+              fr: >-
+                Banque des règlements internationaux, Depository Trust and
+                Clearing Corporation
+        - key:
+            content:
+              en: Foreign exchange transactions
+              fr: Transactions en devises étrangères
+          value:
+            content:
+              en: >-
+                Bank for International Settlements, Depository Trust and
+                Clearing Corporation
+              fr: Comité canadien du marché des changes
+      prototype:
+        key:
+          label: {}
+        value:
+          label: {}

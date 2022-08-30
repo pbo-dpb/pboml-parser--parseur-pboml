@@ -26,4 +26,18 @@ export default class Slice {
     renderAsVnode(print = false, language = document.documentElement.lang) {
         return h('div', { class: 'flex flex-col gap-4' }, this._buildVnodes(print, language));
     }
+
+
+    toArray() {
+        return {
+            type: this.type,
+            readonly: this.readonly,
+            display_label: this.display_label,
+            label: {
+                en: this.label?.en,
+                fr: this.label?.fr
+            },
+            content: this.content
+        }
+    }
 }

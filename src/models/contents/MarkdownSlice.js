@@ -20,4 +20,13 @@ export default class MarkdownSlice extends Slice {
         return vnodes;
     }
 
+    toArray() {
+        let array = super.toArray();
+        array.content = {
+            en: this.content?.en,
+            fr: this.content?.fr
+        }
+        return array;
+    }
+
 }

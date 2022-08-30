@@ -47,4 +47,15 @@ export default class TableSliceVariable {
     }
 
 
+    toArray() {
+        return {
+            label: { en: this.label?.en, fr: this.label?.fr },
+            type: this.type,
+            readonly: this.readonly,
+            display_label: this.display_label,
+            is_descriptive: this.is_descriptive
+        }
+    }
+
+
 }

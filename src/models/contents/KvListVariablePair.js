@@ -59,4 +59,16 @@ export default class KvListVariablePair {
     }
 
 
+    toArray() {
+        return {
+            key: {
+                content: this.key.content
+            },
+            value: {
+                content: this.value.content
+            }
+        }
+    }
+
+
 }

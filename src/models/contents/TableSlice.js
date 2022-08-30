@@ -92,4 +92,19 @@ export default class TableSlice extends Slice {
         return vnodes;
     }
 
+
+    toArray() {
+        let array = super.toArray();
+
+        array.variables = {};
+
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, value] = entry;
+            array.variables[key] = value.toArray();
+        });
+
+        array.content = this.content;
+        return array;
+    }
+
 }
