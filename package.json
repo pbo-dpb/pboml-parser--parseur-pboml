@@ -10,6 +10,7 @@
   "dependencies": {
     "js-yaml": "^4.1.0",
     "jspdf": "^2.5.1",
+    "pdf-lib": "^1.17.1",
     "remarkable": "^2.0.1",
     "vue": "^3.2.25"
   },
