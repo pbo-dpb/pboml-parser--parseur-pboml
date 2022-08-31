@@ -77,7 +77,7 @@ export default {
                     resolve(fr.result)
                 };
                 fr.onerror = reject;
-                fr.readAsText(pdfFile);
+                fr.readAsText(pbomlFile);
             }).then((fileContent) => {
                 this.unpackPbomlDocument(fileContent);
             }, () => {
@@ -90,11 +90,10 @@ export default {
 
             if (file.type === 'application/pdf') {
                 return this.readPdfWithPbomlFile(file);
-            } else if (file.type === "text/yaml") {
-                return this.readPbomlFile(file);
             }
 
-            this.hasError = "Invalid file type // Type de fichier non valide";
+            this.readPbomlFile(file);
+
         }
     }
 }
