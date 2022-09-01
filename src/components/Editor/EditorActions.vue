@@ -15,7 +15,7 @@
         </nav>
 
         <div class="flex flex-row gap-2 justify-end bg-blue-100 shadow p-2" v-if="shouldDisplayExportActions">
-            <button @click="shouldDisplayPreprintExporter = !shouldDisplayPreprintExporter"
+            <button @click="shouldDisplayPreprintExporter = true"
                 class="bg-blue-800 hover:bg-blue-700 p-2 rounded text-white">
                 Preprint // Préimpression
             </button>
@@ -26,13 +26,12 @@
 
 
 
-        <section>
 
 
-            <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
+        <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"
+            @complete="shouldDisplayPreprintExporter = false"></preprint-exporter>
 
 
-        </section>
     </div>
 </template>
 <script>

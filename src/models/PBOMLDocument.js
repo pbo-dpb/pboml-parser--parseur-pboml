@@ -2,6 +2,7 @@ import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
 import yaml from 'js-yaml'
+import { DateTime } from "luxon";
 
 
 export default class PBOMLDocument {
@@ -20,6 +21,9 @@ export default class PBOMLDocument {
 
         this.id = mainDocument.document?.id;
 
+        this.release_date = mainDocument.document?.release_date;
+
+
         this.title = mainDocument.document?.title;
 
         this.slices = mainDocument.slices?.map((el) => {
@@ -37,6 +41,23 @@ export default class PBOMLDocument {
         }).filter(n => n);
     }
 
+
+    get localizedReleaseDate() {
+        if (!this.release_date) return;
+        return {
+            fr: this.release_date.toLocaleDateString('fr-CA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            en: this.release_date.toLocaleDateString('en-CA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            })
+        }
+    }
+
     toArray() {
         const documents = [];
 
@@ -48,6 +69,7 @@ export default class PBOMLDocument {
                 form: this.form,
                 version: this.version,
                 id: this.id,
+                release_date: this.release_date ? this.release_date.toISOString() : null,
                 title: {
                     en: this.title?.en,
                     fr: this.title?.fr
