@@ -1,41 +1,24 @@
 <template>
 
-<main class="flex flex-col gap-4">
+    <main class="flex flex-col gap-4">
 
-<div class="flex flex-row justify-end">
-    <button @click="shouldDisplayPreprintExporter=!shouldDisplayPreprintExporter" class="bg-blue-800 hover:bg-blue-700 p-2 rounded text-white">
-    PRE 📄
-    </button>
-</div>
+        <editor-actions :pboml-document="pbomlDocument"></editor-actions>
 
-
-<section>
-
-
-<preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
-
-
-</section>
-</main>
+    </main>
 
 </template>
 <script>
 import PBOMLDocument from '../../models/PBOMLDocument';
-import PreprintExporter from './PreprintExporter/PreprintExporter.vue';
-
+import EditorActions from './EditorActions.vue';
 
 export default {
     props: {
         pbomlDocument: PBOMLDocument
     },
-    data() {
-        return {
-            shouldDisplayPreprintExporter: false,
-        }
-    },
+
     components: {
-        PreprintExporter,
+        EditorActions,
     },
-    
+
 }
 </script>

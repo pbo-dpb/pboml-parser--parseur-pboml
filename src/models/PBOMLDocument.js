@@ -18,6 +18,10 @@ export default class PBOMLDocument {
         this.form = mainDocument.document?.form;
         this.type = mainDocument.document?.type;
 
+        this.id = mainDocument.document?.id;
+
+        this.title = mainDocument.document?.title;
+
         this.slices = mainDocument.slices?.map((el) => {
 
             const sliceType = el.type;
@@ -36,7 +40,6 @@ export default class PBOMLDocument {
     toArray() {
         const documents = [];
 
-
         let mainDocument = {
             pboml: {
                 version: "1.0.0"
@@ -44,6 +47,11 @@ export default class PBOMLDocument {
             document: {
                 form: this.form,
                 version: this.version,
+                id: this.id,
+                title: {
+                    en: this.title?.en,
+                    fr: this.title?.fr
+                },
                 type: {
                     en: this.type?.en,
                     fr: this.type?.fr

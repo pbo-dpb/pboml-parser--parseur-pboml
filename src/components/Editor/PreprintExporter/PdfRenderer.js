@@ -41,8 +41,8 @@ export default class PdfRenderer {
             x: 20,
             y: 20,
             width: 180,
-            callback: function (doc) {
-                doc.save();
+            callback: (doc) => {
+                doc.save(`${this.pbomlDocument.id}.pdf`);
             },
             windowWidth: 1024,
         });

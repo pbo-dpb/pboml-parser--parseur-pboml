@@ -43,7 +43,7 @@ export default {
     LoadingIndicator,
     Renderer,
   },
-  mounted() {
+  created() {
     if (this.payload) {
       let payload = yaml.loadAll(this.payload);
       this.pbomlDocument = new PBOMLDocument(payload)
