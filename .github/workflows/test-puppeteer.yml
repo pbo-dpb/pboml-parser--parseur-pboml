@@ -13,5 +13,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: pbomlexample.pdf
-          path: export.pdf
+          path: pbomlexample.pdf
           retention-days: 1
