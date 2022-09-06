@@ -1,0 +1,11 @@
+name: test-puppeteer-pdf
+on: [workflow_dispatch]
+jobs:
+  generate-page-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Convert https://github.com to PDF
+        uses: "imbhargav5/puppeteer-pdf-action@master"
+        with:
+          url: https://github.com
+          output-file-path: github.pdf
