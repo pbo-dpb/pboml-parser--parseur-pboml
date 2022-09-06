@@ -2,7 +2,6 @@ import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
 import yaml from 'js-yaml'
-import { DateTime } from "luxon";
 
 
 export default class PBOMLDocument {
