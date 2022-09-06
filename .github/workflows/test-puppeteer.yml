@@ -4,8 +4,14 @@ jobs:
   generate-page-pdf:
     runs-on: ubuntu-latest
     steps:
-      - name: Convert https://github.com to PDF
+      - name: Convert page to PDF
         uses: "imbhargav5/puppeteer-pdf-action@master"
         with:
           url: http://138.197.162.1:8080/#/
           output-file-path: pbomlexample.pdf
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: pbomlexample.pdf
+          path: export.pdf
+          retention-days: 1
