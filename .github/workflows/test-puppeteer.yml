@@ -7,5 +7,5 @@ jobs:
       - name: Convert https://github.com to PDF
         uses: "imbhargav5/puppeteer-pdf-action@master"
         with:
-          url: https://github.com
-          output-file-path: github.pdf
+          url: http://138.197.162.1:8080/#/
+          output-file-path: pbomlexample.pdf
