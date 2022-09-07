@@ -9,7 +9,7 @@ export default {
   },
 
   render() {
-    return h('main', { 'class': 'flex flex-col gap-4' }, this.pbomlDocument.slices.map((slice) => {
+    return h('main', { 'class': 'flex flex-col gap-4 print:block' }, this.pbomlDocument.slices.map((slice) => {
       return slice.renderAsVnode(this.print, this.language);
     }));
   }
