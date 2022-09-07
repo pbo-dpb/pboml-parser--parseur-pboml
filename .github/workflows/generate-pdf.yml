@@ -1,12 +1,12 @@
 name: generate-pdf
 on: workflow_dispatch
-  inputs:
-      input:
-        description: 'A PBOML payload (YAML string).'
-        required: true
-      callback:
-        description: 'URL to POST the artifacts to.'
-        required: true
+inputs:
+    input:
+      description: 'A PBOML payload (YAML string).'
+      required: true
+    callback:
+      description: 'URL to POST the artifacts to.'
+      required: true
 jobs:
   generate-page-pdf:
     runs-on: ubuntu-latest
