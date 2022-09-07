@@ -79,13 +79,13 @@ export default class TableSlice extends Slice {
     _buildVnodes(pring, language) {
         let vnodes = super._buildVnodes(print, language);
         vnodes.push(h('table', {
-            class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "lg:hidden" : "hidden lg:table"}`
+            class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
         }, [
             this.__buildHorizontalHeader(print, language),
             this.__buildHorizontalBody(print, language),
         ]));
 
-        vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table" : "lg:hidden"}` },
+        vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table print:table print:text-sm" : "lg:hidden print:hidden"}` },
             this.__buildVerticalBody(print, language),
         ));
 
