@@ -1,5 +1,11 @@
 name: test-puppeteer-pdf
-on: [workflow_dispatch]
+on: workflow_dispatch
+  inputs:
+      input:
+        description: 'A PBOML payload'
+        required: true
+
+
 jobs:
   generate-page-pdf:
     runs-on: ubuntu-latest
