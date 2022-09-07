@@ -6,7 +6,7 @@
       </template>
       <template v-else>
         <Editor v-if="edit" :pboml-document="pbomlDocument"></Editor>
-        <Renderer v-else :pboml-document="pbomlDocument"></Renderer>
+        <Renderer v-else :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
       </template>
     </div>
     <template #fallback>
@@ -34,6 +34,9 @@ export default {
       required: false
     },
     edit: {
+      required: false
+    },
+    standalone: {
       required: false
     }
   },
