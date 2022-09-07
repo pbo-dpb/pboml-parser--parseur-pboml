@@ -1,11 +1,12 @@
-name: test-puppeteer-pdf
+name: generate-pdf
 on: workflow_dispatch
   inputs:
       input:
-        description: 'A PBOML payload'
+        description: 'A PBOML payload (YAML string).'
         required: true
-
-
+      callback:
+        description: 'URL to POST the artifacts to.'
+        required: true
 jobs:
   generate-page-pdf:
     runs-on: ubuntu-latest
@@ -13,7 +14,7 @@ jobs:
       - name: Convert page to PDF
         uses: "imbhargav5/puppeteer-pdf-action@master"
         with:
-          url: http://138.197.162.1:8080/#/
+          url: https://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/index.html
           output-file-path: pbomlexample.pdf
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
