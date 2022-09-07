@@ -13,8 +13,8 @@ export default defineConfig({
   })],
   build: {
     manifest: true,
-    /*rollupOptions: {
-      input: ['./index.html', './src/main.js'],
-    },*/
+    rollupOptions: {
+      input: ['./index.html', 'index.fr.html'],
+    },
   }
 })
