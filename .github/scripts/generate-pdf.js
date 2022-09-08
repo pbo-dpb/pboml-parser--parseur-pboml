@@ -18,7 +18,7 @@ const makePdf = async function (language) {
         },
         displayHeaderFooter: true,
         headerTemplate: '<div></div>',
-        footerTemplate: `<div style="font-size: 12px;text-align:right;padding: 0 1.2cm"><span class='pageNumber'></span> / <span class='totalPages'></span></div>`,
+        footerTemplate: `<div style="font-size: 12px;text-align:center;width:100%;padding: 0 0.6cm"><span class='pageNumber'></span> / <span class='totalPages'></span></div>`,
     });
 
     await browser.close();
