@@ -3,8 +3,8 @@ const puppeteer = require('puppeteer');
 const makePdf = async function (language) {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    let rootFile = language === 'en' ? "index.html" : 'index.fr.html';
-    await page.goto('https://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/index.html', {
+    let baseUrl = new URL(`https://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+    await page.goto(baseUrl.toString(), {
         waitUntil: 'networkidle2',
     });
     await page.pdf({
