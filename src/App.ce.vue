@@ -1,12 +1,12 @@
 <template>
   <Suspense>
     <div>
-      <template v-if="!pbomlDocument">
+      <template v-if="loaded && !pbomlDocument">
         <FilePicker @pick="handlePick"></FilePicker>
       </template>
       <template v-else>
         <Editor v-if="edit" :pboml-document="pbomlDocument"></Editor>
-        <Renderer v-else :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
+        <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
       </template>
     </div>
     <template #fallback>
@@ -25,7 +25,9 @@ import PBOMLDocument from './models/PBOMLDocument';
 export default {
   data() {
     return {
-      pbomlDocument: null
+      _payload: null,
+      pbomlDocument: null,
+      loaded: false
     }
   },
   props: {
@@ -46,17 +48,42 @@ export default {
     LoadingIndicator,
     Renderer,
   },
-  created() {
+  async created() {
+
     if (this.payload) {
-      let payload = yaml.loadAll(this.payload);
+      this._payload = this.payload;
+    } else {
+      await this.attemptToLoadPayloadFromUrlParameter();
+    }
+
+    if (this._payload) {
+      let payload = yaml.loadAll(this._payload);
       this.pbomlDocument = new PBOMLDocument(payload)
     } else {
       this.pbomlDocument = null
     }
+    this.loaded = true;
   },
   methods: {
     handlePick(pickedDocument) {
       this.pbomlDocument = pickedDocument
+    },
+    async attemptToLoadPayloadFromUrlParameter() {
+      const queryString = window.location.search;
+      if (!queryString) return;
+      const params = new URLSearchParams(queryString);
+      if (params.get('payload')) {
+        this._payload = params.get('payload');
+        return;
+      }
+
+
+      if (params.get('payload-url')) {
+        const response = await fetch(params.get('payload-url'));
+        if (!response || !response.ok) return;
+        this._payload = await response.text();
+      }
+
     }
   }
 }
