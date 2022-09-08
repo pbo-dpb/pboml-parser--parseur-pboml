@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '17'
-      - run: npm install -g puppeteer
+      - run: npm i --save puppeteer
       - run: node ./.github/scripts/generate-pdf.js
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
