@@ -2,8 +2,6 @@ const puppeteer = require('puppeteer');
 
 const makePdf = async function (language, payloadUrl) {
     const browser = await puppeteer.launch({
-        headless: headless,
-        devtools: true,
         args: [
             '--disable-web-security',
             '--disable-features=IsolateOrigins',
@@ -34,6 +32,7 @@ const makePdf = async function (language, payloadUrl) {
 };
 
 (async () => {
+    // Test with https://pbo-epc-utils.s3.ca-central-1.amazonaws.com/epc-2021-1.0.0.yaml
     await makePdf("en", process.argv[2]);
     await makePdf("fr", process.argv[2]);
 })();
