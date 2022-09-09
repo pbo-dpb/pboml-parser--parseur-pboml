@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
     inputs:
         input:
-          description: 'A PBOML payload (YAML string).'
+          description: 'Input URL (a PBOML payload url; must be publicly accessible)'
           required: true
-        callback:
-          description: 'URL to POST the artifacts to.'
+        output:
+          description: 'Output URL (to POST the artifacts to).'
           required: true
 jobs:
   generate-page-pdf:
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '17'
       - run: npm i --save puppeteer
-      - run: node ./.github/scripts/generate-pdf.js
+      - run: node ./.github/scripts/generate-pdf.js ${{ github.event.inputs.input }} ${{ github.event.inputs.output }}
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:

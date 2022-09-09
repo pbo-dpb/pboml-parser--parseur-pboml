@@ -1,9 +1,18 @@
 const puppeteer = require('puppeteer');
 
-const makePdf = async function (language) {
-    const browser = await puppeteer.launch();
+const makePdf = async function (language, payloadUrl) {
+    const browser = await puppeteer.launch({
+        headless: headless,
+        devtools: true,
+        args: [
+            '--disable-web-security',
+            '--disable-features=IsolateOrigins',
+            '--disable-site-isolation-trials'
+        ]
+    });
     const page = await browser.newPage();
     let baseUrl = new URL(`https://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+    baseUrl.searchParams.set('payload-url', payloadUrl)
     await page.goto(baseUrl.toString(), {
         waitUntil: 'networkidle2',
     });
@@ -25,6 +34,6 @@ const makePdf = async function (language) {
 };
 
 (async () => {
-    await makePdf("en");
-    await makePdf("fr");
+    await makePdf("en", process.argv[2]);
+    await makePdf("fr", process.argv[2]);
 })();
