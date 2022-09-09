@@ -18,8 +18,10 @@ jobs:
           node-version: '17'
       - run: npm install
       - run: npm i --save puppeteer
-      - run: npm run preview
-      - run: node ./.github/scripts/generate-pdf.js ${{ github.event.inputs.input }} ${{ github.event.inputs.output }}
+      - run: |
+          npm run preview &
+          sleep 5
+          node ./.github/scripts/generate-pdf.js ${{ github.event.inputs.input }} ${{ github.event.inputs.output }}
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
