@@ -9,7 +9,7 @@ const makePdf = async function (language, payloadUrl) {
         ]
     });
     const page = await browser.newPage();
-    let baseUrl = new URL(`http://127.0.0.1:4173/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+    let baseUrl = new URL(`http://localhost:4173/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
     baseUrl.searchParams.set('payload-url', payloadUrl)
     await page.goto(baseUrl.toString(), {
         waitUntil: 'networkidle2',
