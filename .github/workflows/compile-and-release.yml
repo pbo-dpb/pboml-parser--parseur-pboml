@@ -39,4 +39,4 @@ jobs:
           aws_region: ca-central-1
           function_name: ${{ secrets.AWS_LAMBDA_PDF_GENERATION_FUNCTION }}
           source: .lambda-render-to-pdf-function/index.js
-          layers: [arn:aws:lambda:ca-central-1:764866452798:layer:chrome-aws-lambda:31]
+          layers: arn:aws:lambda:ca-central-1:764866452798:layer:chrome-aws-lambda:31
