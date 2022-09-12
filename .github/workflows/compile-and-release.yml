@@ -38,8 +38,5 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ca-central-1
           function_name: pboml-render-to-pdf-v1
-          #memory_size: 4096
-          #timeout: 15
-          runtime: nodejs16.x
           source: .lambda-render-to-pdf-function/index.js
           layers: arn:aws:lambda:ca-central-1:764866452798:layer:chrome-aws-lambda:31
