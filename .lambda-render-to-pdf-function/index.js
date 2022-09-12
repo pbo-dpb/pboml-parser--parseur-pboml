@@ -1,5 +1,6 @@
 const chromium = require("@sparticuz/chrome-aws-lambda");
 const fs = require("fs");
+const crypto = require('crypto');
 
 
 const makePdf = async function (language, payloadUrl) {
@@ -38,12 +39,41 @@ const makePdf = async function (language, payloadUrl) {
     return buffer;
 };
 
-
 exports.handler = async (event) => {
 
 
     const input = event.queryStringParameters.input;
     const language = event.queryStringParameters.language;
+    const signature = event.queryStringParameters.signature;
+    const salt = event.queryStringParameters.salt;
+    const expiration = event.queryStringParameters.expiration;
+
+    /**
+     * A `SHARED_SECRET` environment variable can be set in the Lambda function configuration.
+     * When set, the function will require a sha256 signature, salt and expiration to be
+     * passed as URL parameters for the function to run. This is only used to minimize
+     * the function's execution time if summoned by random bots.
+     */
+    let sharedSecret = process.env.SHARED_SECRET;
+
+    if (sharedSecret) {
+        if (!signature || !expiration || !salt) return {
+            statusCode: 400,
+            body: "Missing &signature= and/or &expiration= and/or &salt=.",
+        }
+
+        if (new Date().getTime() / 1000 > parseInt(expiration)) return {
+            statusCode: 401,
+            body: "Expired.",
+        }
+
+        const expectedHash = crypto.createHash('sha256').update([input, language, expiration, salt, sharedSecret].join('')).digest('hex');
+
+        if (signature !== expectedHash) return {
+            statusCode: 401,
+            body: "Invalid signature.",
+        }
+    }
 
 
     if (!input || !language || !["en", "fr"].includes(language)) {
