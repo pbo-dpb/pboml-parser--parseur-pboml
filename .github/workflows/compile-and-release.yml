@@ -31,9 +31,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r bundle.zip .lambda-render-to-pdf-function
       - name: Deploy to Lambda
         uses: appleboy/lambda-action@master
         with:
@@ -41,4 +38,6 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ca-central-1
           function_name: ${{ secrets.AWS_LAMBDA_PDF_GENERATION_FUNCTION }}
-          zip_file: bundle.zip
+          source: .lambda-render-to-pdf-function/index.js
+          layers:
+            - arn:aws:lambda:ca-central-1:764866452798:layer:chrome-aws-lambda:31
