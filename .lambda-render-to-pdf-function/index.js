@@ -5,36 +5,50 @@ const crypto = require('crypto');
 
 const makePdf = async function (language, payloadUrl) {
     let browser;
+    let buffer;
 
-    browser = await chromium.puppeteer.launch({
-        args: [...chromium.args],
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath,
-        headless: chromium.headless,
-    });
+    try {
 
-    const page = await browser.newPage();
-    let baseUrl = new URL(`http://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
-    baseUrl.searchParams.set('payload-url', payloadUrl)
-    await page.goto(baseUrl.toString(), {
-        waitUntil: 'networkidle2',
-    });
-    const buffer = await page.pdf({
-        path: `/tmp/pboml-gen-${language}.pdf`,
-        format: 'Letter',
-        margin: {
-            top: "1.2cm",
-            left: "1.2cm",
-            bottom: "1.2cm",
-            right: "1.2cm",
-        },
-        displayHeaderFooter: true,
-        headerTemplate: '<div></div>',
-        footerTemplate: `<div style="font-size: 12px;text-align:center;width:100%;padding: 0 0.6cm"><span class='pageNumber'></span> / <span class='totalPages'></span></div>`,
-    });
+        browser = await chromium.puppeteer.launch({
+            args: [...chromium.args],
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath,
+            headless: chromium.headless,
+        });
 
-    await page.close();
-    await browser.close();
+        const page = await browser.newPage();
+
+        let baseUrl = new URL(`http://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+        baseUrl.searchParams.set('payload-url', payloadUrl)
+        await page.goto(baseUrl.toString(), {
+            waitUntil: 'networkidle2',
+        });
+
+        buffer = await page.pdf({
+            path: `/tmp/pboml-gen-${language}.pdf`,
+            format: 'Letter',
+            margin: {
+                top: "1.2cm",
+                left: "1.2cm",
+                bottom: "1.2cm",
+                right: "1.2cm",
+            },
+            displayHeaderFooter: true,
+            headerTemplate: '<div></div>',
+            footerTemplate: `<div style="font-size: 12px;text-align:center;width:100%;padding: 0 0.6cm"><span class='pageNumber'></span> / <span class='totalPages'></span></div>`,
+        });
+
+        await page.close();
+        await browser.close();
+
+    } catch (error) {
+        console.log(error);
+        return null;
+    } finally {
+        if (browser !== null) {
+            await browser.close();
+        }
+    }
 
     return buffer;
 };
@@ -84,6 +98,11 @@ exports.handler = async (event) => {
     }
 
     const buffer = await makePdf(language, input);
+
+    if (!buffer) return {
+        statusCode: 500,
+        body: "Puppeteer execution error.",
+    };
 
     const response = {
         statusCode: 200,
