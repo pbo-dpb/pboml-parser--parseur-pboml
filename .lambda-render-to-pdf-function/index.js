@@ -6,11 +6,7 @@ const makePdf = async function (language, payloadUrl) {
     let browser;
 
     browser = await chromium.puppeteer.launch({
-        args: [...chromium.args,
-            '--disable-web-security',
-            '--disable-features=IsolateOrigins',
-            '--disable-site-isolation-trials'
-        ],
+        args: [...chromium.args],
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath,
         headless: chromium.headless,
@@ -45,10 +41,12 @@ const makePdf = async function (language, payloadUrl) {
 
 exports.handler = async (event) => {
 
-    const input = event['pathParameters']['input'];
-    const language = event['pathParameters']['language'];
 
-    if (!input || !language || ["en", "fr"].includes(language)) {
+    const input = event.queryStringParameters.input;
+    const language = event.queryStringParameters.language;
+
+
+    if (!input || !language || !["en", "fr"].includes(language)) {
         return {
             statusCode: 400,
             body: "Invalid input.",
