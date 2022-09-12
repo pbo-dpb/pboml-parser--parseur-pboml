@@ -1,25 +1,20 @@
 const chromium = require("@sparticuz/chrome-aws-lambda");
 const fs = require("fs");
+const https = require('https');
+
 
 const makePdf = async function (language, payloadUrl) {
     let browser;
-    /*    browser = await chromium.puppeteer.launch({
-          args: [...chromium.args,
-                '--disable-web-security',
-                '--disable-features=IsolateOrigins',
-                '--disable-site-isolation-trials'
-                ],
-          defaultViewport: chromium.defaultViewport,
-          executablePath: await chromium.executablePath,
-          headless: chromium.headless,
-          //ignoreHTTPSErrors: true,
-        });*/
+
     browser = await chromium.puppeteer.launch({
-        args: chromium.args,
+        args: [...chromium.args,
+            '--disable-web-security',
+            '--disable-features=IsolateOrigins',
+            '--disable-site-isolation-trials'
+        ],
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath,
         headless: chromium.headless,
-        ignoreHTTPSErrors: true,
     });
 
     const page = await browser.newPage();
@@ -51,12 +46,21 @@ const makePdf = async function (language, payloadUrl) {
 
 exports.handler = async (event) => {
 
-    const enBuffer = await makePdf('fr', 'https://pbo-epc-utils.s3.ca-central-1.amazonaws.com/epc-2021-1.0.0.yaml');  //await makePdf("en", process.argv[2]);
-    //const frBuffer = //await makePdf("fr", process.argv[2]);
+    const input = event['pathParameters']['input'];
+    const language = event['pathParameters']['language'];
+
+    if (!input || !language || ["en", "fr"].includes(language)) {
+        return {
+            statusCode: 400,
+            body: "Invalid input.",
+        };
+    }
+
+    const buffer = await makePdf(language, input);
 
     const response = {
         statusCode: 200,
-        body: fs.readFileSync("/tmp/pboml-gen-fr.pdf").toString('base64'),
+        body: fs.readFileSync(`/tmp/pboml-gen-${language}.pdf`).toString('base64'),
         headers: { "content-type": "application/pdf" },
         isBase64Encoded: true
     };
