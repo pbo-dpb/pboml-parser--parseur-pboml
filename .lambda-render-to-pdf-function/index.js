@@ -1,6 +1,5 @@
 const chromium = require("@sparticuz/chrome-aws-lambda");
 const fs = require("fs");
-const https = require('https');
 
 
 const makePdf = async function (language, payloadUrl) {
