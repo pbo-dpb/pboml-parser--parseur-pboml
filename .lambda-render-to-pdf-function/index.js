@@ -56,8 +56,17 @@ const makePdf = async function (language, payloadUrl) {
 exports.handler = async (event) => {
 
 
-    const input = event.queryStringParameters.input;
-    const language = event.queryStringParameters.language;
+    const input = event.queryStringParameters?.input;
+    const language = event.queryStringParameters?.language;
+
+    if (!input || !language || !["en", "fr"].includes(language)) {
+        return {
+            statusCode: 400,
+            body: "Invalid input.",
+        };
+    }
+
+
     const signature = event.queryStringParameters.signature;
     const salt = event.queryStringParameters.salt;
     const expiration = event.queryStringParameters.expiration;
@@ -87,14 +96,6 @@ exports.handler = async (event) => {
             statusCode: 401,
             body: "Invalid signature.",
         }
-    }
-
-
-    if (!input || !language || !["en", "fr"].includes(language)) {
-        return {
-            statusCode: 400,
-            body: "Invalid input.",
-        };
     }
 
     const buffer = await makePdf(language, input);
