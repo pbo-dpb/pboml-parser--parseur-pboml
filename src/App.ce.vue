@@ -17,6 +17,7 @@
 
 <script>
 import yaml from 'js-yaml'
+import { Buffer } from 'buffer';
 
 import { ref, defineAsyncComponent, computed } from 'vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
@@ -54,7 +55,8 @@ export default {
 
       // Accept a base64 encoded payload as long as it's presented as a data-url
       if (typeof this.payload === "string" && this.payload.startsWith('data:text/yaml;base64,')) {
-        this._payload = this.payload.split(',')[1];
+        this._payload = Buffer.from(this.payload.split(',')[1], 'base64').toString('utf8');
+        debugger;
       } else {
         this._payload = this.payload;
       }
