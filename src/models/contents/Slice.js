@@ -1,4 +1,5 @@
-import { h } from 'vue'
+import { h, Suspense } from 'vue'
+import LoadingIndicator from "../../components/LoadingIndicator.vue"
 
 export default class Slice {
     constructor(payload) {
@@ -12,8 +13,8 @@ export default class Slice {
         this.content = payload.content;
     }
 
-    _renderLabelTitleVnode(language) {
-        if (!this.display_label) return null;
+    _renderLabelTitleVnode(language, force = false) {
+        if (!this.display_label && !force) return null;
         return h('h2', { innerHTML: this.label[language], class: "text-2xl font-thin" });
     }
 
@@ -23,10 +24,25 @@ export default class Slice {
         ];
     }
 
+    _buildEditingVnodes() {
+        return [
+            h('div', { class: 'grid grid-cols-2 gap-4' }, [
+                this._renderLabelTitleVnode('en', true),
+                this._renderLabelTitleVnode('fr', true)
+            ])
+        ];
+    }
+
     renderAsVnode(print = false, language = document.documentElement.lang) {
         return h('div', { class: 'flex flex-col gap-4 break-inside-avoid-page print:mt-4' }, this._buildVnodes(print, language));
     }
 
+    renderEditingVnode() {
+        return h('div', { class: 'flex flex-col gap-4 break-inside-avoid-page print:mt-4' }, h(Suspense, null, {
+            default: () => h('div', null, this._buildEditingVnodes()),
+            fallback: () => h('template', null, LoadingIndicator)
+        }));
+    }
 
     toArray() {
         return {
