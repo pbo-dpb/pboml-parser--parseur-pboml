@@ -21,7 +21,12 @@ export default class Slice {
     _buildVnodes(print, language) {
         return [
             this._renderLabelTitleVnode(language),
+            this.renderReadonlyVnode(print, language)
         ];
+    }
+
+    renderReadonlyVnode(language) {
+        return null
     }
 
     _buildEditingVnodes() {

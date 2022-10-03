@@ -12,16 +12,11 @@ export default class MarkdownSlice extends Slice {
         }
     }
 
-    renderReadonlyVnode(language) {
+    renderReadonlyVnode(print, language) {
         const md = new Remarkable();
         return h('div', { class: "prose dark:prose-invert max-w-none prose-headings:font-thin", innerHTML: md.render(this.content[language]) });
     }
 
-    _buildVnodes(print, language) {
-        let vnodes = super._buildVnodes(print, language);
-        vnodes.push(this.renderReadonlyVnode);
-        return vnodes;
-    }
 
     _buildEditingVnodes() {
         let vnodes = super._buildEditingVnodes();

@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 import { Remarkable } from 'remarkable';
 import TableSliceVariable from './TableSliceVariable';
@@ -75,6 +75,10 @@ export default class TableSlice extends Slice {
     }
 
 
+    renderReadonlyVnode(print, language) {
+        return null; // Readonly tables are not supported
+    }
+
 
     _buildVnodes(pring, language) {
         let vnodes = super._buildVnodes(print, language);
@@ -89,6 +93,12 @@ export default class TableSlice extends Slice {
             this.__buildVerticalBody(print, language),
         ));
 
+        return vnodes;
+    }
+
+    _buildEditingVnodes() {
+        let vnodes = super._buildEditingVnodes();
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/TableSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { } }))
         return vnodes;
     }
 

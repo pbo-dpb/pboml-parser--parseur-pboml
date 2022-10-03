@@ -9,8 +9,8 @@ export default {
 
         if (props.slice.readonly) {
             return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
-                props.slice.renderReadonlyVnode("en"),
-                props.slice.renderReadonlyVnode("fr"),
+                props.slice.renderReadonlyVnode(false, "en"),
+                props.slice.renderReadonlyVnode(false, "fr"),
             ])
         }
 

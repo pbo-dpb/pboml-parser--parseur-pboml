@@ -24,6 +24,8 @@ export default class TableSliceVariable {
         return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
+
+
     getTableCellVnode(value, scope = null, print = false, language) {
 
         let innerHTML;

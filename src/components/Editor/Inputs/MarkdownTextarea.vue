@@ -1,5 +1,5 @@
 <template>
-    <textarea class="border border-gray-300 p-2" :value="modelValue"
+    <textarea class="border border-gray-300 p-1 rounded" :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)">
     </textarea>
 </template>
