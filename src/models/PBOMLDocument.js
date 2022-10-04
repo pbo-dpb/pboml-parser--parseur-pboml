@@ -21,7 +21,9 @@ export default class PBOMLDocument {
         this.id = mainDocument.document?.id;
 
         this.release_date = mainDocument.document?.release_date;
-
+        if (this.release_date) {
+            this.release_date = new Date(this.release_date);
+        }
 
         this.title = mainDocument.document?.title;
 
