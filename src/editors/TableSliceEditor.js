@@ -65,12 +65,15 @@ export default {
             });
 
 
+
             return h('table', {
                 class: `table table-fixed border-collapse border border-slate-300 dark:border-slate-700 w-full text-xs`
             }, rows.map(row => {
                 return h('tr', { class: '' }, row)
             })
             )
+
+
         }
 
 

@@ -44,7 +44,7 @@ export default class Slice {
 
     renderEditingVnode() {
         return h('div', { class: 'flex flex-col gap-4 break-inside-avoid-page print:mt-4' }, h(Suspense, null, {
-            default: () => h('div', null, this._buildEditingVnodes()),
+            default: () => h('div', { class: 'flex flex-col gap-2' }, this._buildEditingVnodes()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
     }

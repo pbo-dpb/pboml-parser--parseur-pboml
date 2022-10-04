@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, defineAsyncComponent } from 'vue'
 import KvListVariablePair from './KvListVariablePair';
 import Slice from "./Slice";
 const language = document.documentElement.lang;
@@ -27,16 +27,19 @@ export default class KvListSlice extends Slice {
         this.content = payload.content.map((el) => new KvListVariablePair(this.prototype, el));
     }
 
-
-    _buildVnodes(print, language) {
-        let vnodes = super._buildVnodes(print, language);
-
-        vnodes.push(h('dl', { 'class': 'flex flex-col gap-2' }, this.content.map((kv) => {
+    renderReadonlyVnode(print, language) {
+        return h('dl', { 'class': 'flex flex-col gap-2' }, this.content.map((kv) => {
             return kv.getKvNode(language);
-        })));
+        }))
+    }
 
+
+    _buildEditingVnodes() {
+        let vnodes = super._buildEditingVnodes();
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/KvSliceEditor.js')), { slice: this }))
         return vnodes;
     }
+
 
 
     toArray() {
