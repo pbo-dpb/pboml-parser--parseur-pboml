@@ -35,7 +35,7 @@ export default {
                     cancelable: false,
                     composed: true,
                     detail: {
-                        pbomlDocument: newVal
+                        pbomlDocument: newVal.serialize()
                     }
                 });
                 document.dispatchEvent(event);
