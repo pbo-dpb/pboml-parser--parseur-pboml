@@ -41,6 +41,13 @@ export default class TableSliceVariable {
                 else
                     innerHTML = (new Intl.NumberFormat(language)).format(value);
                 break;
+            case 'fy':
+                // Will break in 2100, sorry.
+                if (language === 'fr')
+                    innerHTML = `20${String(value).substring(0, 1)}-20${String(value).substring(2)}`;
+                else
+                    innerHTML = `20${String(value).substring(0, 1)}-${String(value).substring(2)}`;
+                break;
             default:
                 innerHTML = value[language] ? value[language] : value;
         }
