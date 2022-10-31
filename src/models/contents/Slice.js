@@ -6,6 +6,7 @@ export default class Slice {
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
+        this.print_only = payload.print_only;
         this.label = {
             en: payload.label?.en,
             fr: payload.label?.fr
@@ -39,7 +40,7 @@ export default class Slice {
     }
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h('div', { class: 'flex flex-col gap-4 print:mt-4' }, this._buildVnodes(print, language));
+        return h('div', { class: `flex flex-col gap-4 print:mt-4 ${this.print_only ? 'hidden print:flex' : 'flex'}` }, this._buildVnodes(print, language));
     }
 
     renderEditingVnode() {

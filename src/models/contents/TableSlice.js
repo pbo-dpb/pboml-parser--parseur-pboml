@@ -81,7 +81,7 @@ export default class TableSlice extends Slice {
 
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h('div', { class: 'flex flex-col gap-4  break-inside-avoid-page' }, this._buildVnodes(print, language));
+        return h('div', { class: `flex-col gap-4 break-inside-avoid-page ${this.print_only ? 'hidden print:flex' : 'flex'}` }, this._buildVnodes(print, language));
     }
 
     _buildVnodes(pring, language) {
