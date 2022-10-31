@@ -3,6 +3,7 @@ import LoadingIndicator from "../../components/LoadingIndicator.vue"
 
 export default class Slice {
     constructor(payload) {
+        this.id = payload.id;
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
