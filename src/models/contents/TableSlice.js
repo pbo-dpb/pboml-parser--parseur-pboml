@@ -80,16 +80,20 @@ export default class TableSlice extends Slice {
     }
 
 
+    renderAsVnode(print = false, language = document.documentElement.lang) {
+        return h('div', { class: 'flex flex-col gap-4  break-inside-avoid-page' }, this._buildVnodes(print, language));
+    }
+
     _buildVnodes(pring, language) {
         let vnodes = super._buildVnodes(print, language);
         vnodes.push(h('table', {
-            class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
+            class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 break-inside-avoid-page ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
         }, [
             this.__buildHorizontalHeader(print, language),
             this.__buildHorizontalBody(print, language),
         ]));
 
-        vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table print:table print:text-sm" : "lg:hidden print:hidden"}` },
+        vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table print:table print:text-sm" : "lg:hidden print:hidden"}` },
             this.__buildVerticalBody(print, language),
         ));
 

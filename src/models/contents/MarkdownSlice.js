@@ -14,6 +14,18 @@ export default class MarkdownSlice extends Slice {
 
     renderReadonlyVnode(print, language) {
         const md = new Remarkable();
+
+        md.renderer.rules.paragraph_open = (function () {
+            var original = md.renderer.rules.paragraph_open;
+            return function () {
+                var paragraph = original.apply(this, arguments);
+                if (paragraph === '<p>')
+                    return paragraph.substring(0, paragraph.length - 1) + ' class="break-inside-avoid-page">';
+                return paragraph
+            };
+        })();
+
+
         return h('div', { class: "prose dark:prose-invert max-w-none prose-headings:font-thin", innerHTML: md.render(this.content[language]) });
     }
 

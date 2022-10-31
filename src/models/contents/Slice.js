@@ -39,11 +39,11 @@ export default class Slice {
     }
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h('div', { class: 'flex flex-col gap-4 break-inside-avoid-page print:mt-4' }, this._buildVnodes(print, language));
+        return h('div', { class: 'flex flex-col gap-4 print:mt-4' }, this._buildVnodes(print, language));
     }
 
     renderEditingVnode() {
-        return h('div', { class: 'flex flex-col gap-4 break-inside-avoid-page print:mt-4' }, h(Suspense, null, {
+        return h('div', { class: 'flex flex-col gap-4 print:mt-4' }, h(Suspense, null, {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this._buildEditingVnodes()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
