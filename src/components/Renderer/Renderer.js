@@ -14,8 +14,8 @@ export default {
       if (this.standalone) return [];
       return [h("header", { class: 'flex flex-col gap-1' },
         [
-          h("div", { class: "text-xl", innerHTML: this.pbomlDocument.type[language] }),
-          h("h1", { class: "font-thin text-4xl", innerHTML: this.pbomlDocument.title[language] }),
+          (this.pbomlDocument.type?.[language] ? (h("div", { class: "text-xl", innerHTML: this.pbomlDocument.type[language] })) : null),
+          (this.pbomlDocument.title?.[language] ? h("h1", { class: "font-thin text-4xl", innerHTML: this.pbomlDocument.title[language] }) : null),
           h("div", { class: "text-sm text-gray-800", innerHTML: this.pbomlDocument.localizedReleaseDate?.[language] })
         ]
       )
@@ -25,7 +25,7 @@ export default {
       if (this.standalone) return [];
       return [h("footer", { class: 'flex flex-row gap-2 text-xs text-gray-800 justify-center items-center print:mt-8' },
         [
-          h("div", { class: "", innerHTML: this.pbomlDocument.copyright[language] }),
+          this.pbomlDocument.copyright?.[language] ? h("div", { class: "", innerHTML: this.pbomlDocument.copyright[language] }) : null,
         ]
       )
       ];
