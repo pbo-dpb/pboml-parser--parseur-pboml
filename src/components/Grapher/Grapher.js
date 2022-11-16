@@ -1,6 +1,5 @@
 import { h } from 'vue'
 import Chart from 'chart.js/auto';
-import { Colors } from 'chart.js';
 
 const unid = Math.random().toString(36).slice(2);
 import DatatableDataSource from './DatatableDataSource';
@@ -105,6 +104,11 @@ export default {
                 scales: {
                     x: this.configureAxis('x'),
                     y: this.configureAxis('y')
+                },
+                elements: {
+                    point: {
+                        pointRadius: 5
+                    }
                 }
             }
 
@@ -114,8 +118,6 @@ export default {
 
     mounted() {
         if (this._data && this._config) {
-            Chart.register(Colors);
-
             new Chart(
                 this.$refs.chart.getContext('2d'),
                 this._config

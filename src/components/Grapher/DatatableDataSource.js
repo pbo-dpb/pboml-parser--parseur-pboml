@@ -7,7 +7,7 @@ export default class DatatableDataSource extends DataSource {
     }
 
     /**
-     * Convert an array datatable. Exemple format: 
+     * Convert an array datatable. Exemple format for a bar or line chart: 
      * [
             ['Employee Name', 'Salary 2022', 'Salary 2023'],
             ['Mike', 35000, 35000],
@@ -17,6 +17,7 @@ export default class DatatableDataSource extends DataSource {
             ['Floyd', 92000, 97000],
             ['Fritz', 18500, 25000]
         ]
+        
      */
     convertArrayToGraphjsDataStructure() {
         let datatable = JSON.parse(JSON.stringify(this.datatable));
@@ -31,7 +32,9 @@ export default class DatatableDataSource extends DataSource {
             return {
                 type: this.types[index] ? this.types[index] : this.types[0],
                 label: label,
-                data: data
+                data: data,
+                backgroundColor: this.colorForIndex(index),
+                borderColor: this.colorForIndex(index)
             }
         });
 
