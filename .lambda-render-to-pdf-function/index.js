@@ -24,6 +24,12 @@ const makePdf = async function (language, payloadUrl) {
             waitUntil: 'networkidle2',
         });
 
+        await page.setViewport({
+            width: 1280,
+            height: 1024,
+            deviceScaleFactor: 1,
+        });
+
         buffer = await page.pdf({
             path: `/tmp/pboml-gen-${language}.pdf`,
             format: 'Letter',
