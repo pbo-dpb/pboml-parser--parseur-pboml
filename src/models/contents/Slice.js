@@ -54,7 +54,7 @@ export default class Slice {
 
     _buildEditingVnodes() {
         return [
-            h('div', { class: 'grid grid-cols-2 gap-4' }, [
+            h('div', { class: 'border-l-2 pl-2 py-2 border-blue-300 flex flex-col gap-1' }, [
                 this._renderLabelTitleVnode('en', true),
                 this._renderLabelTitleVnode('fr', true)
             ])
