@@ -16,6 +16,8 @@ export default class GraphSlice extends Slice {
 
         this.axes = payload.axes ? payload.axes : null;
 
+        this.colors = payload.colors ? payload.colors : null;
+
         if (payload.chart_type) {
             this.chart_types = [payload.chart_type]
         } else {
@@ -34,7 +36,8 @@ export default class GraphSlice extends Slice {
                         strings: this.strings,
                         types: this.chart_types,
                         datatable: this.datatable,
-                        axes: this.axes
+                        axes: this.axes,
+                        colors: this.colors,
                     })
                 ])
             ]),
