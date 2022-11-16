@@ -7,6 +7,7 @@ export default class Slice {
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
+        this.is_figure = payload.is_figure ? payload.is_figure : false;
         this.print_only = payload.print_only;
         this.label = {
             en: payload.label?.en,
@@ -17,7 +18,27 @@ export default class Slice {
 
     _renderLabelTitleVnode(language, force = false) {
         if ((!this.display_label && !force) || !this.label?.[language]) return null;
-        return h('h2', { innerHTML: this.label[language], class: "text-2xl font-thin" });
+
+        let labelNodeType;
+        let labelNodeClasses = ["font-thin"]
+        let labelNodeContent = this.label[language];
+        if (this.slice_group) {
+            labelNodeType = "h3";
+            labelNodeClasses.push("text-xl");
+        } else if (this.is_figure) {
+            labelNodeType = "figcaption";
+            labelNodeClasses.push("text-center", "border-y", "border-gray-100", "dark:border-gray-800", "py-2", "xl:w-2/3", "self-center")
+
+            if (typeof this.is_figure === "number") {
+                labelNodeContent = `Figure ${this.is_figure} &ndash; ${labelNodeContent}`;
+            }
+
+        } else {
+            labelNodeType = "h2";
+            labelNodeClasses.push("text-2xl");
+        }
+
+        return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
     }
 
     _buildVnodes(print, language) {
@@ -41,7 +62,7 @@ export default class Slice {
     }
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h('div', { class: `flex flex-col gap-4 print:mt-4 ${this.print_only ? 'hidden print:flex' : 'flex'}` }, this._buildVnodes(print, language));
+        return h(this.is_figure ? 'figure' : 'section', { class: `flex flex-col gap-4 print:mt-4 ${this.print_only ? 'hidden print:flex' : 'flex'}` }, this._buildVnodes(print, language));
     }
 
     renderEditingVnode() {
