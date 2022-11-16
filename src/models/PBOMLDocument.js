@@ -2,6 +2,7 @@ import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
 import yaml from 'js-yaml'
+import GraphSlice from "./contents/GraphSlice";
 
 
 export default class PBOMLDocument {
@@ -37,6 +38,8 @@ export default class PBOMLDocument {
                     return new TableSlice(el);
                 case 'kvlist':
                     return new KvListSlice(el);
+                case 'graph':
+                    return new GraphSlice(el);
             }
 
         }).filter(n => n);

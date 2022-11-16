@@ -16,7 +16,7 @@ export default class Slice {
     }
 
     _renderLabelTitleVnode(language, force = false) {
-        if (!this.display_label && !force) return null;
+        if ((!this.display_label && !force) || !this.label?.[language]) return null;
         return h('h2', { innerHTML: this.label[language], class: "text-2xl font-thin" });
     }
 
