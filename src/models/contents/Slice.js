@@ -27,7 +27,7 @@ export default class Slice {
             labelNodeClasses.push("text-xl");
         } else if (this.is_figure) {
             labelNodeType = "figcaption";
-            labelNodeClasses.push("text-center", "border-y", "border-gray-100", "dark:border-gray-800", "py-2", "xl:w-2/3", "self-center")
+            labelNodeClasses.push("text-center text-xl")
 
             if (typeof this.is_figure === "number") {
                 labelNodeContent = `Figure ${this.is_figure} &ndash; ${labelNodeContent}`;
@@ -62,7 +62,10 @@ export default class Slice {
     }
 
     renderAsVnode(print = false, language = document.documentElement.lang) {
-        return h(this.is_figure ? 'figure' : 'section', { class: `flex flex-col gap-4 print:mt-4 ${this.print_only ? 'hidden print:flex' : 'flex'}` }, this._buildVnodes(print, language));
+        let classes = ["flex flex-col gap-4 print:mt-4"];
+        classes.push(this.print_only ? 'hidden print:flex' : 'flex')
+        classes.push(this.is_figure ? "bg-gradient-to-tr  from-white to-gray-50 rounded-tr-3xl pt-4 py-4" : "");
+        return h(this.is_figure ? 'figure' : 'section', { class: classes.join(" ") }, this._buildVnodes(print, language));
     }
 
     renderEditingVnode() {

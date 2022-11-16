@@ -109,6 +109,11 @@ export default {
                     point: {
                         pointRadius: 5
                     }
+                },
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    }
                 }
             }
 
