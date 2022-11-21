@@ -60,7 +60,7 @@ export default {
         this._payload = this.payload;
       }
 
-    } else {
+    } else if (!this.payload && !this.standalone) {
       await this.attemptToLoadPayloadFromUrlParameter();
     }
 
