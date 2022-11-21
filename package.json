@@ -1,7 +1,7 @@
 {
-  "name": "pbotool-ce-sample",
+  "name": "pboml-parser--parseur-pboml",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --host --port 8080",
     "build": "vite build",
