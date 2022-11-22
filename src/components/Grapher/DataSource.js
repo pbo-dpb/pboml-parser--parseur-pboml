@@ -20,7 +20,7 @@ export default class DataSource {
         let colorForIndex = this.colorPalette[index];
         let color = colorForIndex ? colorForIndex : "#666666";
 
-        return Color(color).saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : -0.25).hex();
+        return Color(color).saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : (emphasize === false ? -0.25 : 0)).hex();
     }
 
     convertToGraphjsDataStructure() {

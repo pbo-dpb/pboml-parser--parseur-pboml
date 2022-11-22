@@ -31,6 +31,7 @@ export default class DatatableDataSource extends DataSource {
             let data = datatable.map((dataRow) => dataRow.shift());
             let datasetdata = data.map((v) => (v?.data ? v.data : v));
             let emphasizes = data.map((v) => (v?.emphasize ? true : false));
+            const hasEmphasizedContent = emphasizes.filter(Boolean).length;
 
             const datasetType = this.types[index] ? this.types[index] : this.types[0];
 
@@ -43,14 +44,14 @@ export default class DatatableDataSource extends DataSource {
             }
 
             if (datasetType === 'line') {
-                const pointColors = emphasizes.map(e => this.colorForIndex(index, e ? true : false));
+                const pointColors = emphasizes.map(e => this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined)));
                 datasetInfo.pointBackgroundColor = pointColors;
                 datasetInfo.pointBorderColor = pointColors;
                 datasetInfo.pointStyle = emphasizes.map(e => e ? 'triangle' : 'circle')
                 datasetInfo.radius = emphasizes.map(e => e ? 8 : 5)
             } else if (datasetType === 'bar') {
-                datasetInfo.backgroundColor = emphasizes.map(e => this.colorForIndex(index, e ? true : false));
-                datasetInfo.borderColor = emphasizes.map(e => Color(this.colorForIndex(index, e ? true : false)).darken(e ? 1 : 0).hex());
+                datasetInfo.backgroundColor = emphasizes.map(e => this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined)));
+                datasetInfo.borderColor = emphasizes.map(e => Color(this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined))).darken(e ? 1 : 0).hex());
             }
 
             return datasetInfo
