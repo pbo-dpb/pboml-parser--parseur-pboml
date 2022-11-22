@@ -175,7 +175,11 @@ export default {
                             formatterOptions.currency = this.axes[axisName].currency ? this.axes[axisName].currency : "CAD";
                             formatterOptions.currencyDisplay = "narrowSymbol";
                         }
-                        return (new Intl.NumberFormat(this.language, formatterOptions)).format(value);
+                        if (this.axes?.[axisName].style === "percentage") {
+                            formatterOptions.style = "percent";
+                            formatterOptions.maximumFractionDigits = 2;
+                        }
+                        return (new Intl.NumberFormat(this.language, formatterOptions)).format(value / 100);
                     }
                 }
             }
