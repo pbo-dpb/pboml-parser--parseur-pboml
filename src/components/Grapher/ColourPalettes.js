@@ -1,10 +1,10 @@
 export const EquidistantColorPalette = [
     "#2d5071",
     "#d69e2e",
-    "#7b598e",
+    "#c85c7a",
     "#dd6962",
     "#a5598a",
-    "#c85c7a",
+    "#7b598e",
     "#e28146",
     "#505685"
 ]
