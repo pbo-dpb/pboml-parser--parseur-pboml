@@ -29,6 +29,12 @@ export default {
 
         /**
          * A primitive objet or an array (object: key-value(s) or [[header1, header2], ['val1', 'val2']]).
+         * Values that are strings or numbers will be treated litteraly. Values that are objects will
+         * be unfolded and must adhere to the following format:
+         * {
+         *      data: "",
+         *      emphasize: true// Optional; when true will highlight this value
+         * }
          * Inspired by https://developers.google.com/chart/interactive/docs/datatables_dataviews
          */
         datatable: {
@@ -105,11 +111,7 @@ export default {
                     x: this.configureAxis('x'),
                     y: this.configureAxis('y')
                 },
-                elements: {
-                    point: {
-                        pointRadius: 5
-                    }
-                },
+
                 plugins: {
                     legend: {
                         position: "bottom"

@@ -1,4 +1,5 @@
 import { EquidistantColorPalette } from "./ColourPalettes";
+import Color from "color";
 
 export default class DataSource {
     constructor(types) {
@@ -15,10 +16,11 @@ export default class DataSource {
         this.colorPalette = EquidistantColorPalette;
     }
 
-    colorForIndex(index) {
+    colorForIndex(index, emphasize) {
         let colorForIndex = this.colorPalette[index];
+        let color = colorForIndex ? colorForIndex : "#666666";
 
-        return colorForIndex ? colorForIndex : "#666666"
+        return Color(color).saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : -0.25).hex();
     }
 
     convertToGraphjsDataStructure() {
