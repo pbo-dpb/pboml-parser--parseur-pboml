@@ -37,6 +37,11 @@ export default {
             });
 
 
+            rows.push(h('button', {
+                'class': 'rounded bg-blue-100 text-blue-800 w-fit p-1', 'innerHTML': "➕", onClick: (e) => {
+                    props.slice.appendKvItem();
+                }
+            }));
 
             return h('div', { class: 'flex flex-col gap-2' }, rows)
 

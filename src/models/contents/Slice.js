@@ -1,6 +1,6 @@
 import { h, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
-import SliceLabelEditor from '../editors/SliceLabelEditor';
+import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
 
 export default class Slice {
     constructor(payload) {

@@ -5,14 +5,38 @@ import { Remarkable } from 'remarkable';
 export default class KvListVariablePair {
     constructor(prototype, payload) {
 
-        this.key = {
-            content: payload.key?.content,
+
+        if (this.payload) {
+            this.key = {
+                content: payload.key?.content,
+            }
+
+            this.value = {
+                content: payload.value?.content,
+            }
+        } else {
+            const defaultStructures = {
+                markdown: {
+                    en: "",
+                    fr: ""
+                },
+                number: 0,
+                default: {
+                    en: "",
+                    fr: ""
+                }
+            }
+            this.key = {
+                content: defaultStructures[prototype.key.type] ? { ...defaultStructures }[prototype.key.type] : { ...defaultStructures['default'] }
+            }
+
+            this.value = {
+                content: defaultStructures[prototype.key.type] ? { ...defaultStructures }[prototype.key.type] : { ...defaultStructures['default'] }
+            }
         }
 
-        this.value = {
-            content: payload.value?.content,
-        }
-        this.display_label = payload.display_label;
+
+        this.display_label = payload?.display_label;
         this.prototype = prototype;
 
 
