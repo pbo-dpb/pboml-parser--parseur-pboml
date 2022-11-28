@@ -28,8 +28,12 @@ export default class KvListSlice extends Slice {
     }
 
 
-    appendKvItem() {
+    appendKvEntry() {
         this.content.push(new KvListVariablePair(this.prototype));
+    }
+
+    removeKvEntry(entry) {
+        this.content = this.content.filter(kve => kve !== entry);
     }
 
     renderReadonlyVnode(print, language) {
