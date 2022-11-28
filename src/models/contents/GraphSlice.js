@@ -23,7 +23,6 @@ export default class GraphSlice extends Slice {
         } else {
             this.chart_types = payload.chart_types ? payload.chart_types : 'bar'
         }
-
     }
 
 
@@ -47,7 +46,10 @@ export default class GraphSlice extends Slice {
 
     _buildEditingVnodes() {
         let vnodes = super._buildEditingVnodes();
-        // TODO implement
+        vnodes.push(h('div', { class: 'grid grid-cols-2 gap-2' }, [
+            this.renderReadonlyVnode(false, 'en'),
+            this.renderReadonlyVnode(false, 'fr')
+        ]))
         return vnodes;
     }
 
