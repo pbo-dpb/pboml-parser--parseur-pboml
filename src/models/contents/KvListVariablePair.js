@@ -5,8 +5,7 @@ import { Remarkable } from 'remarkable';
 export default class KvListVariablePair {
     constructor(prototype, payload) {
 
-
-        if (this.payload) {
+        if (payload) {
             this.key = {
                 content: payload.key?.content,
             }
@@ -48,7 +47,13 @@ export default class KvListVariablePair {
         switch (type) {
             case 'markdown':
                 const md = new Remarkable({ breaks: false });
-                innerHTML = md.render(value[language] ? value[language] : value)
+                console.log(value);
+                try {
+                    innerHTML = md.render(value[language] ? value[language] : value)
+                } catch (error) {
+                    innerHTML = ""
+                }
+
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);

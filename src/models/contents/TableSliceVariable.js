@@ -32,7 +32,12 @@ export default class TableSliceVariable {
         switch (this.type) {
             case 'markdown':
                 const md = new Remarkable({ breaks: false });
-                innerHTML = md.render(value[language] ? value[language] : value)
+
+                try {
+                    innerHTML = md.render(value[language] ? value[language] : value)
+                } catch (error) {
+                    innerHTML = ""
+                }
                 break;
             case 'number':
                 // Patches an issue with jsPDF where french numbers (eg. 12 345) are inconsistently rendered with slashes (12/345)
