@@ -24,7 +24,7 @@ export default class KvListSlice extends Slice {
             }
         }
 
-        this.content = payload.content.map((el) => new KvListVariablePair(this.prototype, el));
+        this.content = payload.content ? payload.content.map((el) => new KvListVariablePair(this.prototype, el)) : [];
     }
 
     renderReadonlyVnode(print, language) {
