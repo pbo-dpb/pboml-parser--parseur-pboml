@@ -1,5 +1,6 @@
 import { h, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
+import SliceLabelEditor from '../editors/SliceLabelEditor';
 
 export default class Slice {
     constructor(payload) {
@@ -41,6 +42,7 @@ export default class Slice {
         return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
     }
 
+
     _buildVnodes(print, language) {
         return [
             this._renderLabelTitleVnode(language),
@@ -54,10 +56,7 @@ export default class Slice {
 
     _buildEditingVnodes() {
         return [
-            h('div', { class: 'border-l-2 pl-2 py-2 border-blue-300 flex flex-col gap-1' }, [
-                this._renderLabelTitleVnode('en', true),
-                this._renderLabelTitleVnode('fr', true)
-            ])
+            (new SliceLabelEditor(this.label)).renderAsVnode(),
         ];
     }
 
@@ -69,7 +68,7 @@ export default class Slice {
     }
 
     renderEditingVnode() {
-        return h('div', { class: 'flex flex-col gap-4 print:mt-4' }, h(Suspense, null, {
+        return h('fieldset', { class: 'flex flex-col gap-4 print:mt-4' }, h(Suspense, null, {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this._buildEditingVnodes()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
