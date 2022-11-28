@@ -55,6 +55,10 @@ export default class GraphSlice extends Slice {
 
     toArray() {
         let array = super.toArray();
+        array.strings = this.strings;
+        array.datatable = this.datatable;
+        array.axes = this.axes;
+        array.chart_types = this.chart_types;
         return array;
     }
 

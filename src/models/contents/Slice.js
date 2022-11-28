@@ -79,6 +79,8 @@ export default class Slice {
             type: this.type,
             readonly: this.readonly,
             display_label: this.display_label,
+            is_figure: this.is_figure,
+            slice_group: this.slice_group,
             label: {
                 en: this.label?.en,
                 fr: this.label?.fr
