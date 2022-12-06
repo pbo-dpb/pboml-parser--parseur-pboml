@@ -68,7 +68,7 @@ export default class Slice {
     }
 
     renderEditingVnode() {
-        return h('fieldset', { class: 'flex flex-col gap-4 print:mt-4' }, h(Suspense, null, {
+        return h('fieldset', { class: `flex flex-col gap-4 print:mt-4 ${this.readonly ? ' filter grayscale' : ''}` }, h(Suspense, null, {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this._buildEditingVnodes()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
