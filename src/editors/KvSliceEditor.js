@@ -26,28 +26,33 @@ export default {
                         }
                     }),
 
-                    h('div', { class: 'flex flex-col font-semibold' }, [
-                        h('div', { class: '', innerText: `${props.slice.prototype.key.label?.en ?? 'Key'} • ${props.slice.prototype.key.label?.fr ?? 'Clé'}` }),
-                        h(BilingualInput, {
-                            class: "w-full",
-                            modelValue: entry.key.content,
-                            'onUpdate:modelValue': (value) => {
-                                entry.key.content = value;
-                            }
-                        }),
+                    h('div', { class: 'grid grid-cols-2 gap-2' }, [
+                        h('div', { class: 'flex flex-col font-semibold' }, [
+                            h('div', { class: '', innerText: `${props.slice.prototype.key.label?.en ?? 'Key'} • ${props.slice.prototype.key.label?.fr ?? 'Clé'}` }),
+                            h(BilingualInput, {
+                                class: "w-full",
+                                modelValue: entry.key.content,
+                                'onUpdate:modelValue': (value) => {
+                                    entry.key.content = value;
+                                }
+                            }),
+                        ]),
+                        h('div', { class: 'flex flex-col' }, [
+                            h('div', { class: '', innerText: `${props.slice.prototype.value.label?.en ?? 'Value'} • ${props.slice.prototype.value.label?.fr ?? 'Valeur'}` }),
+                            h(BilingualInput, {
+                                class: "w-full",
+                                modelValue: entry.value.content,
+                                'onUpdate:modelValue': (value) => {
+                                    entry.value.content = value;
+                                }
+                            }),
+                        ])
                     ]),
 
 
-                    h('div', { class: 'flex flex-col' }, [
-                        h('div', { class: '', innerText: `${props.slice.prototype.value.label?.en ?? 'Value'} • ${props.slice.prototype.value.label?.fr ?? 'Valeur'}` }),
-                        h(BilingualInput, {
-                            class: "w-full",
-                            modelValue: entry.value.content,
-                            'onUpdate:modelValue': (value) => {
-                                entry.value.content = value;
-                            }
-                        }),
-                    ])
+
+
+
 
 
                 ])
