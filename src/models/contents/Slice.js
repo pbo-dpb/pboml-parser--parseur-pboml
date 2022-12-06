@@ -77,6 +77,7 @@ export default class Slice {
     toArray() {
         return {
             type: this.type,
+            id: this.id,
             readonly: this.readonly,
             display_label: this.display_label,
             is_figure: this.is_figure,
