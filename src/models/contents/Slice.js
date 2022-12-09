@@ -8,6 +8,7 @@ export default class Slice {
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
+        this.slice_group = payload.slice_group;
         this.is_figure = payload.is_figure ? payload.is_figure : false;
         this.print_only = payload.print_only;
         this.label = {
