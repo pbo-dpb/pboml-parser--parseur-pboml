@@ -24,7 +24,7 @@ export default class KvListSlice extends Slice {
             }
         }
 
-        this.content = payload.content ? payload.content.map((el) => new KvListVariablePair(this.prototype, el)) : [];
+        this.content = (payload.content && !!payload.content.forEach) ? payload.content.map((el) => new KvListVariablePair(this.prototype, el)) : [];
     }
 
 
@@ -37,9 +37,9 @@ export default class KvListSlice extends Slice {
     }
 
     renderReadonlyVnode(print, language) {
-        return h('dl', { 'class': 'flex flex-col gap-2' }, this.content.map((kv) => {
+        return h('dl', { 'class': 'flex flex-col gap-2' }, (!!this.content.forEach ? this.content.map((kv) => {
             return kv.getKvNode(language);
-        }))
+        }) : null))
     }
 
 
@@ -65,7 +65,7 @@ export default class KvListSlice extends Slice {
             }
         };
 
-        array.content = this.content.map(kvp => kvp.toArray());
+        array.content = !!this.content.forEach ? this.content.map(kvp => kvp.toArray()) : [];
 
         return array;
     }

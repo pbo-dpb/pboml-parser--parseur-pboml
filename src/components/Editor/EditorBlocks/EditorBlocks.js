@@ -14,9 +14,9 @@ export default {
 
     render() {
         return h('main', { 'class': 'flex flex-col gap-4 print:block' }, [
-            ...this.pbomlDocument.slices.map((slice) => {
+            ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice) => {
                 return slice.renderEditingVnode();
-            }),
+            }) : null),
         ]);
     }
 }
