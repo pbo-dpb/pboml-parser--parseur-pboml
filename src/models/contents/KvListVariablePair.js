@@ -47,7 +47,6 @@ export default class KvListVariablePair {
         switch (type) {
             case 'markdown':
                 const md = new Remarkable({ breaks: false });
-                console.log(value);
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)
                 } catch (error) {
