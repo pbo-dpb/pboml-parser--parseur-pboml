@@ -6,7 +6,7 @@ export default {
     setup(props, { emit }) {
 
         if (props.slice.readonly) {
-            return () => h('div', { class: 'flex flex-col gap-4' }, [
+            return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
                 props.slice.renderReadonlyVnode(false, "en"),
                 props.slice.renderReadonlyVnode(false, "fr"),
             ])
