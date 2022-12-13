@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import { Remarkable } from 'remarkable';
 
+const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal";
 
 export default class KvListVariablePair {
     constructor(prototype, payload) {
@@ -66,15 +67,15 @@ export default class KvListVariablePair {
     getKeyVnode(language) {
 
         return h('dt', { class: "" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label, language) }) : null,
-            h('span', { class: "font-semibold text-gray-800 text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.key.type, this.key.content, language) })
+            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label, language), class: defaultProseClasses }) : null,
+            h('span', { class: `${defaultProseClasses} prose-p:font-semibold prose-a:font-semibold`, innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.key.type, this.key.content, language) })
         ]);
     }
 
     getValueVnode(language) {
         return h('dd', { class: "col-span-2" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label, language) }) : null,
-            h('span', { class: "text-sm", innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.value.type, this.value.content, language) })
+            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label, language), class: defaultProseClasses }) : null,
+            h('span', { class: defaultProseClasses, innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.value.type, this.value.content, language) })
         ]);
     }
 

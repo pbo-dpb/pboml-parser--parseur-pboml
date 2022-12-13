@@ -26,7 +26,7 @@ export default class MarkdownSlice extends Slice {
         })();
 
 
-        return h('div', { class: "prose dark:prose-invert max-w-none prose-headings:font-thin", innerHTML: md.render(this.content[language]) });
+        return h('div', { class: "pboml-prose", innerHTML: md.render(this.content[language]) });
     }
 
 
