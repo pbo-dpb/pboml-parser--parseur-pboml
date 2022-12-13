@@ -25,10 +25,12 @@ const makePdf = async function (filename, language, payloadUrl) {
         });
 
         await page.setViewport({
-            width: 1280,
-            height: 1024,
+            width: 1008,
+            height: 1056,
             deviceScaleFactor: 1,
         });
+
+        let footerContent = `<span class='pageNumber'></span> ${language === 'fr' ? 'de' : 'of'} <span class='totalPages'></span>`;
 
         buffer = await page.pdf({
             path: `/tmp/pboml-gen-${filename}-${language}.pdf`,
@@ -40,8 +42,8 @@ const makePdf = async function (filename, language, payloadUrl) {
                 right: "1.2cm",
             },
             displayHeaderFooter: true,
-            headerTemplate: '<div></div>',
-            footerTemplate: `<div style="font-size: 10px;text-align:center;width:100%;padding: 0 0.6cm"><span class='pageNumber'></span> / <span class='totalPages'></span></div>`,
+            headerTemplate: '<div style="font-size:0.1px"></div>',
+            footerTemplate: `<div style="font-size: 10px;text-align:right;width:100%;padding: 0 1.2cm">${footerContent}</div>`,
         });
 
         await page.close();

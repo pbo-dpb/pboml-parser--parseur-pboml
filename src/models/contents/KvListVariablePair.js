@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { Remarkable } from 'remarkable';
 
-const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none";
+const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid";
 
 export default class KvListVariablePair {
     constructor(prototype, payload) {
