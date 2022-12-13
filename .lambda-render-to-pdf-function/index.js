@@ -1,9 +1,9 @@
 const chromium = require("@sparticuz/chrome-aws-lambda");
 const fs = require("fs");
 const crypto = require('crypto');
+var AWS = require('aws-sdk');
 
-
-const makePdf = async function (language, payloadUrl) {
+const makePdf = async function (filename, language, payloadUrl) {
     let browser;
     let buffer;
 
@@ -18,7 +18,7 @@ const makePdf = async function (language, payloadUrl) {
 
         const page = await browser.newPage();
 
-        let baseUrl = new URL(`http://pboml-parser--parseur-pboml.s3.ca-central-1.amazonaws.com/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+        let baseUrl = new URL(`https://pboml.opbo-bdpb.ca/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
         baseUrl.searchParams.set('payload-url', payloadUrl)
         await page.goto(baseUrl.toString(), {
             waitUntil: 'networkidle2',
@@ -31,7 +31,7 @@ const makePdf = async function (language, payloadUrl) {
         });
 
         buffer = await page.pdf({
-            path: `/tmp/pboml-gen-${language}.pdf`,
+            path: `/tmp/pboml-gen-${filename}-${language}.pdf`,
             format: 'Letter',
             margin: {
                 top: "1.2cm",
@@ -59,11 +59,59 @@ const makePdf = async function (language, payloadUrl) {
     return buffer;
 };
 
+const saveToTemporaryStorage = async function (filename, content) {
+    const s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+
+    await s3.putObject({
+        Bucket: process.env.INTERCHANGE_BUCKET,
+        Key: filename,
+        Body: content,
+        ContentType: "text/yaml; charset=utf-8"
+    }, function (err, data) {
+        if (err) {
+            console.error(err, err.stack)
+            throw "Error writing S3 interchange";
+        }
+    }).promise();
+
+    const expiration = 60;
+    return s3.getSignedUrl('getObject', {
+        Bucket: process.env.INTERCHANGE_BUCKET,
+        Key: filename,
+        Expires: expiration
+    });
+
+}
+
+const deleteTemporaryStorage = async function (filename) {
+    await (new AWS.S3({ apiVersion: '2006-03-01' })).deleteObject({
+        Bucket: process.env.INTERCHANGE_BUCKET,
+        Key: filename
+    }).promise()
+}
+
+/**
+ *
+ * This function will return a PDF render of a valid PBOML document. To use this
+ * Lambda function, make a POST request to it's public endpoint with a JSON 
+ * encoded body that contains the following:
+ * - language: language of the requested render
+ * - input: the PBOML to render
+ * - signature: (optional) the request signature (a sha-256 hash of [expiration, salt, sharedSecret])
+ * - salt: (optional) a randomly generated salt, part of the signature's hash
+ * - expiration: (optional) an expiration (in seconds since Epoch)
+ * 
+ * To deploy this function on Lambda, make sure to set the following configuration strings:
+ * - INTERCHANGE_BUCKET: a bucket on which PBOML will be stored temporarely for rendering (function needs list/write/read/delete permissions set)
+ * - SHARED_SECRET: a string that will be used to generate the signature and allow requests to proceed.
+ * 
+ */
 exports.handler = async (event) => {
 
+    const body = JSON.parse(event.body);
+    const input = body?.input;
+    const language = body?.language;
 
-    const input = event.queryStringParameters?.input;
-    const language = event.queryStringParameters?.language;
 
     if (!input || !language || !["en", "fr"].includes(language)) {
         return {
@@ -73,15 +121,16 @@ exports.handler = async (event) => {
     }
 
 
-    const signature = event.queryStringParameters.signature;
-    const salt = event.queryStringParameters.salt;
-    const expiration = event.queryStringParameters.expiration;
+    const signature = body.signature;
+    const salt = body.salt;
+    const expiration = body.expiration;
 
     /**
      * A `SHARED_SECRET` environment variable can be set in the Lambda function configuration.
      * When set, the function will require a sha256 signature, salt and expiration to be
-     * passed as URL parameters for the function to run. This is only used to minimize
-     * the function's execution time if summoned by random bots.
+     * passed as parameters for the function to run. This is only used to minimize
+     * the function's execution time if summoned by random bots, while allowing
+     * usage from the PBOML renderer.
      */
     let sharedSecret = process.env.SHARED_SECRET;
 
@@ -96,7 +145,7 @@ exports.handler = async (event) => {
             body: "Expired.",
         }
 
-        const expectedHash = crypto.createHash('sha256').update([input, language, expiration, salt, sharedSecret].join('')).digest('hex');
+        const expectedHash = crypto.createHash('sha256').update([expiration, salt, sharedSecret].join('')).digest('hex');
 
         if (signature !== expectedHash) return {
             statusCode: 401,
@@ -104,7 +153,17 @@ exports.handler = async (event) => {
         }
     }
 
-    const buffer = await makePdf(language, input);
+    const temporaryFileName = crypto.randomUUID();
+
+    const temporaryInterchangeUrl = await saveToTemporaryStorage(temporaryFileName, input);
+    let buffer;
+    try {
+        buffer = await makePdf(temporaryFileName, language, temporaryInterchangeUrl);
+    } catch (error) {
+        console.error(error);
+    }
+
+    await deleteTemporaryStorage(temporaryFileName);
 
     if (!buffer) return {
         statusCode: 500,
@@ -113,7 +172,7 @@ exports.handler = async (event) => {
 
     const response = {
         statusCode: 200,
-        body: fs.readFileSync(`/tmp/pboml-gen-${language}.pdf`).toString('base64'),
+        body: fs.readFileSync(`/tmp/pboml-gen-${temporaryFileName}-${language}.pdf`).toString('base64'),
         headers: { "content-type": "application/pdf" },
         isBase64Encoded: true
     };
