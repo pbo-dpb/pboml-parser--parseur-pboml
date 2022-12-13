@@ -22,7 +22,7 @@ export default class Slice {
         if ((!this.display_label && !force) || !this.label?.[language]) return null;
 
         let labelNodeType;
-        let labelNodeClasses = ["font-thin"]
+        let labelNodeClasses = ["font-thin break-after-avoid"]
         let labelNodeContent = this.label[language];
         if (this.slice_group) {
             labelNodeType = "h3";

@@ -37,7 +37,7 @@ export default class KvListSlice extends Slice {
     }
 
     renderReadonlyVnode(print, language) {
-        return h('dl', { 'class': 'flex flex-col gap-2' }, (!!this.content.forEach ? this.content.map((kv) => {
+        return h('dl', { 'class': 'flex flex-col gap-2 break-inside-avoid' }, (!!this.content.forEach ? this.content.map((kv) => {
             return kv.getKvNode(language);
         }) : null))
     }
