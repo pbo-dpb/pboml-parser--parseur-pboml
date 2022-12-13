@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import { Remarkable } from 'remarkable';
 
-const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal";
+const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline";
 
 export default class KvListVariablePair {
     constructor(prototype, payload) {
@@ -43,6 +43,11 @@ export default class KvListVariablePair {
     }
 
     renderKeyOrValueContentToHtml(type, value, language) {
+
+        if (Array.isArray(value[language])) {
+            return value[language].map(it => this.renderKeyOrValueContentToHtml(type, it, language)).join(" <span role='separator'>•</span> ");
+        }
+
         let innerHTML;
 
         switch (type) {
