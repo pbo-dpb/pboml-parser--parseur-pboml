@@ -4,7 +4,13 @@
 
 @layer components {
     .pboml-prose {
-      @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-normal;
+      @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
     }
-    
-  }
+}
+
+.prose > :first-child{
+  margin-top: 0;
+}
+.prose > :last-child{
+  margin-bottom: 0;
+}
