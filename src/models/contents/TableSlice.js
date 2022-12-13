@@ -45,7 +45,7 @@ export default class TableSlice extends Slice {
                 const variable = this.variables[key];
                 columns.push(variable.getTableCellVnode(value, 'row', print, language));
             });
-            return h('tr', { class: "" }, columns);
+            return h('tr', { class: "break-inside-avoid" }, columns);
         })
         return h('tbody', {}, rows);
     }
