@@ -13,9 +13,12 @@
             <loading-indicator v-if="!renderer || !renderer.ready" class="w-8 h-8"></loading-indicator>
 
             <template v-else>
-                <EditorDownloadPdfButton @click="download('en')">English</EditorDownloadPdfButton>
-                <EditorDownloadPdfButton @click="download('en')">Français</EditorDownloadPdfButton>
-                <EditorDownloadPdfButton :primary="true" @click="download()">Bilingual</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton @click="download('en')">English ({{ renderer.requestedType }})
+                </EditorDownloadPdfButton>
+                <EditorDownloadPdfButton @click="download('fr')">Français ({{ renderer.requestedType }})
+                </EditorDownloadPdfButton>
+                <EditorDownloadPdfButton :primary="true" @click="download()">Bilingual ({{ renderer.requestedType }})
+                </EditorDownloadPdfButton>
             </template>
         </section>
     </div>

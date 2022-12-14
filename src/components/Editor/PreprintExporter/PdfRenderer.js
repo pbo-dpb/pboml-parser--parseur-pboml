@@ -1,5 +1,5 @@
 import PBOMLDocument from "../../../models/PBOMLDocument";
-import { PDFDocument } from 'pdf-lib'
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 export default class PdfRenderer {
     /**
@@ -81,6 +81,37 @@ export default class PdfRenderer {
         this.versions[outputKey] = new Uint8Array(await mergedPdf.save());
     }
 
+    async _watermarkPdf(language, watermark = null) {
+
+        if (!this.versions[language]) return;
+
+        const defaultWatermarks = {
+            en: "EMBARGO",
+            fr: "EMBARGO",
+            null: "EMBARGO"
+        }
+        if (!watermark) watermark = defaultWatermarks[language];
+
+        const pdfDoc = await PDFDocument.load(this.versions[language]);
+        const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+        const pages = pdfDoc.getPages()
+        pages.forEach((page) => {
+            const { width, height } = page.getSize()
+            const fontsize = 20;
+            page.drawText(watermark, {
+                x: fontsize * 0.5,
+                y: height - (fontsize * 1.25),
+                size: fontsize,
+                font: helveticaFont,
+                color: rgb(155 / 255, 44 / 255, 44 / 255),
+            })
+        });
+
+
+        this.versions[language] = new Uint8Array(await pdfDoc.save())
+    }
+
     async _setYamlInPdfMetadata(yaml, language) {
         if (!this.versions[language]) return;
 
@@ -96,8 +127,12 @@ export default class PdfRenderer {
         await Promise.all([this._retrieveVersion(yaml, 'en'), this._retrieveVersion(yaml, 'fr')]);
 
         await this._mergePdfs([this.versions.en, this.versions.fr], 'null');
-        for (const [key, value] of Object.entries(this.versions)) {
-            await this._setYamlInPdfMetadata(yaml, key);
+        for (const [language, value] of Object.entries(this.versions)) {
+            await this._setYamlInPdfMetadata(yaml, language);
+            if (this.requestedType === 'preprint') {
+                await this._watermarkPdf(language)
+            }
+
         }
 
     }
@@ -111,7 +146,7 @@ export default class PdfRenderer {
         shadowHyperlink.style = "display: none";
         const url = window.URL.createObjectURL(blob);
         shadowHyperlink.href = url;
-        shadowHyperlink.download = `${this.pbomlDocument.id}${this.style === 'preprint' ? '__PRE_' : ''}_${language ? language : 'b'}.pdf`;
+        shadowHyperlink.download = `${this.pbomlDocument.id}${this.requestedType === 'preprint' ? '__PRE_' : ''}_${language ? language : 'b'}.pdf`;
         shadowHyperlink.setAttribute('aria-hidden', true);
         shadowHyperlink.click();
         window.URL.revokeObjectURL(url);
