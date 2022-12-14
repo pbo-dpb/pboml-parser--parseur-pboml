@@ -49,9 +49,10 @@ export default {
         setRequestedType(requestedType) {
             this.requestedType = requestedType;
             this.renderer = new PdfRenderer(this.pbomlDocument, requestedType);
+            this.renderer.fetchVersions();
         },
         download(language) {
-            this.rendered.download(language);
+            this.renderer.download(language);
         }
     }
 }
