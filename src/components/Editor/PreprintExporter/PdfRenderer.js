@@ -1,4 +1,5 @@
 import PBOMLDocument from "../../../models/PBOMLDocument";
+import { PDFDocument } from 'pdf-lib'
 
 export default class PdfRenderer {
     /**
@@ -31,19 +32,24 @@ export default class PdfRenderer {
             fr: null,
             null: true
         }
+        this.errors = {
+            en: null,
+            fr: null,
+            null: null
+        }
     }
 
 
-    async _retrieveVersion(language) {
 
 
+    async _retrieveVersion(yaml, language) {
 
         let body = {
             signature: PdfRenderer.pdfRendererParams.signature,
             salt: PdfRenderer.pdfRendererParams.salt,
             expiration: PdfRenderer.pdfRendererParams.expiration,
             language,
-            input: this.pbomlDocument.serialize()
+            input: yaml
         };
 
         const response = await fetch(PdfRenderer.pdfRendererParams.url, {
@@ -51,34 +57,64 @@ export default class PdfRenderer {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body)
         });
-        const blob = await response.blob();
-        this.versions[language] = blob;
+        if (response.ok) {
+            const arrayBuffer = await response.arrayBuffer();
+            this.versions[language] = arrayBuffer;
+        } else {
+            this.errors[language] = await response.text();
+        }
 
+    }
 
+    async _mergePdfs(pdfs, outputKey) {
+
+        const mergedPdf = await PDFDocument.create();
+
+        for (let document of pdfs) {
+            if (!document) continue;
+            document = await PDFDocument.load(document);
+
+            const copiedPages = await mergedPdf.copyPages(document, document.getPageIndices());
+            copiedPages.forEach((page) => mergedPdf.addPage(page));
+        }
+
+        this.versions[outputKey] = new Uint8Array(await mergedPdf.save());
+    }
+
+    async _setYamlInPdfMetadata(yaml, language) {
+        if (!this.versions[language]) return;
+
+        const pdfDoc = await PDFDocument.load(this.versions[language]);
+        pdfDoc.setSubject(yaml);
+        this.versions[language] = new Uint8Array(await pdfDoc.save());
     }
 
     async fetchVersions() {
 
         if (!PdfRenderer.canRenderPdf) throw "Renderer URL is undefined (pass through `&renderer-url=` URL parameter).";
+        const yaml = this.pbomlDocument.serialize()
+        await Promise.all([this._retrieveVersion(yaml, 'en'), this._retrieveVersion(yaml, 'fr')]);
 
-        await Promise.all([this._retrieveVersion('en'), this._retrieveVersion('fr')]);
+        await this._mergePdfs([this.versions.en, this.versions.fr], 'null');
+        for (const [key, value] of Object.entries(this.versions)) {
+            await this._setYamlInPdfMetadata(yaml, key);
+        }
 
     }
 
 
     download(language) {
 
+        const blob = new Blob([this.versions[language ? language : null]], { type: 'application/pdf' });
         const shadowHyperlink = document.createElement("a");
         document.body.appendChild(shadowHyperlink);
         shadowHyperlink.style = "display: none";
-        const url = window.URL.createObjectURL(this.versions[language]);
+        const url = window.URL.createObjectURL(blob);
         shadowHyperlink.href = url;
-        shadowHyperlink.download = `${this.pbomlDocument.id}${this.style === 'preprint' ? '__PRE_' : ''}_${language}.pdf`;
+        shadowHyperlink.download = `${this.pbomlDocument.id}${this.style === 'preprint' ? '__PRE_' : ''}_${language ? language : 'b'}.pdf`;
         shadowHyperlink.setAttribute('aria-hidden', true);
         shadowHyperlink.click();
         window.URL.revokeObjectURL(url);
-
-
 
     }
 
