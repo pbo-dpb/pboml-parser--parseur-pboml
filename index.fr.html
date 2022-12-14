@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>  
-    <script src="https://cdn.tailwindcss.com?plugins=typography,line-clamp"></script>
+    <link rel="stylesheet" type="text/css" href="/src/index.css">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Parseur PBOML</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src;script-src 'self' cdn.tailwindcss.com; style-src 'self' 'unsafe-inline'; connect-src *">
-
-  </head>
-  <body>
+    <meta http-equiv="Content-Security-Policy" content="default-src;script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src *">
     <style>
       @page {
         size: 8.5in 11in;
         margin: 1.2cm;
       }
     </style>
+  </head>
+  <body>
+    
     <pboml-parser></pboml-parser>
     <script type="module" src="/src/main.js"></script>
   </body>
