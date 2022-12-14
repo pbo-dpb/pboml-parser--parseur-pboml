@@ -63,7 +63,7 @@ export default {
             const element = document.createElement('a');
             element.setAttribute('aria-hidden', true);
             element.setAttribute('href', 'data:text/pboml;charset=utf-8,' + encodeURIComponent(rawtext));
-            element.setAttribute('download', `${this.pbomlDocument.id}.yaml`);
+            element.setAttribute('download', `${this.pbomlDocument.id}.pboml.yaml`);
 
             element.style.display = 'none';
             document.body.appendChild(element);

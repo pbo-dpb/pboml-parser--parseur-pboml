@@ -146,7 +146,7 @@ export default class PdfRenderer {
         shadowHyperlink.style = "display: none";
         const url = window.URL.createObjectURL(blob);
         shadowHyperlink.href = url;
-        shadowHyperlink.download = `${this.pbomlDocument.id}${this.requestedType === 'preprint' ? '__PRE_' : ''}_${language ? language : 'b'}.pdf`;
+        shadowHyperlink.download = `${this.pbomlDocument.id}${this.requestedType === 'preprint' ? '__PRE_' : ''}_${language ? language : 'b'}.pboml.pdf`;
         shadowHyperlink.setAttribute('aria-hidden', true);
         shadowHyperlink.click();
         window.URL.revokeObjectURL(url);
