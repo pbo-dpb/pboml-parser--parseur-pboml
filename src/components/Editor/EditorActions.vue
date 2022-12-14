@@ -15,13 +15,12 @@
         </nav>
 
         <div class="flex flex-row gap-2 justify-end bg-blue-100 shadow p-2" v-if="shouldDisplayExportActions">
-            <button @click="shouldDisplayPreprintExporter = true"
-                class="bg-blue-800 hover:bg-blue-700 p-2 rounded text-white">
-                Preprint // Préimpression
-            </button>
-            <button @click="downloadPboml" class="bg-blue-800 hover:bg-blue-700 p-2 rounded text-white">
+            <Button @click="shouldDisplayPreprintExporter = true" v-if="shouldDisplayPreprintButton">
+                PDF
+            </Button>
+            <Button @click="downloadPboml">
                 PBOML
-            </button>
+            </Button>
         </div>
 
 
@@ -37,6 +36,8 @@
 <script>
 import PreprintExporter from './PreprintExporter/PreprintExporter.vue';
 import PBOMLDocument from '../../models/PBOMLDocument';
+import PdfRenderer from "./PreprintExporter/PdfRenderer.js"
+import Button from './Button.vue';
 export default {
     props: {
         pbomlDocument: PBOMLDocument
@@ -50,6 +51,7 @@ export default {
     },
     components: {
         PreprintExporter,
+        Button
     },
 
     methods: {
@@ -63,6 +65,12 @@ export default {
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
+        }
+    },
+
+    computed: {
+        shouldDisplayPreprintButton() {
+            return PdfRenderer.canRenderPdf;
         }
     }
 

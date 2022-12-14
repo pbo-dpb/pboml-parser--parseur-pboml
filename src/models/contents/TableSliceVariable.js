@@ -40,11 +40,7 @@ export default class TableSliceVariable {
                 }
                 break;
             case 'number':
-                // Patches an issue with jsPDF where french numbers (eg. 12 345) are inconsistently rendered with slashes (12/345)
-                if (print && language === 'fr')
-                    innerHTML = (value);
-                else
-                    innerHTML = (new Intl.NumberFormat(language)).format(value);
+                innerHTML = (new Intl.NumberFormat(language)).format(value);
                 break;
             case 'fy':
                 // Will break in 2100, sorry.

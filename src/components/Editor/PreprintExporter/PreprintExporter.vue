@@ -1,50 +1,54 @@
 <template>
 
-    <loading-indicator class="w-8 h-8"></loading-indicator>
+    <div class="border border-gray-300 rounded p-4 flex flex-col gap-4">
 
-    <div hidden ref="renderedEn">
-        <Renderer :pboml-document="pbomlDocument" language="en" :print="true"></Renderer>
+        <h3 class="text-xl font-semibold">PDF</h3>
+
+        <section class="grid grid-cols-2 gap-4 justify-center items-center" v-if="requestedType === null">
+            <Button @click="setRequestedType('preprint')">Preprint // Préimpression</Button>
+            <Button @click="setRequestedType('final')">Final // Finale</Button>
+        </section>
+
+        <section v-if="requestedType !== null" class=" grid grid-cols-3 gap-4 justify-center items-center">
+            <loading-indicator v-if="!renderer || !renderer.ready" class="w-8 h-8"></loading-indicator>
+
+            <template v-else>
+                <EditorDownloadPdfButton>English</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton>Français</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton :primary="true">Bilingual</EditorDownloadPdfButton>
+            </template>
+        </section>
     </div>
-
-    <div hidden ref="renderedFr">
-        <Renderer :pboml-document="pbomlDocument" language="fr" :print="true"></Renderer>
-    </div>
-
 
 </template>
 <script>
 import PBOMLDocument from '../../../models/PBOMLDocument';
-import EditorDownloadPdfButtonVue from './EditorDownloadPdfButton.vue';
-import PdfRenderer from "./PdfRenderer"
-import Renderer from '../../Renderer/Renderer';
+import EditorDownloadPdfButton from './EditorDownloadPdfButton.vue';
 import LoadingIndicator from "../../LoadingIndicator.vue"
+import Button from '../Button.vue';
+import PdfRenderer from "./PdfRenderer.js"
 
 export default {
     emits: ['complete'],
+    data() {
+        return {
+            requestedType: null,
+            renderer: null
+        }
+    },
     props: {
         pbomlDocument: PBOMLDocument
     },
     components: {
-        editorDownloadPdfButton: EditorDownloadPdfButtonVue,
-        Renderer,
-        LoadingIndicator
+        EditorDownloadPdfButton,
+        LoadingIndicator,
+        Button
     },
-    mounted() {
-        this.$nextTick(() => {
-            this.downloadPdf();
-        })
-    },
+
     methods: {
-        downloadPdf(root) {
-
-            const renderer = new PdfRenderer(this.pbomlDocument, { en: this.$refs.renderedEn, fr: this.$refs.renderedFr });
-            renderer.download(() => {
-                setInterval(() => {
-                    // Give user a marginally longer visual cue.
-                    this.$emit("complete", true);
-                }, 2000);
-
-            });
+        setRequestedType(requestedType) {
+            this.requestedType = requestedType;
+            this.renderer = new PdfRenderer(this.pbomlDocument, requestedType);
         }
     }
 }
