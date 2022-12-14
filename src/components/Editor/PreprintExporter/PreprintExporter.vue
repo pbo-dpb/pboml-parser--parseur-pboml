@@ -1,8 +1,7 @@
 <template>
 
-    <div class="border border-gray-300 rounded p-4 flex flex-col gap-4">
+    <div class="border-t-2 border-gray-500 pt-2 flex flex-col gap-2">
 
-        <h3 class="text-xl font-semibold">PDF</h3>
 
         <section class="grid grid-cols-2 gap-4 justify-center items-center" v-if="requestedType === null">
             <Button @click="setRequestedType('preprint')">Preprint // Préimpression</Button>
