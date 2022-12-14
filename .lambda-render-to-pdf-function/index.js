@@ -35,7 +35,7 @@ const makePdf = async function (filename, language, payloadUrl) {
         buffer = await page.pdf({
             path: `/tmp/pboml-gen-${filename}-${language}.pdf`,
             format: 'Letter',
-            displayHeaderFooter: false,
+            displayHeaderFooter: true,
             headerTemplate: '<div style="font-size:0.1px"></div>',
             footerTemplate: `<div style="font-size: 10px;text-align:right;width:100%;padding: 0 1.2cm">${footerContent}</div>`,
         });
