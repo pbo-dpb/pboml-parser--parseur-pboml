@@ -13,9 +13,9 @@
             <loading-indicator v-if="!renderer || !renderer.ready" class="w-8 h-8"></loading-indicator>
 
             <template v-else>
-                <EditorDownloadPdfButton>English</EditorDownloadPdfButton>
-                <EditorDownloadPdfButton>Français</EditorDownloadPdfButton>
-                <EditorDownloadPdfButton :primary="true">Bilingual</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton @click="download('en')">English</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton @click="download('en')">Français</EditorDownloadPdfButton>
+                <EditorDownloadPdfButton :primary="true" @click="download()">Bilingual</EditorDownloadPdfButton>
             </template>
         </section>
     </div>
@@ -49,6 +49,9 @@ export default {
         setRequestedType(requestedType) {
             this.requestedType = requestedType;
             this.renderer = new PdfRenderer(this.pbomlDocument, requestedType);
+        },
+        download(language) {
+            this.rendered.download(language);
         }
     }
 }
