@@ -18,7 +18,7 @@ const makePdf = async function (filename, language, payloadUrl) {
 
         const page = await browser.newPage();
 
-        let baseUrl = new URL(`https://pboml.opbo-bdpb.ca/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+        let baseUrl = new URL(`https://pboml.opbo-bdpb.ca/${language === 'fr' ? "index.fr.html" : 'index.html'}?media=print`);
         baseUrl.searchParams.set('payload-url', payloadUrl)
         await page.goto(baseUrl.toString(), {
             waitUntil: 'networkidle2',

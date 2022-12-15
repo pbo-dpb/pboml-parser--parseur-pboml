@@ -1,0 +1,35 @@
+
+@media print {
+    table {
+      width: 100%;
+    }
+  
+    table,
+    td,
+    th {
+      border: 1px solid lightgray;
+      word-break: break-word;
+    }
+
+
+  
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: lighter;
+    }
+  
+    .text-xl {
+      font-size: 1.2em
+    }
+  
+    .flex-row {
+      display: flex;
+      gap: 0.75em;
+    }
+  
+    .text-center {
+      text-align: center;
+    }
+  }

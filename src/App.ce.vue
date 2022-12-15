@@ -1,18 +1,20 @@
 <template>
-  <Suspense>
-    <div>
-      <template v-if="loaded && !pbomlDocument">
-        <FilePicker @pick="handlePick"></FilePicker>
+  <div :class="{ 'sd': shouldApplyDefaultStyle }">
+    <Suspense>
+      <div>
+        <template v-if="loaded && !pbomlDocument">
+          <FilePicker @pick="handlePick"></FilePicker>
+        </template>
+        <template v-else>
+          <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone"></Editor>
+          <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
+        </template>
+      </div>
+      <template #fallback>
+        <LoadingIndicator class="w-8 h-8" />
       </template>
-      <template v-else>
-        <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone"></Editor>
-        <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
-      </template>
-    </div>
-    <template #fallback>
-      <LoadingIndicator class="w-8 h-8" />
-    </template>
-  </Suspense>
+    </Suspense>
+  </div>
 </template>
 
 <script>
@@ -48,6 +50,19 @@ export default {
     FilePicker: defineAsyncComponent(() => import('./components/FilePicker/FilePicker.vue')),
     LoadingIndicator,
     Renderer,
+  },
+  computed: {
+    shouldApplyDefaultStyle() {
+      /**
+       * We can't wrap `@tailwind` directives in a `@media screen` directive but we need to
+       * disable the styles to print correctly (otherwise Puppeteer driven Chromium and
+       * Firefox  won't print text without rare and unpredictable weird artifacts and 
+       * overlapping lines). This is a workaround: pass &media=print as a URL
+       * parameter to disable Tailwind when printing PDFs.
+       */
+      const params = new URLSearchParams(window.location.search);
+      return params.get('media') !== 'print';
+    }
   },
   async created() {
 
@@ -98,6 +113,7 @@ export default {
 </script>
 <style>
 @import "./index.css";
+@import "./print.css" print;
 
 th {
   @apply font-semibold;

@@ -1,4 +1,5 @@
 module.exports = {
+  important: '.sd',
   content: [
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
