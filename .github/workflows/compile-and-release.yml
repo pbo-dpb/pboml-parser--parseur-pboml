@@ -28,6 +28,7 @@ jobs:
           source_dir: 'dist'
           destination_dir: ''
       - uses: chetan/invalidate-cloudfront-action@v2
+        continue-on-error: true
         env:
           DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION }}
           PATHS: "/manifest.json /index.html /index.fr.html"
