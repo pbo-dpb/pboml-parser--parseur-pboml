@@ -71,8 +71,12 @@ export default {
         },
         handleRawEditorToggle() {
             if (this.shouldEditRaw) {
-                this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml);
-                this.shouldEditRaw = false;
+                try {
+                    this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml);
+                    this.shouldEditRaw = false;
+                } catch (e) {
+                }
+
             } else {
                 this.shouldEditRaw = true;
             }
