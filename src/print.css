@@ -9,6 +9,11 @@
     th {
       border: 1px solid lightgray;
       word-break: break-word;
+      
+    }
+
+    tr {
+      break-inside: avoid-page;
     }
 
 
@@ -18,6 +23,7 @@
     h3,
     h4 {
       font-weight: lighter;
+      break-after: avoid;
     }
   
     .text-xl {
