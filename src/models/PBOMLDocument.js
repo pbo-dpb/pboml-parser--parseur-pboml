@@ -6,6 +6,12 @@ import GraphSlice from "./contents/GraphSlice";
 
 
 export default class PBOMLDocument {
+
+    static initFromYaml(yamlPayload) {
+        let payload = yaml.loadAll(yamlPayload);
+        return new PBOMLDocument(payload);
+    }
+
     constructor(payload = []) {
         const mainDocument = payload.find(element => element.pboml?.version);
         this.otherDocuments = payload.filter((dc) => dc != mainDocument);

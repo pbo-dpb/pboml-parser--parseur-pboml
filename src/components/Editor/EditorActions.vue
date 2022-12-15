@@ -2,7 +2,8 @@
     <div class="flex flex-col gap-2">
         <nav class="flex flex-row justify-end gap-2">
 
-            <Button @click="shouldDisplayPreview = (shouldDisplayPreview ? false : 'en')">
+            <slot></slot>
+            <Button :disabled="disabled" @click="shouldDisplayPreview = (shouldDisplayPreview ? false : 'en')">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -12,7 +13,7 @@
                 <span class="sr-only">Export // Exporter</span>
             </Button>
 
-            <Button @click="shouldDisplayExportActions = !shouldDisplayExportActions"
+            <Button :disabled="disabled" @click="shouldDisplayExportActions = !shouldDisplayExportActions"
                 :toggled="shouldDisplayExportActions">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -68,7 +69,8 @@ import Button from './Button.vue';
 import Renderer from '../Renderer/Renderer';
 export default {
     props: {
-        pbomlDocument: PBOMLDocument
+        pbomlDocument: PBOMLDocument,
+        disabled: Boolean
     },
     data() {
         return {

@@ -14,7 +14,8 @@
     "js-yaml": "^4.1.0",
     "pdf-lib": "^1.17.1",
     "remarkable": "^2.0.1",
-    "vue": "^3.2.45"
+    "vue": "^3.2.45",
+    "vue3-ace-editor": "^2.2.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.8",
