@@ -1,5 +1,6 @@
 module.exports = {
   content: [
+    "./editor.html",
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
