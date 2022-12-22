@@ -26,7 +26,7 @@ export default class GraphSlice extends Slice {
     }
 
 
-    renderReadonlyVnode(print, language) {
+    renderReadonlyVnode(language) {
         return h(Suspense, null, {
             default: () => h('div', { class: 'flex print:block flex-col items-center justify-center' }, [
                 h('div', { class: 'w-full xl:w-2/3' }, [
@@ -44,8 +44,8 @@ export default class GraphSlice extends Slice {
         });
     }
 
-    _buildEditingVnodes() {
-        let vnodes = super._buildEditingVnodes();
+    _buildEditorInputVnodes() {
+        let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h('div', { class: 'grid grid-cols-2 gap-2' }, [
             this.renderReadonlyVnode(false, 'en'),
             this.renderReadonlyVnode(false, 'fr')

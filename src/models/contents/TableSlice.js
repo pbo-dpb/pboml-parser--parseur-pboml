@@ -28,7 +28,7 @@ export default class TableSlice extends Slice {
         return this.variableCount < this.bodyRowsCount;
     }
 
-    __buildHorizontalHeader(print, language) {
+    __buildHorizontalHeader(language) {
         return h('thead', {}, [h('tr', { class: "" }, Object.values(this.variables).map(vr => {
             let node = vr.getTableHeaderVnode('col', language);
             node.props['width'] = `${100 / this.variableCount}%`;
@@ -36,21 +36,21 @@ export default class TableSlice extends Slice {
         }))])
     }
 
-    __buildHorizontalBody(print, language) {
+    __buildHorizontalBody(language) {
         let rows = this.content.map(row => {
 
             let columns = [];
             Object.entries(row).forEach((entry) => {
                 const [key, value] = entry;
                 const variable = this.variables[key];
-                columns.push(variable.getTableCellVnode(value, 'row', print, language));
+                columns.push(variable.getTableCellVnode(value, 'row', language));
             });
             return h('tr', { class: "break-inside-avoid" }, columns);
         })
         return h('tbody', {}, rows);
     }
 
-    __buildVerticalBody(print, language) {
+    __buildVerticalBody(language) {
 
         let rows = [];
         Object.entries(this.variables).forEach((entry) => {
@@ -62,7 +62,7 @@ export default class TableSlice extends Slice {
             columns.push(headerCol);
 
             this.content.forEach(content => {
-                let cell = variable.getTableCellVnode(content[key], 'col', print, language);
+                let cell = variable.getTableCellVnode(content[key], 'col', language);
                 cell.props['width'] = `${100 / (this.bodyRowsCount + 1)}%`;
                 columns.push(cell);
             })
@@ -75,35 +75,35 @@ export default class TableSlice extends Slice {
     }
 
 
-    renderReadonlyVnode(print, language) {
+    renderReadonlyVnode(language) {
         return null; // Readonly tables are not supported
     }
 
 
-    renderAsVnode(print = false, language = document.documentElement.lang) {
-        let parentVnode = super.renderAsVnode(print, language);
+    renderAsVnode(language = document.documentElement.lang) {
+        let parentVnode = super.renderAsVnode(language);
         parentVnode.props.class = `${parentVnode.props.class} break-inside-avoid-page`;
         return parentVnode;
     }
 
-    _buildVnodes(pring, language) {
-        let vnodes = super._buildVnodes(print, language);
+    _buildVnodes(language) {
+        let vnodes = super._buildVnodes(language);
         vnodes.push(h('table', {
             class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 break-inside-avoid-page ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
         }, [
-            this.__buildHorizontalHeader(print, language),
-            this.__buildHorizontalBody(print, language),
+            this.__buildHorizontalHeader(language),
+            this.__buildHorizontalBody(language),
         ]));
 
         vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table print:table print:text-sm" : "lg:hidden print:hidden"}` },
-            this.__buildVerticalBody(print, language),
+            this.__buildVerticalBody(language),
         ));
 
         return vnodes;
     }
 
-    _buildEditingVnodes() {
-        let vnodes = super._buildEditingVnodes();
+    _buildEditorInputVnodes() {
+        let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h(defineAsyncComponent(() => import('../../editors/TableSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { } }))
         return vnodes;
     }

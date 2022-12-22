@@ -10,6 +10,7 @@ export default class Slice {
         this.display_label = payload.display_label;
         this.slice_group = payload.slice_group;
         this.is_figure = payload.is_figure ? payload.is_figure : false;
+        this._choices = payload._choices;
         this.print_only = payload.print_only;
         this.label = {
             en: payload.label?.en,
@@ -44,10 +45,10 @@ export default class Slice {
     }
 
 
-    _buildVnodes(print, language) {
+    _buildVnodes(language) {
         return [
             this._renderLabelTitleVnode(language),
-            this.renderReadonlyVnode(print, language)
+            this.renderReadonlyVnode(language)
         ];
     }
 
@@ -55,22 +56,30 @@ export default class Slice {
         return null
     }
 
-    _buildEditingVnodes() {
+    _buildEditorInputVnodes() {
+        return [];
+    }
+
+
+    __buildEditorsVnode() {
+
+
         return [
             (new SliceLabelEditor(this.label)).renderAsVnode(),
+            ...(this.choices ? this._buildEditorInputVnodes() : this._buildEditorInputVnodes())
         ];
     }
 
-    renderAsVnode(print = false, language = document.documentElement.lang) {
+    renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4"];
         classes.push(this.print_only ? 'hidden print:flex' : 'flex')
         classes.push(this.is_figure ? "bg-gradient-to-tr  from-white to-gray-50 rounded-tr-3xl pt-4 py-4 break-inside-avoid-page" : "");
-        return h(this.is_figure ? 'figure' : 'section', { class: classes.join(" ") }, this._buildVnodes(print, language));
+        return h(this.is_figure ? 'figure' : 'section', { class: classes.join(" ") }, this._buildVnodes(language));
     }
 
     renderEditingVnode() {
         return h('fieldset', { class: `flex flex-col gap-4 print:mt-4 ${this.readonly ? ' filter grayscale' : ''}` }, h(Suspense, null, {
-            default: () => h('div', { class: 'flex flex-col gap-2' }, this._buildEditingVnodes()),
+            default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
     }

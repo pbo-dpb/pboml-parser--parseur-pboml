@@ -26,7 +26,7 @@ export default class TableSliceVariable {
 
 
 
-    getTableCellVnode(value, scope = null, print = false, language) {
+    getTableCellVnode(value, scope = null, language) {
 
         let innerHTML;
         switch (this.type) {
@@ -53,7 +53,7 @@ export default class TableSliceVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableSliceVariable.#cellBaseClass} ${print ? 'py-2' : ''}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableSliceVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 

@@ -12,7 +12,7 @@ export default class MarkdownSlice extends Slice {
         }
     }
 
-    renderReadonlyVnode(print, language) {
+    renderReadonlyVnode(language) {
         const md = new Remarkable();
 
         md.renderer.rules.paragraph_open = (function () {
@@ -30,8 +30,8 @@ export default class MarkdownSlice extends Slice {
     }
 
 
-    _buildEditingVnodes() {
-        let vnodes = super._buildEditingVnodes();
+    _buildEditorInputVnodes() {
+        let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h(defineAsyncComponent(() => import('../../editors/MarkdownSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { this.content = value } }))
         return vnodes;
     }

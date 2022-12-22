@@ -36,15 +36,15 @@ export default class KvListSlice extends Slice {
         this.content = this.content.filter(kve => kve !== entry);
     }
 
-    renderReadonlyVnode(print, language) {
+    renderReadonlyVnode(language) {
         return h('dl', { 'class': 'flex flex-col gap-2 break-inside-avoid' }, (!!this.content.forEach ? this.content.map((kv) => {
             return kv.getKvNode(language);
         }) : null))
     }
 
 
-    _buildEditingVnodes() {
-        let vnodes = super._buildEditingVnodes();
+    _buildEditorInputVnodes() {
+        let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h(defineAsyncComponent(() => import('../../editors/KvSliceEditor.js')), { slice: this }))
         return vnodes;
     }

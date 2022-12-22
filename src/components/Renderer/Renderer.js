@@ -4,7 +4,6 @@ import { h } from 'vue'
 export default {
   props: {
     pbomlDocument: PBOMLDocument,
-    print: Boolean,
     language: String,
     standalone: Boolean
   },
@@ -41,7 +40,7 @@ export default {
     return h('main', { 'class': 'flex flex-col gap-4 print:block' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
-        return slice.renderAsVnode(this.print, language);
+        return slice.renderAsVnode(language);
       }),
       ...this._buildFooterVnodes(language),
     ]);
