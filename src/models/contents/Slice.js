@@ -1,6 +1,7 @@
 import { h, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
+import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 
 export default class Slice {
     constructor(payload) {
@@ -10,7 +11,7 @@ export default class Slice {
         this.display_label = payload.display_label;
         this.slice_group = payload.slice_group;
         this.is_figure = payload.is_figure ? payload.is_figure : false;
-        this._choices = payload._choices;
+        this.choices = payload.choices;
         this.print_only = payload.print_only;
         this.label = {
             en: payload.label?.en,
@@ -60,13 +61,17 @@ export default class Slice {
         return [];
     }
 
+    _buildEditorChoicesInputVnode() {
+        return [new ChoiceRenderer(this).renderAsVnode()]
+    }
+
 
     __buildEditorsVnode() {
 
 
         return [
             (new SliceLabelEditor(this.label)).renderAsVnode(),
-            ...(this.choices ? this._buildEditorInputVnodes() : this._buildEditorInputVnodes())
+            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
         ];
     }
 
@@ -92,6 +97,7 @@ export default class Slice {
             display_label: this.display_label,
             is_figure: this.is_figure,
             slice_group: this.slice_group,
+            choices: this.choices,
             label: {
                 en: this.label?.en,
                 fr: this.label?.fr
