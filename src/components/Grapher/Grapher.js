@@ -141,7 +141,6 @@ export default {
              *  Inspired by https://stackoverflow.com/questions/29473526/recursive-find-and-replace-in-multidimensional-javascript-object
              */
             let rawContent = JSON.stringify(content);
-
             for (const [key, value] of Object.entries(this.strings[this.language])) {
                 rawContent = rawContent.replaceAll(`"${key}"`, JSON.stringify(value))
             }

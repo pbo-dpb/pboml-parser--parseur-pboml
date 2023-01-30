@@ -47,8 +47,8 @@ export default class GraphSlice extends Slice {
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h('div', { class: 'grid grid-cols-2 gap-2' }, [
-            this.renderReadonlyVnode(false, 'en'),
-            this.renderReadonlyVnode(false, 'fr')
+            this.renderReadonlyVnode('en'),
+            this.renderReadonlyVnode('fr')
         ]))
         return vnodes;
     }
