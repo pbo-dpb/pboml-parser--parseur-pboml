@@ -54,7 +54,9 @@ export default class Slice {
     }
 
     renderReadonlyVnode(language) {
-        return null
+        return [
+
+        ]
     }
 
     _buildEditorInputVnodes() {
