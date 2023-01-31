@@ -2,15 +2,18 @@ import { h } from 'vue'
 import { Remarkable } from 'remarkable';
 import MarkdownSlice from '../models/contents/MarkdownSlice.js'
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
+import strings from "../editor-strings"
 
 export default {
     props: ['slice'],
     setup(props, { emit }) {
 
         if (props.slice.readonly) {
+            const md = new Remarkable({ breaks: false, });
             return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
-                props.slice.renderReadonlyVnode(false, "en"),
-                props.slice.renderReadonlyVnode(false, "fr"),
+                h('div', { class: 'col-span-2 font-bold', innerHTML: md.render(strings[document.documentElement.lang].readonly_slice) }),
+                props.slice.renderAsVnode("en"),
+                props.slice.renderAsVnode("fr"),
             ])
         }
 
