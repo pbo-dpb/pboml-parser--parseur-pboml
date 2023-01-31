@@ -7,6 +7,7 @@ import LoadingIndicator from "../../components/LoadingIndicator.vue"
 export default class GraphSlice extends Slice {
     constructor(payload) {
         super(payload);
+        this.type = "graph"
         this.strings = {
             en: payload.strings?.en,
             fr: payload.strings?.fr

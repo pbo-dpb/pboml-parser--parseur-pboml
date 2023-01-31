@@ -68,9 +68,13 @@ export default class Slice {
 
     __buildEditorsVnode() {
 
-
         return [
-            (new SliceLabelEditor(this.label)).renderAsVnode(),
+            h(SliceLabelEditor, {
+                'label': this.label,
+                'onUpdate:modelValue': (value) => {
+                    this.label.en = value.en; this.label.fr = value.fr
+                }
+            }),
             ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
         ];
     }

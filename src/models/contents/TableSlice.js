@@ -7,6 +7,7 @@ import TableSliceVariable from './TableSliceVariable';
 export default class TableSlice extends Slice {
     constructor(payload) {
         super(payload);
+        this.type = "table"
         let variables = {};
         Object.entries(payload.variables).forEach((entry) => {
             const [key, value] = entry;

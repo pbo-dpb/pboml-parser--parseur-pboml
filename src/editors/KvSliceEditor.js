@@ -1,5 +1,7 @@
 import { h } from 'vue'
 import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
+import TinyButton from "../components/Editor/TinyButton.vue"
+
 
 export default {
     props: ['slice'],
@@ -20,8 +22,8 @@ export default {
             props.slice.content.forEach((entry) => {
                 let kvBlock = h('div', { 'class': 'flex flex-col gap-2  py-2  pl-4 pr-2 border-r-2 border-gray-300' }, [
 
-                    h('button', {
-                        'class': 'rounded bg-red-100 hover:bg-red-300 text-sm text-blue-800 w-fit p-1 place-self-end', 'innerHTML': "🗑️", onClick: (e) => {
+                    h(TinyButton, {
+                        'class': 'place-self-end', 'innerHTML': "🗑️", danger: true, onClick: (e) => {
                             props.slice.removeKvEntry(entry);
                         }
                     }),
@@ -61,8 +63,8 @@ export default {
             });
 
 
-            rows.push(h('button', {
-                'class': 'rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 w-fit p-1', 'innerHTML': "➕", onClick: (e) => {
+            rows.push(h(TinyButton, {
+                'innerHTML': "➕", onClick: (e) => {
                     props.slice.appendKvEntry();
                 }
             }));

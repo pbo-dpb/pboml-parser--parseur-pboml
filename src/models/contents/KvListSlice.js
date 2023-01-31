@@ -7,6 +7,7 @@ const language = document.documentElement.lang;
 export default class KvListSlice extends Slice {
     constructor(payload) {
         super(payload);
+        this.type = "kvlist";
         this.prototype = {
             key: {
                 type: payload.prototype?.key?.type,
