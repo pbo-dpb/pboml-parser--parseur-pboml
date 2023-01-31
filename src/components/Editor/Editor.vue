@@ -13,7 +13,11 @@
             </Button>
         </editor-actions>
 
-        <editor-blocks v-if="!shouldEditRaw" :pboml-document="pbomlDocument"></editor-blocks>
+        <template v-if="!shouldEditRaw">
+            <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
+            <slice-stager @new="handleNewSlice"></slice-stager>
+        </template>
+
         <yaml-editor v-if="shouldEditRaw" :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></yaml-editor>
 
     </main>
@@ -26,6 +30,7 @@ import PBOMLDocument from '../../models/PBOMLDocument';
 import EditorActions from './EditorActions.vue';
 import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
+import SliceStager from "./SliceStager/SliceStager.vue";
 
 export default {
     props: {
@@ -45,6 +50,7 @@ export default {
         EditorBlocks,
         Button,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
+        SliceStager
     },
 
     watch: {
@@ -66,7 +72,6 @@ export default {
     },
     methods: {
         handlePbomlUpdate(newContent) {
-            console.log('handle updated ml')
             this.workingPboml = newContent;
         },
         handleRawEditorToggle() {
@@ -80,6 +85,9 @@ export default {
             } else {
                 this.shouldEditRaw = true;
             }
+        },
+        handleNewSlice(slice) {
+            this.pbomlDocument.addSlice(slice);
         }
     }
 }

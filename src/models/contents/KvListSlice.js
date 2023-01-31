@@ -9,17 +9,17 @@ export default class KvListSlice extends Slice {
         super(payload);
         this.prototype = {
             key: {
-                type: payload.prototype.key?.type,
+                type: payload.prototype?.key?.type,
                 label: {
-                    en: payload.prototype.key?.label?.en,
-                    fr: payload.prototype.key?.label?.fr,
+                    en: payload.prototype?.key?.label?.en,
+                    fr: payload.prototype?.key?.label?.fr,
                 }
             },
             value: {
-                type: payload.prototype.value?.type,
+                type: payload.prototype?.value?.type,
                 label: {
-                    en: payload.prototype.value?.label?.en,
-                    fr: payload.prototype.value?.label?.fr,
+                    en: payload.prototype?.value?.label?.en,
+                    fr: payload.prototype?.value?.label?.fr,
                 }
             }
         }
