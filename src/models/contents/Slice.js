@@ -97,7 +97,7 @@ export default class Slice {
     }
 
     renderEditingVnode() {
-        return h('fieldset', { class: `flex flex-col gap-4 print:mt-4 ${this.readonly ? ' filter grayscale' : ''}` }, h(Suspense, null, {
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` }, h(Suspense, null, {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
