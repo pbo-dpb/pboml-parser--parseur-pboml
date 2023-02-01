@@ -14,6 +14,11 @@
         </editor-actions>
 
         <template v-if="!shouldEditRaw">
+            <template v-if="!standalone">
+                <h2 class="text-4xl font-thin">{{ strings.meta_section_title }}</h2>
+                <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+                <h2 class="text-4xl font-thin mt-4">{{ strings.slices_section_title }}</h2>
+            </template>
             <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
             <slice-stager @new="handleNewSlice"></slice-stager>
         </template>
@@ -31,6 +36,8 @@ import EditorActions from './EditorActions.vue';
 import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
+import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
+import strings from "../../editor-strings"
 
 export default {
     props: {
@@ -41,7 +48,8 @@ export default {
     data() {
         return {
             shouldEditRaw: false,
-            workingPboml: ''
+            workingPboml: '',
+            strings: strings[document.documentElement.lang]
         }
     },
 
@@ -50,7 +58,8 @@ export default {
         EditorBlocks,
         Button,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
-        SliceStager
+        SliceStager,
+        DocumentMetaEditor
     },
 
     watch: {
@@ -89,6 +98,7 @@ export default {
         handleNewSlice(slice) {
             this.pbomlDocument.addSlice(slice);
         }
-    }
+    },
+
 }
 </script>

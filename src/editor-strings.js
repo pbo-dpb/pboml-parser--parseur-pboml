@@ -1,5 +1,10 @@
 export default {
     en: {
+        "meta_section_title": "Document properties",
+        "slices_section_title": "Slices",
+        "document_title_label": "Document title",
+        "document_id_label": "ID",
+        "document_copyright_label": "Copyright notice",
         "create_slice": "Add a new slice",
         "no_slice_title": "Unnamed slice",
         'slice_type_markdown': "Rich Text (markdown)",
@@ -10,6 +15,11 @@ export default {
         "kv_slice_value_label": "Label for value",
     },
     fr: {
+        "meta_section_title": "Propriétés du document",
+        "slices_section_title": "Tranches",
+        "document_title_label": "Titre du document",
+        "document_id_label": "ID",
+        "document_copyright_label": "Avis de droit d'auteur",
         "create_slice": "Ajouter une tranche",
         "no_slice_title": "Tranche sans nom",
         'slice_type_markdown': "Rich Text (markdown)",

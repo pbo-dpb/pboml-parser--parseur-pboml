@@ -4,7 +4,7 @@ import BilingualInput from "../../components/Editor/Inputs/BilingualInput.vue"
 import strings from '../../editor-strings'
 export default {
     props: ["label", "isEditing"],
-
+    emits: ['update:modelValue', 'editing'],
 
     render() {
 
