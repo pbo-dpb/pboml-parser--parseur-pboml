@@ -2,8 +2,8 @@
 
     <main class="flex flex-col gap-4">
 
-        <editor-actions v-if="!standalone" class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument"
-            :disabled="shouldEditRaw">
+        <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw"
+            :standalone="standalone">
             <Button @click="handleRawEditorToggle" :toggled="shouldEditRaw"><svg aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -17,8 +17,9 @@
             <template v-if="!standalone">
                 <h2 class="text-4xl font-thin">{{ strings.meta_section_title }}</h2>
                 <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
-                <h2 class="text-4xl font-thin mt-4">{{ strings.slices_section_title }}</h2>
             </template>
+            <h2 class="text-4xl font-thin mt-4">{{ strings.slices_section_title }}</h2>
+
             <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
             <slice-stager @new="handleNewSlice"></slice-stager>
         </template>
