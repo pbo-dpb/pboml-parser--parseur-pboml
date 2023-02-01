@@ -13,8 +13,8 @@
                 <span class="sr-only">Export // Exporter</span>
             </Button>
 
-            <Button :disabled="disabled" @click="shouldDisplayExportActions = !shouldDisplayExportActions"
-                :toggled="shouldDisplayExportActions">
+            <Button v-if="!standalone" :disabled="disabled"
+                @click="shouldDisplayExportActions = !shouldDisplayExportActions" :toggled="shouldDisplayExportActions">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -70,7 +70,8 @@ import Renderer from '../Renderer/Renderer';
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
-        disabled: Boolean
+        disabled: Boolean,
+        standalone: Boolean
     },
     data() {
         return {
@@ -102,6 +103,7 @@ export default {
 
     computed: {
         shouldDisplayPreprintButton() {
+
             return PdfRenderer.canRenderPdf;
         }
     }

@@ -18,6 +18,10 @@ export default class Slice {
             fr: payload.label?.fr
         }
         this.content = payload.content;
+
+        this.state = {
+            isEditingMeta: false
+        }
     }
 
     _renderLabelTitleVnode(language, force = false) {
@@ -54,7 +58,9 @@ export default class Slice {
     }
 
     renderReadonlyVnode(language) {
-        return null
+        return [
+
+        ]
     }
 
     _buildEditorInputVnodes() {
@@ -68,9 +74,17 @@ export default class Slice {
 
     __buildEditorsVnode() {
 
-
         return [
-            (new SliceLabelEditor(this.label)).renderAsVnode(),
+            h(SliceLabelEditor, {
+                'label': this.label,
+                'isEditing': this.state.isEditingMeta,
+                'onEditing': (value) => {
+                    this.state.isEditingMeta = value;
+                },
+                'onUpdate:modelValue': (value) => {
+                    this.label.en = value.en; this.label.fr = value.fr
+                }
+            }),
             ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
         ];
     }
@@ -83,7 +97,7 @@ export default class Slice {
     }
 
     renderEditingVnode() {
-        return h('fieldset', { class: `flex flex-col gap-4 print:mt-4 ${this.readonly ? ' filter grayscale' : ''}` }, h(Suspense, null, {
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` }, h(Suspense, null, {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
             fallback: () => h('template', null, LoadingIndicator)
         }));

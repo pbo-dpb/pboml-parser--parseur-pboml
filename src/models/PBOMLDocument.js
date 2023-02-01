@@ -106,4 +106,8 @@ export default class PBOMLDocument {
     serialize() {
         return this.toArray().map(doc => yaml.dump(doc)).join('---\n');
     }
+
+    addSlice(slice) {
+        this.slices.push(slice);
+    }
 }

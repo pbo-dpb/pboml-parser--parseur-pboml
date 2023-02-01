@@ -2,8 +2,8 @@
 
     <main class="flex flex-col gap-4">
 
-        <editor-actions v-if="!standalone" class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument"
-            :disabled="shouldEditRaw">
+        <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw"
+            :standalone="standalone">
             <Button @click="handleRawEditorToggle" :toggled="shouldEditRaw"><svg aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
@@ -13,7 +13,17 @@
             </Button>
         </editor-actions>
 
-        <editor-blocks v-if="!shouldEditRaw" :pboml-document="pbomlDocument"></editor-blocks>
+        <template v-if="!shouldEditRaw">
+            <template v-if="!standalone">
+                <h2 class="text-4xl font-thin">{{ strings.meta_section_title }}</h2>
+                <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+            </template>
+            <h2 class="text-4xl font-thin mt-4">{{ strings.slices_section_title }}</h2>
+
+            <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
+            <slice-stager @new="handleNewSlice"></slice-stager>
+        </template>
+
         <yaml-editor v-if="shouldEditRaw" :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></yaml-editor>
 
     </main>
@@ -26,6 +36,9 @@ import PBOMLDocument from '../../models/PBOMLDocument';
 import EditorActions from './EditorActions.vue';
 import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
+import SliceStager from "./SliceStager/SliceStager.vue";
+import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
+import strings from "../../editor-strings"
 
 export default {
     props: {
@@ -36,7 +49,8 @@ export default {
     data() {
         return {
             shouldEditRaw: false,
-            workingPboml: ''
+            workingPboml: '',
+            strings: strings[document.documentElement.lang]
         }
     },
 
@@ -45,6 +59,8 @@ export default {
         EditorBlocks,
         Button,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
+        SliceStager,
+        DocumentMetaEditor
     },
 
     watch: {
@@ -66,7 +82,6 @@ export default {
     },
     methods: {
         handlePbomlUpdate(newContent) {
-            console.log('handle updated ml')
             this.workingPboml = newContent;
         },
         handleRawEditorToggle() {
@@ -80,7 +95,11 @@ export default {
             } else {
                 this.shouldEditRaw = true;
             }
+        },
+        handleNewSlice(slice) {
+            this.pbomlDocument.addSlice(slice);
         }
-    }
+    },
+
 }
 </script>

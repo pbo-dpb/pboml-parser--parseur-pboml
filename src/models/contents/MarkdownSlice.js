@@ -10,6 +10,7 @@ export default class MarkdownSlice extends Slice {
             en: payload.content?.en,
             fr: payload.content?.fr
         }
+        this.type = "markdown"
     }
 
     renderReadonlyVnode(language) {

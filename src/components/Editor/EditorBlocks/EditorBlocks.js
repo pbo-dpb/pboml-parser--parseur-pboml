@@ -13,7 +13,7 @@ export default {
 
 
     render() {
-        return h('main', { 'class': 'flex flex-col gap-4 print:block' }, [
+        return h('main', { 'class': 'flex flex-col gap-8 print:block pb-8' }, [
             ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice) => {
                 return slice.renderEditingVnode();
             }) : null),

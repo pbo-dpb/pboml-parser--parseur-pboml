@@ -7,6 +7,7 @@ import LoadingIndicator from "../../components/LoadingIndicator.vue"
 export default class GraphSlice extends Slice {
     constructor(payload) {
         super(payload);
+        this.type = "graph"
         this.strings = {
             en: payload.strings?.en,
             fr: payload.strings?.fr
@@ -47,8 +48,8 @@ export default class GraphSlice extends Slice {
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
         vnodes.push(h('div', { class: 'grid grid-cols-2 gap-2' }, [
-            this.renderReadonlyVnode(false, 'en'),
-            this.renderReadonlyVnode(false, 'fr')
+            this.renderReadonlyVnode('en'),
+            this.renderReadonlyVnode('fr')
         ]))
         return vnodes;
     }
