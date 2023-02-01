@@ -44,9 +44,9 @@ export default {
         }
 
         return [
-            h('div', { class: 'flex flex-row gap-2 font-thin text-2xl' }, [
+            h('div', { class: 'flex flex-row gap-2 ' }, [
                 actionNode,
-                h(this.isEditing ? 'div' : 'legend', { class: 'flex flex-col gap-1 w-full' }, contentNodes),
+                h(this.isEditing ? 'div' : 'legend', { class: `flex flex-col gap-1 w-full ${this.isEditing ? '' : 'font-thin text-2xl'}` }, contentNodes),
             ])
 
         ];
