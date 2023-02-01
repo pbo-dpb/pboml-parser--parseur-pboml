@@ -46,7 +46,7 @@ export default class KvListSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/KvSliceEditor.js')), { slice: this }))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/KvSliceEditor.js')), { slice: this, isEditingMeta: this.state.isEditingMeta }))
         return vnodes;
     }
 

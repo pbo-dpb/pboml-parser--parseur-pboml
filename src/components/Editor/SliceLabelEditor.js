@@ -3,20 +3,16 @@ import TinyButton from "./TinyButton.vue"
 import BilingualInput from "../../components/Editor/Inputs/BilingualInput.vue"
 import strings from '../../editor-strings'
 export default {
-    props: ["label"],
-    data() {
-        return {
-            isEditing: false
-        }
-    },
+    props: ["label", "isEditing"],
+
 
     render() {
 
         let actionNode;
         if (!this.isEditing) {
             actionNode = h(TinyButton, {
-                'class': 'bg-blue-100', innerText: '🖊️', onClick: (e) => {
-                    this.isEditing = true;
+                'class': 'bg-amber-100 hover:bg-amber-300', innerText: '⚙️', onClick: (e) => {
+                    this.$emit("editing", true)
                 },
             })
         }
@@ -24,9 +20,10 @@ export default {
 
         if (this.isEditing) {
             contentNodes = [
-                h('fieldset', { class: 'flex flex-col gap-2 w-full' }, [
+                h('fieldset', { class: 'flex flex-col gap-2 w-full border-l-4 border-amber-300 pl-4' }, [
                     h(BilingualInput, {
                         modelValue: this.label,
+                        label: strings[document.documentElement.lang].slice_title_field_label,
                         'onUpdate:modelValue': (value) => this.$emit('update:modelValue', value)
                     })
                 ])

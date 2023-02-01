@@ -5,7 +5,12 @@ import strings from "../editor-strings"
 import { Remarkable } from 'remarkable';
 
 export default {
-    props: ['slice'],
+    props: ['slice', 'isEditingMeta'],
+    data() {
+        return {
+            editingLabels: false
+        }
+    },
     setup(props, { emit }) {
 
         if (props.slice.readonly) {
@@ -23,7 +28,38 @@ export default {
 
         return () => {
 
+            let metas = [];
+
+            if (props.isEditingMeta) {
+                metas.push(
+
+
+                    h('div', { class: 'grid grid-cols-2 gap-2' }, [
+
+                        h(BilingualInput, {
+                            class: "w-full",
+                            modelValue: props.slice.prototype.key.label,
+                            label: strings[document.documentElement.lang].kv_slice_key_label,
+                            'onUpdate:modelValue': (value) => {
+                                props.slice.prototype.key.label = value;
+                            }
+                        }),
+                        h(BilingualInput, {
+                            class: "w-full",
+                            modelValue: props.slice.prototype.value.label,
+                            label: strings[document.documentElement.lang].kv_slice_value_label,
+                            'onUpdate:modelValue': (value) => {
+                                props.slice.prototype.value.label = value;
+                            }
+                        }),
+                    ]),
+                )
+            }
+
+
+
             let rows = [];
+
             props.slice.content.forEach((entry) => {
                 let kvBlock = h('div', { 'class': 'flex flex-col gap-2  py-2  pl-4 pr-2 border-r-2 border-gray-300' }, [
 
@@ -69,12 +105,18 @@ export default {
 
 
             rows.push(h(TinyButton, {
+                'class': "self-center",
                 'innerHTML': "➕", onClick: (e) => {
                     props.slice.appendKvEntry();
                 }
             }));
 
-            return h('div', { class: 'flex flex-col gap-4 ml-4' }, rows)
+
+
+            return h('div', { class: 'flex flex-col gap-4' }, [
+                h('div', { class: 'border-l-4 border-amber-300 pl-4' }, metas),
+                h('div', { class: 'p-4 bg-gray-100 rounded flex flex-col gap-8' }, rows)
+            ])
 
 
         }

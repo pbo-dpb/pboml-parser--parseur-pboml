@@ -1,5 +1,7 @@
 <template>
-    <div class="flex flex-col p-1 gap-0.5 border border-gray-300 rounded">
+    <fieldset class="flex flex-col p-1 gap-0.5 border border-gray-300 rounded">
+
+        <legend v-if="label" class="font-semibold px-1">{{ label }}</legend>
 
         <label class="flex flex-row items-center text-left">
             <span class="w-8">EN</span>
@@ -14,7 +16,7 @@
         </label>
 
 
-    </div>
+    </fieldset>
 
 
 
@@ -22,7 +24,7 @@
 <script setup>
 
 import MarkdownInput from "./MarkdownInput.vue"
-const props = defineProps(['modelValue'])
+const props = defineProps(['modelValue', 'label'])
 const emit = defineEmits(['update:modelValue'])
 
 

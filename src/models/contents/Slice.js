@@ -18,6 +18,10 @@ export default class Slice {
             fr: payload.label?.fr
         }
         this.content = payload.content;
+
+        this.state = {
+            isEditingMeta: false
+        }
     }
 
     _renderLabelTitleVnode(language, force = false) {
@@ -73,6 +77,10 @@ export default class Slice {
         return [
             h(SliceLabelEditor, {
                 'label': this.label,
+                'isEditing': this.state.isEditingMeta,
+                'onEditing': (value) => {
+                    this.state.isEditingMeta = value;
+                },
                 'onUpdate:modelValue': (value) => {
                     this.label.en = value.en; this.label.fr = value.fr
                 }
