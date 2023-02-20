@@ -3,7 +3,7 @@ const fs = require("fs");
 const crypto = require('crypto');
 var AWS = require('aws-sdk');
 
-const makePdf = async function (filename, language, payloadUrl) {
+const makePdf = async function (filename, language, payloadUrl, rendering) {
     let browser;
     let buffer;
 
@@ -18,7 +18,12 @@ const makePdf = async function (filename, language, payloadUrl) {
 
         const page = await browser.newPage();
 
-        let baseUrl = new URL(`https://pboml.opbo-bdpb.ca/${language === 'fr' ? "index.fr.html" : 'index.html'}`);
+        let landingPath = language === 'fr' ? "index.fr.html" : 'index.html';
+        if (rendering === "large-print") {
+            landingPath = language === 'fr' ? "large-print.fr.html" : 'large-print.html'
+        }
+        let baseUrl = new URL(`https://pboml.opbo-bdpb.ca/${landingPath}`);
+
         baseUrl.searchParams.set('payload-url', payloadUrl)
         await page.goto(baseUrl.toString(), {
             waitUntil: 'networkidle2',
@@ -108,7 +113,6 @@ exports.handler = async (event) => {
     const input = body?.input;
     const language = body?.language;
 
-
     if (!input || !language || !["en", "fr"].includes(language)) {
         return {
             statusCode: 400,
@@ -116,6 +120,14 @@ exports.handler = async (event) => {
         };
     }
 
+
+    const rendering = body?.rendering;
+    if (rendering && !["large-print"].includes(rendering)) {
+        return {
+            statusCode: 400,
+            body: "Invalid rendering option.",
+        };
+    }
 
     const signature = body.signature;
     const salt = body.salt;
@@ -154,7 +166,7 @@ exports.handler = async (event) => {
     const temporaryInterchangeUrl = await saveToTemporaryStorage(temporaryFileName, input);
     let buffer;
     try {
-        buffer = await makePdf(temporaryFileName, language, temporaryInterchangeUrl);
+        buffer = await makePdf(temporaryFileName, language, temporaryInterchangeUrl, rendering);
     } catch (error) {
         console.error(error);
     }
