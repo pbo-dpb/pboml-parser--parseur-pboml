@@ -33,20 +33,22 @@ export default class Slice {
     _renderLabelTitleVnode(language, force = false) {
         if ((!this.display_label && !force) || !this.label?.[language]) return null;
 
-        let labelNodeType;
+        let labelNodeType = 'h2'
         let labelNodeClasses = ["font-thin break-after-avoid"]
         let labelNodeContent = this.label[language];
+
+        if (this.presentation) {
+            labelNodeType = 'header'
+            labelNodeClasses.push("text-center text-xl")
+        } else {
+            labelNodeClasses.push('text-2xl')
+        }
+
         if (this.presentation === 'figure') {
             labelNodeType = "figcaption";
-            labelNodeClasses.push("text-center text-xl")
-
             if (this.presentation === "figure" && this.referenced_as) {
                 labelNodeContent = `<b>${this.referenced_as[language]}</b> &ndash; ${labelNodeContent}`;
             }
-
-        } else {
-            labelNodeType = "h2";
-            labelNodeClasses.push("text-2xl");
         }
 
         return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
@@ -95,8 +97,14 @@ export default class Slice {
     renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4"];
         classes.push(this.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr  from-white to-gray-50 rounded-tr-3xl pt-4 py-4 break-inside-avoid-page" : "");
-        return h(this.presentation === 'figure' ? 'figure' : 'section', { class: classes.join(" ") }, this._buildVnodes(language));
+        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-white to-gray-50 rounded-tr-3xl py-4 break-inside-avoid-page" : "");
+        classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-100 to-sky-50  rounded-tr-3xl p-4 break-inside-avoid-page" : "");
+
+        let elType = 'section';
+        if (this.presentation === 'figure') elType = 'figure';
+        else if (this.presentation === 'aside') elType = 'aside';
+
+        return h(elType, { class: classes.join(" ") }, this._buildVnodes(language));
     }
 
     renderEditingVnode() {
