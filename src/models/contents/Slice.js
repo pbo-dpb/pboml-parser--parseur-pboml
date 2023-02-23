@@ -4,7 +4,7 @@ import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 
 export default class Slice {
-    constructor(payload, sequence = 0, depth = 0) {
+    constructor(payload) {
         this.id = payload.id;
         this.type = payload.type;
         this.readonly = payload.readonly;
@@ -23,11 +23,10 @@ export default class Slice {
         this.content = payload.content;
 
         this.state = {
-            isEditingMeta: false
+            isEditingMeta: false,
+            sequence: 0
         }
 
-        this.sequence = sequence;
-        this.depth = depth;
     }
 
     _renderLabelTitleVnode(language, force = false) {
@@ -104,7 +103,7 @@ export default class Slice {
         if (this.presentation === 'figure') elType = 'figure';
         else if (this.presentation === 'aside') elType = 'aside';
 
-        return h(elType, { class: classes.join(" ") }, this._buildVnodes(language));
+        return h(elType, { class: classes.join(" "), id: this.anchor }, this._buildVnodes(language));
     }
 
     renderEditingVnode() {
@@ -112,6 +111,10 @@ export default class Slice {
             default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
             fallback: () => h('template', null, LoadingIndicator)
         }));
+    }
+
+    get anchor() {
+        return `${this.type}-${this.state.sequence}`
     }
 
     toArray() {

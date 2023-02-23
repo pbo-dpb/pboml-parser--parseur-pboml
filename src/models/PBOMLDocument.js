@@ -1,6 +1,7 @@
 import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
+import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
 import GraphSlice from "./contents/GraphSlice";
 
@@ -34,18 +35,33 @@ export default class PBOMLDocument {
 
         this.title = mainDocument.document?.title;
 
+        let counter = 0;
         this.slices = mainDocument.slices?.map((el) => {
 
             const sliceType = el.type;
+            let sli;
             switch (sliceType) {
                 case 'markdown':
-                    return new MarkdownSlice(el);
+                    sli = new MarkdownSlice(el);
+                    break;
                 case 'table':
-                    return new TableSlice(el);
+                    sli = new TableSlice(el);
+                    break;
                 case 'kvlist':
-                    return new KvListSlice(el);
+                    sli = new KvListSlice(el);
+                    break;
                 case 'graph':
-                    return new GraphSlice(el);
+                    sli = new GraphSlice(el);
+                    break;
+                case 'heading':
+                    sli = new HeadingSlice(el);
+                    break;
+            }
+
+            counter++;
+            if (sli) {
+                sli.state.sequence = counter;
+                return sli;
             }
 
         }).filter(n => n);
