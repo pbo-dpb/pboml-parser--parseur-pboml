@@ -9,7 +9,6 @@ export default class Slice {
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
-        this.slice_group = payload.slice_group;
         this.is_figure = payload.is_figure ? payload.is_figure : false;
         this.choices = payload.choices;
         this.print_only = payload.print_only;
@@ -30,10 +29,7 @@ export default class Slice {
         let labelNodeType;
         let labelNodeClasses = ["font-thin break-after-avoid"]
         let labelNodeContent = this.label[language];
-        if (this.slice_group) {
-            labelNodeType = "h3";
-            labelNodeClasses.push("text-xl");
-        } else if (this.is_figure) {
+        if (this.is_figure) {
             labelNodeType = "figcaption";
             labelNodeClasses.push("text-center text-xl")
 
@@ -110,7 +106,6 @@ export default class Slice {
             readonly: this.readonly,
             display_label: this.display_label,
             is_figure: this.is_figure,
-            slice_group: this.slice_group,
             choices: this.choices,
             label: {
                 en: this.label?.en,
