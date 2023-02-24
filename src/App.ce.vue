@@ -73,6 +73,7 @@ export default {
     }
     this.loaded = true;
   },
+
   methods: {
     handlePick(pickedDocument) {
       this.pbomlDocument = pickedDocument

@@ -4,6 +4,7 @@ import TableSlice from "./contents/TableSlice";
 import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
 import GraphSlice from "./contents/GraphSlice";
+import Annotation from "./Annotation";
 
 
 export default class PBOMLDocument {
@@ -64,6 +65,15 @@ export default class PBOMLDocument {
                 return sli;
             }
 
+        }).filter(n => n);
+
+
+        let i = 0;
+        this.annotations = mainDocument.annotations?.map((el) => {
+            i++;
+            let ant = new Annotation(el);
+            ant.state.sequence = i;
+            return ant
         }).filter(n => n);
     }
 

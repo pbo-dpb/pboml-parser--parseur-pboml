@@ -1,7 +1,9 @@
 import PBOMLDocument from "../../models/PBOMLDocument";
 import { h } from 'vue'
+import AnnotationAnchorsRenderer from "./AnnotationAnchorsRenderer";
 
 export default {
+
   props: {
     pbomlDocument: PBOMLDocument,
     language: String,
@@ -31,18 +33,34 @@ export default {
       )
       ];
     },
+
+    async renderAnnotations() {
+      (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
+    }
   },
 
 
   render() {
     const language = this.language ? this.language : document.documentElement.lang;
 
-    return h('main', { 'class': 'flex flex-col gap-4 print:block' }, [
+    return h('main', { 'class': 'flex flex-col gap-4 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
         return slice.renderAsVnode(language);
       }),
       ...this._buildFooterVnodes(language),
     ]);
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.renderAnnotations();
+    })
+  },
+
+  updated() {
+    this.$nextTick(() => {
+      this.renderAnnotations();
+    })
   }
 }
