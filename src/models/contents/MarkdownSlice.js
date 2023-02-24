@@ -1,6 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import { Remarkable } from 'remarkable';
+import MarkdownDriver from "../../MarkdownDriver"
 
 
 export default class MarkdownSlice extends Slice {
@@ -14,19 +14,8 @@ export default class MarkdownSlice extends Slice {
     }
 
     renderReadonlyVnode(language) {
-        const md = new Remarkable();
-
-        md.renderer.rules.paragraph_open = (function () {
-            var original = md.renderer.rules.paragraph_open;
-            return function () {
-                var paragraph = original.apply(this, arguments);
-                if (paragraph === '<p>')
-                    return paragraph.substring(0, paragraph.length - 1) + ' class="break-inside-avoid-page">';
-                return paragraph
-            };
-        })();
-
-
+        const md = new MarkdownDriver();
+        md.shouldAvoidBreakingInsideParagraphs();
         return h('div', { class: "pboml-prose", innerHTML: md.render(this.content[language]) });
     }
 

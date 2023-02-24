@@ -1,5 +1,5 @@
 import { h } from 'vue'
-import { Remarkable } from 'remarkable';
+import MarkdownDriver from '../../MarkdownDriver';
 
 const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid";
 
@@ -52,7 +52,8 @@ export default class KvListVariablePair {
 
         switch (type) {
             case 'markdown':
-                const md = new Remarkable({ breaks: false });
+                const md = new MarkdownDriver;
+                md.shouldBreakNewLines(false);
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)
                 } catch (error) {

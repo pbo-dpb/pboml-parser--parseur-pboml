@@ -1,6 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import { Remarkable } from 'remarkable';
+import MarkdownDriver from '../../MarkdownDriver';
 
 
 export default class HeadingSlice extends Slice {
@@ -33,7 +33,9 @@ export default class HeadingSlice extends Slice {
                 break;
         }
 
-        const md = new Remarkable({ breaks: true });
+        const md = new MarkdownDriver;
+        md.shouldBreakNewLines(false);
+        md.shouldRenderInline(true);
         return h(headingElType, { innerHTML: md.render(this.content[language]), class: classes.join(' ') });
     }
 

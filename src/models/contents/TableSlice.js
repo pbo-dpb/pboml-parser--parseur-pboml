@@ -1,6 +1,5 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import { Remarkable } from 'remarkable';
 import TableSliceVariable from './TableSliceVariable';
 
 
