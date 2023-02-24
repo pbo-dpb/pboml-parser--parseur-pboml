@@ -119,7 +119,8 @@ export default class PBOMLDocument {
                     fr: this.copyright?.fr
                 }
             },
-            slices: this.slices.map(sl => sl.toArray())
+            slices: this.slices.map(sl => sl.toArray()),
+            annotations: this.annotations.map(an => an.toArray())
         }
 
         documents.push(mainDocument);
