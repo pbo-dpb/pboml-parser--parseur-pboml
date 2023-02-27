@@ -45,7 +45,7 @@ export default class Slice {
 
         if (this.presentation === 'figure') {
             labelNodeType = "figcaption";
-            if (this.presentation === "figure" && this.referenced_as) {
+            if (this.presentation === "figure" && this.referenced_as[language]) {
                 labelNodeContent = `<b>${this.referenced_as[language]}</b> &ndash; ${labelNodeContent}`;
             }
         }

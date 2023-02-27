@@ -5,6 +5,7 @@ import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
 import GraphSlice from "./contents/GraphSlice";
 import Annotation from "./Annotation";
+import PlainImageSlice from "./contents/PlainImageSlice";
 
 
 export default class PBOMLDocument {
@@ -56,6 +57,9 @@ export default class PBOMLDocument {
                     break;
                 case 'heading':
                     sli = new HeadingSlice(el);
+                    break;
+                case 'plain_image':
+                    sli = new PlainImageSlice(el);
                     break;
             }
 
