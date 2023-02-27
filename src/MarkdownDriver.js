@@ -1,4 +1,6 @@
 import { Remarkable } from 'remarkable';
+import { linkify } from 'remarkable/linkify';
+
 
 export default class MarkdownDriver {
 
@@ -35,6 +37,11 @@ export default class MarkdownDriver {
         this.engine.set({
             breaks: val
         });
+    }
+
+    shouldConvertUrls() {
+        this.engine.use(linkify)
+
     }
 
 

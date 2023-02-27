@@ -55,6 +55,7 @@ export default class Annotation {
     renderMarkdown(language) {
         let markdownDriver = new MarkdownDriver();
         markdownDriver.shouldRenderInline();
+        markdownDriver.shouldConvertUrls();
         return markdownDriver.render(this.content[language] ? this.content[language] : this.content)
     }
 
@@ -71,11 +72,14 @@ export default class Annotation {
     renderAsVnode(language = document.documentElement.lang) {
 
         return [
-            h('dt', {}, [
-                h('span', { class: 'sr-only' }, `Note #${this.state.sequence}`),
-                h('a', { 'aria-hidden': true, class: "w-4" }, `${this.state.sequence}.`),
-            ]),
-            h('dd', { 'class': 'col-span-11', innerHTML: this.renderContent(language), id: `antn_${this.id}` })
+            h('div', { class: 'flex flex-row gap-2' }, [
+                h('dt', { class: 'w-8 prose dark:prose-invert' }, [
+                    h('span', { class: 'print:hidden sr-only' }, `Note #${this.state.sequence}`),
+                    h('span', { 'aria-hidden': true, }, `${this.state.sequence}.`),
+                ]),
+                h('dd', { 'class': 'col-span-11 prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: `antn_${this.id}` })
+            ])
+
         ]
     }
 }
