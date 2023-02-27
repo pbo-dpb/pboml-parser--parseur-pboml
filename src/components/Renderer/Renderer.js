@@ -1,6 +1,7 @@
 import PBOMLDocument from "../../models/PBOMLDocument";
 import { h } from 'vue'
 import AnnotationAnchorsRenderer from "./AnnotationAnchorsRenderer";
+import Annotations from "./Annotations";
 
 export default {
 
@@ -22,6 +23,7 @@ export default {
       )
       ];
     },
+
     _buildFooterVnodes(language) {
       if (this.standalone) return [];
       return [h("footer", { class: "flex flex-row gap-2 text-xs text-gray-800 justify-center items-center print:mt-8" },
@@ -34,7 +36,14 @@ export default {
       ];
     },
 
-    async renderAnnotations() {
+    _buildAnnotationsVnodes(language) {
+      return [
+        h(Annotations, { pbomlDocument: this.pbomlDocument, language: this.language })
+      ]
+
+    },
+
+    async renderAnnotationAnchors() {
       (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
     }
   },
@@ -48,19 +57,20 @@ export default {
       ...this.pbomlDocument.slices.map((slice) => {
         return slice.renderAsVnode(language);
       }),
+      ...this._buildAnnotationsVnodes(language),
       ...this._buildFooterVnodes(language),
     ]);
   },
 
   mounted() {
     this.$nextTick(() => {
-      this.renderAnnotations();
+      this.renderAnnotationAnchors();
     })
   },
 
   updated() {
     this.$nextTick(() => {
-      this.renderAnnotations();
+      this.renderAnnotationAnchors();
     })
   }
 }

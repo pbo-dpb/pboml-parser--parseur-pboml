@@ -12,12 +12,18 @@ export default class AnnotationAnchorsRenderer {
 
 
     render() {
-
         this.annotations.forEach(annotation => {
 
+            if (!this.mainEl) return;
+
             this.mainEl.querySelectorAll(".pboml-prose").forEach(el => {
-                el.innerHTML = el.innerHTML.replaceAll(`[^${annotation.id}]`, annotation.anchorHtml)
+
+                while (el.innerHTML.includes(`[^${annotation.id}]`)) {
+                    el.innerHTML = el.innerHTML.replace(`[^${annotation.id}]`, annotation.getAnchorDomElement().outerHTML)
+                }
+
             })
+
 
         });
 
