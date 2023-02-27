@@ -16,7 +16,7 @@ export default class PlainImageSlice extends Slice {
     }
 
     renderReadonlyVnode(language) {
-        return h('figure', { class: "md:px-64 flex justify-center" }, [h('img', { src: this.content[language] })]);
+        return h('figure', { class: "flex justify-center" }, [h('img', { src: this.content[language] })]);
     }
 
 
