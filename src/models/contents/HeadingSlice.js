@@ -55,6 +55,7 @@ export default class HeadingSlice extends Slice {
             en: this.content?.en,
             fr: this.content?.fr
         }
+        array.level = this.level;
         return array;
     }
 

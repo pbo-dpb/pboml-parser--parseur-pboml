@@ -166,21 +166,27 @@ export default class Slice {
     }
 
     toArray() {
-        return {
+
+
+        let serialization = {
             type: this.type,
             id: this.id,
             readonly: this.readonly,
             display_label: this.display_label,
             presentation: this.presentation,
             choices: this.choices,
-            referenced_as: this.referenced_as,
+            referenced_as: (this.referenced_as.fr || this.referenced_as.en) ? this.referenced_as : null,
             label: {
                 en: this.label?.en,
                 fr: this.label?.fr
             },
-            sources: this.sources,
-            notes: this.notes,
+            sources: this.sources.length ? this.sources : null,
+            notes: this.notes.length ? this.notes : null,
             content: this.content
-        }
+        };
+
+
+
+        return Object.fromEntries(Object.entries(serialization).filter(([_, v]) => v !== null));;
     }
 }
