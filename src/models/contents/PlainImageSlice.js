@@ -22,7 +22,7 @@ export default class PlainImageSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        //TODO implement
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/PlainImageSliceEditor.js')), { slice: this }))
         return vnodes;
     }
 
