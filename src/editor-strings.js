@@ -13,10 +13,13 @@ export default {
         'slice_type_plain_image': 'Image (plain)',
         'slice_type_table': "Table",
         'slice_type_graph': "Graph",
-        'slice_title_field_label': "Slice title",
+        'slice_title_field_label': "Slice title (n+0)",
         'readonly_slice': "The content of this slice is marked as not to be manually edited (`readonly`).",
         "kv_slice_key_label": "Label for key",
         "kv_slice_value_label": "Label for value",
+        'presentation_none': "Inline presentation (default)",
+        'presentation_figure': 'Figure',
+        'presentation_aside': "Box",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -32,9 +35,13 @@ export default {
         'slice_type_plain_image': 'Image (de base)',
         'slice_type_table': "Tableau",
         'slice_type_graph': "Graphique",
-        'slice_title_field_label': "Titre de la tranche",
+        'slice_title_field_label': "Titre de la tranche (n+0)",
         'readonly_slice': "Le contenu de cette tranche est marqué comme ne devant pas être manuellement modifié (`readonly`).",
         "kv_slice_key_label": "Étiquette des clés",
         "kv_slice_value_label": "Étiquette des valeurs",
+        'presentation_none': "Présentation au fil de la page (par défault)",
+        'presentation_figure': 'Figure',
+        'presentation_aside': "Box",
+
     }
 }

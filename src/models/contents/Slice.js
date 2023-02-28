@@ -1,6 +1,7 @@
 import { h, setTransitionHooks, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
+import SlicePresentationEditor from "../../components/Editor/SlicePresentationEditor.js";
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 import editorStrings from '../../editor-strings';
 import MetaEditingButton from '../../components/Editor/MetaEditingButton';
@@ -129,6 +130,16 @@ export default class Slice {
     __buildEditorsVnode() {
 
         return [
+
+            h(SlicePresentationEditor, {
+                'presentation': this.presentation,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.presentation = value;
+                }
+            }),
+
+
             h(SliceLabelEditor, {
                 'label': this.label,
                 'isEditing': this.state.isEditingMeta,
@@ -136,6 +147,9 @@ export default class Slice {
                     this.label.en = value.en; this.label.fr = value.fr
                 }
             }),
+
+
+
             ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
         ];
     }
@@ -157,15 +171,15 @@ export default class Slice {
         const verboseSliceType = editorStrings[language][`slice_type_${this.type}`];
         return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` },
             [
-                verboseSliceType ? h('legend', { class: 'text-sm px-2 text-gray-600 flex flex-row gap-2 items-center' }, [
+                h('legend', { class: 'text-sm px-2 text-gray-600 flex flex-row gap-2 items-center' }, [
                     h(MetaEditingButton, {
                         'isEditing': this.state.isEditingMeta,
                         'onEditing': (value) => {
                             this.state.isEditingMeta = value;
                         }
                     }),
-                    h('span', verboseSliceType),
-                ]) : null,
+                    verboseSliceType ? h('span', verboseSliceType) : null,
+                ]),
                 h(Suspense, null, {
                     default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
                     fallback: () => h('template', null, LoadingIndicator)
