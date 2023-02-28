@@ -12,6 +12,7 @@ export default class AnnotationAnchorsRenderer {
 
 
     render() {
+        if (!this.annotations) return;
         this.annotations.forEach(annotation => {
 
             if (!this.mainEl) return;
