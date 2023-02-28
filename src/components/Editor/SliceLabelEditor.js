@@ -28,17 +28,15 @@ export default {
                     h('span', { innerText: this.label.fr }),
                 ]
             } else {
-                contentNodes = [
-                    h('span', { innerText: strings[document.documentElement.lang].no_slice_title, class: 'italic' })
-                ]
+                contentNodes = null
             }
 
         }
 
         return [
-            h('div', { class: 'flex flex-row gap-2 ' }, [
+            contentNodes ? h('div', { class: 'flex flex-row gap-2 ' }, [
                 h(this.isEditing ? 'div' : 'legend', { class: `flex flex-col gap-1 w-full ${this.isEditing ? '' : 'font-thin text-2xl'}` }, contentNodes),
-            ])
+            ]) : null
 
         ];
 
