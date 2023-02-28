@@ -1,5 +1,4 @@
 <template>
-
     <button v-if="!staging" class="rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 w-fit px-2 py-1"
         @click="staging = !staging">{{
             strings.create_slice
@@ -13,7 +12,6 @@
             {{ button.label }}
         </button>
     </div>
-
 </template>
 <script>
 import MarkdownSlice from '../../../models/contents/MarkdownSlice'
@@ -41,7 +39,7 @@ export default {
                     type: MarkdownSlice
                 },
                 {
-                    label: this.strings.slice_type_kv,
+                    label: this.strings.slice_type_kvlist,
                     type: KvListSlice
                 }
             ]

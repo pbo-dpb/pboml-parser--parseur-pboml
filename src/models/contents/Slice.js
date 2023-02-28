@@ -2,6 +2,7 @@ import { h, setTransitionHooks, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
+import editorStrings from '../../editor-strings';
 
 export default class Slice {
     constructor(payload) {
@@ -154,11 +155,16 @@ export default class Slice {
         return h(elType, { class: classes.join(" "), id: this.anchor }, this._buildVnodes(language));
     }
 
-    renderEditingVnode() {
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` }, h(Suspense, null, {
-            default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
-            fallback: () => h('template', null, LoadingIndicator)
-        }));
+    renderEditingVnode(language = document.documentElement.lang) {
+        const verboseSliceType = editorStrings[language][`slice_type_${this.type}`];
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` },
+            [
+                verboseSliceType ? h('legend', { class: 'text-sm  px-2 text-gray-600' }, verboseSliceType) : null,
+                h(Suspense, null, {
+                    default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
+                    fallback: () => h('template', null, LoadingIndicator)
+                })])
+
     }
 
     get anchor() {
