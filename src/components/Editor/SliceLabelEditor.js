@@ -4,18 +4,11 @@ import BilingualInput from "../../components/Editor/Inputs/BilingualInput.vue"
 import strings from '../../editor-strings'
 export default {
     props: ["label", "isEditing"],
-    emits: ['update:modelValue', 'editing'],
+    emits: ['update:modelValue'],
 
     render() {
 
-        let actionNode;
-        if (!this.isEditing) {
-            actionNode = h(TinyButton, {
-                'class': 'bg-amber-100 hover:bg-amber-300', innerText: '⚙️', onClick: (e) => {
-                    this.$emit("editing", true)
-                },
-            })
-        }
+
         let contentNodes;
 
         if (this.isEditing) {
@@ -26,8 +19,7 @@ export default {
                         label: strings[document.documentElement.lang].slice_title_field_label,
                         'onUpdate:modelValue': (value) => this.$emit('update:modelValue', value)
                     })
-                ])
-                ,
+                ]),
             ]
         } else {
             if (this.label.en && this.label.fr) {
@@ -45,7 +37,6 @@ export default {
 
         return [
             h('div', { class: 'flex flex-row gap-2 ' }, [
-                actionNode,
                 h(this.isEditing ? 'div' : 'legend', { class: `flex flex-col gap-1 w-full ${this.isEditing ? '' : 'font-thin text-2xl'}` }, contentNodes),
             ])
 
