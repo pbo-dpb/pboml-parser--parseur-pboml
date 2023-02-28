@@ -1,6 +1,5 @@
 import { h } from 'vue'
-import { Remarkable } from 'remarkable';
-
+import MarkdownDriver from '../../MarkdownDriver';
 
 export default class TableSliceVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center';
@@ -20,7 +19,8 @@ export default class TableSliceVariable {
 
 
     getTableHeaderVnode(scope = null, language) {
-        const md = new Remarkable({ breaks: false, });
+        const md = new MarkdownDriver;
+        md.shouldBreakNewLines(false);
         return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
@@ -31,7 +31,8 @@ export default class TableSliceVariable {
         let innerHTML;
         switch (this.type) {
             case 'markdown':
-                const md = new Remarkable({ breaks: false });
+                const md = new MarkdownDriver;
+                md.shouldBreakNewLines(false);
 
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)

@@ -1,8 +1,11 @@
 import KvListSlice from "./contents/KvListSlice";
 import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
+import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
 import GraphSlice from "./contents/GraphSlice";
+import Annotation from "./Annotation";
+import PlainImageSlice from "./contents/PlainImageSlice";
 
 
 export default class PBOMLDocument {
@@ -34,20 +37,47 @@ export default class PBOMLDocument {
 
         this.title = mainDocument.document?.title;
 
+        let counter = 0;
         this.slices = mainDocument.slices?.map((el) => {
 
             const sliceType = el.type;
+            let sli;
             switch (sliceType) {
                 case 'markdown':
-                    return new MarkdownSlice(el);
+                    sli = new MarkdownSlice(el);
+                    break;
                 case 'table':
-                    return new TableSlice(el);
+                    sli = new TableSlice(el);
+                    break;
                 case 'kvlist':
-                    return new KvListSlice(el);
+                    sli = new KvListSlice(el);
+                    break;
                 case 'graph':
-                    return new GraphSlice(el);
+                    sli = new GraphSlice(el);
+                    break;
+                case 'heading':
+                    sli = new HeadingSlice(el);
+                    break;
+                case 'plain_image':
+                    sli = new PlainImageSlice(el);
+                    break;
             }
 
+            counter++;
+            if (sli) {
+                sli.state.sequence = counter;
+                return sli;
+            }
+
+        }).filter(n => n);
+
+
+        let i = 0;
+        this.annotations = mainDocument.annotations?.map((el) => {
+            i++;
+            let ant = new Annotation(el);
+            ant.state.sequence = i;
+            return ant
         }).filter(n => n);
     }
 
@@ -93,7 +123,8 @@ export default class PBOMLDocument {
                     fr: this.copyright?.fr
                 }
             },
-            slices: this.slices.map(sl => sl.toArray())
+            slices: this.slices.map(sl => sl.toArray()),
+            annotations: this.annotations.map(an => an.toArray())
         }
 
         documents.push(mainDocument);

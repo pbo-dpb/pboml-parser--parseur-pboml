@@ -1,7 +1,10 @@
 import PBOMLDocument from "../../models/PBOMLDocument";
 import { h } from 'vue'
+import AnnotationAnchorsRenderer from "./AnnotationAnchorsRenderer";
+import Annotations from "./Annotations";
 
 export default {
+
   props: {
     pbomlDocument: PBOMLDocument,
     language: String,
@@ -20,6 +23,7 @@ export default {
       )
       ];
     },
+
     _buildFooterVnodes(language) {
       if (this.standalone) return [];
       return [h("footer", { class: "flex flex-row gap-2 text-xs text-gray-800 justify-center items-center print:mt-8" },
@@ -31,18 +35,42 @@ export default {
       )
       ];
     },
+
+    _buildAnnotationsVnodes(language) {
+      return [
+        h(Annotations, { pbomlDocument: this.pbomlDocument, language: this.language })
+      ]
+
+    },
+
+    async renderAnnotationAnchors() {
+      (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
+    }
   },
 
 
   render() {
     const language = this.language ? this.language : document.documentElement.lang;
 
-    return h('main', { 'class': 'flex flex-col gap-4 print:block' }, [
+    return h('main', { 'class': 'flex flex-col gap-4 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
         return slice.renderAsVnode(language);
       }),
+      ...this._buildAnnotationsVnodes(language),
       ...this._buildFooterVnodes(language),
     ]);
+  },
+
+  mounted() {
+    this.$nextTick(() => {
+      this.renderAnnotationAnchors();
+    })
+  },
+
+  updated() {
+    this.$nextTick(() => {
+      this.renderAnnotationAnchors();
+    })
   }
 }

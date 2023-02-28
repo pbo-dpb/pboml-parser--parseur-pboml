@@ -1,4 +1,4 @@
-import { h, Suspense } from 'vue'
+import { h, setTransitionHooks, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
@@ -9,51 +9,103 @@ export default class Slice {
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
-        this.slice_group = payload.slice_group;
-        this.is_figure = payload.is_figure ? payload.is_figure : false;
+        this.presentation = payload.presentation ? payload.presentation : null;
         this.choices = payload.choices;
         this.print_only = payload.print_only;
+
+        this.referenced_as = {
+            en: payload.referenced_as?.en,
+            fr: payload.referenced_as?.fr
+        };
+
         this.label = {
             en: payload.label?.en,
             fr: payload.label?.fr
         }
+
+        this.sources = payload.sources ? payload.sources.map(src => {
+            return {
+                en: src?.en,
+                fr: src?.fr
+            }
+        }) : [];
+
+        this.notes = payload.notes ? payload.notes.map(src => {
+            return {
+                en: src?.en,
+                fr: src?.fr
+            }
+        }) : [];
+
         this.content = payload.content;
 
+
         this.state = {
-            isEditingMeta: false
+            isEditingMeta: false,
+            sequence: 0
         }
+
     }
 
     _renderLabelTitleVnode(language, force = false) {
         if ((!this.display_label && !force) || !this.label?.[language]) return null;
 
-        let labelNodeType;
+        let labelNodeType = 'h2'
         let labelNodeClasses = ["font-thin break-after-avoid"]
         let labelNodeContent = this.label[language];
-        if (this.slice_group) {
-            labelNodeType = "h3";
-            labelNodeClasses.push("text-xl");
-        } else if (this.is_figure) {
-            labelNodeType = "figcaption";
+
+        if (this.presentation) {
+            labelNodeType = 'header'
             labelNodeClasses.push("text-center text-xl")
-
-            if (typeof this.is_figure === "number") {
-                labelNodeContent = `Figure ${this.is_figure} &ndash; ${labelNodeContent}`;
-            }
-
         } else {
-            labelNodeType = "h2";
-            labelNodeClasses.push("text-2xl");
+            labelNodeClasses.push('text-2xl')
+        }
+
+        if (this.presentation === 'figure') {
+            labelNodeType = "figcaption";
+            if (this.presentation === "figure" && this.referenced_as[language]) {
+                labelNodeContent = `<b>${this.referenced_as[language]}</b> &ndash; ${labelNodeContent}`;
+            }
         }
 
         return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
+    }
+
+    __renderMetaVnodes(label, content, language) {
+        return [
+            h('dl', { class: 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' }, [
+                h('dt', { class: "text-xs font-semibold", innerHTML: label }),
+                h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("; ") }),
+            ]),
+
+        ]
+    }
+
+    _renderSourcesVnodes(language) {
+        if (!this.sources.length) return [];
+        return this.__renderMetaVnodes((this.sources.length > 1 ? 'Sources' : 'Source'), this.sources, language);
+    }
+
+    _renderNotesVnodes(language) {
+        if (!this.notes.length) return [];
+        return this.__renderMetaVnodes(this.notes.length > 1 ? 'Notes' : 'Note', this.notes, language);
+    }
+
+    _renderMetaVnodes(language) {
+        if (!this.sources.length && !this.notes.length) return [];
+
+        return h('div', { 'class': 'flex flex-col gap-2' }, [
+            ...this._renderSourcesVnodes(language),
+            ...this._renderNotesVnodes(language)
+        ])
     }
 
 
     _buildVnodes(language) {
         return [
             this._renderLabelTitleVnode(language),
-            this.renderReadonlyVnode(language)
+            this.renderReadonlyVnode(language),
+            this._renderMetaVnodes(language)
         ];
     }
 
@@ -92,8 +144,14 @@ export default class Slice {
     renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4"];
         classes.push(this.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.is_figure ? "bg-gradient-to-tr  from-white to-gray-50 rounded-tr-3xl pt-4 py-4 break-inside-avoid-page" : "");
-        return h(this.is_figure ? 'figure' : 'section', { class: classes.join(" ") }, this._buildVnodes(language));
+        classes.push(this.presentation === "figure" ? "mx-auto w-full xl:w-2/3 bg-gradient-to-tr from-white to-gray-100 rounded-tr-3xl py-4 break-inside-avoid-page" : "");
+        classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-100 to-sky-50  rounded-tr-3xl p-4 break-inside-avoid-page" : "");
+
+        let elType = 'section';
+        if (this.presentation === 'figure') elType = 'figure';
+        else if (this.presentation === 'aside') elType = 'aside';
+
+        return h(elType, { class: classes.join(" "), id: this.anchor }, this._buildVnodes(language));
     }
 
     renderEditingVnode() {
@@ -103,20 +161,32 @@ export default class Slice {
         }));
     }
 
+    get anchor() {
+        return `${this.type}-${this.state.sequence}`
+    }
+
     toArray() {
-        return {
+
+
+        let serialization = {
             type: this.type,
             id: this.id,
             readonly: this.readonly,
             display_label: this.display_label,
-            is_figure: this.is_figure,
-            slice_group: this.slice_group,
+            presentation: this.presentation,
             choices: this.choices,
+            referenced_as: (this.referenced_as.fr || this.referenced_as.en) ? this.referenced_as : null,
             label: {
                 en: this.label?.en,
                 fr: this.label?.fr
             },
+            sources: this.sources.length ? this.sources : null,
+            notes: this.notes.length ? this.notes : null,
             content: this.content
-        }
+        };
+
+
+
+        return Object.fromEntries(Object.entries(serialization).filter(([_, v]) => v !== null));;
     }
 }

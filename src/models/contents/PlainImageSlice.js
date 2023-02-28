@@ -1,28 +1,28 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import MarkdownDriver from "../../MarkdownDriver"
 
 
-export default class MarkdownSlice extends Slice {
+export default class PlainImageSlice extends Slice {
     constructor(payload) {
         super(payload);
+
         this.content = {
             en: payload.content?.en,
             fr: payload.content?.fr
         }
-        this.type = "markdown"
+        this.display_label = payload.display_label === false ? false : true;
+        this.presentation = payload.presentation ? payload.presentation : 'figure';
+        this.type = "plain_image"
     }
 
     renderReadonlyVnode(language) {
-        const md = new MarkdownDriver();
-        md.shouldAvoidBreakingInsideParagraphs();
-        return h('div', { class: "pboml-prose", innerHTML: md.render(this.content[language]) });
+        return h('figure', { class: "flex justify-center" }, [h('img', { src: this.content[language] })]);
     }
 
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/MarkdownSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { this.content = value } }))
+        //TODO implement
         return vnodes;
     }
 
