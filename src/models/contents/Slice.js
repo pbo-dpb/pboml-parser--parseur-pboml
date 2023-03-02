@@ -1,6 +1,7 @@
 import { h, setTransitionHooks, Suspense } from 'vue'
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
+import SliceReferenceEditor from '../../components/Editor/SliceReferenceEditor.js';
 import SlicePresentationEditor from "../../components/Editor/SlicePresentationEditor.js";
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 import editorStrings from '../../editor-strings';
@@ -139,12 +140,22 @@ export default class Slice {
                 }
             }),
 
+            h(SliceReferenceEditor, {
+                'referenced_as': this.referenced_as,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.referenced_as.en = value.en;
+                    this.referenced_as.fr = value.fr;
+                }
+            }),
+
 
             h(SliceLabelEditor, {
                 'label': this.label,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
-                    this.label.en = value.en; this.label.fr = value.fr
+                    this.label.en = value.en;
+                    this.label.fr = value.fr
                 }
             }),
 
