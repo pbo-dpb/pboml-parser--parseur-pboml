@@ -15,6 +15,8 @@
 <script>
 import MarkdownSlice from '../../../models/contents/MarkdownSlice'
 import KvListSlice from '../../../models/contents/KvListSlice'
+import HeadingSlice from '../../../models/contents/HeadingSlice'
+
 import Button from "../Button.vue"
 
 import editorStrings from "../../../editor-strings.js"
@@ -42,6 +44,10 @@ export default {
                 {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
+                },
+                {
+                    label: this.strings.slice_type_heading,
+                    type: HeadingSlice
                 }
             ]
         }

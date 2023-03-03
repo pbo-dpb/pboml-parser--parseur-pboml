@@ -69,7 +69,7 @@ export default class PBOMLDocument {
                 return sli;
             }
 
-        }).filter(n => n);
+        }).filter(n => n) ?? [];
 
 
         let i = 0;

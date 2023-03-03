@@ -30,20 +30,19 @@
                     </Tab>
                 </div>
 
-                <div v-if="!standalone" id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices"
-                    v-show="currentTab === 'slices'">
+                <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices" v-if="currentTab === 'slices'">
                     <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
-                    <slice-stager @new="handleNewSlice"></slice-stager>
+                    <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
                 </div>
 
-                <div v-if="!standalone" id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
-                    v-show="currentTab === 'annotations'">
+                <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
+                    v-if="currentTab === 'annotations'">
                     <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
                 </div>
 
 
-                <div v-if="!standalone" id="meta" role="tabpanel" tabindex="0" aria-labelledby="tab-meta"
-                    v-show="currentTab === 'meta'">
+                <div v-if="!standalone && currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
+                    aria-labelledby="tab-meta">
                     <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
                 </div>
 
@@ -85,7 +84,7 @@ export default {
             shouldEditRaw: false,
             workingPboml: '',
             strings: strings[document.documentElement.lang],
-            currentTab: "annotations"
+            currentTab: "slices",
         }
     },
 
@@ -134,7 +133,18 @@ export default {
             }
         },
         handleNewSlice(slice) {
+            // Force a rerender of the slices editor block.
+            this.currentTab = null;
             this.pbomlDocument.addSlice(slice);
+            this.$nextTick(() => {
+                this.currentTab = 'slices';
+                this.$nextTick(() => {
+                    setTimeout(() => {
+                        this.$refs.slicestager.$el.scrollIntoView(false)
+                    }, "300")
+
+                })
+            })
         }
     },
 
