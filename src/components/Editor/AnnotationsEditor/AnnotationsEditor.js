@@ -7,6 +7,9 @@ export default {
 
     methods: {
         pushNewAnnotation() {
+            if (!this.pbomlDocument.annotations)
+                this.pbomlDocument.annotations = [];
+
             let currentAnnotationsCount = this.pbomlDocument.annotations.length
             this.pbomlDocument.annotations.push(new Annotation({
                 id: currentAnnotationsCount + 1
