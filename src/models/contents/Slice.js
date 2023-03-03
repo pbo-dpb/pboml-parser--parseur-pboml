@@ -126,32 +126,32 @@ export default class Slice {
 
         return [
 
-            h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
+            h('div', {}, [h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
                 'presentation': this.presentation,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
                     this.presentation = value;
                 }
-            }),
+            })]),
 
-            h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
+            h('div', {}, [h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
                 'referenced_as': this.referenced_as,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
                     this.referenced_as.en = value.en;
                     this.referenced_as.fr = value.fr;
                 }
-            }),
+            })]),
 
 
-            h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
+            h('div', {}, [h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
                 'label': this.label,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
                     this.label.en = value.en;
                     this.label.fr = value.fr
                 }
-            }),
+            })]),
 
 
 
@@ -173,8 +173,6 @@ export default class Slice {
     }
 
     renderEditingVnode(language = document.documentElement.lang) {
-
-
         return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language });
 
     }
