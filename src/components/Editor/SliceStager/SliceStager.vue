@@ -1,9 +1,8 @@
 <template>
-    <button v-if="!staging" class="rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 w-fit px-2 py-1"
-        @click="staging = !staging">{{
-            strings.create_slice
-        }}
-        ➕</button>
+    <Button v-if="!staging" @click="staging = !staging">{{
+        strings.create_slice
+    }}
+        ➕</Button>
 
     <div class="grid grid-cols-4 gap-4" v-else>
         <button
@@ -16,6 +15,7 @@
 <script>
 import MarkdownSlice from '../../../models/contents/MarkdownSlice'
 import KvListSlice from '../../../models/contents/KvListSlice'
+import Button from "../Button.vue"
 
 import editorStrings from "../../../editor-strings.js"
 const language = document.documentElement.lang;
@@ -30,6 +30,7 @@ export default {
 
         }
     },
+    components: { Button },
 
     computed: {
         buttons() {

@@ -20,17 +20,27 @@
                     <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
                         {{ strings.slices_section_title }}
                     </Tab>
+                    <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
+                        @click="currentTab = 'annotations'">
+                        {{ strings.annotations_section_title }}
+                    </Tab>
                     <Tab v-if="!standalone" :controls="'meta'" :selected="currentTab === 'meta'"
                         @click="currentTab = 'meta'">
                         {{ strings.meta_section_title }}
                     </Tab>
-
                 </div>
 
                 <div v-if="!standalone" id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices"
                     v-show="currentTab === 'slices'">
                     <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
+                    <slice-stager @new="handleNewSlice"></slice-stager>
                 </div>
+
+                <div v-if="!standalone" id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
+                    v-show="currentTab === 'annotations'">
+                    <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
+                </div>
+
 
                 <div v-if="!standalone" id="meta" role="tabpanel" tabindex="0" aria-labelledby="tab-meta"
                     v-show="currentTab === 'meta'">
@@ -60,6 +70,7 @@ import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
+import AnnotationsEditor from "./AnnotationsEditor/AnnotationsEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
 
@@ -74,7 +85,7 @@ export default {
             shouldEditRaw: false,
             workingPboml: '',
             strings: strings[document.documentElement.lang],
-            currentTab: "slices"
+            currentTab: "annotations"
         }
     },
 
@@ -85,7 +96,8 @@ export default {
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
         SliceStager,
         DocumentMetaEditor,
-        Tab
+        Tab,
+        AnnotationsEditor
     },
 
     watch: {

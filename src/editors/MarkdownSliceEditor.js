@@ -19,7 +19,7 @@ export default {
 
         return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
             h(MarkdownTextarea, {
-                class: "h-64",
+                label: "EN",
                 modelValue: props.slice.content['en'],
                 'onUpdate:modelValue': (value) => {
                     emit('update:modelValue', {
@@ -30,7 +30,7 @@ export default {
                 }
             }),
             h(MarkdownTextarea, {
-                class: "h-64",
+                label: "FR",
                 modelValue: props.slice.content['fr'],
                 'onUpdate:modelValue': (value) => {
                     emit('update:modelValue', {

@@ -1,11 +1,5 @@
-import { h, setTransitionHooks, Suspense } from 'vue'
-import LoadingIndicator from "../../components/LoadingIndicator.vue"
-import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
-import SliceReferenceEditor from '../../components/Editor/SliceReferenceEditor.js';
-import SlicePresentationEditor from "../../components/Editor/SlicePresentationEditor.js";
+import { h, defineAsyncComponent } from 'vue'
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
-import editorStrings from '../../editor-strings';
-import MetaEditingButton from '../../components/Editor/MetaEditingButton';
 
 export default class Slice {
     constructor(payload) {
@@ -132,7 +126,7 @@ export default class Slice {
 
         return [
 
-            h(SlicePresentationEditor, {
+            h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
                 'presentation': this.presentation,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
@@ -140,7 +134,7 @@ export default class Slice {
                 }
             }),
 
-            h(SliceReferenceEditor, {
+            h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
                 'referenced_as': this.referenced_as,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
@@ -150,7 +144,7 @@ export default class Slice {
             }),
 
 
-            h(SliceLabelEditor, {
+            h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
                 'label': this.label,
                 'isEditing': this.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
@@ -179,22 +173,9 @@ export default class Slice {
     }
 
     renderEditingVnode(language = document.documentElement.lang) {
-        const verboseSliceType = editorStrings[language][`slice_type_${this.type}`];
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` },
-            [
-                h('legend', { class: 'text-sm px-2 text-gray-600 flex flex-row gap-2 items-center' }, [
-                    h(MetaEditingButton, {
-                        'isEditing': this.state.isEditingMeta,
-                        'onEditing': (value) => {
-                            this.state.isEditingMeta = value;
-                        }
-                    }),
-                    verboseSliceType ? h('span', verboseSliceType) : null,
-                ]),
-                h(Suspense, null, {
-                    default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
-                    fallback: () => h('template', null, LoadingIndicator)
-                })])
+
+
+        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language });
 
     }
 

@@ -1,4 +1,4 @@
-import { h, Suspense } from 'vue'
+import { h, defineAsyncComponent } from 'vue'
 import MarkdownDriver from '../MarkdownDriver';
 
 const defaults = {
@@ -8,13 +8,15 @@ const defaults = {
 
 export default class Annotation {
     constructor(payload) {
-        this.id = payload.id
+        this.id = payload?.id
         this.category = payload.category ? payload.category : defaults.category;
-        this.content_type = payload.category ? payload.category : defaults.content_type;
+        this.content_type = payload.content_type ? payload.content_type : defaults.content_type;
 
-        if (this.content_type === "markdown") {
-            this.content = payload.content;
-        }
+        this.content = {
+            en: payload.content?.en,
+            fr: payload.content?.fr
+        };
+
 
 
         this.state = {
@@ -47,7 +49,10 @@ export default class Annotation {
             id: this.id,
             category: this.category,
             content_type: this.content_type,
-
+            content: {
+                en: this.content?.en,
+                fr: this.content?.fr
+            }
         }
     }
 
@@ -82,4 +87,17 @@ export default class Annotation {
 
         ]
     }
+
+
+    renderEditingVnode(language = document.documentElement.lang) {
+
+
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
+
+            h(defineAsyncComponent(() => import('../editors/AnnotationEditor.js')), { annotation: this }),
+
+        ])
+
+    }
+
 }
