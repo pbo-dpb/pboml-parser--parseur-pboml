@@ -1,9 +1,9 @@
 <template>
     <div class="flex flex-col gap-1">
         <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
-        <textarea :id="eluid" class="border border-gray-300 p-1 rounded h-96" :value="modelValue"
+        <textarea :id="eluid" class="border border-gray-300 p-1 rounded h-96 font-mono" :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)">
-                    </textarea>
+                        </textarea>
     </div>
 </template>
 <script setup>

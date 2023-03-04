@@ -1,7 +1,8 @@
 import { h } from 'vue'
-import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
+import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
+import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
 
 export default {
     props: ['slice'],
@@ -17,27 +18,25 @@ export default {
             ])
         }
 
-        return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
-            h(MarkdownTextarea, {
-                label: "EN",
-                modelValue: props.slice.content['en'],
+        return () => h('div', { class: 'flex flex-col gap-4' }, [
+
+            h(SelectInput, {
+                choices: {
+                    "H1 (n+0)": 0,
+                    "> H2 (n+1)": 1,
+                    ">> H3 (n+2)": 2,
+                },
+                modelValue: props.slice.level,
                 'onUpdate:modelValue': (value) => {
-                    emit('update:modelValue', {
-                        en: value,
-                        fr: props.slice.content.fr
-                    }
-                    )
+                    props.slice.level = parseInt(value);
                 }
             }),
-            h(MarkdownTextarea, {
-                label: "FR",
-                modelValue: props.slice.content['fr'],
+
+            h(BilingualInput, {
+                class: "w-full",
+                modelValue: props.slice.content,
                 'onUpdate:modelValue': (value) => {
-                    emit('update:modelValue', {
-                        en: props.slice.content.en,
-                        fr: value
-                    }
-                    )
+                    props.slice.content = value;
                 }
             }),
         ]);

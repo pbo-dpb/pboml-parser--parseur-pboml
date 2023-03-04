@@ -69,7 +69,7 @@ export default class PBOMLDocument {
                 return sli;
             }
 
-        }).filter(n => n);
+        }).filter(n => n) ?? [];
 
 
         let i = 0;
@@ -124,7 +124,7 @@ export default class PBOMLDocument {
                 }
             },
             slices: this.slices.map(sl => sl.toArray()),
-            annotations: this.annotations.map(an => an.toArray())
+            annotations: this.annotations?.map(an => an.toArray()) ?? []
         }
 
         documents.push(mainDocument);

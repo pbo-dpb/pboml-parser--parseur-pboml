@@ -1,6 +1,4 @@
-import { h, setTransitionHooks, Suspense } from 'vue'
-import LoadingIndicator from "../../components/LoadingIndicator.vue"
-import SliceLabelEditor from '../../components/Editor/SliceLabelEditor.js';
+import { h, defineAsyncComponent } from 'vue'
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 
 export default class Slice {
@@ -31,6 +29,13 @@ export default class Slice {
         }) : [];
 
         this.notes = payload.notes ? payload.notes.map(src => {
+            return {
+                en: src?.en,
+                fr: src?.fr
+            }
+        }) : [];
+
+        this.alts = payload.alts ? payload.alts.map(src => {
             return {
                 en: src?.en,
                 fr: src?.fr
@@ -127,17 +132,41 @@ export default class Slice {
     __buildEditorsVnode() {
 
         return [
-            h(SliceLabelEditor, {
+
+            h('div', {}, [h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
+                'presentation': this.presentation,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.presentation = value;
+                }
+            })]),
+
+            h('div', {}, [h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
+                'referenced_as': this.referenced_as,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.referenced_as.en = value.en;
+                    this.referenced_as.fr = value.fr;
+                }
+            })]),
+
+
+            h('div', {}, [h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
                 'label': this.label,
                 'isEditing': this.state.isEditingMeta,
-                'onEditing': (value) => {
-                    this.state.isEditingMeta = value;
-                },
                 'onUpdate:modelValue': (value) => {
-                    this.label.en = value.en; this.label.fr = value.fr
+                    this.label.en = value.en;
+                    this.label.fr = value.fr
                 }
-            }),
-            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
+            })]),
+
+
+
+            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
+
+            h('div', {}, [h(defineAsyncComponent(() => import('../../editors/SliceMetasEditor.js')), {
+                slice: this
+            })]),
         ];
     }
 
@@ -154,11 +183,9 @@ export default class Slice {
         return h(elType, { class: classes.join(" "), id: this.anchor }, this._buildVnodes(language));
     }
 
-    renderEditingVnode() {
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.readonly ? ' filter grayscale opacity-80' : ''}` }, h(Suspense, null, {
-            default: () => h('div', { class: 'flex flex-col gap-2' }, this.__buildEditorsVnode()),
-            fallback: () => h('template', null, LoadingIndicator)
-        }));
+    renderEditingVnode(language = document.documentElement.lang) {
+        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language });
+
     }
 
     get anchor() {
@@ -182,6 +209,7 @@ export default class Slice {
             },
             sources: this.sources.length ? this.sources : null,
             notes: this.notes.length ? this.notes : null,
+            alts: this.alts.length ? this.alts : null,
             content: this.content
         };
 
