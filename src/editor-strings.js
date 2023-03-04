@@ -27,6 +27,9 @@ export default {
         'annotation_id_helper': "You can refer to this annotation using the following string: ",
         'annotation_content_type_label': "Content type",
         'annotation_content_label': "Content",
+        'slice_meta_type_sources': "Sources",
+        'slice_meta_type_notes': "Notes",
+        'slice_meta_type_alts': "Textual descriptions",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -56,5 +59,8 @@ export default {
         'annotation_id_helper': "Vous pouvez référer à cette annotation en utilisant la chaine suivante : ",
         'annotation_content_type_label': "Type de contenu",
         'annotation_content_label': "Contenu",
+        'slice_meta_type_sources': "Sources",
+        'slice_meta_type_notes': "Notes",
+        'slice_meta_type_alts': "Descriptions textuelles",
     }
 }

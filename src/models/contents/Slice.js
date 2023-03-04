@@ -35,6 +35,13 @@ export default class Slice {
             }
         }) : [];
 
+        this.alts = payload.alts ? payload.alts.map(src => {
+            return {
+                en: src?.en,
+                fr: src?.fr
+            }
+        }) : [];
+
         this.content = payload.content;
 
 
@@ -155,7 +162,11 @@ export default class Slice {
 
 
 
-            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
+            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
+
+            h('div', {}, [h(defineAsyncComponent(() => import('../../editors/SliceMetasEditor.js')), {
+                slice: this
+            })]),
         ];
     }
 
@@ -198,6 +209,7 @@ export default class Slice {
             },
             sources: this.sources.length ? this.sources : null,
             notes: this.notes.length ? this.notes : null,
+            alts: this.alts.length ? this.alts : null,
             content: this.content
         };
 
