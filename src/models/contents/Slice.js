@@ -78,9 +78,9 @@ export default class Slice {
 
     __renderMetaVnodes(label, content, language) {
         return [
-            h('dl', { class: 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' }, [
+            h('dl', { class: 'flex flex-col grid-cols-3 gap-1 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' }, [
                 h('dt', { class: "text-xs font-semibold", innerHTML: label }),
-                h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("; ") }),
+                h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("<br>") }),
             ]),
 
         ]
