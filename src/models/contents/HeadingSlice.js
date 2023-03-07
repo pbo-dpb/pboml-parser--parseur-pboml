@@ -40,9 +40,17 @@ export default class HeadingSlice extends Slice {
     }
 
 
+    __buildEditorsVnode() {
+
+        return [
+            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
+        ];
+    }
+
+
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/MarkdownSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { this.content = value } }))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/HeadingSliceEditor.js')), { slice: this }))
         return vnodes;
     }
 

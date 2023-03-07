@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite --host --port 8080",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host --port 8080"
   },
   "dependencies": {
     "buffer": "^6.0.3",

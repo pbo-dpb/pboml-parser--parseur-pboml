@@ -1,5 +1,4 @@
 <template>
-
     <main class="flex flex-col gap-4">
 
         <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw"
@@ -14,20 +13,52 @@
         </editor-actions>
 
         <template v-if="!shouldEditRaw">
-            <template v-if="!standalone">
-                <h2 class="text-4xl font-thin">{{ strings.meta_section_title }}</h2>
-                <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
-            </template>
-            <h2 class="text-4xl font-thin mt-4">{{ strings.slices_section_title }}</h2>
 
-            <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
-            <slice-stager @new="handleNewSlice"></slice-stager>
+
+            <div class="tabs">
+                <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
+                    <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
+                        {{ strings.slices_section_title }}
+                    </Tab>
+                    <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
+                        @click="currentTab = 'annotations'">
+                        {{ strings.annotations_section_title }}
+                    </Tab>
+                    <Tab v-if="!standalone" :controls="'meta'" :selected="currentTab === 'meta'"
+                        @click="currentTab = 'meta'">
+                        {{ strings.meta_section_title }}
+                    </Tab>
+                </div>
+
+                <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices" v-if="currentTab === 'slices'">
+                    <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
+                    <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
+                </div>
+
+                <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
+                    v-if="currentTab === 'annotations'">
+                    <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
+                </div>
+
+
+                <div v-if="!standalone && currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
+                    aria-labelledby="tab-meta">
+                    <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
         </template>
 
         <yaml-editor v-if="shouldEditRaw" :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></yaml-editor>
 
     </main>
-
 </template>
 <script>
 
@@ -38,7 +69,9 @@ import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
+import AnnotationsEditor from "./AnnotationsEditor/AnnotationsEditor"
 import strings from "../../editor-strings"
+import Tab from "./Tabs/Tab.vue"
 
 export default {
     props: {
@@ -50,7 +83,8 @@ export default {
         return {
             shouldEditRaw: false,
             workingPboml: '',
-            strings: strings[document.documentElement.lang]
+            strings: strings[document.documentElement.lang],
+            currentTab: "slices",
         }
     },
 
@@ -60,7 +94,9 @@ export default {
         Button,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
         SliceStager,
-        DocumentMetaEditor
+        DocumentMetaEditor,
+        Tab,
+        AnnotationsEditor
     },
 
     watch: {
@@ -97,7 +133,18 @@ export default {
             }
         },
         handleNewSlice(slice) {
+            // Force a rerender of the slices editor block.
+            this.currentTab = null;
             this.pbomlDocument.addSlice(slice);
+            this.$nextTick(() => {
+                this.currentTab = 'slices';
+                this.$nextTick(() => {
+                    setTimeout(() => {
+                        this.$refs.slicestager.$el.scrollIntoView(false)
+                    }, "300")
+
+                })
+            })
         }
     },
 
