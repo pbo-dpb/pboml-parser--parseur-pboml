@@ -76,18 +76,7 @@ export default class TableSlice extends Slice {
 
 
     renderReadonlyVnode(language) {
-        return null; // Readonly tables are not supported
-    }
-
-
-    renderAsVnode(language = document.documentElement.lang) {
-        let parentVnode = super.renderAsVnode(language);
-        parentVnode.props.class = `${parentVnode.props.class} break-inside-avoid-page`;
-        return parentVnode;
-    }
-
-    _buildVnodes(language) {
-        let vnodes = super._buildVnodes(language);
+        let vnodes = super.renderReadonlyVnode(language);
         vnodes.push(h('table', {
             class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 break-inside-avoid-page ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
         }, [
@@ -100,6 +89,13 @@ export default class TableSlice extends Slice {
         ));
 
         return vnodes;
+    }
+
+
+    renderAsVnode(language = document.documentElement.lang) {
+        let parentVnode = super.renderAsVnode(language);
+        parentVnode.props.class = `${parentVnode.props.class} break-inside-avoid-page`;
+        return parentVnode;
     }
 
     _buildEditorInputVnodes() {
