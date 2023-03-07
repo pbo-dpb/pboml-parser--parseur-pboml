@@ -78,7 +78,7 @@ export default class Annotation {
 
         return [
             h('div', { class: 'flex flex-row gap-2' }, [
-                h('dt', { class: 'w-8 prose dark:prose-invert' }, [
+                h('dt', { class: 'w-8 shrink-0 prose dark:prose-invert' }, [
                     h('span', { class: 'print:hidden sr-only' }, `Note #${this.state.sequence}`),
                     h('span', { 'aria-hidden': true, }, `${this.state.sequence}.`),
                 ]),
