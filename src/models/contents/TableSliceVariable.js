@@ -14,6 +14,7 @@ export default class TableSliceVariable {
         this.readonly = payload.readonly;
         this.display_label = payload.display_label;
         this.is_descriptive = payload.is_descriptive;
+        this.is_time = payload.is_time;
     }
 
 
@@ -64,7 +65,8 @@ export default class TableSliceVariable {
             type: this.type,
             readonly: this.readonly,
             display_label: this.display_label,
-            is_descriptive: this.is_descriptive
+            is_descriptive: this.is_descriptive,
+            is_time: this.is_time
         }
     }
 
