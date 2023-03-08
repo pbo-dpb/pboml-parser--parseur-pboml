@@ -2,10 +2,10 @@
   <Suspense>
     <div>
       <template v-if="loaded && !pbomlDocument">
-        <FilePicker @pick="handlePick"></FilePicker>
+        <FilePicker @pick="handlePick" :prefix="prefix"></FilePicker>
       </template>
       <template v-else>
-        <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone"></Editor>
+        <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone" :prefix="prefix"></Editor>
         <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
       </template>
     </div>
@@ -36,11 +36,27 @@ export default {
       type: String,
       required: false
     },
+    /**
+     * When true, will render the document in editing mode.
+     */
     edit: {
       required: false
     },
+    /**
+     * When marked as standalone, the component will not display
+     * headers and footers (title, copyright, etc.) and
+     * remove exportation features from the editor.
+     */
     standalone: {
       required: false
+    },
+    /**
+     * A string used to prefix rendered element ids and anchors. Used when
+     * multiple pboml documents are displayed on the same page.
+     */
+    prefix: {
+      type: String,
+      default: null
     }
   },
   components: {
@@ -67,7 +83,7 @@ export default {
 
     if (this._payload) {
       let payload = yaml.loadAll(this._payload);
-      this.pbomlDocument = new PBOMLDocument(payload)
+      this.pbomlDocument = new PBOMLDocument(payload, this.prefix)
     } else {
       this.pbomlDocument = null
     }

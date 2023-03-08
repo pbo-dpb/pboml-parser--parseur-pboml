@@ -20,11 +20,15 @@ export default class Annotation {
 
 
         this.state = {
-            ref_count: 0
+            ref_count: 0,
+            prefix: null,
         }
 
     }
 
+    get annotationAnchor() {
+        return (this.state.prefix ? (this.state.prefix + '_') : "") + `antn_${this.id}`;
+    }
 
     getAnchorDomElement() {
         const sup = document.createElement("sup");
@@ -32,8 +36,8 @@ export default class Annotation {
         //link.setAttribute('class', "no-underline print:no-underline print:text-gray-800 hover:underline bg-blue-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
         // At this time the anchor is non-interactive so we won't use blue.
         link.setAttribute('class', "no-underline print:no-underline cursor-text text-gray-800 bg-gray-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
-        link.setAttribute('href', `#antn_${this.id}`);
-        link.setAttribute('id', `antn_ref_${this.id}_${this.state.ref_count}`);
+        link.setAttribute('href', `#${this.annotationAnchor}`);
+        link.setAttribute('id', `ref_${this.annotationAnchor}_${this.state.ref_count}`);
         link.setAttribute("role", "doc-noteref");
         link.setAttribute("aria-describedby", "annotations-label");
         link.innerText = this.id;
@@ -81,7 +85,7 @@ export default class Annotation {
                     h('span', { class: 'print:hidden sr-only' }, `Note #${this.id}`),
                     h('span', { 'aria-hidden': true, }, `${this.id}.`),
                 ]),
-                h('dd', { 'class': 'col-span-11 prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: `antn_${this.id}` })
+                h('dd', { 'class': 'col-span-11 prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: `${this.annotationAnchor}` })
             ])
 
         ]

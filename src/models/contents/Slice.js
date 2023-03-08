@@ -53,7 +53,8 @@ export default class Slice {
 
         this.state = {
             isEditingMeta: false,
-            sequence: 0
+            sequence: 0,
+            prefix: null
         }
 
     }
@@ -195,7 +196,7 @@ export default class Slice {
     }
 
     get anchor() {
-        return `${this.type}-${this.state.sequence}`
+        return `${this.prefix ? this.prefix + '-' : ''}${this.type}-${this.state.sequence}`
     }
 
     toArray() {

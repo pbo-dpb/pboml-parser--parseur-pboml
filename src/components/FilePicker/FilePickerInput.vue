@@ -1,5 +1,4 @@
 <template>
-
     <div class="flex flex-col gap-2" :class="{ 'bg-red-100': hasError }">
         <input type="file" if="pboml-file-picker" @change="handleFileInputChange" accept=".yaml,.pdf" />
         <label v-if="hasError" for="pboml-file-picker"
@@ -16,6 +15,7 @@ import yaml from 'js-yaml'
 
 
 export default {
+    props: ['prefix'],
     emits: ['pick'],
     data() {
         return {
@@ -36,7 +36,7 @@ export default {
 
             let pbomlDocument;
             try {
-                pbomlDocument = new PBOMLDocument(loadedPboml);
+                pbomlDocument = new PBOMLDocument(loadedPboml, this.prefix);
             } catch (error) {
                 this.hasError = "Unable to open file: invalid PBOML // Impossible d'ouvrir le fichier : PBOML non conforme";
                 return;

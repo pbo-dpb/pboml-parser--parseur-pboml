@@ -10,12 +10,12 @@ import PlainImageSlice from "./contents/PlainImageSlice";
 
 export default class PBOMLDocument {
 
-    static initFromYaml(yamlPayload) {
+    static initFromYaml(yamlPayload, prefix = null) {
         let payload = yaml.loadAll(yamlPayload);
-        return new PBOMLDocument(payload);
+        return new PBOMLDocument(payload, prefix);
     }
 
-    constructor(payload = []) {
+    constructor(payload = [], prefix = null) {
         const mainDocument = payload.find(element => element.pboml?.version);
         this.otherDocuments = payload.filter((dc) => dc != mainDocument);
 
@@ -66,6 +66,7 @@ export default class PBOMLDocument {
             counter++;
             if (sli) {
                 sli.state.sequence = counter;
+                sli.state.prefix = prefix;
                 return sli;
             }
 
@@ -74,6 +75,7 @@ export default class PBOMLDocument {
 
         this.annotations = mainDocument.annotations?.map((el) => {
             let ant = new Annotation(el);
+            ant.state.prefix = prefix;
             return ant
         }).filter(n => n).sort((a, b) => `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }));
     }

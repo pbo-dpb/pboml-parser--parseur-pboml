@@ -76,7 +76,8 @@ import Tab from "./Tabs/Tab.vue"
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
-        standalone: Boolean
+        standalone: Boolean,
+        prefix: String
     },
 
     data() {
@@ -123,7 +124,7 @@ export default {
         handleRawEditorToggle() {
             if (this.shouldEditRaw) {
                 try {
-                    this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml);
+                    this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml, this.prefix);
                     this.shouldEditRaw = false;
                 } catch (e) {
                 }
