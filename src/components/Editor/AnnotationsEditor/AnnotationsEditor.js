@@ -6,7 +6,7 @@ export default {
     props: ["pbomlDocument"],
 
     methods: {
-        pushNewAnnotation() {
+        pushNewAnnotation(e) {
             if (!this.pbomlDocument.annotations)
                 this.pbomlDocument.annotations = [];
 
@@ -20,6 +20,15 @@ export default {
                     fr: `@techreport{LOREM_IPSUM_ID,\n  author={Smith, John and Untel, Jean},\n  title={Lorem Ipsum},\n  institution={Bureau du directeur parlementaire du budget},\n  year=2023,\n  url = \"https://www.pbo-dpb.ca/fr",\n  address = \"Ottawa, ON\"\n}`
                 }*/
             }))
+            if (e && e.target) {
+                const button = e.target;
+                this.$nextTick(() => {
+                    setTimeout(() => {
+                        button.scrollIntoView(false)
+                    }, "300")
+                })
+            }
+
         },
         deleteAnnotation(annotation) {
 
@@ -34,7 +43,7 @@ export default {
                 return ann.renderEditingVnode()
             }),
 
-            h('div', h(Button, { 'innerText': `${strings.create_annotation} ➕`, "onClick": () => this.pushNewAnnotation() }))
+            h('div', h(Button, { 'innerText': `${strings.create_annotation} ➕`, "onClick": (e) => this.pushNewAnnotation(e) }))
 
         ])
 
