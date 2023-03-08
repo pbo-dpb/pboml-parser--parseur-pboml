@@ -1,6 +1,11 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../MarkdownDriver';
 
+const defaults = {
+    display_label: true,
+    is_time: false
+}
+
 export default class TableSliceVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center';
 
@@ -12,9 +17,9 @@ export default class TableSliceVariable {
 
         this.type = payload.type;
         this.readonly = payload.readonly;
-        this.display_label = payload.display_label;
+        this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
         this.is_descriptive = payload.is_descriptive;
-        this.is_time = payload.is_time;
+        this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
     }
 
 
@@ -60,7 +65,8 @@ export default class TableSliceVariable {
 
 
     toArray() {
-        return {
+
+        let arrayout = {
             label: { en: this.label?.en, fr: this.label?.fr },
             type: this.type,
             readonly: this.readonly,
@@ -68,6 +74,15 @@ export default class TableSliceVariable {
             is_descriptive: this.is_descriptive,
             is_time: this.is_time
         }
+
+        // Remove default values from  output
+        for (const [key, value] of Object.entries(defaults)) {
+            if (arrayout[key] === value) {
+                delete arrayout[key];
+            }
+        }
+
+        return arrayout
     }
 
 
