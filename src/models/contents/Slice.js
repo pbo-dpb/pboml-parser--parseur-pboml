@@ -1,13 +1,19 @@
 import { h, defineAsyncComponent } from 'vue'
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 
+const defaults = {
+    presentation: null,
+    readonly: false,
+    display_label: true
+}
+
 export default class Slice {
     constructor(payload) {
         this.id = payload.id;
         this.type = payload.type;
-        this.readonly = payload.readonly;
-        this.display_label = payload.display_label;
-        this.presentation = payload.presentation ? payload.presentation : null;
+        this.readonly = payload.readonly !== undefined ? payload.readonly : defaults.readonly;
+        this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
+        this.presentation = payload.presentation !== undefined ? payload.presentation : defaults.presentation;
         this.choices = payload.choices;
         this.print_only = payload.print_only;
 
@@ -213,7 +219,11 @@ export default class Slice {
             content: this.content
         };
 
-
+        for (const [key, value] of Object.entries(defaults)) {
+            if (serialization[key] === value) {
+                delete serialization[key];
+            }
+        }
 
         return Object.fromEntries(Object.entries(serialization).filter(([_, v]) => v !== null));;
     }
