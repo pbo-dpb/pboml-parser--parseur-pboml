@@ -173,7 +173,7 @@ export default class Slice {
     renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4"];
         classes.push(this.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-zinc-50 to-zinc-100 rounded-tr-3xl p-4 break-inside-avoid-page" : "");
+        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 rounded-tr-3xl p-4 break-inside-avoid-page" : "");
         classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100  rounded-tr-3xl p-4 break-inside-avoid-page" : "");
 
         let elType = 'section';
