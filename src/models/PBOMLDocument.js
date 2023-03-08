@@ -72,13 +72,10 @@ export default class PBOMLDocument {
         }).filter(n => n) ?? [];
 
 
-        let i = 0;
         this.annotations = mainDocument.annotations?.map((el) => {
-            i++;
             let ant = new Annotation(el);
-            ant.state.sequence = i;
             return ant
-        }).filter(n => n);
+        }).filter(n => n).sort((a, b) => `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }));
     }
 
 

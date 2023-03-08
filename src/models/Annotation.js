@@ -20,7 +20,6 @@ export default class Annotation {
 
 
         this.state = {
-            sequence: 0,
             ref_count: 0
         }
 
@@ -37,7 +36,7 @@ export default class Annotation {
         link.setAttribute('id', `antn_ref_${this.id}_${this.state.ref_count}`);
         link.setAttribute("role", "doc-noteref");
         link.setAttribute("aria-describedby", "annotations-label");
-        link.innerText = this.state.sequence;
+        link.innerText = this.id;
         sup.appendChild(link);
 
         this.state.ref_count++;
@@ -79,8 +78,8 @@ export default class Annotation {
         return [
             h('div', { class: 'flex flex-row gap-2' }, [
                 h('dt', { class: 'w-8 shrink-0 prose dark:prose-invert' }, [
-                    h('span', { class: 'print:hidden sr-only' }, `Note #${this.state.sequence}`),
-                    h('span', { 'aria-hidden': true, }, `${this.state.sequence}.`),
+                    h('span', { class: 'print:hidden sr-only' }, `Note #${this.id}`),
+                    h('span', { 'aria-hidden': true, }, `${this.id}.`),
                 ]),
                 h('dd', { 'class': 'col-span-11 prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: `antn_${this.id}` })
             ])
