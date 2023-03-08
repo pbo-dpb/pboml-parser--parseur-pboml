@@ -24,8 +24,36 @@ export default class TableSlice extends Slice {
         return this.content.length;
     }
 
-    get mobileShouldUseVertical() {
+    get shouldShowVerticalTable() {
+        // If a 3 column (or less) table is possible, show it vertically on mobile
+        if (window.innerWidth < 1024 && this.bodyRowsCount < 4 && this.variableCount > 2) return true;
+
+        // When a table is a time series, always show it horizontally
+        if (this.descriptiveVariableIsTimeSeries) return false;
+
         return this.variableCount < this.bodyRowsCount;
+    }
+
+    get descriptiveVariableIsTimeSeries() {
+        let descriptiveVariable = Object.values(this.variables).find(v => v.is_descriptive);
+        if (!descriptiveVariable) return false;
+
+        if (descriptiveVariable.is_time) return true;
+        const descriptiveVariableKey = Object.keys(this.variables).find(key => this.variables[key] === descriptiveVariable);
+
+        /**
+         * Count the number of values that match a year or fiscal year pattern.
+         * For example, 2023, 2023-24 and 2023-2024 would count as a year
+         * value. If more than half of the variable's values are year
+         * values we consider the content a time series.
+         */
+        const timeSeriesTest = /^[0-9]{4}(\-[0-9]{2,4})?$/gm;
+        let yearCount = 0;
+        this.content.forEach(col => {
+            if (timeSeriesTest.test(col?.[descriptiveVariableKey]?.en ?? '') || timeSeriesTest.test(col?.[descriptiveVariableKey]?.fr ?? '')) yearCount++;
+        })
+
+        return yearCount > this.content.length / 2;
     }
 
     __buildHorizontalHeader(language) {
@@ -77,16 +105,23 @@ export default class TableSlice extends Slice {
 
     renderReadonlyVnode(language) {
         let vnodes = super.renderReadonlyVnode(language);
-        vnodes.push(h('table', {
-            class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 break-inside-avoid-page ${this.mobileShouldUseVertical ? "lg:hidden print:hidden" : "hidden lg:table print:table print:text-sm"}`
-        }, [
-            this.__buildHorizontalHeader(language),
-            this.__buildHorizontalBody(language),
-        ]));
 
-        vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700 ${this.mobileShouldUseVertical ? "hidden lg:table print:table print:text-sm" : "lg:hidden print:hidden"}` },
-            this.__buildVerticalBody(language),
-        ));
+        if (this.shouldShowVerticalTable) {
+            vnodes.push(h('table', {
+                class: `table-fixed border-collapse border border-gray-300 dark:border-gray-700 break-inside-avoid-page  lg:table print:table print:text-sm`
+            }, [
+                this.__buildHorizontalHeader(language),
+                this.__buildHorizontalBody(language),
+            ]));
+        } else {
+            vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700  lg:table print:table print:text-sm` },
+                this.__buildVerticalBody(language),
+            ));
+        }
+
+
+
+
 
         return vnodes;
     }
