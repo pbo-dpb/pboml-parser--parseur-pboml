@@ -71,10 +71,12 @@ export default class Annotation {
     }
 
 
-    renderContent(language) {
+    renderContents(language) {
         switch (this.content_type) {
             case 'markdown':
-                return this.renderMarkdown(language);
+                return [h('div', { innerHTML: this.renderMarkdown(language) })];
+            case 'bibtex':
+                return [h(defineAsyncComponent(() => import('../components/Renderer/AnnotationBibtex')), { annotation: this, language: language })]
         }
         return "";
     }
@@ -89,7 +91,7 @@ export default class Annotation {
                     h('span', { 'aria-hidden': true, }, `${this.id}.`),
                 ]),
                 h('div', { class: "col-span-11 print:w-11/12 flex flex-col gap-1" }, [
-                    h('div', { 'class': 'prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: this.annotationAnchor }),
+                    h('div', { 'class': 'prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', id: this.annotationAnchor }, [...this.renderContents(language)]),
                     highlight ? h('a', { href: `#${this.getReferenceAnchor()}`, class: "p-2 self-end text-yellow-600 hover:text-yellow-800 dark:text-yellow-100 hover:text-white", 'aria-label': rendererStrings[language].annotation_back_to_source }, [
                         h('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", 'stroke-width': "1.5", stroke: "currentColor", class: "w-4 h-4", 'aria-hidden': true }, [
                             h('path', { 'stroke-linecap': "round", 'stroke-linejoin': "round", d: "M9 9l6-6m0 0l6 6m-6-6v12a6 6 0 01-12 0v-3" })
@@ -105,7 +107,7 @@ export default class Annotation {
     renderEditingVnode(language = document.documentElement.lang) {
 
 
-        return h('fieldset', { class: `border - 2 border - slate - 300 p - 4 flex flex - col gap - 4 rounded` }, [
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
 
             h(defineAsyncComponent(() => import('../editors/AnnotationEditor.js')), { annotation: this }),
 

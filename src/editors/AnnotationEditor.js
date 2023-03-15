@@ -2,6 +2,7 @@ import { h, defineAsyncComponent } from "vue"
 import editorStrings from "../editor-strings"
 import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
+import BibtexTextarea from "../components/Editor/Inputs/BibtexTextarea.vue"
 
 
 export default {
@@ -67,20 +68,23 @@ export default {
 
 
             this.annotation.content_type === 'bibtex' ? h('div', { class: 'grid grid-cols-2 gap-4' }, [
-                h(defineAsyncComponent(() => import('../components/Editor/Inputs/BibtexTextarea.vue')), {
-                    label: "EN",
-                    modelValue: this.annotation.content.en,
-                    'onUpdate:modelValue': (value) => {
-                        this.annotation.content.en = value
-                    }
-                }),
-                h(defineAsyncComponent(() => import('../components/Editor/Inputs/BibtexTextarea.vue')), {
-                    label: "FR",
-                    modelValue: this.annotation.content.fr,
-                    'onUpdate:modelValue': (value) => {
-                        this.annotation.content.fr = value
-                    }
-                }),
+                h('div', {}, [
+                    h(BibtexTextarea, {
+                        label: "EN",
+                        modelValue: this.annotation.content.en,
+                        'onUpdate:modelValue': (value) => {
+                            this.annotation.content.en = value
+                        }
+                    })
+                ]),
+                h('div', {}, [
+                    h(BibtexTextarea, {
+                        label: "FR",
+                        modelValue: this.annotation.content.fr,
+                        'onUpdate:modelValue': (value) => {
+                            this.annotation.content.fr = value
+                        }
+                    })]),
             ]) : null,
         ]
 

@@ -10,12 +10,13 @@
   "dependencies": {
     "buffer": "^6.0.3",
     "chart.js": "^4.2.1",
+    "citation-js": "^0.6.7",
     "color": "^4.2.3",
     "deep-equal": "^2.2.0",
     "js-yaml": "^4.1.0",
     "pdf-lib": "^1.17.1",
-    
     "remarkable": "^2.0.1",
+    "root": "github:citation-js/citation-js",
     "vue": "^3.2.47"
   },
   "devDependencies": {
