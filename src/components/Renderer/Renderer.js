@@ -45,6 +45,19 @@ export default {
 
     async renderAnnotationAnchors() {
       (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
+    },
+
+    /*
+     *  Manually observe hash (/hello.html#myanchor) changes so we can scroll to the appropriate
+     *  content on hash change, as this will not work natively with the shadow dom.
+     */
+    handleHashChange(e) {
+      const hash = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
+      let childel = this.$el.querySelector(`#${hash}`)
+      if (hash && childel) {
+        childel.scrollIntoView();
+      }
+
     }
   },
 
@@ -66,6 +79,17 @@ export default {
     this.$nextTick(() => {
       this.renderAnnotationAnchors();
     })
+
+
+    const handleHashChangeFunc = this.handleHashChange
+    addEventListener('hashchange', handleHashChangeFunc);
+
+
+  },
+
+  beforeUnmount() {
+    const handleHashChangeFunc = this.handleHashChange
+    removeEventListener('hashchange', handleHashChangeFunc);
   },
 
   updated() {

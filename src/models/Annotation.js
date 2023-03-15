@@ -1,5 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import MarkdownDriver from '../MarkdownDriver';
+import rendererStrings from '../renderer-strings';
 
 const defaults = {
     category: "note",
@@ -30,16 +31,18 @@ export default class Annotation {
         return (this.state.prefix ? (this.state.prefix + '_') : "") + `antn_${this.id}`;
     }
 
+    getReferenceAnchor(counter = 0) {
+        return `ref_${this.annotationAnchor}_${counter}`;
+    }
+
     getAnchorDomElement() {
         const sup = document.createElement("sup");
         const link = document.createElement("a");
-        //link.setAttribute('class', "no-underline print:no-underline print:text-gray-800 hover:underline bg-blue-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
-        // At this time the anchor is non-interactive so we won't use blue.
-        link.setAttribute('class', "no-underline print:no-underline cursor-text text-gray-800 bg-gray-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
+        link.setAttribute('class', "pb__annotation-anchor no-underline print:no-underline print:text-gray-800 cursor-pointer text-blue-800 bg-blue-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
         link.setAttribute('href', `#${this.annotationAnchor}`);
-        link.setAttribute('id', `ref_${this.annotationAnchor}_${this.state.ref_count}`);
+        link.setAttribute('id', this.getReferenceAnchor(this.state.ref_count));
         link.setAttribute("role", "doc-noteref");
-        link.setAttribute("aria-describedby", "annotations-label");
+        link.setAttribute("aria-describedby", "pb__annotations-label");
         link.innerText = this.id;
         sup.appendChild(link);
 
@@ -73,19 +76,26 @@ export default class Annotation {
             case 'markdown':
                 return this.renderMarkdown(language);
         }
-        return ""
+        return "";
     }
 
 
-    renderAsVnode(language = document.documentElement.lang) {
+    renderAsVnode(language = document.documentElement.lang, highlight = false) {
 
         return [
-            h('div', { class: 'flex flex-row gap-2' }, [
-                h('dt', { class: 'w-8 shrink-0 prose dark:prose-invert' }, [
+            h('li', { class: `grid grid-cols-12 gap-4 print:flex print:gap-0 print:py-1 ${highlight ? 'bg-yellow-100 border-r-4 border-yellow-300' : ''}` }, [
+                h('div', { class: 'col-span-1 print:w-1/12 flex justify-end print:pr-4 gap-2 prose dark:prose-invert font-light tracking-wide proportional-nums text-gray-700' }, [
                     h('span', { class: 'print:hidden sr-only' }, `Note #${this.id}`),
                     h('span', { 'aria-hidden': true, }, `${this.id}.`),
                 ]),
-                h('dd', { 'class': 'col-span-11 prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: `${this.annotationAnchor}` })
+                h('div', { class: "col-span-11 print:w-11/12 flex flex-col gap-1" }, [
+                    h('div', { 'class': 'prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: this.annotationAnchor }),
+                    highlight ? h('a', { href: `#${this.getReferenceAnchor()}`, class: "p-2 self-end text-yellow-600 hover:text-yellow-800", 'aria-label': rendererStrings[language].annotation_back_to_source }, [
+                        h('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", 'stroke-width': "1.5", stroke: "currentColor", class: "w-4 h-4", 'aria-hidden': true }, [
+                            h('path', { 'stroke-linecap': "round", 'stroke-linejoin': "round", d: "M9 9l6-6m0 0l6 6m-6-6v12a6 6 0 01-12 0v-3" })
+                        ])
+                    ]) : null,
+                ])
             ])
 
         ]
@@ -95,7 +105,7 @@ export default class Annotation {
     renderEditingVnode(language = document.documentElement.lang) {
 
 
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
+        return h('fieldset', { class: `border - 2 border - slate - 300 p - 4 flex flex - col gap - 4 rounded` }, [
 
             h(defineAsyncComponent(() => import('../editors/AnnotationEditor.js')), { annotation: this }),
 
