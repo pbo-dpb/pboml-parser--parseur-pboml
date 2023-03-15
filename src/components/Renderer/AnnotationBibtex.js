@@ -6,14 +6,21 @@ export default {
     props: ['annotation', 'language'],
     render() {
 
-        //let example = new Cite(this.annotation.content[this.language])
-        let example = new Cite(this.annotation.content[this.language]);
-        let output = example.format('bibliography', {
-            format: 'html',
-            template: 'apa',
-            lang: `${this.language}-CA`
-        })
+        let output;
+        try {
+            const reference = new Cite(this.annotation.content[this.language]);
+            output = reference.format('bibliography', {
+                format: 'html',
+                template: 'apa',
+                lang: `${this.language}-CA`
+            })
+            return h('div', { innerHTML: output });
+        } catch (error) {
 
-        return h('div', { innerHTML: output })
+        }
+
+
+        output = h('div', { class: "font-mono text-red-500" }, this.annotation.content[this.language]);
+
     }
 }
