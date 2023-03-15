@@ -86,7 +86,7 @@ export default class KvListVariablePair {
     }
 
     getKvNode(language) {
-        return h('div', { 'class': 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' },
+        return h('div', { 'class': 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 ' },
             [
                 this.getKeyVnode(language),
                 this.getValueVnode(language)

@@ -38,7 +38,7 @@ export default class Annotation {
     getAnchorDomElement() {
         const sup = document.createElement("sup");
         const link = document.createElement("a");
-        link.setAttribute('class', "pb__annotation-anchor no-underline print:no-underline print:text-gray-800 cursor-pointer text-blue-800 bg-blue-100 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
+        link.setAttribute('class', "pb__annotation-anchor no-underline print:no-underline print:text-gray-800 cursor-pointer text-blue-800 bg-blue-100 hover:bg-blue-200 dark:text-blue-100 dark:bg-blue-900 dark:hover:bg-blue-700 print:before:content-['['] print:after:content-[']'] rounded font-mono px-0.5 mx-0.5");
         link.setAttribute('href', `#${this.annotationAnchor}`);
         link.setAttribute('id', this.getReferenceAnchor(this.state.ref_count));
         link.setAttribute("role", "doc-noteref");
@@ -83,14 +83,14 @@ export default class Annotation {
     renderAsVnode(language = document.documentElement.lang, highlight = false) {
 
         return [
-            h('li', { class: `grid grid-cols-12 gap-4 print:flex print:gap-0 print:py-1 ${highlight ? 'bg-yellow-100 border-r-4 border-yellow-300' : ''}` }, [
-                h('div', { class: 'col-span-1 print:w-1/12 flex justify-end print:pr-4 gap-2 prose dark:prose-invert font-light tracking-wide proportional-nums text-gray-700' }, [
+            h('li', { class: `grid grid-cols-12 gap-4 print:flex print:gap-0 print:py-1 ${highlight ? 'border-r-4 bg-yellow-100 border-yellow-300 dark:bg-yellow-900 dark:border-yellow-700' : ''}` }, [
+                h('div', { class: 'col-span-1 print:w-1/12 flex justify-end print:pr-4 gap-2 prose dark:prose-invert font-light tracking-wide proportional-nums text-gray-700 dark:text-gray-300' }, [
                     h('span', { class: 'print:hidden sr-only' }, `Note #${this.id}`),
                     h('span', { 'aria-hidden': true, }, `${this.id}.`),
                 ]),
                 h('div', { class: "col-span-11 print:w-11/12 flex flex-col gap-1" }, [
                     h('div', { 'class': 'prose dark:prose-invert max-w-none prose-a:font-normal prose-p:inline break-inside-avoid', innerHTML: this.renderContent(language), id: this.annotationAnchor }),
-                    highlight ? h('a', { href: `#${this.getReferenceAnchor()}`, class: "p-2 self-end text-yellow-600 hover:text-yellow-800", 'aria-label': rendererStrings[language].annotation_back_to_source }, [
+                    highlight ? h('a', { href: `#${this.getReferenceAnchor()}`, class: "p-2 self-end text-yellow-600 hover:text-yellow-800 dark:text-yellow-100 hover:text-white", 'aria-label': rendererStrings[language].annotation_back_to_source }, [
                         h('svg', { xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", 'stroke-width': "1.5", stroke: "currentColor", class: "w-4 h-4", 'aria-hidden': true }, [
                             h('path', { 'stroke-linecap': "round", 'stroke-linejoin': "round", d: "M9 9l6-6m0 0l6 6m-6-6v12a6 6 0 01-12 0v-3" })
                         ])

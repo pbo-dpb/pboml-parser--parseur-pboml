@@ -85,7 +85,7 @@ export default class Slice {
 
     __renderMetaVnodes(label, content, language) {
         return [
-            h('dl', { class: 'flex flex-col grid-cols-3 gap-1 border-l-2 border-gray-200 dark:border-gray-800 pl-2 ' }, [
+            h('dl', { class: 'flex flex-col grid-cols-3 gap-1 border-l-2 border-gray-200 dark:border-gray-700 pl-2 ' }, [
                 h('dt', { class: "text-xs font-semibold", innerHTML: label }),
                 h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("<br>") }),
             ]),
@@ -180,8 +180,8 @@ export default class Slice {
     renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4"];
         classes.push(this.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 rounded-tr-3xl p-4 break-inside-avoid-page" : "");
-        classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100  rounded-tr-3xl p-4 break-inside-avoid-page" : "");
+        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page" : "");
+        classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page" : "");
 
         let elType = 'section';
         if (this.presentation === 'figure') elType = 'figure';

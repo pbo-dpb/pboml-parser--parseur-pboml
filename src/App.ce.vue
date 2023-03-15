@@ -1,6 +1,6 @@
 <template>
   <Suspense>
-    <div>
+    <div class="dark:text-white">
       <template v-if="loaded && !pbomlDocument">
         <FilePicker @pick="handlePick" :prefix="prefix"></FilePicker>
       </template>

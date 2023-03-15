@@ -18,7 +18,7 @@ export default {
         [
           (this.pbomlDocument.type?.[language] ? (h("div", { class: "text-xl", innerHTML: this.pbomlDocument.type[language] })) : null),
           (this.pbomlDocument.title?.[language] ? h("h1", { class: "font-thin text-4xl", innerHTML: this.pbomlDocument.title[language] }) : null),
-          h("div", { class: "text-sm text-gray-800", innerHTML: this.pbomlDocument.localizedReleaseDate?.[language] })
+          h("div", { class: "text-sm text-gray-800 dark:text-gray-200", innerHTML: this.pbomlDocument.localizedReleaseDate?.[language] })
         ]
       )
       ];
