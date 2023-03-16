@@ -1,5 +1,7 @@
 import { h, defineAsyncComponent } from 'vue'
+import Details from '../../components/Details.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
+import rendererStrings from '../../renderer-strings.js';
 
 const defaults = {
     presentation: null,
@@ -83,10 +85,21 @@ export default class Slice {
         return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
     }
 
-    __renderMetaVnodes(label, content, language) {
+    __renderMetaVnodes(label, content, language, collapsible = false) {
+
+        if (collapsible) {
+            return [
+                h(Details, { label: label }, {
+                    default: () => h('div', { class: "prose-sm", innerHTML: content.map(src => src[language]).join("<br>") }),
+                }
+
+                )
+            ]
+        }
+
         return [
             h('dl', { class: 'flex flex-col grid-cols-3 gap-1 border-l-2 border-gray-200 dark:border-gray-700 pl-2 ' }, [
-                h('dt', { class: "text-xs font-semibold", innerHTML: label }),
+                h('dt', { class: "text-sm font-semibold", innerHTML: label }),
                 h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("<br>") }),
             ]),
 
@@ -103,10 +116,16 @@ export default class Slice {
         return this.__renderMetaVnodes(this.notes.length > 1 ? 'Notes' : 'Note', this.notes, language);
     }
 
+    _renderAltsVnodes(language) {
+        if (!this.alts.length) return [];
+        return this.__renderMetaVnodes(rendererStrings[language].alts_label, this.alts, language, true);
+    }
+
     _renderMetaVnodes(language) {
         if (!this.sources.length && !this.notes.length) return [];
 
         return h('div', { 'class': 'flex flex-col gap-2' }, [
+            ...this._renderAltsVnodes(language),
             ...this._renderSourcesVnodes(language),
             ...this._renderNotesVnodes(language)
         ])
