@@ -215,7 +215,7 @@ export default class Slice {
     }
 
     get anchor() {
-        return `${this.prefix ? this.prefix + '-' : ''}${this.type}-${this.state.sequence}`
+        return `${this.state.prefix ? this.state.prefix + '-' : ''}${this.type}-${this.state.sequence}`
     }
 
     toArray() {

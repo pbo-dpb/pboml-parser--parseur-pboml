@@ -37,6 +37,7 @@ export default class PBOMLDocument {
 
         this.title = mainDocument.document?.title;
 
+
         let counter = 0;
         this.slices = mainDocument.slices?.map((el) => {
 
@@ -78,6 +79,10 @@ export default class PBOMLDocument {
             ant.state.prefix = prefix;
             return ant
         }).filter(n => n).sort((a, b) => `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }));
+
+        this.state = {
+            prefix
+        }
     }
 
 

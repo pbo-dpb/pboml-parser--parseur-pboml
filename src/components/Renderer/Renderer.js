@@ -53,6 +53,7 @@ export default {
      */
     handleHashChange(e) {
       const hash = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
+      if (!hash) return;
       let childel = this.$el.querySelector(`#${hash}`)
       if (hash && childel) {
         childel.scrollIntoView();
