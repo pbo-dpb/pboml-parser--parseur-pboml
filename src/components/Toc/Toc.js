@@ -64,7 +64,12 @@ export default {
 
         },
         labelTree() {
-
+            return this.rawLabels.map((slice) => {
+                return {
+                    label: slice.label[this.language],
+                    anchor: slice.anchor
+                }
+            })
         },
         tree() {
             if (this.rawHeaderSlices && this.rawHeaderSlices.length > 0) {
