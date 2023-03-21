@@ -73,12 +73,16 @@ export default class PBOMLDocument {
 
         }).filter(n => n) ?? [];
 
+        try {
+            this.annotations = mainDocument.annotations?.map((el) => {
+                let ant = new Annotation(el);
+                ant.state.prefix = prefix;
+                return ant
+            }).filter(n => n).sort((a, b) => `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }));
+        } catch (error) {
+            this.annotations = []
+        }
 
-        this.annotations = mainDocument.annotations?.map((el) => {
-            let ant = new Annotation(el);
-            ant.state.prefix = prefix;
-            return ant
-        }).filter(n => n).sort((a, b) => `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }));
 
         this.state = {
             prefix
