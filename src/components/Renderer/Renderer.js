@@ -2,6 +2,7 @@ import PBOMLDocument from "../../models/PBOMLDocument";
 import { h } from 'vue'
 import AnnotationAnchorsRenderer from "./AnnotationAnchorsRenderer";
 import Annotations from "./Annotations";
+import RendererIntersectionManager from "./RendererIntersectionManager";
 
 export default {
 
@@ -11,7 +12,14 @@ export default {
     standalone: Boolean
   },
 
+  data() {
+    return {
+      intersectionManager: new RendererIntersectionManager
+    }
+  },
+
   methods: {
+
     _buildHeaderVnodes(language) {
       if (this.standalone) return [];
       return [h("header", { class: 'flex flex-col gap-1' },
@@ -86,11 +94,19 @@ export default {
     addEventListener('hashchange', handleHashChangeFunc);
 
 
+    this.pbomlDocument.slices.forEach((slice) => {
+      this.$nextTick(() => this.intersectionManager.startObservingForSlice(this.$el, slice))
+    })
+
+
   },
 
   beforeUnmount() {
     const handleHashChangeFunc = this.handleHashChange
     removeEventListener('hashchange', handleHashChangeFunc);
+
+    this.intersectionManager.stopObserving()
+
   },
 
   updated() {

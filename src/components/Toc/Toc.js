@@ -16,6 +16,16 @@ export default {
         language: {
             type: String,
             default: document.documentElement.lang
+        },
+        shouldFollowAnchorIntersectionVisibility: {
+            type: Boolean,
+            default: true
+        }
+    },
+
+    data() {
+        return {
+            currentlyVisibleAnchor: null
         }
     },
 
@@ -78,20 +88,58 @@ export default {
                 return this.labelTree;
             }
             return []
+        },
+        // A list of anchors id that are present in the tree
+        anchors() {
+            return this.tree.map((t) => this.getAnchorsFromObjectAndChildren(t)).flat(Infinity);
         }
     },
     methods: {
         buildVnodeForItem(item, level = 0) {
             const levelSpecificClasses = liStyles[level];
+            let aClasses = ['hover:text-blue-800', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
+
+            if (this.shouldFollowAnchorIntersectionVisibility && item.anchor === this.currentlyVisibleAnchor) {
+                aClasses.push(...['text-gray-900', 'dark:text-gray-100'])
+            } else {
+                aClasses.push(...['text-blue-900', 'dark:text-blue-100',])
+            }
+
             return h('li', { class: [...levelSpecificClasses, ''].join(' ') }, [
                 h('a',
                     {
-                        class: 'text-blue-900 hover:text-blue-800 dark:text-blue-100 hover:dark:text-blue-200 hover:underline print:text-black print:no-underline',
+                        class: aClasses.join(' '),
                         href: `#${item.anchor}`,
                         id: `toci-${item.anchor}`,
                     }, item.label),
                 ((item.children && level <= 2) ? h('ol', {}, ...item.children.map(e => this.buildVnodeForItem(e, level + 1))) : null)
             ])
+        },
+        getAnchorsFromObjectAndChildren(parent) {
+            let family = [parent.anchor];
+            if (parent.children) {
+                family.push(parent.children.map(ch => this.getAnchorsFromObjectAndChildren(ch)));
+            }
+            return family
+        },
+        listenForIntersectionEvents(e) {
+            if (e.detail?.anchor && this.anchors.includes(e.detail.anchor)) {
+                this.currentlyVisibleAnchor = e.detail.anchor;
+            }
+        },
+
+        initializeAnchorFollowing() {
+            let hash = location.hash ? location.hash.replace("#", "") : null;
+            if (hash && this.anchors.includes(hash)) {
+                this.currentlyVisibleAnchor = hash;
+            } else {
+                this.currentlyVisibleAnchor = this.tree[0]?.anchor ?? null;
+            }
+
+            addEventListener("scroll", (event) => {
+                const startListeningForIntersectionEventsFunc = this.listenForIntersectionEvents;
+                document.addEventListener("pboml-renderer-intersection-visible", startListeningForIntersectionEventsFunc);
+            }, { once: true });
         }
     },
     render() {
@@ -101,5 +149,14 @@ export default {
                 ...this.tree.map(t => this.buildVnodeForItem(t))
             ])
         ]) : null
-    }
+    },
+
+    mounted() {
+        this.initializeAnchorFollowing();
+    },
+
+    beforeUnmount() {
+        const startListeningForIntersectionEventsFunc = this.listenForIntersectionEvents;
+        addEventListener("pboml-renderer-intersection-visible", startListeningForIntersectionEventsFunc);
+    },
 }
