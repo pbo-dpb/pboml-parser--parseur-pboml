@@ -74,7 +74,7 @@ export default class PBOMLDocument {
         }).filter(n => n) ?? [];
 
         try {
-            this.annotations = mainDocument.annotations?.map((el) => {
+            this.annotations = mainDocument.annotations.map((el) => {
                 let ant = new Annotation(el);
                 ant.state.prefix = prefix;
                 return ant
