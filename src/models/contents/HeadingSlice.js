@@ -46,6 +46,16 @@ export default class HeadingSlice extends Slice {
     __buildEditorsVnode() {
 
         return [
+
+            h('div', {}, [h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
+                'referenced_as': this.referenced_as,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.referenced_as.en = value.en;
+                    this.referenced_as.fr = value.fr;
+                }
+            })]),
+
             ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes())
         ];
     }
