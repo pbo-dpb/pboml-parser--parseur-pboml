@@ -30,6 +30,8 @@ export default {
         'slice_meta_type_sources': "Sources",
         'slice_meta_type_notes': "Notes",
         'slice_meta_type_alts': "Textual descriptions",
+        'meta_editing_slice_button_label': 'Edit slice metadata',
+        'previewing_slice_button_label': "Preview slice",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -62,5 +64,7 @@ export default {
         'slice_meta_type_sources': "Sources",
         'slice_meta_type_notes': "Notes",
         'slice_meta_type_alts': "Descriptions textuelles",
+        'meta_editing_slice_button_label': 'Modifier les métadonnées de la tranche',
+        'previewing_slice_button_label': "Aperçu de la tranche",
     }
 }

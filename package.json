@@ -8,6 +8,7 @@
     "preview": "vite preview --host --port 8080"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.0.16",
     "buffer": "^6.0.3",
     "chart.js": "^4.2.1",
     "citation-js": "^0.6.7",

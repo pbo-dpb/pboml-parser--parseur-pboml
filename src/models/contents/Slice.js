@@ -55,6 +55,7 @@ export default class Slice {
 
         this.state = {
             isEditingMeta: false,
+            isPreviewing: false,
             sequence: 0,
             prefix: null
         }
