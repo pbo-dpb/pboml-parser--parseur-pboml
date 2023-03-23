@@ -25,6 +25,7 @@ export default {
                     "H1 (n+0)": 0,
                     "> H2 (n+1)": 1,
                     ">> H3 (n+2)": 2,
+                    ">>> H4 (n+3)": 3,
                 },
                 modelValue: props.slice.level,
                 'onUpdate:modelValue': (value) => {
