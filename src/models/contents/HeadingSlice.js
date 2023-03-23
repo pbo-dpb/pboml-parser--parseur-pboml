@@ -19,27 +19,30 @@ export default class HeadingSlice extends Slice {
     renderReadonlyVnode(language) {
 
         let headingElType = `h${2 + this.level}`;
-        let classes = [''];
+        let classes = ['font-thin'];
 
         switch (this.level) {
             case 0:
-                classes.push('font-thin text-3xl border-b-4 pb-1 border-gray-300 dark:border-gray-700');
+                classes.push('text-3xl border-b-4 pb-1 border-gray-300 dark:border-gray-700');
                 break;
             case 1:
-                classes.push('font-thin text-2xl border-b-2 pb-1 border-gray-300 dark:border-gray-700');
+                classes.push('text-2xl border-b-2 pb-1 border-gray-300 dark:border-gray-700');
                 break;
             case 2:
-                classes.push('font-thin text-xl font-thin border-b pb-1 border-gray-100 dark:border-gray-800');
+                classes.push('text-xl border-b pb-1 border-gray-100 dark:border-gray-800');
                 break;
             case 3:
-                classes.push('font-thin italic border-b pb-1 border-gray-100 dark:border-gray-800');
+                classes.push('italic border-b pb-1 border-gray-100 dark:border-gray-800');
                 break;
         }
 
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
         md.shouldRenderInline(true);
-        return h(headingElType, { innerHTML: md.render(this.content[language]), class: classes.join(' ') });
+        return h(headingElType, { class: classes.join(' ') }, [
+            this.referenced_as?.[language] ? h('span', { class: 'opacity-70 font-normal mr-4 tracking-tight' }, this.referenced_as[language]) : null,
+            h('span', { innerHTML: md.render(this.content[language]) })
+        ]);
     }
 
 
