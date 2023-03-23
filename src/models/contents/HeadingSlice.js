@@ -19,17 +19,20 @@ export default class HeadingSlice extends Slice {
     renderReadonlyVnode(language) {
 
         let headingElType = `h${2 + this.level}`;
-        let classes = ['font-thin'];
+        let classes = [''];
 
         switch (this.level) {
             case 0:
-                classes.push('text-2xl');
+                classes.push('font-thin text-3xl border-b-4 pb-1 border-gray-300 dark:border-gray-700');
                 break;
             case 1:
-                classes.push('text-xl');
+                classes.push('font-thin text-2xl border-b-2 pb-1 border-gray-300 dark:border-gray-700');
                 break;
             case 2:
-                classes.push('text-lg');
+                classes.push('font-thin text-xl font-thin border-b pb-1 border-gray-100 dark:border-gray-800');
+                break;
+            case 3:
+                classes.push('font-thin italic border-b pb-1 border-gray-100 dark:border-gray-800');
                 break;
         }
 
