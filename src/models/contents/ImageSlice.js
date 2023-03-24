@@ -2,7 +2,7 @@ import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 
 
-export default class PlainImageSlice extends Slice {
+export default class ImageSlice extends Slice {
     constructor(payload) {
         super(payload);
 
@@ -12,7 +12,7 @@ export default class PlainImageSlice extends Slice {
         }
         this.display_label = payload.display_label === false ? false : true;
         this.presentation = payload.presentation ? payload.presentation : 'figure';
-        this.type = "plain_image"
+        this.type = "image"
     }
 
     renderReadonlyVnode(language) {
@@ -22,7 +22,7 @@ export default class PlainImageSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/PlainImageSliceEditor.js')), { slice: this }))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/ImageSliceEditor.js')), { slice: this }))
         return vnodes;
     }
 
