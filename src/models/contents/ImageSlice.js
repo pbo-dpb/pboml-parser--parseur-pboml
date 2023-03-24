@@ -10,13 +10,25 @@ export default class ImageSlice extends Slice {
             en: payload.content?.en,
             fr: payload.content?.fr
         }
+        this.thumbnails = {
+            en: payload.thumbnails?.en,
+            fr: payload.thumbnails?.fr,
+        };
+
         this.display_label = payload.display_label === false ? false : true;
         this.presentation = payload.presentation ? payload.presentation : 'figure';
         this.type = "image"
     }
 
     renderReadonlyVnode(language) {
-        return h('figure', { class: "flex justify-center" }, [h('img', { src: this.content[language] })]);
+
+        if (!this.thumbnails[language]) {
+            // Render the original image inline
+            return h('figure', { class: "flex justify-center" }, [h('img', { src: this.content[language], 'alt': this.label[language] })]);
+        }
+
+
+
     }
 
 
@@ -32,6 +44,8 @@ export default class ImageSlice extends Slice {
             en: this.content?.en,
             fr: this.content?.fr
         }
+        if (array.thumbnails.en || array.thumbnails.fr)
+            array.thumbnails = this.thumbnails
         return array;
     }
 
