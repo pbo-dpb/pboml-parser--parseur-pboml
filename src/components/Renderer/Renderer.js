@@ -74,7 +74,7 @@ export default {
   render() {
     const language = this.language ? this.language : document.documentElement.lang;
 
-    return h('main', { 'class': 'flex flex-col gap-4 print:block', 'ref': 'main' }, [
+    return h('main', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
         return slice.renderAsVnode(language);
