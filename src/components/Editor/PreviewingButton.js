@@ -8,7 +8,9 @@ export default {
 
     render() {
 
-        let actionNode = h('div', { 'class': 'flex flex-row gap-1 items-center' }, () => [
+
+
+        return h('div', { 'class': 'flex flex-row gap-1 items-center' }, [
 
             h(TinyButton, {
                 'aria-label': strings[document.documentElement.lang].previewing_slice_button_label,
@@ -18,8 +20,8 @@ export default {
                     this.$emit("previewing", (this.isPreviewing === 'en') ? false : 'en')
                 },
             }, () => [
-                h(EyeIcon, { 'class': 'h-4 w-4' }, []),
-                h('span', {}, 'EN')
+                h(EyeIcon, { 'class': 'h-4 w-4' }, () => []),
+                h('span', 'EN')
             ]),
 
             h(TinyButton, {
@@ -30,15 +32,12 @@ export default {
                     this.$emit("previewing", (this.isPreviewing === 'fr') ? false : 'fr')
                 },
             }, () => [
-                h(EyeIcon, { 'class': 'h-4 w-4' }, []),
-                h('span', {}, 'FR')
+                h(EyeIcon, { 'class': 'h-4 w-4' }, () => []),
+                h('span', 'FR')
             ])
 
         ])
 
-        return [
-            actionNode,
-        ];
 
     }
 
