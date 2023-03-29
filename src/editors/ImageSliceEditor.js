@@ -4,12 +4,16 @@ import MarkdownDriver from '../MarkdownDriver'
 import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
 import Details from '../components/Details'
 import SingleInput from "../components/Editor/Inputs/SingleInput.vue"
+import TinyButton from "../components/Editor/TinyButton.vue"
+import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 
-import { IMAGE_RESOLUTIONS, IMAGE_FORMATS, IMAGE_DENSITIES } from '../models/contents/ImageSlice'
+import yaml from 'js-yaml'
+
+import ImageSlice, { IMAGE_RESOLUTIONS, IMAGE_FORMATS, IMAGE_DENSITIES } from '../models/contents/ImageSlice'
 
 export default {
     props: ['slice'],
-    setup(props, { emit }) {
+    setup(props, { emit, expose }) {
 
         if (props.slice.readonly) {
             const md = new MarkdownDriver;
@@ -19,6 +23,43 @@ export default {
                 props.slice.renderAsVnode("en"),
                 props.slice.renderAsVnode("fr"),
             ])
+        }
+
+        const pasteFromClipboard = async () => {
+
+            try {
+                let raw;
+                if (navigator.clipboard) {
+                    raw = await navigator.clipboard.readText();
+                } else {
+                    raw = window.prompt("📋");
+                }
+
+                let newSliceObject = yaml.load(raw);
+                let newImageSlice = new ImageSlice(newSliceObject);
+
+                // Merge slices without overriding already set properties.
+                ['en', 'fr'].forEach(language => {
+                    if (!props.slice.content[language]) props.slice.content[language] = newImageSlice.content[language]
+
+
+
+                    Object.keys(IMAGE_RESOLUTIONS).map((rs) => IMAGE_DENSITIES.map(ds =>
+                        IMAGE_FORMATS.map(ft => {
+                            const keyForThumbnail = `${rs}_${ds}_${ft}`
+                            if (!props.slice.thumbnails[language]?.[keyForThumbnail] && newImageSlice.thumbnails[language]?.[keyForThumbnail]) {
+                                if (!props.slice.thumbnails[language]) {
+                                    props.slice.thumbnails[language] = {}
+                                }
+                                props.slice.thumbnails[language][keyForThumbnail] = newImageSlice.thumbnails[language][keyForThumbnail];
+                            }
+                        })
+                    ))
+                })
+            } catch (error) {
+                window.alert("⚠️ Invalid YAML.")
+            }
+
         }
 
         return () => h('div', { class: 'flex flex-col gap-4' }, [
@@ -42,7 +83,14 @@ export default {
             ]),
 
             h('hr'),
-
+            h(TinyButton, {
+                onClick: (e) => {
+                    pasteFromClipboard();
+                },
+            }, () => [
+                h(ClipboardDocumentIcon, { 'class': 'h-4 w-4' }, () => []),
+                h('span', strings[document.documentElement.lang].image_slice_fill_from_clipboard)
+            ]),
             h(Details, { label: strings[document.documentElement.lang].image_slice_thumbnails_details_label }, {
                 default: () => h('div', { class: "grid grid-cols-2 gap-2 text-sm" }, [
                     ...['en', 'fr'].map(lg => {

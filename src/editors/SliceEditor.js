@@ -12,10 +12,11 @@ export default {
 
         return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
             [
+
                 h('legend',
                     { class: 'text-sm px-2 text-gray-600 flex flex-row gap-2 items-center' },
                     [
-                        verboseSliceType ? h('span', {}, () => verboseSliceType) : null,
+                        verboseSliceType ? h('span', {}, verboseSliceType) : null,
 
                         h(MetaEditingButton, {
                             'isEditing': this.slice.state.isEditingMeta,

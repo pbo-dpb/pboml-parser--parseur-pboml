@@ -12,7 +12,7 @@ export default {
         'slice_type_markdown': "Rich Text (markdown)",
         'slice_type_kvlist': "Key-Value list",
         'slice_type_heading': "Heading",
-        'slice_type_plain_image': 'Image (plain)',
+        'slice_type_image': 'Image',
         'slice_type_table': "Table",
         'slice_type_graph': "Graph",
         'slice_title_field_label': "Slice title (n+0)",
@@ -34,6 +34,7 @@ export default {
         'previewing_slice_button_label': "Preview slice",
         'image_slice_thumbnails_details_label': "Thumbnails (optional)",
         'image_slice_source_label': 'Source (full resolution image)',
+        'image_slice_fill_from_clipboard': "Fill from clipboard"
 
     },
     fr: {
@@ -49,7 +50,7 @@ export default {
         'slice_type_markdown': "Rich Text (markdown)",
         'slice_type_kvlist': "Liste clé-valeur",
         'slice_type_heading': "En-tête",
-        'slice_type_plain_image': 'Image (de base)',
+        'slice_type_image': 'Image',
         'slice_type_table': "Tableau",
         'slice_type_graph': "Graphique",
         'slice_title_field_label': "Titre de la tranche (n+0)",
@@ -71,6 +72,7 @@ export default {
         'previewing_slice_button_label': "Aperçu de la tranche",
         'image_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
         'image_slice_source_label': 'Source (image en pleine résolution)',
+        'image_slice_fill_from_clipboard': "Fill from clipboard"
 
     }
 }

@@ -16,6 +16,7 @@
 import MarkdownSlice from '../../../models/contents/MarkdownSlice'
 import KvListSlice from '../../../models/contents/KvListSlice'
 import HeadingSlice from '../../../models/contents/HeadingSlice'
+import ImageSlice from '../../../models/contents/ImageSlice'
 
 import Button from "../Button.vue"
 
@@ -42,13 +43,18 @@ export default {
                     type: MarkdownSlice
                 },
                 {
+                    label: this.strings.slice_type_heading,
+                    type: HeadingSlice
+                },
+                {
+                    label: this.strings.slice_type_image,
+                    type: ImageSlice
+                },
+                {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
                 },
-                {
-                    label: this.strings.slice_type_heading,
-                    type: HeadingSlice
-                }
+
             ]
         }
     },

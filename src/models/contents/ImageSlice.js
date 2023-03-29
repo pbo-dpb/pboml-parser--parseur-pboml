@@ -86,7 +86,7 @@ export default class ImageSlice extends Slice {
             en: this.content?.en,
             fr: this.content?.fr
         }
-        if (array.thumbnails?.en || array.thumbnails?.fr)
+        if (this.thumbnails?.en || this.thumbnails?.fr)
             array.thumbnails = this.thumbnails
         return array;
     }
