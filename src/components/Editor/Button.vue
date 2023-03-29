@@ -1,6 +1,6 @@
 <template>
     <button
-        class="rounded  text-white p-2 flex flex-row gap-1 items-center justify-center font-semibold disabled:opacity-30"
+        class="rounded  text-white p-2 flex flex-row gap-1 items-center justify-center font-semibold disabled:opacity-30 aria-pressed:ring-2 ring-yellow-600"
         :class="{
             'bg-blue-800 enabled:hover:bg-blue-700': primary,
             'bg-slate-800 enabled:hover:bg-slate-700': !primary,
