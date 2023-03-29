@@ -30,7 +30,7 @@ export default class GraphSlice extends Slice {
     renderReadonlyVnode(language) {
         return h(Suspense, null, {
             default: () => h('div', { class: 'flex print:block flex-col items-center justify-center' }, [
-                h('div', { class: `w-full'}` }, [
+                h('div', { class: `w-full` }, [
                     h(Grapher, {
                         language: language,
                         strings: this.strings,
