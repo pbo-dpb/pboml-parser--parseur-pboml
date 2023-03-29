@@ -23,16 +23,6 @@ export default {
                 }),
             ]
 
-        } else {
-            if (this.presentation === 'aside') {
-                contentNodes = [
-                    h('div', { class: 'bg-blue-100 rounded p-2 font-semibold text-sm' }, editorStrings[document.documentElement.lang]['presentation_aside'])
-                ]
-            } else if (this.presentation === 'figure') {
-                contentNodes = [
-                    h('div', { class: 'bg-gray-300 rounded p-2 font-semibold text-sm' }, editorStrings[document.documentElement.lang]['presentation_figure'])
-                ]
-            }
         }
 
         return contentNodes;
