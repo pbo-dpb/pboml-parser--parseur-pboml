@@ -13,7 +13,7 @@
             <TinyButton
                 class="rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 p-2 flex flex-col gap-2 w-full text-center"
                 v-for="button in buttons" @click="generateSliceFromButton(button)">
-                <PlusCircleIcon class="w-4 h-4"></PlusCircleIcon>
+                <PlusCircleIcon class="w-6 h-6"></PlusCircleIcon>
                 {{ button.label }}
             </TinyButton>
         </div>
