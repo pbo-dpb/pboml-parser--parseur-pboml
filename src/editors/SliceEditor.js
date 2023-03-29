@@ -18,11 +18,11 @@ export default {
                         verboseSliceType ? h('span', {}, () => verboseSliceType) : null,
 
                         h(MetaEditingButton, {
-                            'isEditing': () => this.slice.state.isEditingMeta,
-                            'onEditing': (value) => {
-                                this.slice.state.isEditingMeta = value;
+                            'isEditing': this.slice.state.isEditingMeta,
+                            'onClick': (value) => {
+                                this.slice.state.isEditingMeta = !this.slice.state.isEditingMeta;
                             }
-                        }, () => []),
+                        }),
                         h(PreviewingButton, {
                             'isPreviewing': this.slice.state.isPreviewing,
                             'onPreviewing': (value) => {

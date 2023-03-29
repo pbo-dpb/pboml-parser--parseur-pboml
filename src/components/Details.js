@@ -14,10 +14,3 @@ export default {
             ]);
     }
 }
-
-/***
- * <details> 
-      <summary>Figure 4 - Text version </summary> 
-
-     </details>
- */
