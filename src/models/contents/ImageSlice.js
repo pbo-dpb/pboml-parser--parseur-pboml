@@ -1,7 +1,9 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 
-const RESOLUTION_MATCH = { sm: 640, md: 768 }
+export const IMAGE_RESOLUTIONS = { sm: 640, md: 768, lg: null };
+export const IMAGE_FORMATS = ['webp', 'png'];
+export const IMAGE_DENSITIES = ['1x', '2x', '3x'];
 
 export default class ImageSlice extends Slice {
     constructor(payload) {
@@ -27,7 +29,7 @@ export default class ImageSlice extends Slice {
         };
 
         let srcSet = [];
-        ['1x', '2x', '3x'].forEach(pixelDensity => {
+        IMAGE_DENSITIES.forEach(pixelDensity => {
             let url = this.thumbnails[language][`${resolution}_${pixelDensity}_${format}`];
             if (url) srcSet.push(`${url} ${pixelDensity}`)
         })
@@ -36,7 +38,7 @@ export default class ImageSlice extends Slice {
 
         attributes.srcset = srcSet.join(', ');
 
-        let maxForRes = RESOLUTION_MATCH[resolution];
+        let maxForRes = IMAGE_RESOLUTIONS[resolution];
         if (maxForRes) {
             attributes['media'] = `(max-width: ${maxForRes}px)`;
         }
@@ -50,20 +52,17 @@ export default class ImageSlice extends Slice {
     }
 
     renderReadonlyVnode(language) {
+
         let imageNode;
         if (!this.thumbnails[language]) {
             // Render the original image inline
             imageNode = h('figure', { class: "flex justify-center" }, [this.buildReadonlyImgNode(language)]);
         } else {
-            // We should eventually stop hardcoding them
             imageNode = h('picture', {
             }, [
-                this.buildReadonlySourceNodeForResolution(language, 'sm', 'webp'),
-                this.buildReadonlySourceNodeForResolution(language, 'sm', 'png'),
-                this.buildReadonlySourceNodeForResolution(language, 'md', 'webp'),
-                this.buildReadonlySourceNodeForResolution(language, 'md', 'png'),
-                this.buildReadonlySourceNodeForResolution(language, 'lg', 'webp'),
-                this.buildReadonlySourceNodeForResolution(language, 'lg', 'png'),
+                ...Object.keys(IMAGE_RESOLUTIONS).map((rs) => {
+                    return IMAGE_FORMATS.map(ft => this.buildReadonlySourceNodeForResolution(language, rs, ft))
+                }),
                 this.buildReadonlyImgNode(language)
             ]);
         }

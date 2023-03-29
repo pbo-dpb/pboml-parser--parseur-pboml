@@ -32,6 +32,9 @@ export default {
         'slice_meta_type_alts': "Textual descriptions",
         'meta_editing_slice_button_label': 'Edit slice metadata',
         'previewing_slice_button_label': "Preview slice",
+        'image_slice_thumbnails_details_label': "Thumbnails (optional)",
+        'image_slice_source_label': 'Source (full resolution image)',
+
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -66,5 +69,8 @@ export default {
         'slice_meta_type_alts': "Descriptions textuelles",
         'meta_editing_slice_button_label': 'Modifier les métadonnées de la tranche',
         'previewing_slice_button_label': "Aperçu de la tranche",
+        'image_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
+        'image_slice_source_label': 'Source (image en pleine résolution)',
+
     }
 }
