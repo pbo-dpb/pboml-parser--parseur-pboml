@@ -115,6 +115,7 @@ export default {
       if (!location.hash || location.hash.startsWith("#!")) return;
       const hash = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
 
+      const timeout = this.edit || !this.firstInitializationCompleted ? 850 : 10
       if (!hash) return;
       this.$nextTick(() => {
         setTimeout(() => {
@@ -122,10 +123,9 @@ export default {
           if (hash && childel) {
             childel.scrollIntoView({
               behavior: 'smooth',
-              block: 'center',
             });
           }
-        }, 850);
+        }, timeout);
 
       })
 
