@@ -16,36 +16,60 @@
 
 
             <div class="tabs">
-                <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
-                    <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
-                        {{ strings.slices_section_title }}
-                    </Tab>
-                    <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
-                        @click="currentTab = 'annotations'">
-                        {{ strings.annotations_section_title }}
-                    </Tab>
-                    <Tab v-if="!standalone" :controls="'meta'" :selected="currentTab === 'meta'"
-                        @click="currentTab = 'meta'">
-                        {{ strings.meta_section_title }}
-                    </Tab>
-                </div>
-
-                <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices" v-if="currentTab === 'slices'">
-                    <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
-                        @move-slice="handleMoveSlice"></editor-blocks>
-                    <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
-                </div>
-
-                <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
-                    v-if="currentTab === 'annotations'">
-                    <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
-                </div>
+                <div class="flex flex-row justify-between items-center">
+                    <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
+                        <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
+                            {{ strings.slices_section_title }}
+                        </Tab>
+                        <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
+                            @click="currentTab = 'annotations'">
+                            {{ strings.annotations_section_title }}
+                        </Tab>
+                        <Tab v-if="!standalone" :controls="'meta'" :selected="currentTab === 'meta'"
+                            @click="currentTab = 'meta'">
+                            {{ strings.meta_section_title }}
+                        </Tab>
+                    </div>
+                    <TinyButton @click="shouldPresentDocumentStructure = !shouldPresentDocumentStructure">
+                        <Bars3Icon class="w-6 h-6"></Bars3Icon>
+                        <span class="sr-only">Structure</span>
+                    </TinyButton>
 
 
-                <div v-if="!standalone && currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
-                    aria-labelledby="tab-meta">
-                    <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+
+
                 </div>
+
+                <nav class="flex flex-row justify-end sticky top-0 -mt-4 pt-4" v-if="shouldPresentDocumentStructure">
+                    <Toc :pboml-document="pbomlDocument"></Toc>
+                </nav>
+
+                <div class="grid" :class="{ 'grid-cols-5': shouldPresentDocumentStructure }">
+
+                    <div class="col-span-4">
+                        <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices"
+                            v-if="currentTab === 'slices'">
+                            <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
+                                @move-slice="handleMoveSlice"></editor-blocks>
+                            <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
+                        </div>
+
+                        <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
+                            v-if="currentTab === 'annotations'">
+                            <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
+                        </div>
+
+
+                        <div v-if="!standalone && currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
+                            aria-labelledby="tab-meta">
+                            <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
 
 
             </div>
@@ -68,11 +92,13 @@ import PBOMLDocument from '../../models/PBOMLDocument';
 import EditorActions from './EditorActions.vue';
 import EditorBlocks from './EditorBlocks/EditorBlocks.js';
 import Button from './Button.vue';
+import TinyButton from './TinyButton.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
 import AnnotationsEditor from "./AnnotationsEditor/AnnotationsEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
+import { Bars3Icon } from '@heroicons/vue/24/solid';
 
 export default {
     props: {
@@ -87,6 +113,7 @@ export default {
             workingPboml: '',
             strings: strings[document.documentElement.lang],
             currentTab: "slices",
+            shouldPresentDocumentStructure: false
         }
     },
 
@@ -94,11 +121,14 @@ export default {
         EditorActions,
         EditorBlocks,
         Button,
+        TinyButton,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
         SliceStager,
         DocumentMetaEditor,
         Tab,
-        AnnotationsEditor
+        AnnotationsEditor,
+        Bars3Icon,
+        Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
     },
 
     watch: {
