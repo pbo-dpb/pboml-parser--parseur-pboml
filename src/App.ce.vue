@@ -28,7 +28,8 @@ export default {
     return {
       _payload: null,
       pbomlDocument: null,
-      loaded: false
+      loaded: false,
+      firstInitializationCompleted: false
     }
   },
   props: {
@@ -90,7 +91,48 @@ export default {
     this.loaded = true;
   },
 
+  mounted() {
+    const handleHashChangeFunc = this.handleHashChange
+    addEventListener('hashchange', handleHashChangeFunc);
+    if (!this.firstInitializationCompleted && location.hash) {
+      this.handleHashChange();
+    }
+    // Avoid running scrolling on tab change; Chrome agressively re-runs
+    this.firstInitializationCompleted = true;
+  },
+
+  beforeUnmount() {
+    const handleHashChangeFunc = this.handleHashChange
+    removeEventListener('hashchange', handleHashChangeFunc);
+  },
+
   methods: {
+    /*
+     *  Manually observe hash (/hello.html#myanchor) changes so we can scroll to the appropriate
+     *  content on hash change, as this will not work natively with the shadow dom.
+     */
+    handleHashChange(e) {
+      if (!location.hash || location.hash.startsWith("#!")) return;
+      const hash = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
+
+      if (!hash) return;
+      this.$nextTick(() => {
+        setTimeout(() => {
+          let childel = this.$el.querySelector(`#${hash}`)
+          if (hash && childel) {
+            childel.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+            });
+          }
+        }, 850);
+
+      })
+
+
+    },
+
+
     handlePick(pickedDocument) {
       this.pbomlDocument = pickedDocument
     },

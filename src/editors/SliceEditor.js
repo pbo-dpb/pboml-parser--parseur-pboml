@@ -3,6 +3,10 @@ import { h, Suspense, defineAsyncComponent } from 'vue'
 import LoadingIndicator from "../components/LoadingIndicator.vue"
 import MetaEditingButton from "../components/Editor/MetaEditingButton";
 import PreviewingButton from "../components/Editor/PreviewingButton";
+import DeleteButton from "../components/Editor/DeleteButton";
+import MoveButton from "../components/Editor/MoveButton";
+
+
 import { ListBulletIcon } from "@heroicons/vue/24/solid";
 
 export default {
@@ -31,6 +35,26 @@ export default {
                         h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),
 
                         h('div', { class: 'flex flex-row gap-2' }, [
+                            h(DeleteButton, {
+                                'isEditing': this.slice.state.isEditingMeta,
+                                'onDelete': (value) => {
+                                    this.$emit("delete-slice", this.slice);
+                                }
+                            }),
+
+                            h(MoveButton, {
+                                canMoveUp: this.slice.state.canMoveUp,
+                                canMoveDown: this.slice.state.canMoveDown,
+                                'onMove': (direction) => {
+                                    this.$emit("move-slice", this.slice, direction);
+                                }
+                            }, () => []),
+
+                            h('div', {
+                                'aria-hidden': true,
+                                'class': 'text-gray-400',
+                            }, "•"),
+
                             h(PreviewingButton, {
                                 'isPreviewing': this.slice.state.isPreviewing,
                                 'onPreviewing': (value) => {
@@ -44,6 +68,10 @@ export default {
                                     this.slice.state.isEditingMeta = !this.slice.state.isEditingMeta;
                                 }
                             }),
+
+
+
+
                         ])
 
 

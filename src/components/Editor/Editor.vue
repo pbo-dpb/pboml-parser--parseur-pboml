@@ -31,7 +31,8 @@
                 </div>
 
                 <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices" v-if="currentTab === 'slices'">
-                    <editor-blocks :pboml-document="pbomlDocument"></editor-blocks>
+                    <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
+                        @move-slice="handleMoveSlice"></editor-blocks>
                     <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
                 </div>
 
@@ -146,6 +147,12 @@ export default {
 
                 })
             })
+        },
+        handleDeleteSlice(slice) {
+            this.pbomlDocument.deleteSlice(slice);
+        },
+        handleMoveSlice(slice, direction) {
+            this.pbomlDocument.moveSlice(slice, direction);
         }
     },
 

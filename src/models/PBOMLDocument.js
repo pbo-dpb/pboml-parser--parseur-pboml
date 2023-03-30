@@ -68,6 +68,10 @@ export default class PBOMLDocument {
             if (sli) {
                 sli.state.sequence = counter;
                 sli.state.prefix = prefix;
+                //sli.state.callbacks.move = (s) => this.handleSliceMove(s);
+                //sli.state.callbacks.delete = (s) => this.handleSliceDelete(s);
+                if (counter === 1) sli.state.canMoveUp = false;
+                if (counter === mainDocument.slices.length) sli.state.canMoveDown = false;
                 return sli;
             }
 
@@ -148,5 +152,44 @@ export default class PBOMLDocument {
 
     addSlice(slice) {
         this.slices.push(slice);
+        this.resetSlicesMoveability();
+    }
+
+    scrollToSliceAtIndex(index) {
+        let slice = this.slices[index];
+        location.hash = slice.anchor
+    }
+
+    resetSlicesMoveability() {
+        let counter = 0;
+        this.slices.forEach((slice) => {
+            counter++;
+            slice.state.sequence = counter;
+            slice.state.canMoveUp = counter > 1;
+            slice.state.canMoveDown = this.slices.length > counter;
+        })
+    }
+
+    moveSlice(slice, direction) {
+        const from = slice.state.sequence - 1;
+        const to = direction == 'up' ? from - 1 : from + 1;
+        const el = this.slices.splice(from, 1)[0];
+        this.slices.splice(to, 0, el);
+        this.resetSlicesMoveability();
+        this.scrollToSliceAtIndex(to);
+    }
+
+    deleteSlice(slice) {
+        let nearestSlicePosition = slice.state.sequence;
+        if (this.slices.length === nearestSlicePosition) {
+            // Slice was last
+            nearestSlicePosition = this.slices.length - 1;
+        }
+        this.slices.splice(slice.state.sequence - 1, 1);
+        this.resetSlicesMoveability();
+
+        if (nearestSlicePosition > 0) {
+            this.scrollToSliceAtIndex(nearestSlicePosition - 1)
+        }
     }
 }

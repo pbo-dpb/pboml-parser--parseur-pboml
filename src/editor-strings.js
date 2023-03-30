@@ -32,6 +32,9 @@ export default {
         'slice_meta_type_alts': "Textual descriptions",
         'meta_editing_slice_button_label': 'Edit slice metadata',
         'previewing_slice_button_label': "Preview slice",
+        'delete_slice_button_label': "Delete slice",
+        'move_slice_up_button_label': "Push the slice towards the start",
+        'move_slice_down_button_label': "Push the slice towards the end",
         'image_slice_thumbnails_details_label': "Thumbnails (optional)",
         'image_slice_source_label': 'Source (full resolution image)',
         'image_slice_fill_from_clipboard': "Fill from clipboard"
@@ -70,6 +73,9 @@ export default {
         'slice_meta_type_alts': "Descriptions textuelles",
         'meta_editing_slice_button_label': 'Modifier les métadonnées de la tranche',
         'previewing_slice_button_label': "Aperçu de la tranche",
+        'delete_slice_button_label': "Supprimer la tranche",
+        'move_slice_up_button_label': "Pousser la tranche vers le début",
+        'move_slice_down_button_label': "Pousser la tranche vers la fin",
         'image_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
         'image_slice_source_label': 'Source (image en pleine résolution)',
         'image_slice_fill_from_clipboard': "Fill from clipboard"

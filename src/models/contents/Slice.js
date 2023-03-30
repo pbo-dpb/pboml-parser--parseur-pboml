@@ -57,7 +57,13 @@ export default class Slice {
             isEditingMeta: false,
             isPreviewing: false,
             sequence: 0,
-            prefix: null
+            prefix: null,
+            canMoveUp: true,
+            canMoveDown: true,
+            callbacks: {
+                move: null,
+                delete: null
+            }
         }
 
     }
@@ -211,7 +217,7 @@ export default class Slice {
     }
 
     renderEditingVnode(language = document.documentElement.lang) {
-        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language });
+        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language, id: this.anchor });
 
     }
 
