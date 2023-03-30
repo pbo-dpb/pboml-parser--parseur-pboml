@@ -58,6 +58,7 @@ export default {
                             h(PreviewingButton, {
                                 'isPreviewing': this.slice.state.isPreviewing,
                                 'onPreviewing': (value) => {
+                                    this.slice.state.isEditingMeta = false;
                                     this.slice.state.isPreviewing = value;
                                 }
                             }, () => []),
@@ -65,6 +66,7 @@ export default {
                             h(MetaEditingButton, {
                                 'isEditing': this.slice.state.isEditingMeta,
                                 'onClick': (value) => {
+                                    this.slice.state.isPreviewing = false;
                                     this.slice.state.isEditingMeta = !this.slice.state.isEditingMeta;
                                 }
                             }),
