@@ -6,7 +6,7 @@ const defaults = {
     is_time: false
 }
 
-export default class TableSliceVariable {
+export default class TableVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center';
 
     constructor(payload) {
@@ -27,7 +27,7 @@ export default class TableSliceVariable {
     getTableHeaderVnode(scope = null, language) {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
-        return h('th', { class: TableSliceVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
+        return h('th', { class: TableVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
 
@@ -60,7 +60,7 @@ export default class TableSliceVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableSliceVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 
