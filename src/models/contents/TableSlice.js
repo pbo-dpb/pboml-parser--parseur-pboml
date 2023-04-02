@@ -1,6 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import Table from './Table';
+import DataTable from './DataTable/DataTable';
 
 
 export default class TableSlice extends Slice {
@@ -8,13 +8,13 @@ export default class TableSlice extends Slice {
     constructor(payload) {
         super(payload);
         this.type = "table"
-        this.table = new Table(payload);
+        this.datatable = new DataTable(payload);
     }
 
 
     renderReadonlyVnode(language) {
         let vnodes = super.renderReadonlyVnode(language);
-        vnodes.push(this.table.renderReadonlyVnode(language))
+        vnodes.push(this.datatable.renderReadonlyVnode(language))
         return vnodes;
     }
 
@@ -38,12 +38,12 @@ export default class TableSlice extends Slice {
 
         array.variables = {};
 
-        Object.entries(this.table.variables).forEach((entry) => {
+        Object.entries(this.datatable.variables).forEach((entry) => {
             const [key, value] = entry;
             array.variables[key] = value.toArray();
         });
 
-        array.content = this.table.content;
+        array.content = this.datatable.content;
         return array;
     }
 

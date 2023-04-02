@@ -1,14 +1,19 @@
 import { h } from 'vue'
-import TableVariable from "./TableVariable";
+import DataTableVariable from "./DataTableVariable";
+import DataTableEntry from './DataTableEntry';
 export default class Table {
     constructor(payload) {
         let variables = {};
         Object.entries(payload.variables).forEach((entry) => {
             const [key, value] = entry;
-            variables[key] = new TableVariable(value);
+            variables[key] = new DataTableVariable(value);
         });
         this.variables = variables;
-        this.content = payload.content;
+
+        let dataTableEntries = [];
+        this.content = payload.content.map(entry => {
+            return new DataTableEntry(entry, variables);
+        });
     }
 
     get variableCount() {

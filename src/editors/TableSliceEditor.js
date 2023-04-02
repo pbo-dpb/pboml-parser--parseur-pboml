@@ -27,7 +27,7 @@ export default {
 
 
             let rows = [];
-            Object.entries(props.slice.variables).forEach((entry) => {
+            Object.entries(props.slice.datatable.variables).forEach((entry) => {
                 const [key, variable] = entry;
 
                 let columns = [];
@@ -36,14 +36,14 @@ export default {
                         modelValue: variable.label,
                         'onUpdate:modelValue': (value) => {
                             variable.label = value;
-                            emit('update:modelValue', props.slice.variables)
+                            emit('update:modelValue', props.slice.datatable.variables)
                         }
                     }),
                 ]);
 
                 headerCol.props['width'] = `${100 / (props.slice.bodyRowsCount + 1)}%`;
                 columns.push(headerCol);
-                props.slice.content.forEach(content => {
+                props.slice.datatable.content.forEach(content => {
 
                     let cellContent;
 
@@ -52,7 +52,7 @@ export default {
                             modelValue: content[key],
                             'onUpdate:modelValue': (value) => {
                                 content[key] = value;
-                                emit('update:modelValue', props.slice.content)
+                                emit('update:modelValue', props.slice.datatable.content)
                             }
                         });
                     } else {
@@ -60,7 +60,7 @@ export default {
                             modelValue: content[key],
                             'onUpdate:modelValue': (value) => {
                                 content[key] = value;
-                                emit('update:modelValue', props.slice.content)
+                                emit('update:modelValue', props.slice.datatable.content)
                             }
                         });
                     }

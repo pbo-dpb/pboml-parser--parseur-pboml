@@ -1,12 +1,12 @@
 import { h } from 'vue'
-import MarkdownDriver from '../../MarkdownDriver';
+import MarkdownDriver from '../../../MarkdownDriver';
 
 const defaults = {
     display_label: true,
     is_time: false
 }
 
-export default class TableVariable {
+export default class DataTableVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center';
 
     constructor(payload) {
@@ -27,7 +27,7 @@ export default class TableVariable {
     getTableHeaderVnode(scope = null, language) {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
-        return h('th', { class: TableVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
+        return h('th', { class: DataTableVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
 
@@ -60,7 +60,7 @@ export default class TableVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: `${TableVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        return h(this.is_descriptive ? 'th' : 'td', { class: `${DataTableVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 
