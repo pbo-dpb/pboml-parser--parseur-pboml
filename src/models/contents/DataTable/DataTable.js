@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import DataTableVariable from "./DataTableVariable";
 import DataTableEntry from './DataTableEntry';
-export default class Table {
+export default class DataTable {
     constructor(payload) {
         let variables = {};
         Object.entries(payload.variables).forEach((entry) => {
@@ -34,12 +34,29 @@ export default class Table {
         return this.variableCount < this.bodyRowsCount;
     }
 
+    get descriptiveVariableKeyPair() {
+        let vK = null;
+        let vV = null;
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, value] = entry;
+            if (!vK && value.is_descriptive) {
+                vK = key;
+                vV = value;
+            }
+        });
+        return [vK, vV];
+    }
+
+    get descriptiveVariableKey() {
+        const [key, value] = this.descriptiveVariableKeyPair;
+        return key
+    }
+
     get descriptiveVariableIsTimeSeries() {
-        let descriptiveVariable = Object.values(this.variables).find(v => v.is_descriptive);
+        let descriptiveVariable = this.variables[this.descriptiveVariableKey];
         if (!descriptiveVariable) return false;
 
         if (descriptiveVariable.is_time) return true;
-        const descriptiveVariableKey = Object.keys(this.variables).find(key => this.variables[key] === descriptiveVariable);
 
         /**
          * Count the number of values that match a year or fiscal year pattern.
@@ -50,7 +67,7 @@ export default class Table {
         const timeSeriesTest = /^[0-9]{4}(\-[0-9]{2,4})?$/gm;
         let yearCount = 0;
         this.content.forEach(col => {
-            if (timeSeriesTest.test(col?.[descriptiveVariableKey]?.en ?? '') || timeSeriesTest.test(col?.[descriptiveVariableKey]?.fr ?? '')) yearCount++;
+            if (timeSeriesTest.test(col?.[this.descriptiveVariableKey]?.en ?? '') || timeSeriesTest.test(col?.[this.descriptiveVariableKey]?.fr ?? '')) yearCount++;
         })
 
         return yearCount > this.content.length / 2;

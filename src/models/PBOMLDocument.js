@@ -6,6 +6,7 @@ import yaml from 'js-yaml'
 import GraphSlice from "./contents/GraphSlice";
 import Annotation from "./Annotation";
 import ImageSlice from "./contents/ImageSlice";
+import ChartSlice from "./contents/ChartSlice";
 
 
 export default class PBOMLDocument {
@@ -61,6 +62,9 @@ export default class PBOMLDocument {
                     break;
                 case 'image':
                     sli = new ImageSlice(el);
+                    break;
+                case 'chart':
+                    sli = new ChartSlice(el);
                     break;
             }
 

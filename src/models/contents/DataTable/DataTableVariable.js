@@ -15,6 +15,11 @@ export default class DataTableVariable {
             fr: payload.label?.fr
         }
 
+        this.unit = {
+            en: payload.unit?.en,
+            fr: payload.unit?.fr
+        }
+
         this.type = payload.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
