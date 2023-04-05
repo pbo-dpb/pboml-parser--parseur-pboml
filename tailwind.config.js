@@ -4,7 +4,12 @@ module.exports = {
     "./src/**/*.{vue,js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        '128': '32rem',
+      }
+
+    },
   },
   plugins: [require('@tailwindcss/typography'),],
 }

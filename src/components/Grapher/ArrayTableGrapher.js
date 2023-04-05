@@ -6,10 +6,7 @@ import ChartJsMixin from './ChartJsMixin';
 export default {
     mixins: [ChartJsMixin],
     props: {
-        language: {
-            type: String,
-            required: true
-        },
+
 
         /**
          * Provided keys found in the chart config object will be replaced by the given string.
@@ -75,7 +72,7 @@ export default {
 
 
     computed: {
-        chartjsconfig() {
+        config() {
             return this._config;
         },
         _config() {
@@ -100,18 +97,12 @@ export default {
 
         _options() {
             let options = {
-                locale: this.language,
-                responsive: true,
                 scales: {
                     x: this.configureAxis('x'),
                     y: this.configureAxis('y')
                 },
 
-                plugins: {
-                    legend: {
-                        position: "bottom"
-                    }
-                }
+
             }
 
             return options

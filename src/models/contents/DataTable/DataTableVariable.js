@@ -3,7 +3,10 @@ import MarkdownDriver from '../../../MarkdownDriver';
 
 const defaults = {
     display_label: true,
-    is_time: false
+    is_time: false,
+    skip_chart: false,
+    is_descriptive: false,
+    group: null
 }
 
 export default class DataTableVariable {
@@ -25,6 +28,11 @@ export default class DataTableVariable {
         this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
         this.is_descriptive = payload.is_descriptive;
         this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
+        this.skip_chart = payload.skip_chart ? true : false
+        this.group = payload.group ? {
+            en: payload.group.en,
+            fr: payload.group.fr
+        } : null
     }
 
 

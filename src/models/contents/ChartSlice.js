@@ -35,7 +35,7 @@ export default class ChartSlice extends Slice {
         if (this.datatable) {
             grapher = h(DataTableGrapher, {
                 language: language,
-                datatable: datatable
+                datatable: this.datatable
             })
         } else if (this.arraytable) {
             grapher = h(ArrayTableGrapher, {
