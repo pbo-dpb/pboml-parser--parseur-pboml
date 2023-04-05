@@ -16,7 +16,7 @@ slices:
       y:
         label: __Salary__
         style: currency
-    datatable: [["Employee","_Salary_22_","_Salary_23_"],["Mike",35000,35000],["Bob",35000,37000],["Alice",44000,47000],["Frank",27000,30000],["Floyd",92000,97000],["Fritz",18500,25000]] 
+    arraytable: [["Employee","_Salary_22_","_Salary_23_"],["Mike",35000,35000],["Bob",35000,37000],["Alice",44000,47000],["Frank",27000,30000],["Floyd",92000,97000],["Fritz",18500,25000]] 
     strings:
       en:
         __Person__: Employee's name

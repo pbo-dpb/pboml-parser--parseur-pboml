@@ -3,7 +3,6 @@ import MarkdownSlice from "./contents/MarkdownSlice";
 import TableSlice from "./contents/TableSlice";
 import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
-import GraphSlice from "./contents/GraphSlice";
 import Annotation from "./Annotation";
 import ImageSlice from "./contents/ImageSlice";
 import ChartSlice from "./contents/ChartSlice";
@@ -54,17 +53,14 @@ export default class PBOMLDocument {
                 case 'kvlist':
                     sli = new KvListSlice(el);
                     break;
-                case 'graph':
-                    sli = new GraphSlice(el);
+                case 'chart':
+                    sli = new ChartSlice(el);
                     break;
                 case 'heading':
                     sli = new HeadingSlice(el);
                     break;
                 case 'image':
                     sli = new ImageSlice(el);
-                    break;
-                case 'chart':
-                    sli = new ChartSlice(el);
                     break;
             }
 

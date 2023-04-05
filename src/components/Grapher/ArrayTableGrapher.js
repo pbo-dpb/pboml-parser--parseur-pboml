@@ -1,10 +1,10 @@
 import { h } from 'vue'
-import Chart from 'chart.js/auto';
 
-const unid = Math.random().toString(36).slice(2);
-import DatatableDataSource from './DatatableDataSource';
+import ArrayTableDataSource from './ArrayTableDataSource';
+import ChartJsMixin from './ChartJsMixin';
 
 export default {
+    mixins: [ChartJsMixin],
     props: {
         language: {
             type: String,
@@ -37,7 +37,7 @@ export default {
          * }
          * Inspired by https://developers.google.com/chart/interactive/docs/datatables_dataviews
          */
-        datatable: {
+        arraytable: {
             type: [Array, Object],
             required: true,
         },
@@ -72,18 +72,12 @@ export default {
             type: Object,
         },
     },
-    data() {
-        return {
-            unid: unid
-        }
-    },
 
-    render() {
-        return h('canvas', { ref: 'chart', innerHTML: "" }, [
-        ]);
-    },
 
     computed: {
+        chartjsconfig() {
+            return this._config;
+        },
         _config() {
 
             let config = {
@@ -96,8 +90,8 @@ export default {
 
         _data() {
 
-            if (this.datatable) {
-                let dataSource = new DatatableDataSource(this.types, this.datatable);
+            if (this.arraytable) {
+                let dataSource = new ArrayTableDataSource(this.types, this.arraytable);
                 return this.localizeRecursively(dataSource.convertToGraphjsDataStructure());
             }
 
@@ -107,6 +101,7 @@ export default {
         _options() {
             let options = {
                 locale: this.language,
+                responsive: true,
                 scales: {
                     x: this.configureAxis('x'),
                     y: this.configureAxis('y')
@@ -122,17 +117,6 @@ export default {
             return options
         }
     },
-
-    mounted() {
-        if (this._data && this._config) {
-            new Chart(
-                this.$refs.chart.getContext('2d'),
-                this._config
-            );
-        }
-
-    },
-
 
     methods: {
         localizeRecursively(content) {

@@ -1,14 +1,14 @@
 import DataSource from "./DataSource";
 import Color from "color";
 
-export default class DatatableDataSource extends DataSource {
-    constructor(types, datatable) {
+export default class ArraytableDataSource extends DataSource {
+    constructor(types, arraytable) {
         super(types);
-        this.datatable = datatable;
+        this.arraytable = arraytable;
     }
 
     /**
-     * Convert an array datatable. Exemple format for a bar or line chart: 
+     * Convert an array arraytable. Exemple format for a bar or line chart: 
      * [
             ['Employee Name', 'Salary 2022', 'Salary 2023'],
             ['Mike', 35000, 35000],
@@ -21,14 +21,14 @@ export default class DatatableDataSource extends DataSource {
         
      */
     convertArrayToGraphjsDataStructure() {
-        let datatable = JSON.parse(JSON.stringify(this.datatable));
+        let arraytable = JSON.parse(JSON.stringify(this.arraytable));
 
-        let datasetsRow = datatable.shift();
+        let datasetsRow = arraytable.shift();
         let datasetsLabelsInfo = datasetsRow.shift();
-        let dataLabels = datatable.map((dataRow) => dataRow.shift());
+        let dataLabels = arraytable.map((dataRow) => dataRow.shift());
 
         let datasets = datasetsRow.map((label, index) => {
-            let data = datatable.map((dataRow) => dataRow.shift());
+            let data = arraytable.map((dataRow) => dataRow.shift());
             let datasetdata = data.map((v) => (v?.data ? v.data : v));
             let emphasizes = data.map((v) => (v?.emphasize ? true : false));
             const hasEmphasizedContent = emphasizes.filter(Boolean).length;
@@ -80,7 +80,7 @@ export default class DatatableDataSource extends DataSource {
         }
      */
     convertToGraphjsDataStructure() {
-        if (Array.isArray(this.datatable)) {
+        if (Array.isArray(this.arraytable)) {
             return this.convertArrayToGraphjsDataStructure();
         }
 
