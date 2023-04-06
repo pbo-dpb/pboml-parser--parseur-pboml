@@ -61,6 +61,8 @@ export default class ChartSlice extends Slice {
             let content;
             if (this.datatable) {
                 content = this.datatable.renderReadonlyVnode(language)
+            } else if (this.arraytable) {
+                content = this.arraytable.renderReadonlyVnode(language)
             }
             return content ? this.renderMetaVnodes(rendererStrings[language].alts_label, content, language, true) : [];
         };

@@ -1,4 +1,4 @@
-import { h } from 'vue'
+import { h, defineAsyncComponent } from 'vue'
 
 export default class ArrayTable {
     constructor(payload) {
@@ -67,5 +67,9 @@ export default class ArrayTable {
         }
 
         return JSON.parse(rawContent);
+    }
+
+    renderReadonlyVnode(language) {
+        return h(defineAsyncComponent(() => import('../../../components/Renderer/ArrayTableTable')), { arraytable: this })
     }
 }
