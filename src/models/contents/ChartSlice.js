@@ -4,6 +4,10 @@ const ArrayTableGrapher = defineAsyncComponent(() => import('../../components/Gr
 const DataTableGrapher = defineAsyncComponent(() => import('../../components/Grapher/DataTableGrapher.js'))
 import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import DataTable from './DataTable/DataTable';
+import ArrayTable from './ArrayTable/ArrayTable';
+
+import rendererStrings from '../../renderer-strings.js';
+
 
 export default class ChartSlice extends Slice {
     constructor(payload) {
@@ -12,20 +16,8 @@ export default class ChartSlice extends Slice {
         if (payload.datatable) {
             this.datatable = payload.datatable ? new DataTable(payload.datatable) : null;
         } else if (payload.arraytable) {
-            this.arraytable = payload.arraytable ? payload.arraytable : null;
-            this.axes = payload.axes ? payload.axes : null;
-            this.colors = payload.colors ? payload.colors : null;
-            this.strings = {
-                en: payload.strings?.en,
-                fr: payload.strings?.fr
-            }
-            if (payload.chart_type) {
-                this.chart_types = [payload.chart_type]
-            } else {
-                this.chart_types = payload.chart_types ? payload.chart_types : 'bar'
-            }
+            this.arraytable = new ArrayTable(payload.arraytable)
         }
-
     }
 
 
@@ -40,11 +32,7 @@ export default class ChartSlice extends Slice {
         } else if (this.arraytable) {
             grapher = h(ArrayTableGrapher, {
                 language: language,
-                strings: this.strings,
-                types: this.chart_types,
-                arraytable: this.arraytable,
-                axes: this.axes,
-                colors: this.colors,
+                arraytable: this.arraytable
             })
         }
 
@@ -68,14 +56,23 @@ export default class ChartSlice extends Slice {
     }
 
 
+    renderAltsVnodes(language) {
+        if (!this.alts.length) {
+            let content;
+            if (this.datatable) {
+                content = this.datatable.renderReadonlyVnode(language)
+            }
+            return content ? this.renderMetaVnodes(rendererStrings[language].alts_label, content, language, true) : [];
+        };
+        return super.renderAltsVnodes(language);
+    }
+
+
 
     toArray() {
         let array = super.toArray();
-        array.strings = this.strings;
         array.datatable = this.datatable;
         array.arraytable = this.arraytable;
-        array.axes = this.axes;
-        array.chart_types = this.chart_types;
         return array;
     }
 

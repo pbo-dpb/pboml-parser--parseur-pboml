@@ -92,12 +92,19 @@ export default class Slice {
         return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
     }
 
-    __renderMetaVnodes(label, content, language, collapsible = false) {
+
+    __renderMetaContentArrayVnodes(contentArray, language) {
+
+        return h('div', { class: 'prose-sm', innerHTML: contentArray.map(src => src[language]).join("<br>") })
+    }
+
+    renderMetaVnodes(label, content, collapsible = false) {
+
 
         if (collapsible) {
             return [
                 h(Details, { label: label }, {
-                    default: () => h('div', { class: "prose-sm", innerHTML: content.map(src => src[language]).join("<br>") }),
+                    default: () => content,
                 }
 
                 )
@@ -107,34 +114,34 @@ export default class Slice {
         return [
             h('dl', { class: 'flex flex-col grid-cols-3 gap-1 border-l-2 border-gray-200 dark:border-gray-700 pl-2 ' }, [
                 h('dt', { class: "text-sm font-semibold", innerHTML: label }),
-                h('dd', { class: "prose-sm ", innerHTML: content.map(src => src[language]).join("<br>") }),
+                content,
             ]),
 
         ]
     }
 
-    _renderSourcesVnodes(language) {
+    renderSourcesVnodes(language) {
         if (!this.sources.length) return [];
-        return this.__renderMetaVnodes((this.sources.length > 1 ? 'Sources' : 'Source'), this.sources, language);
+        return this.renderMetaVnodes((this.sources.length > 1 ? 'Sources' : 'Source'), this.__renderMetaContentArrayVnodes(this.sources, language));
     }
 
-    _renderNotesVnodes(language) {
+    renderNotesVnodes(language) {
         if (!this.notes.length) return [];
-        return this.__renderMetaVnodes(this.notes.length > 1 ? 'Notes' : 'Note', this.notes, language);
+        return this.renderMetaVnodes(this.notes.length > 1 ? 'Notes' : 'Note', this.__renderMetaContentArrayVnodes(this.notes, language));
     }
 
-    _renderAltsVnodes(language) {
+    renderAltsVnodes(language) {
         if (!this.alts.length) return [];
-        return this.__renderMetaVnodes(rendererStrings[language].alts_label, this.alts, language, true);
+        return this.renderMetaVnodes(rendererStrings[language].alts_label, this.__renderMetaContentArrayVnodes(this.alts, language), true);
     }
 
     _renderMetaVnodes(language) {
         if (!this.sources.length && !this.notes.length) return [];
 
         return h('div', { 'class': 'flex flex-col gap-2' }, [
-            ...this._renderAltsVnodes(language),
-            ...this._renderSourcesVnodes(language),
-            ...this._renderNotesVnodes(language)
+            ...this.renderAltsVnodes(language),
+            ...this.renderSourcesVnodes(language),
+            ...this.renderNotesVnodes(language)
         ])
     }
 

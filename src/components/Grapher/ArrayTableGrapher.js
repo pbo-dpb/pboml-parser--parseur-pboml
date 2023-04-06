@@ -1,77 +1,33 @@
-import { h } from 'vue'
-
 import ArrayTableDataSource from './ArrayTableDataSource';
 import ChartJsMixin from './ChartJsMixin';
+import ArrayTable from '../../models/contents/ArrayTable/ArrayTable';
 
 export default {
     mixins: [ChartJsMixin],
     props: {
 
-
-        /**
-         * Provided keys found in the chart config object will be replaced by the given string.
-         * Eg.: given config `{"myval": "_some_string_"}` and dicts `{'en': { '_some_string_': "Hello, world!"}}`
-         * will render as `{"myval": "Hello, world!"}` when language set to `en`.
-         */
-        strings: {
-            type: Object,
-            default() {
-                return {
-                    'en': {},
-                    'fr': {}
-                }
-            }
-        },
-
-
-        /**
-         * A primitive objet or an array (object: key-value(s) or [[header1, header2], ['val1', 'val2']]).
-         * Values that are strings or numbers will be treated litteraly. Values that are objects will
-         * be unfolded and must adhere to the following format:
-         * {
-         *      data: "",
-         *      emphasize: true// Optional; when true will highlight this value
-         * }
-         * Inspired by https://developers.google.com/chart/interactive/docs/datatables_dataviews
-         */
         arraytable: {
-            type: [Array, Object],
+            type: ArrayTable,
             required: true,
         },
 
-        /**
-         * A type (string) or an array of types (array) for the chart (eg. line). If more than one type is passed,
-         * they will be applied to each dataset in order. If a string is passed, each dataset will be
-         * of that single type.
-         */
-        types: {
-            validator(values) {
-                if (typeof values === "string")
-                    values = [values];
-                return !values.map(value => ['line', 'bar'].includes(value)).includes(false)
-            }
-        },
-
-
-        /**
-         * An optional object with possible format 
-         * {
-         *  x: {
-         *      label: "__some_label__",
-         *      type: "time|dollars"
-         *  },
-         *  y: {
-         *      (...)
-         *  }
-         * }
-         */
-        axes: {
-            type: Object,
-        },
     },
 
 
     computed: {
+
+        strings() {
+            return this.arraytable.strings
+        },
+
+        axes() {
+            return this.arraytable.axes;
+        },
+
+        types() {
+            return this.arraytable.types;
+        },
+
         config() {
             return this._config;
         },
@@ -87,8 +43,8 @@ export default {
 
         _data() {
 
-            if (this.arraytable) {
-                let dataSource = new ArrayTableDataSource(this.types, this.arraytable);
+            if (this.arraytable.arraytable) {
+                let dataSource = new ArrayTableDataSource(this.types, this.arraytable.arraytable);
                 return this.localizeRecursively(dataSource.convertToGraphjsDataStructure());
             }
 

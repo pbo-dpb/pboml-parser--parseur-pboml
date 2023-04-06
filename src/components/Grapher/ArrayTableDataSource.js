@@ -1,10 +1,25 @@
-import DataSource from "./DataSource";
+import { EquidistantColorPalette } from "./ColourPalettes";
 import Color from "color";
 
-export default class ArraytableDataSource extends DataSource {
+export default class ArraytableDataSource {
+
     constructor(types, arraytable) {
-        super(types);
+
+        if (Array.isArray(types)) {
+            this.types = types;
+        } else {
+            this.types = [types];
+        }
+
+        this.colorPalette = EquidistantColorPalette;
         this.arraytable = arraytable;
+    }
+
+    colorForIndex(index, emphasize) {
+        let colorForIndex = this.colorPalette[index];
+        let color = colorForIndex ? colorForIndex : "#666666";
+
+        return Color(color).saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : (emphasize === false ? -0.25 : 0)).hex();
     }
 
     /**
