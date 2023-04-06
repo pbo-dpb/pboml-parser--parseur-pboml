@@ -45,17 +45,7 @@ export default {
                 },
                 ...config.options.plugins,
             },
-            /*scales: {
-                y: {
-                    fontColor: textColor,
-                    ...config.options.scales?.y
-                },
-                x: {
-                    fontColor: textColor,
-                    ...config.options.scales?.x
-                },
-                ...config.options.scales,
-            }*/
+
         }
         this._chart = new Chart(
             this.$refs.chart.getContext('2d'),
