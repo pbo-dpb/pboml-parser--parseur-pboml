@@ -45,7 +45,7 @@ export default {
 
             if (this.arraytable.arraytable) {
                 let dataSource = new ArrayTableDataSource(this.types, this.arraytable.arraytable);
-                return this.localizeRecursively(dataSource.convertToGraphjsDataStructure());
+                return this.arraytable.localizeRecursively(dataSource.convertToGraphjsDataStructure(), this.language);
             }
 
             return null;
@@ -66,18 +66,7 @@ export default {
     },
 
     methods: {
-        localizeRecursively(content) {
-            /**
-             *  Feels a little too easy...
-             *  Inspired by https://stackoverflow.com/questions/29473526/recursive-find-and-replace-in-multidimensional-javascript-object
-             */
-            let rawContent = JSON.stringify(content);
-            for (const [key, value] of Object.entries(this.strings[this.language])) {
-                rawContent = rawContent.replaceAll(`"${key}"`, JSON.stringify(value))
-            }
 
-            return JSON.parse(rawContent);
-        },
         configureAxis(axisName) {
             let axis = {
                 title: {}
@@ -90,7 +79,7 @@ export default {
                 axis.title.display = true;
                 axis.title.text = this.axes[axisName].label;
                 // A custom name needs to be localized
-                axis = this.localizeRecursively(axis);
+                axis = this.arraytable.localizeRecursively(axis, this.language);
             }
 
             /**
