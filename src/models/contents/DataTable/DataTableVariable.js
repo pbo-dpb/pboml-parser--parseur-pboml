@@ -41,7 +41,7 @@ export default class DataTableVariable {
     getTableHeaderVnode(scope = null, language) {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
-        return h('th', { class: DataTableVariable.#cellBaseClass, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
+        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky left-0 bg-gray-100 lg:bg-transparent dark:bg-gray-950`, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
     }
 
 

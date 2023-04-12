@@ -97,18 +97,26 @@ export default class DataTable {
 
     __buildVerticalBody(language) {
 
+        const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
+
         let rows = [];
         Object.entries(this.variables).forEach((entry) => {
             const [key, variable] = entry;
 
             let columns = [];
             let headerCol = variable.getTableHeaderVnode('row', language);
-            headerCol.props['width'] = `${100 / (this.bodyRowsCount + 1)}%`;
+            if (isLg)
+                headerCol.props['width'] = `${100 * (1 / 3)}%`;
+            else
+                headerCol.props['class'] += ' w-32'
             columns.push(headerCol);
 
             this.content.forEach(content => {
                 let cell = variable.getTableCellVnode(content[key], 'col', language);
-                cell.props['width'] = `${100 / (this.bodyRowsCount + 1)}%`;
+                if (isLg)
+                    cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
+                else
+                    cell.props['class'] = cell.props['class'] + ' w-24'
                 columns.push(cell);
             })
             rows.push(columns);
@@ -131,9 +139,13 @@ export default class DataTable {
                 this.__buildHorizontalBody(language),
             ]));
         } else {
-            vnodes.push(h('table', { class: `table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700  lg:table print:table print:text-sm` },
-                this.__buildVerticalBody(language),
-            ));
+            vnodes.push(h('div', {
+                class: 'overflow-x-auto'
+            }, [
+                h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700 lg:table print:table print:text-sm` },
+                    this.__buildVerticalBody(language),
+                )
+            ]));
         }
         return vnodes;
     }
