@@ -1,5 +1,6 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../../MarkdownDriver';
+import rendererStrings from '../../../renderer-strings';
 
 const defaults = {
     display_label: true,
@@ -47,6 +48,7 @@ export default class DataTableVariable {
 
     getTableCellVnode(value, scope = null, language) {
 
+        let cellClasses = DataTableVariable.#cellBaseClass;
         let innerHTML;
         switch (this.type) {
             case 'markdown':
@@ -73,7 +75,12 @@ export default class DataTableVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: `${DataTableVariable.#cellBaseClass}`, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        if (!value) {
+            innerHTML = `<span class='sr-only'>${rendererStrings[language].empty_cell_label}</span>`;
+            cellClasses += " bg-gray-100 dark:bg-gray-900"
+        }
+
+        return h(this.is_descriptive ? 'th' : 'td', { class: cellClasses, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }
 
 

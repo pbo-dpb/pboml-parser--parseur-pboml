@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import ArrayTable from "../../models/contents/ArrayTable/ArrayTable";
 import DataTableVariable from '../../models/contents/DataTable/DataTableVariable';
+import RendererStrings from "../../renderer-strings"
 
 const cellBaseClass = `border border-gray-300 dark:border-gray-700 p-.5 text-center leading-snug`
 export default {
@@ -46,7 +47,7 @@ export default {
             let cellClasses = `${cellBaseClass}`;
 
             if (celldata === null) {
-                celldata = '';
+                celldata = [h('span', { class: 'sr-only' }, RendererStrings[this.language].empty_cell_label)];
                 cellClasses += " bg-gray-100 dark:bg-gray-900"
             } else if (typeof celldata === 'number') {
                 let formatterOptions = {
