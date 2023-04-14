@@ -4,7 +4,7 @@ import TableSlice from "./contents/TableSlice";
 import HeadingSlice from "./contents/HeadingSlice";
 import yaml from 'js-yaml'
 import Annotation from "./Annotation";
-import ImageSlice from "./contents/ImageSlice";
+import BitmapSlice from "./contents/BitmapSlice";
 import ChartSlice from "./contents/ChartSlice";
 
 
@@ -59,8 +59,8 @@ export default class PBOMLDocument {
                 case 'heading':
                     sli = new HeadingSlice(el);
                     break;
-                case 'image':
-                    sli = new ImageSlice(el);
+                case 'bitmap':
+                    sli = new BitmapSlice(el);
                     break;
             }
 

@@ -1,11 +1,11 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 
-export const IMAGE_RESOLUTIONS = { sm: 640, md: 768, lg: null };
-export const IMAGE_FORMATS = ['webp', 'png'];
-export const IMAGE_DENSITIES = ['1x', '2x', '3x'];
+export const BITMAP_RESOLUTIONS = { sm: 640, md: 768, lg: null };
+export const BITMAP_FORMATS = ['webp', 'png'];
+export const BITMAP_DENSITIES = ['1x', '2x', '3x'];
 
-export default class ImageSlice extends Slice {
+export default class BitmapSlice extends Slice {
     constructor(payload) {
         super(payload);
         this.content = {
@@ -19,17 +19,17 @@ export default class ImageSlice extends Slice {
 
         this.display_label = payload.display_label === false ? false : true;
         this.presentation = payload.presentation ? payload.presentation : 'figure';
-        this.type = "image"
+        this.type = "bitmap"
     }
 
     buildReadonlySourceNodeForResolution(language, resolution, format) {
 
         const attributes = {
-            'type': `image/${format}`
+            'type': `bitmap/${format}`
         };
 
         let srcSet = [];
-        IMAGE_DENSITIES.forEach(pixelDensity => {
+        BITMAP_DENSITIES.forEach(pixelDensity => {
             let url = this.thumbnails[language][`${resolution}_${pixelDensity}_${format}`];
             if (url) srcSet.push(`${url} ${pixelDensity}`)
         })
@@ -38,7 +38,7 @@ export default class ImageSlice extends Slice {
 
         attributes.srcset = srcSet.join(', ');
 
-        let maxForRes = IMAGE_RESOLUTIONS[resolution];
+        let maxForRes = BITMAP_RESOLUTIONS[resolution];
         if (maxForRes) {
             attributes['media'] = `(max-width: ${maxForRes}px)`;
         }
@@ -53,22 +53,22 @@ export default class ImageSlice extends Slice {
 
     renderReadonlyVnode(language) {
 
-        let imageNode;
+        let bitmapNode;
         if (!this.thumbnails[language]) {
-            // Render the original image inline
-            imageNode = h('figure', { class: "flex justify-center" }, [this.buildReadonlyImgNode(language)]);
+            // Render the original bitmap inline
+            bitmapNode = h('figure', { class: "flex justify-center" }, [this.buildReadonlyImgNode(language)]);
         } else {
-            imageNode = h('picture', {
+            bitmapNode = h('picture', {
             }, [
-                ...Object.keys(IMAGE_RESOLUTIONS).map((rs) => {
-                    return IMAGE_FORMATS.map(ft => this.buildReadonlySourceNodeForResolution(language, rs, ft))
+                ...Object.keys(BITMAP_RESOLUTIONS).map((rs) => {
+                    return BITMAP_FORMATS.map(ft => this.buildReadonlySourceNodeForResolution(language, rs, ft))
                 }),
                 this.buildReadonlyImgNode(language)
             ]);
         }
 
         return h('a', { href: this.content[language], target: '_blank', class: 'flex items-center justify-center' }, [
-            imageNode
+            bitmapNode
         ])
 
     }
@@ -76,7 +76,7 @@ export default class ImageSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/ImageSliceEditor.js')), { slice: this }))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/BitmapSliceEditor.js')), { slice: this }))
         return vnodes;
     }
 

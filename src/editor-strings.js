@@ -12,7 +12,7 @@ export default {
         'slice_type_markdown': "Rich Text (markdown)",
         'slice_type_kvlist': "Key-Value list",
         'slice_type_heading': "Heading",
-        'slice_type_image': 'Image',
+        'slice_type_bitmap': 'Bitmap',
         'slice_type_table': "Table",
         'slice_type_graph': "Graph",
         'slice_title_field_label': "Slice title (n+0)",
@@ -35,9 +35,9 @@ export default {
         'delete_slice_button_label': "Delete slice",
         'move_slice_up_button_label': "Push the slice towards the start",
         'move_slice_down_button_label': "Push the slice towards the end",
-        'image_slice_thumbnails_details_label': "Thumbnails (optional)",
-        'image_slice_source_label': 'Source (full resolution image)',
-        'image_slice_fill_from_clipboard': "Fill from clipboard"
+        'bitmap_slice_thumbnails_details_label': "Thumbnails (optional)",
+        'bitmap_slice_source_label': 'Source (full resolution bitmap)',
+        'bitmap_slice_fill_from_clipboard': "Fill from clipboard"
 
     },
     fr: {
@@ -53,7 +53,7 @@ export default {
         'slice_type_markdown': "Rich Text (markdown)",
         'slice_type_kvlist': "Liste clé-valeur",
         'slice_type_heading': "En-tête",
-        'slice_type_image': 'Image',
+        'slice_type_bitmap': 'Bitmap',
         'slice_type_table': "Tableau",
         'slice_type_graph': "Graphique",
         'slice_title_field_label': "Titre de la tranche (n+0)",
@@ -76,9 +76,9 @@ export default {
         'delete_slice_button_label': "Supprimer la tranche",
         'move_slice_up_button_label': "Pousser la tranche vers le début",
         'move_slice_down_button_label': "Pousser la tranche vers la fin",
-        'image_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
-        'image_slice_source_label': 'Source (image en pleine résolution)',
-        'image_slice_fill_from_clipboard': "Fill from clipboard"
+        'bitmap_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
+        'bitmap_slice_source_label': 'Source (bitmap en pleine résolution)',
+        'bitmap_slice_fill_from_clipboard': "Fill from clipboard"
 
     }
 }

@@ -9,7 +9,7 @@ import { ClipboardDocumentIcon } from '@heroicons/vue/24/solid'
 
 import yaml from 'js-yaml'
 
-import ImageSlice, { IMAGE_RESOLUTIONS, IMAGE_FORMATS, IMAGE_DENSITIES } from '../models/contents/ImageSlice'
+import BitmapSlice, { BITMAP_RESOLUTIONS, BITMAP_FORMATS, BITMAP_DENSITIES } from '../models/contents/BitmapSlice'
 
 export default {
     props: ['slice'],
@@ -36,22 +36,22 @@ export default {
                 }
 
                 let newSliceObject = yaml.load(raw);
-                let newImageSlice = new ImageSlice(newSliceObject);
+                let newBitmapSlice = new BitmapSlice(newSliceObject);
 
                 // Merge slices without overriding already set properties.
                 ['en', 'fr'].forEach(language => {
-                    if (!props.slice.content[language]) props.slice.content[language] = newImageSlice.content[language]
+                    if (!props.slice.content[language]) props.slice.content[language] = newBitmapSlice.content[language]
 
 
 
-                    Object.keys(IMAGE_RESOLUTIONS).map((rs) => IMAGE_DENSITIES.map(ds =>
-                        IMAGE_FORMATS.map(ft => {
+                    Object.keys(BITMAP_RESOLUTIONS).map((rs) => BITMAP_DENSITIES.map(ds =>
+                        BITMAP_FORMATS.map(ft => {
                             const keyForThumbnail = `${rs}_${ds}_${ft}`
-                            if (!props.slice.thumbnails[language]?.[keyForThumbnail] && newImageSlice.thumbnails[language]?.[keyForThumbnail]) {
+                            if (!props.slice.thumbnails[language]?.[keyForThumbnail] && newBitmapSlice.thumbnails[language]?.[keyForThumbnail]) {
                                 if (!props.slice.thumbnails[language]) {
                                     props.slice.thumbnails[language] = {}
                                 }
-                                props.slice.thumbnails[language][keyForThumbnail] = newImageSlice.thumbnails[language][keyForThumbnail];
+                                props.slice.thumbnails[language][keyForThumbnail] = newBitmapSlice.thumbnails[language][keyForThumbnail];
                             }
                         })
                     ))
@@ -65,7 +65,7 @@ export default {
         return () => h('div', { class: 'flex flex-col gap-4' }, [
 
             h(BilingualInput, {
-                label: strings[document.documentElement.lang].image_slice_source_label,
+                label: strings[document.documentElement.lang].bitmap_slice_source_label,
                 class: "w-full",
                 modelValue: props.slice.content,
                 'onUpdate:modelValue': (value) => {
@@ -89,15 +89,15 @@ export default {
                 },
             }, () => [
                 h(ClipboardDocumentIcon, { 'class': 'h-4 w-4' }, () => []),
-                h('span', strings[document.documentElement.lang].image_slice_fill_from_clipboard)
+                h('span', strings[document.documentElement.lang].bitmap_slice_fill_from_clipboard)
             ]),
-            h(Details, { label: strings[document.documentElement.lang].image_slice_thumbnails_details_label }, {
+            h(Details, { label: strings[document.documentElement.lang].bitmap_slice_thumbnails_details_label }, {
                 default: () => h('div', { class: "grid grid-cols-2 gap-2 text-sm" }, [
                     ...['en', 'fr'].map(lg => {
                         return h('fieldset', { class: 'flex flex-col gap-2' }, [
-                            ...Object.keys(IMAGE_RESOLUTIONS).map((rs) => IMAGE_DENSITIES.map(ds => {
+                            ...Object.keys(BITMAP_RESOLUTIONS).map((rs) => BITMAP_DENSITIES.map(ds => {
 
-                                return IMAGE_FORMATS.map(ft => {
+                                return BITMAP_FORMATS.map(ft => {
                                     const keyForThumbnail = `${rs}_${ds}_${ft}`
                                     return h(SingleInput, {
                                         modelValue: props.slice.thumbnails[lg]?.[keyForThumbnail],
