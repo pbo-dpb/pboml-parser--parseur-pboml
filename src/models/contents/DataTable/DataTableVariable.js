@@ -36,6 +36,9 @@ export default class DataTableVariable {
         } : null
     }
 
+    static getCellBaseClass() {
+        return this.#cellBaseClass;
+    }
 
 
     getTableHeaderVnode(scope = null, language) {

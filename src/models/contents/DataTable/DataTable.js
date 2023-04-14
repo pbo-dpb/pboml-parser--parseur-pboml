@@ -1,6 +1,8 @@
 import { h } from 'vue'
 import DataTableVariable from "./DataTableVariable";
 import DataTableEntry from './DataTableEntry';
+const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
+
 export default class DataTable {
     constructor(payload) {
         let variables = {};
@@ -43,48 +45,111 @@ export default class DataTable {
         return key
     }
 
-    __buildVerticalBody(language) {
+    groupsMapForLanguage(language) {
+        const groups = new Map();
 
-        const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
-
-        let rows = [];
         Object.entries(this.variables).forEach((entry) => {
             const [key, variable] = entry;
+            if (variable.is_descriptive) return;
+            const groupName = variable.group?.[language] ?? '';
+            let updatedGroup = {
+                ...(groups.get(groupName) ? groups.get(groupName) : {})
+            }
+            updatedGroup[key] = variable;
+            groups.set(groupName, updatedGroup)
+        });
+        return groups;
+    }
 
-            let columns = [];
-            let headerCol = variable.getTableHeaderVnode('row', language);
+
+    __buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language) {
+
+        let columns = [];
+        let headerCol = variable.getTableHeaderVnode('row', language);
+        if (isLg)
+            headerCol.props['width'] = `${100 * (1 / (shouldUseGroupsPresentation ? 6 : 3))}%`;
+        else
+            headerCol.props['class'] += ' w-32'
+        columns.push(headerCol);
+
+        this.content.forEach(content => {
+            let cell = variable.getTableCellVnode(content[key], 'col', language);
             if (isLg)
-                headerCol.props['width'] = `${100 * (1 / 3)}%`;
+                cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
             else
-                headerCol.props['class'] += ' w-32'
-            columns.push(headerCol);
+                cell.props['class'] = cell.props['class'] + ' w-24'
+            columns.push(cell);
+        })
+        return columns;
+    }
 
-            this.content.forEach(content => {
-                let cell = variable.getTableCellVnode(content[key], 'col', language);
-                if (isLg)
-                    cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
-                else
-                    cell.props['class'] = cell.props['class'] + ' w-24'
-                columns.push(cell);
-            })
-            rows.push(columns);
+    __buildTheadNode(shouldUseGroupsPresentation, language) {
+        let rows = []
+
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, variable] = entry;
+            if (!variable.is_descriptive) return;
+            let columns = this.__buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language)
+            rows.push(h('tr', {}, [
+                shouldUseGroupsPresentation ? h('td', { class: (isLg ? '' : ' w-32') }, '') : null,
+                ...columns
+            ]))
         });
 
-        return h('tbody', {}, rows.map(row => {
+        return h('thead', {}, rows);
+    }
+
+    __buildTableNodes(language) {
+
+        let groups = this.groupsMapForLanguage(language);
+        const shouldUseGroupsPresentation = groups.size > 1;
+
+        let nodes = [
+            this.__buildTheadNode(shouldUseGroupsPresentation, language)
+        ];
+
+        groups.forEach((variables, groupName) => {
+            let trs = [];
+            let isFirst = true;
+            Object.entries(variables).forEach((varEntry) => {
+                const [key, variable] = varEntry;
+                let columns = this.__buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language)
+
+                let groupCell;
+                if (shouldUseGroupsPresentation && isFirst) {
+                    let cellClasses = (groupName ? DataTableVariable.getCellBaseClass() : '') + (isLg ? '' : ' w-32')
+                    groupCell = h('th', { scope: 'rowgroup', rowspan: Object.values(variables).length, class: cellClasses }, groupName);
+                }
+
+                trs.push(h('tr', {}, [groupCell, ...columns]))
+                isFirst = false;
+            });
+
+            nodes.push(h('tbody', {}, trs))
+        });
+
+        return nodes;
+
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, variable] = entry;
+            let columns = this.__buildTableRowColumnsNodes(key, variable, language)
+            rows.push(columns)
+        });
+
+        return [h('tbody', {}, rows.map(row => {
             return h('tr', {}, row)
-        }));
+        }))];
     }
 
 
     renderReadonlyVnode(language) {
         let vnodes = [];
 
-
         vnodes.push(h('div', {
             class: 'overflow-x-auto'
         }, [
-            h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse border border-gray-300 break-inside-avoid dark:border-gray-700 lg:table print:table print:text-sm` },
-                this.__buildVerticalBody(language),
+            h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse  break-inside-avoid lg:table print:table print:text-sm` },
+                ...this.__buildTableNodes(language),
             )
         ]));
 
