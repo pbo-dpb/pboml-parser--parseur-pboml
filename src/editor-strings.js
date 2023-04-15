@@ -15,6 +15,7 @@ export default {
         'slice_type_bitmap': 'Bitmap',
         'slice_type_table': "Table",
         'slice_type_graph': "Graph",
+        'slice_type_svg': 'SVG Vector',
         'slice_title_field_label': "Slice title (n+0)",
         'slice_referenced_as_field_label': "Verbose reference anchor name",
         'readonly_slice': "The content of this slice is marked as not to be manually edited (`readonly`).",
@@ -37,8 +38,8 @@ export default {
         'move_slice_down_button_label': "Push the slice towards the end",
         'bitmap_slice_thumbnails_details_label': "Thumbnails (optional)",
         'bitmap_slice_source_label': 'Source (full resolution bitmap)',
-        'bitmap_slice_fill_from_clipboard': "Fill from clipboard"
-
+        'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
+        'svg_slice_show_source_button_label': 'Source code',
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -56,6 +57,7 @@ export default {
         'slice_type_bitmap': 'Bitmap',
         'slice_type_table': "Tableau",
         'slice_type_graph': "Graphique",
+        'slice_type_svg': 'SVG Vector',
         'slice_title_field_label': "Titre de la tranche (n+0)",
         'slice_referenced_as_field_label': "Verbose reference anchor name",
         'readonly_slice': "Le contenu de cette tranche est marqué comme ne devant pas être manuellement modifié (`readonly`).",
@@ -78,7 +80,7 @@ export default {
         'move_slice_down_button_label': "Pousser la tranche vers la fin",
         'bitmap_slice_thumbnails_details_label': "Vignettes (cette section est facultative)",
         'bitmap_slice_source_label': 'Source (bitmap en pleine résolution)',
-        'bitmap_slice_fill_from_clipboard': "Fill from clipboard"
-
+        'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
+        'svg_slice_show_source_button_label': 'Code source',
     }
 }

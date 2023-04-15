@@ -24,6 +24,8 @@ import MarkdownSlice from '../../../models/contents/MarkdownSlice'
 import KvListSlice from '../../../models/contents/KvListSlice'
 import HeadingSlice from '../../../models/contents/HeadingSlice'
 import BitmapSlice from '../../../models/contents/BitmapSlice'
+import SvgSlice from '../../../models/contents/SvgSlice'
+
 import { PlusIcon, PlusCircleIcon } from '@heroicons/vue/24/solid'
 
 import Button from "../Button.vue"
@@ -63,6 +65,10 @@ export default {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
                 },
+                {
+                    label: this.strings.slice_type_svg,
+                    type: SvgSlice,
+                }
 
             ]
         }
