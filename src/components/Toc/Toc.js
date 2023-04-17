@@ -97,7 +97,7 @@ export default {
     methods: {
         buildVnodeForItem(item, level = 0) {
             const levelSpecificClasses = liStyles[level];
-            let aClasses = ['hover:text-blue-800', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
+            let aClasses = ['hover:text-blue-800', 'select-none', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
 
             if (this.shouldFollowAnchorIntersectionVisibility && item.anchor === this.currentlyVisibleAnchor) {
                 aClasses.push(...['text-gray-900', 'dark:text-gray-100'])

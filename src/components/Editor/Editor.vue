@@ -40,18 +40,25 @@
 
                 </div>
 
-                <nav class="flex flex-row justify-end sticky top-0 -mt-4 pt-4" v-if="shouldPresentDocumentStructure">
-                    <Toc :pboml-document="pbomlDocument"></Toc>
-                </nav>
 
-                <div class="grid" :class="{ 'grid-cols-5': shouldPresentDocumentStructure }">
 
-                    <div class="col-span-4">
+                <div>
+
+                    <div>
                         <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices"
-                            v-if="currentTab === 'slices'">
-                            <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
-                                @move-slice="handleMoveSlice"></editor-blocks>
-                            <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
+                            v-if="currentTab === 'slices'" class="grid gap-4"
+                            :class="{ 'grid-cols-5': shouldPresentDocumentStructure }">
+
+                            <div class="col-span-4">
+                                <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
+                                    @move-slice="handleMoveSlice" @duplicate-slice="handleDuplicateSlice"></editor-blocks>
+                                <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
+                            </div>
+                            <nav class="" v-if="shouldPresentDocumentStructure">
+                                <div class="flex flex-row justify-end sticky top-0 -mt-4 pt-4">
+                                    <Toc :pboml-document="pbomlDocument"></Toc>
+                                </div>
+                            </nav>
                         </div>
 
                         <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
@@ -180,6 +187,9 @@ export default {
         },
         handleDeleteSlice(slice) {
             this.pbomlDocument.deleteSlice(slice);
+        },
+        handleDuplicateSlice(slice) {
+            this.pbomlDocument.duplicateSlice(slice);
         },
         handleMoveSlice(slice, direction) {
             this.pbomlDocument.moveSlice(slice, direction);

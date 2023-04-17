@@ -4,6 +4,7 @@ import LoadingIndicator from "../components/LoadingIndicator.vue"
 import MetaEditingButton from "../components/Editor/MetaEditingButton";
 import PreviewingButton from "../components/Editor/PreviewingButton";
 import DeleteButton from "../components/Editor/DeleteButton";
+import DuplicateButton from "../components/Editor/DuplicateButton";
 import MoveButton from "../components/Editor/MoveButton";
 
 
@@ -36,9 +37,14 @@ export default {
 
                         h('div', { class: 'flex flex-row gap-2' }, [
                             h(DeleteButton, {
-                                'isEditing': this.slice.state.isEditingMeta,
                                 'onDelete': (value) => {
                                     this.$emit("delete-slice", this.slice);
+                                }
+                            }),
+
+                            h(DuplicateButton, {
+                                'onDuplicate': (value) => {
+                                    this.$emit("duplicate-slice", this.slice);
                                 }
                             }),
 

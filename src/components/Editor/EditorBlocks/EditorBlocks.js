@@ -13,6 +13,10 @@ export default {
 
         handleMoveSlice(slice, direction) {
             this.$emit('move-slice', slice, direction);
+        },
+
+        handleDuplicateSlice(slice) {
+            this.$emit('duplicate-slice', slice);
         }
 
     },
@@ -23,6 +27,7 @@ export default {
             ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice) => {
                 let sliceEditingVnode = slice.renderEditingVnode();
                 sliceEditingVnode.props.onDeleteSlice = this.handleDeleteSlice;
+                sliceEditingVnode.props.onDuplicateSlice = this.handleDuplicateSlice;
                 sliceEditingVnode.props.onMoveSlice = this.handleMoveSlice;
                 return h('div', {}, [sliceEditingVnode]);
             }) : null),

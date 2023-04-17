@@ -42,31 +42,7 @@ export default class PBOMLDocument {
         let counter = 0;
         this.slices = mainDocument.slices?.map((el) => {
 
-            const sliceType = el.type;
-            let sli;
-            switch (sliceType) {
-                case 'markdown':
-                    sli = new MarkdownSlice(el);
-                    break;
-                case 'table':
-                    sli = new TableSlice(el);
-                    break;
-                case 'kvlist':
-                    sli = new KvListSlice(el);
-                    break;
-                case 'chart':
-                    sli = new ChartSlice(el);
-                    break;
-                case 'heading':
-                    sli = new HeadingSlice(el);
-                    break;
-                case 'bitmap':
-                    sli = new BitmapSlice(el);
-                    break;
-                case 'svg':
-                    sli = new SvgSlice(el);
-                    break;
-            }
+            let sli = PBOMLDocument.provisionSliceFromPayload(el)
 
             counter++;
             if (sli) {
@@ -94,6 +70,26 @@ export default class PBOMLDocument {
 
         this.state = {
             prefix
+        }
+    }
+
+    static provisionSliceFromPayload(el) {
+        const sliceType = el.type;
+        switch (sliceType) {
+            case 'markdown':
+                return new MarkdownSlice(el);
+            case 'table':
+                return new TableSlice(el);
+            case 'kvlist':
+                return new KvListSlice(el);
+            case 'chart':
+                return new ChartSlice(el);
+            case 'heading':
+                return new HeadingSlice(el);
+            case 'bitmap':
+                return new BitmapSlice(el);
+            case 'svg':
+                return new SvgSlice(el);
         }
     }
 
@@ -195,5 +191,10 @@ export default class PBOMLDocument {
         if (nearestSlicePosition > 0) {
             this.scrollToSliceAtIndex(nearestSlicePosition - 1)
         }
+    }
+
+    duplicateSlice(slice) {
+        let newSlice = PBOMLDocument.provisionSliceFromPayload(slice.toArray());
+        this.addSlice(newSlice);
     }
 }
