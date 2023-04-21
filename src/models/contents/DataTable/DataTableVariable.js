@@ -31,8 +31,8 @@ export default class DataTableVariable {
         this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
         this.group = payload.group ? {
-            en: payload.group.en,
-            fr: payload.group.fr
+            en: payload.group?.en ?? '',
+            fr: payload.group?.fr ?? ''
         } : null
     }
 
@@ -95,12 +95,14 @@ export default class DataTableVariable {
             readonly: this.readonly,
             display_label: this.display_label,
             is_descriptive: this.is_descriptive,
-            is_time: this.is_time
+            is_time: this.is_time,
+            group: this.group,
+            skip_chart: this.skip_chart,
         }
 
         // Remove default values from  output
         for (const [key, value] of Object.entries(defaults)) {
-            if (arrayout[key] === value) {
+            if (arrayout[key] == value) {
                 delete arrayout[key];
             }
         }

@@ -6,15 +6,15 @@ const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 102
 export default class DataTable {
     constructor(payload) {
         let variables = {};
-        Object.entries(payload.variables).forEach((entry) => {
+        Object.entries(payload?.variables ?? {}).forEach((entry) => {
             const [key, value] = entry;
             variables[key] = new DataTableVariable(value);
         });
         this.variables = variables;
 
         let dataTableEntries = [];
-        this.content = payload.content.map(entry => {
-            return new DataTableEntry(entry, variables);
+        this.content = (payload?.content ?? []).map(entry => {
+            return new DataTableEntry(entry);
         });
     }
 
@@ -130,15 +130,6 @@ export default class DataTable {
 
         return nodes;
 
-        Object.entries(this.variables).forEach((entry) => {
-            const [key, variable] = entry;
-            let columns = this.__buildTableRowColumnsNodes(key, variable, language)
-            rows.push(columns)
-        });
-
-        return [h('tbody', {}, rows.map(row => {
-            return h('tr', {}, row)
-        }))];
     }
 
 

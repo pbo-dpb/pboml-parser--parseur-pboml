@@ -4,6 +4,8 @@ import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
 import NumberInput from "../components/Editor/Inputs/NumberInput.vue"
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
+import DataTableEditor from "../components/Editor/DataTableEditor/DataTableEditor.js"
+import DataTable from '../models/contents/DataTable/DataTable'
 
 export default {
     props: ['slice'],
@@ -21,67 +23,9 @@ export default {
         }
 
 
-
-
-        return () => {
-
-
-            let rows = [];
-            Object.entries(props.slice.datatable.variables).forEach((entry) => {
-                const [key, variable] = entry;
-
-                let columns = [];
-                let headerCol = h('th', { class: "px-1 py-2 border-slate-300 border bg-slate-200" }, [
-                    h(BilingualInput, {
-                        modelValue: variable.label,
-                        'onUpdate:modelValue': (value) => {
-                            variable.label = value;
-                            emit('update:modelValue', props.slice.datatable.variables)
-                        }
-                    }),
-                ]);
-
-                headerCol.props['width'] = `${100 / (props.slice.bodyRowsCount + 1)}%`;
-                columns.push(headerCol);
-                props.slice.datatable.content.forEach(content => {
-
-                    let cellContent;
-
-                    if (variable.type === 'markdown') {
-                        cellContent = h(BilingualInput, {
-                            modelValue: content[key],
-                            'onUpdate:modelValue': (value) => {
-                                content[key] = value;
-                                emit('update:modelValue', props.slice.datatable.content)
-                            }
-                        });
-                    } else {
-                        cellContent = h(NumberInput, {
-                            modelValue: content[key],
-                            'onUpdate:modelValue': (value) => {
-                                content[key] = value;
-                                emit('update:modelValue', props.slice.datatable.content)
-                            }
-                        });
-                    }
-
-                    columns.push(h('td', { width: `${100 / (props.slice.bodyRowsCount + 1)}%`, class: "px-1 py-2 border-slate-300 border bg-slate-100" }, [cellContent]));
-                })
-
-                rows.push(columns);
-            });
-
-
-
-            return h('table', {
-                class: `table table-fixed border-collapse border border-slate-300 dark:border-slate-700 w-full text-xs`
-            }, rows.map(row => {
-                return h('tr', { class: '' }, row)
-            })
-            )
-
-
-        }
+        return () => [
+            h(DataTableEditor, { datatable: props.slice.datatable })
+        ]
 
 
 
