@@ -50,10 +50,12 @@ export default {
         'data_table_variables_editor_var_is_descriptive': "Describes column contents.",
         'data_table_variables_editor_var_skip_chart': "Skip in figures",
         'data_table_variables_editor_var_group': "Group by label",
-        'data_table_variables_editor_var_emphasize': "Emphasize",
         'data_table_variables_editor_var_unit': "Unit",
+        'data_table_variables_editor_var_chart_type': "Drawn as...",
         'data_table_variables_editor_advanced_toggle': "Advanced settings",
         'data_table_variables_editor_var_type_number': 'Number',
+        'data_table_editor_emphasize': "Emphasize",
+        'data_table_editor_delete': "Delete",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -106,9 +108,11 @@ export default {
         'data_table_variables_editor_var_is_descriptive': "Décrit le contenu de sa colonne.",
         'data_table_variables_editor_var_skip_chart': "Ne pas montrer dans une figure",
         'data_table_variables_editor_var_group': "Grouper avec l'étiquette",
-        'data_table_variables_editor_var_emphasize': "Mettre l'emphase",
         'data_table_variables_editor_var_unit': "Unité",
+        'data_table_variables_editor_var_chart_type': "Dessiner sous la forme de...",
         'data_table_variables_editor_advanced_toggle': "Paramètres avancés",
         'data_table_variables_editor_var_type_number': 'Numérique',
+        'data_table_editor_emphasize': "Mettre en emphase",
+        'data_table_editor_delete': "Supprimer",
     }
 }

@@ -36,13 +36,9 @@ export default class TableSlice extends Slice {
     toArray() {
         let array = super.toArray();
 
-        array.variables = {};
-        Object.entries(this.datatable.variables).forEach((entry) => {
-            const [key, value] = entry;
-            array.variables[key] = value.toArray();
-        });
-
-        array.content = this.datatable.content;
+        const letDatatableArray = this.datatable.toArray();
+        array.variables = letDatatableArray.variables;
+        array.content = letDatatableArray.content;
         return array;
     }
 

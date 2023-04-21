@@ -6,9 +6,13 @@ import DataTableVariablesEditor from './DataTableVariablesEditor';
 import Tab from "../Tabs/Tab.vue"
 import { TableCellsIcon, VariableIcon } from '@heroicons/vue/24/solid'
 import editorStrings from '../../../editor-strings';
+import DataTable from '../../../models/contents/DataTable/DataTable';
 
 export default {
-    props: ['datatable'],
+    props: {
+        datatable: { type: DataTable, required: true },
+        showChartProperties: { type: Boolean, default: false }
+    },
     data() {
         return {
             currentTab: 'visual',
@@ -39,7 +43,7 @@ export default {
                 })
             ]),
             this.currentTab === 'visual' ? h(DataTableVisualEditor, { datatable: this.datatable, id: visualEditorId }) : null,
-            this.currentTab === 'variables' ? h(DataTableVariablesEditor, { datatable: this.datatable, id: variablesEditorId }) : null
+            this.currentTab === 'variables' ? h(DataTableVariablesEditor, { datatable: this.datatable, id: variablesEditorId, showChartProperties: this.showChartProperties }) : null
         ])
 
 

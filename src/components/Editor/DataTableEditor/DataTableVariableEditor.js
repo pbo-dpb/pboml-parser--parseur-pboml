@@ -3,9 +3,10 @@ import DataTableVariable from "../../../models/contents/DataTable/DataTableVaria
 import BilingualInput from '../../Editor/Inputs/BilingualInput.vue'
 import editorStrings from '../../../editor-strings'
 import tinyButton from "../TinyButton.vue"
-import { AdjustmentsVerticalIcon } from '@heroicons/vue/24/solid'
+import { AdjustmentsVerticalIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import SelectInput from "../Inputs/SelectInput.vue"
 import CheckboxInput from "../Inputs/CheckboxInput.vue"
+import TinyButton from "../TinyButton.vue";
 
 export default {
     props: {
@@ -16,6 +17,10 @@ export default {
         variableKey: {
             type: String,
             required: true
+        },
+        showChartProperties: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -40,8 +45,39 @@ export default {
         }
         typesInputChoices[strings.data_table_variables_editor_var_type_number] = 'number';
 
+        let chartVariableTypeChoices = {
+            'Bar': 'bar',
+            'Line': 'line'
+        }
+
         return h('div', { class: `border border-gray-300 rounded p-2 flex flex-col gap-4 ${bgClass}` }, [
-            h('span', { class: 'font-semibold text-gray-800 font-mono text-lg' }, this.variableKey),
+            h('div', { class: 'flex flex-row justify-between' }, [
+                h('span', { class: 'font-semibold text-gray-800 font-mono text-lg' }, this.variableKey),
+                h('div', { class: 'flex flex-row gap-2' }, [
+
+                    h(TinyButton, {
+                        danger: true,
+                        'aria-label': strings.data_table_editor_delete,
+                        onClick: () => {
+                            this.$emit('delete', this.variableKey)
+                        }
+                    }, () => [
+                        h(TrashIcon, { class: 'h-4 w-4' })
+                    ]),
+                    h(TinyButton, {
+                        'aria-pressed': this.variable.emphasize,
+                        'aria-label': strings.data_table_editor_emphasize,
+                        onClick: () => {
+                            this.variable.emphasize = !this.variable.emphasize
+                            this.$emit('update:modelValue', this.variable)
+                        }
+                    }, () => [
+                        h(StarIcon, { class: 'h-4 w-4' })
+                    ]),
+
+                ])
+            ]),
+
             h(BilingualInput, {
                 label: strings.data_table_variables_editor_var_label,
                 modelValue: this.variable.label,
@@ -69,14 +105,44 @@ export default {
                 }
             }),
 
+
+            /**
+             * Charting
+             */
+
+            ...this.showChartProperties ? [
+
+                h(CheckboxInput, {
+                    label: strings.data_table_variables_editor_var_skip_chart,
+                    modelValue: this.variable.skip_chart,
+                    'onUpdate:modelValue': (value) => {
+                        this.variable.skip_chart = value
+                        this.$emit('update:modelValue', this.variable)
+                    }
+                }),
+
+                h(SelectInput, {
+                    choices: chartVariableTypeChoices,
+                    label: strings.data_table_variables_editor_var_chart_type,
+                    modelValue: this.variable.chart_type,
+                    'onUpdate:modelValue': (value) => {
+                        this.variable.chart_type = value;
+                    }
+                }),
+
+            ] : [],
+
+
+
+            /**
+             * Advanced toggle
+             */
             h(tinyButton, {
                 'aria-pressed': this.showAdvanced,
                 'onClick': () => { this.showAdvanced = !this.showAdvanced },
             }, () => [h(AdjustmentsVerticalIcon, { 'class': 'h-4 w-4' }), strings.data_table_variables_editor_advanced_toggle]),
 
-
-
-            ...this.showAdvanced ? [
+            this.showAdvanced ? h('div', { class: 'border-l-2 border-blue-300 pl-2' }, [
                 h(BilingualInput, {
                     label: strings.data_table_variables_editor_var_group,
                     modelValue: this.variable.group,
@@ -94,28 +160,8 @@ export default {
                     }
                 }),
 
+            ]) : null,
 
-
-                h(CheckboxInput, {
-                    label: strings.data_table_variables_editor_var_skip_chart,
-                    modelValue: this.variable.skip_chart,
-                    'onUpdate:modelValue': (value) => {
-                        this.variable.skip_chart = value
-                        this.$emit('update:modelValue', this.variable)
-                    }
-                }),
-
-                h(CheckboxInput, {
-                    label: strings.data_table_variables_editor_var_emphasize,
-                    modelValue: this.variable.emphasize,
-                    'onUpdate:modelValue': (value) => {
-                        this.variable.emphasize = value
-                        this.$emit('update:modelValue', this.variable)
-                    }
-                }),
-
-
-            ] : [],
 
 
         ])

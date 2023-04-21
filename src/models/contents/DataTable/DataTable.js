@@ -45,6 +45,12 @@ export default class DataTable {
         return key
     }
 
+
+    deleteVariableWithKey(variableKey) {
+        delete this.variables[variableKey];
+        this.content.forEach((ct) => delete ct[variableKey])
+    }
+
     groupsMapForLanguage(language) {
         const groups = new Map();
 
@@ -133,6 +139,8 @@ export default class DataTable {
     }
 
 
+
+
     renderReadonlyVnode(language) {
         let vnodes = [];
 
@@ -147,5 +155,18 @@ export default class DataTable {
         return vnodes;
     }
 
+
+    toArray() {
+        let array = {};
+
+        array.variables = {};
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, value] = entry;
+            array.variables[key] = value.toArray();
+        });
+
+        array.content = this.content.map((entry) => entry.toArray());
+        return array;
+    }
 
 }
