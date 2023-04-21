@@ -87,7 +87,7 @@ export default {
 
                     ]),
                 this.slice.state.isPreviewing ? this.slice._buildVnodes(this.slice.state.isPreviewing) : h(Suspense, null, {
-                    default: () => h('div', { class: 'flex flex-col gap-2' }, this.slice.__buildEditorsVnode()),
+                    default: () => h('div', { class: '' }, this.slice.__buildEditorsVnode()),
                     fallback: () => h('template', null, LoadingIndicator)
                 })])
 

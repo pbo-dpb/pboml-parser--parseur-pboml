@@ -7,7 +7,7 @@ export default {
     render() {
 
         return h("div", {
-            'class': 'border-t border-gray-300 text-sm mt-2 pt-2'
+            'class': 'border-t border-gray-300 text-sm mt-2 pt-4'
         },
 
             [
