@@ -25,6 +25,7 @@ export default {
             if (this.label.en && this.label.fr) {
                 contentNodes = [
                     h('span', { innerText: this.label.en }),
+                    h('span', { role: 'separator', innerText: "•", class: 'text-gray-400' }),
                     h('span', { innerText: this.label.fr }),
                 ]
             } else {
@@ -35,7 +36,7 @@ export default {
 
         return [
             contentNodes ? h('div', { class: 'flex flex-row gap-2 ' }, [
-                h(this.isEditing ? 'div' : 'legend', { class: `flex flex-col gap-1 w-full ${this.isEditing ? '' : 'font-thin text-2xl'}` }, contentNodes),
+                h(this.isEditing ? 'div' : 'legend', { class: ` gap-1 w-full ${this.isEditing ? 'flex flex-col' : 'inline-flex gap-2 font-thin text-2xl'}` }, contentNodes),
             ]) : null
 
         ];
