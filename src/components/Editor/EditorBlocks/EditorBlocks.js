@@ -23,7 +23,7 @@ export default {
 
 
     render() {
-        return h('main', { 'class': 'flex flex-col gap-8 pb-8' }, [
+        return h('main', { 'class': 'flex flex-col gap-16 pb-16' }, [
             ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice) => {
                 let sliceEditingVnode = slice.renderEditingVnode();
                 sliceEditingVnode.props.onDeleteSlice = this.handleDeleteSlice;

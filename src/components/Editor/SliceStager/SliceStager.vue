@@ -1,19 +1,14 @@
 <template>
-    <div class="flex flex-col gap-2 border-l-2 pl-2" :class="{
-        'border-yellow-600': staging,
-        'border-blue-800': staging
-    }">
-        <Button :aria-pressed="staging" @click="staging = !staging">{{
-            strings.create_slice
-        }}
-            <PlusIcon class="w-6 h-6"></PlusIcon>
-        </Button>
-
-        <div class="grid grid-cols-4 gap-4" v-if="staging">
+    <div class="flex flex-col gap-2 border-t border-blue-300 pt-2">
+        <div class="flex flex-row text-xl font-thin text-blue-800 items-center gap-2">
+            <PlusIcon class="w-4 h-4"></PlusIcon> <span class=''>{{
+                strings.create_slice
+            }}</span>
+        </div>
+        <div class="grid grid-cols-8 gap-4">
             <TinyButton
                 class="rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 p-2 flex flex-col gap-2 w-full text-center"
                 v-for="button in buttons" @click="generateSliceFromButton(button)">
-                <PlusCircleIcon class="w-6 h-6"></PlusCircleIcon>
                 {{ button.label }}
             </TinyButton>
         </div>
@@ -27,12 +22,11 @@ import BitmapSlice from '../../../models/contents/BitmapSlice'
 import SvgSlice from '../../../models/contents/SvgSlice'
 import TableSlice from '../../../models/contents/TableSlice'
 
-import { PlusIcon, PlusCircleIcon } from '@heroicons/vue/24/solid'
+import { PlusIcon } from '@heroicons/vue/24/solid'
 
-import Button from "../Button.vue"
+import TinyButton from "../TinyButton.vue"
 
 import editorStrings from "../../../editor-strings.js"
-import TinyButton from '../TinyButton.vue'
 const language = document.documentElement.lang;
 
 
@@ -40,12 +34,13 @@ export default {
 
     data() {
         return {
-            staging: null,
             strings: editorStrings[language],
-
         }
     },
-    components: { Button, PlusIcon, TinyButton, PlusCircleIcon },
+    components: {
+        TinyButton,
+        PlusIcon,
+    },
 
     computed: {
         buttons() {
