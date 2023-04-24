@@ -63,7 +63,6 @@ export default class DataTableVariable {
                 labelSpan,
                 unitSpan,
             ])
-
         ]);
     }
 

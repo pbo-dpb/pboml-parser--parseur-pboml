@@ -130,6 +130,7 @@ export default class DataTable {
         const shouldUseGroupsPresentation = groups.size > 1;
 
         let nodes = [
+            this.__buildTableCaptionNodes(language),
             this.__buildTheadNode(shouldUseGroupsPresentation, language)
         ];
 
@@ -158,6 +159,17 @@ export default class DataTable {
     }
 
 
+    __buildTableCaptionNodes(language) {
+
+        let captionStrings = [
+            ...this.state.caption?.[language] ?? [],
+            this.getWholeTableUnitForLanguage(language)
+        ].filter(x => x);
+        if (!captionStrings.length) return [];
+
+        return h('caption', { class: 'sr-only' }, [captionStrings.join(', ')]);
+    }
+
 
     /**
      * We repeat the title's figure 
@@ -165,13 +177,16 @@ export default class DataTable {
     renderReadonlyVnode(language) {
         let vnodes = [];
 
+        let globalUnit = this.getWholeTableUnitForLanguage(language)
+
         vnodes.push(h('div', {
             class: 'overflow-x-auto'
         }, [
+            globalUnit ? h('div', { 'aria-hidden': true, class: 'font-thin text-gray-800 dark:text-gray-200 border-l-2 border-gray-200 dark:border-gray-700 mb-2 pl-2' }, `${globalUnit}`) : null,
             h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse  break-inside-avoid lg:table print:table print:text-sm` },
-                this.state.caption?.[language] ? h('caption', { class: 'sr-only' }, this.state.caption[language].join(', ')) : null,
-                ...this.__buildTableNodes(language),
-            )
+                this.__buildTableNodes(language),
+            ),
+
         ]));
 
         return vnodes;
