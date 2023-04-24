@@ -68,12 +68,24 @@ export default class Slice {
 
     }
 
+
+    get labelStrings() {
+        return {
+            en: [this.referenced_as['en'], this.label['en']].filter(x => x),
+            fr: [this.referenced_as['fr'], this.label['fr']].filter(x => x),
+        }
+    }
+
+    getLabelStringsSpanVnodesForLanguage(language) {
+        let labelStrings = this.labelStrings[language];
+        return labelStrings.map((str, index) => h('span', { class: '[&:not(:last-child)]:after:content-["–"] after:mx-1 after:text-gray-500' + (labelStrings.length > 1 ? ` first:font-normal` : '') }, str))
+    }
+
     _renderLabelTitleVnode(language, force = false) {
         if ((!this.display_label && !force) || !this.label?.[language]) return null;
 
         let labelNodeType = 'h2'
         let labelNodeClasses = ["font-thin break-after-avoid"]
-        let labelNodeContent = this.label[language];
 
         if (this.presentation) {
             labelNodeType = 'header'
@@ -84,12 +96,13 @@ export default class Slice {
 
         if (this.presentation === 'figure') {
             labelNodeType = "figcaption";
-            if (this.presentation === "figure" && this.referenced_as[language]) {
-                labelNodeContent = `<b>${this.referenced_as[language]}</b> &ndash; ${labelNodeContent}`;
-            }
         }
 
-        return h(labelNodeType, { innerHTML: labelNodeContent, class: labelNodeClasses.join(" ") });
+
+
+        return h(labelNodeType, { class: labelNodeClasses.join(" ") },
+            this.getLabelStringsSpanVnodesForLanguage(language)
+        );
     }
 
 

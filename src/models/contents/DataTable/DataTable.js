@@ -16,6 +16,10 @@ export default class DataTable {
         this.content = (payload?.content ?? []).map(entry => {
             return new DataTableEntry(entry);
         });
+
+        this.state = {
+            caption: null
+        }
     }
 
     get variableCount() {
@@ -67,11 +71,26 @@ export default class DataTable {
         return groups;
     }
 
+    getWholeTableUnitForLanguage(language) {
+
+        let units = [];
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, variable] = entry;
+            if (variable.is_descriptive) return;
+            const unit = (variable.unit?.[language] ?? '').trim()
+            if (!unit || units.includes(unit)) return;
+            units.push(unit)
+        });
+        if (units.length > 1) return null;
+
+        return units[0];
+    }
+
 
     __buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language) {
 
         let columns = [];
-        let headerCol = variable.getTableHeaderVnode('row', language);
+        let headerCol = variable.getTableHeaderVnode('row', language, !this.getWholeTableUnitForLanguage(language));
         if (isLg)
             headerCol.props['width'] = `${100 * (1 / (shouldUseGroupsPresentation ? 6 : 3))}%`;
         else
@@ -140,7 +159,9 @@ export default class DataTable {
 
 
 
-
+    /**
+     * We repeat the title's figure 
+     */
     renderReadonlyVnode(language) {
         let vnodes = [];
 
@@ -148,6 +169,7 @@ export default class DataTable {
             class: 'overflow-x-auto'
         }, [
             h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse  break-inside-avoid lg:table print:table print:text-sm` },
+                this.state.caption?.[language] ? h('caption', { class: 'sr-only' }, this.state.caption[language].join(', ')) : null,
                 ...this.__buildTableNodes(language),
             )
         ]));

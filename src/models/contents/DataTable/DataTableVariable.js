@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../../MarkdownDriver';
 import rendererStrings from '../../../renderer-strings';
+import isequal from 'lodash.isequal';
 
 const defaults = {
     display_label: true,
@@ -9,7 +10,8 @@ const defaults = {
     is_descriptive: false,
     group: null,
     emphasize: false,
-    chart_type: 'bar'
+    chart_type: 'bar',
+    unit: null
 }
 
 export default class DataTableVariable {
@@ -19,11 +21,6 @@ export default class DataTableVariable {
         this.label = {
             en: payload.label?.en,
             fr: payload.label?.fr
-        }
-
-        this.unit = {
-            en: payload.unit?.en,
-            fr: payload.unit?.fr
         }
 
         this.type = payload.type;
@@ -38,6 +35,10 @@ export default class DataTableVariable {
             en: payload.group?.en ?? '',
             fr: payload.group?.fr ?? ''
         } : null
+        this.unit = payload.unit ? {
+            en: payload.unit?.en ?? '',
+            fr: payload.unit?.fr ?? ''
+        } : null
     }
 
     static getCellBaseClass() {
@@ -45,10 +46,25 @@ export default class DataTableVariable {
     }
 
 
-    getTableHeaderVnode(scope = null, language) {
+    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true) {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
-        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky left-0 bg-gray-100 lg:bg-transparent dark:bg-gray-950`, scope: scope, innerHTML: this.display_label ? md.render(this.label[language]) : '' });
+
+
+        let labelSpan = h('span', { class: this.display_label ? '' : 'sr-only', innerHTML: md.render(this.label[language]) });
+
+        let unitSpan;
+        if (shouldIncludeUnit && this.unit?.[language]) {
+            unitSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 text-sm font-normal', innerHTML: md.render(this.unit[language]) });
+        }
+
+        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky left-0 bg-gray-100 lg:bg-transparent dark:bg-gray-950`, scope: scope }, [
+            h('div', { class: 'flex flex-col gap-1' }, [
+                labelSpan,
+                unitSpan,
+            ])
+
+        ]);
     }
 
 
@@ -104,14 +120,16 @@ export default class DataTableVariable {
             skip_chart: this.skip_chart,
             emphasize: this.emphasize,
             chart_type: this.chart_type,
+            unit: this.unit,
         }
 
-        // Remove default values from  output
+        // Remove default values and empty objects from output
         for (const [key, value] of Object.entries(defaults)) {
-            if (arrayout[key] == value) {
+            if (isequal(arrayout[key], value) || isequal(arrayout[key], { en: '', fr: '' }) || isequal(arrayout[key], { en: '' }) || isequal(arrayout[key], { fr: '' })) {
                 delete arrayout[key];
             }
         }
+
 
         return arrayout
     }

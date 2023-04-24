@@ -9,6 +9,7 @@ export default class TableSlice extends Slice {
         super(payload);
         this.type = "table"
         this.datatable = new DataTable(payload);
+        this.datatable.state.caption = this.labelStrings
     }
 
 
