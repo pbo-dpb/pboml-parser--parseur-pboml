@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../MarkdownDriver';
 
-const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid pboml-prose";
+const defaultProseClasses = "pboml-prose prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid ";
 
 export default class KvListVariablePair {
     constructor(prototype, payload) {
