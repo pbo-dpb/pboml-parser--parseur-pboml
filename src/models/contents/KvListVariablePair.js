@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../MarkdownDriver';
 
-const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid";
+const defaultProseClasses = "prose prose-sm dark:prose-invert max-w-none prose-a:font-normal prose-p:inline leading-none break-inside-avoid pboml-prose";
 
 export default class KvListVariablePair {
     constructor(prototype, payload) {
@@ -86,7 +86,7 @@ export default class KvListVariablePair {
     }
 
     getKvNode(language) {
-        return h('div', { 'class': 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 ' },
+        return h('div', { 'class': 'flex flex-col grid-cols-3 gap-.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2' },
             [
                 this.getKeyVnode(language),
                 this.getValueVnode(language)
