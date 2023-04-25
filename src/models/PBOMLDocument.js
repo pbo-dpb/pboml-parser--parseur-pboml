@@ -157,7 +157,15 @@ export default class PBOMLDocument {
 
     scrollToSliceAtIndex(index) {
         let slice = this.slices[index];
-        location.hash = slice.anchor
+
+        if (!location.hash || /^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) {
+            location.hash = slice.anchor
+        } else {
+            // Do not use hash navigation if hash seems to be used for single page application navigation purposes.
+            const evt = new CustomEvent("pbomlnavigate", { bubbles: true, detail: slice.anchor });
+            dispatchEvent(evt);
+        }
+
     }
 
     resetSlicesMoveability() {

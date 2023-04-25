@@ -94,8 +94,9 @@ export default {
   mounted() {
     const handleHashChangeFunc = this.handleHashChange
     addEventListener('hashchange', handleHashChangeFunc);
+    addEventListener('pbomlnavigate', handleHashChangeFunc);
     if (!this.firstInitializationCompleted && location.hash) {
-      this.handleHashChange();
+      this.handleHashChange(false);
     }
     // Avoid running scrolling on tab change; Chrome agressively re-runs
     this.firstInitializationCompleted = true;
@@ -104,6 +105,7 @@ export default {
   beforeUnmount() {
     const handleHashChangeFunc = this.handleHashChange
     removeEventListener('hashchange', handleHashChangeFunc);
+    removeEventListener('pbomlnavigate', handleHashChangeFunc);
   },
 
   methods: {
@@ -112,15 +114,24 @@ export default {
      *  content on hash change, as this will not work natively with the shadow dom.
      */
     handleHashChange(e) {
-      if (!location.hash || location.hash.startsWith("#!")) return;
-      const hash = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
+
+
+      let selector;
+      if (e == false || e?.type == 'hashchange') {
+        // Ignore shebang and common Vue Router navigations.
+        if (!location.hash || !/^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) return;
+        selector = location.hash.replace(/[^a-zA-Z0-9\-_]+/g, "");
+      } else if (e?.type === 'pbomlnavigate') {
+        selector = e.detail;
+      }
+
 
       const timeout = this.edit || !this.firstInitializationCompleted ? 850 : 10
-      if (!hash) return;
+      if (!selector) return;
       this.$nextTick(() => {
         setTimeout(() => {
-          let childel = this.$el.querySelector(`#${hash}`)
-          if (hash && childel) {
+          let childel = this.$el.querySelector(`#${selector}`)
+          if (selector && childel) {
             childel.scrollIntoView({
               behavior: 'smooth',
             });

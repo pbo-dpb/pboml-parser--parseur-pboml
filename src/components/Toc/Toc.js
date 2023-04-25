@@ -111,6 +111,13 @@ export default {
                         class: aClasses.join(' '),
                         href: `#${item.anchor}`,
                         id: `toci-${item.anchor}`,
+                        onClick: (e) => {
+                            if (location.hash && !/^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) {
+                                e.preventDefault();
+                                const evt = new CustomEvent("pbomlnavigate", { bubbles: true, detail: item.anchor });
+                                dispatchEvent(evt);
+                            }
+                        }
                     }, item.label),
                 ((item.children && level <= 2) ? h('ol', {}, ...item.children.map(e => this.buildVnodeForItem(e, level + 1))) : null)
             ])
