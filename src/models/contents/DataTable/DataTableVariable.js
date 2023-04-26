@@ -1,7 +1,7 @@
 import { h } from 'vue'
 import MarkdownDriver from '../../../MarkdownDriver';
 import rendererStrings from '../../../renderer-strings';
-import isequal from 'lodash.isequal';
+import deepEqual from 'deep-equal';
 
 const defaults = {
     display_label: true,
@@ -124,7 +124,8 @@ export default class DataTableVariable {
 
         // Remove default values and empty objects from output
         for (const [key, value] of Object.entries(defaults)) {
-            if (isequal(arrayout[key], value) || isequal(arrayout[key], { en: '', fr: '' }) || isequal(arrayout[key], { en: '' }) || isequal(arrayout[key], { fr: '' })) {
+
+            if (deepEqual(arrayout[key], value) || deepEqual(arrayout[key], { en: '', fr: '' }) || deepEqual(arrayout[key], { en: '' }) || deepEqual(arrayout[key], { fr: '' })) {
                 delete arrayout[key];
             }
         }
