@@ -2,6 +2,7 @@ import { h, defineAsyncComponent } from 'vue'
 import Details from '../../components/Details.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 import rendererStrings from '../../renderer-strings.js';
+import MarkdownDriver from '../../MarkdownDriver.js';
 
 const defaults = {
     presentation: null,
@@ -107,8 +108,9 @@ export default class Slice {
 
 
     __renderMetaContentArrayVnodes(contentArray, language) {
-
-        return h('div', { class: 'prose-sm', innerHTML: contentArray.map(src => src[language]).join("<br>") })
+        const md = new MarkdownDriver;
+        md.shouldBreakNewLines(false);
+        return h('div', { class: 'prose-sm prose-td:border prose-td:border-gray-300 dark:prose-td:border-gray-700 prose-th:border prose-th:border-gray-300 dark:prose-th:border-gray-700 prose-th:font-semibold prose-table:table-fixed prose-td:p-2 prose-th:p-2 prose-table:w-full prose-th:text-left', innerHTML: contentArray.map(src => md.render(src[language])).join("<br>") })
     }
 
     renderMetaVnodes(label, content, collapsible = false) {
