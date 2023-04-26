@@ -21,8 +21,8 @@ export default class SvgSlice extends Slice {
             doc.documentElement.setAttribute('viewBox', `0 0 ${doc.documentElement.getAttribute('width')} ${doc.documentElement.getAttribute('height')}`)
             doc.documentElement.removeAttribute('width');
             doc.documentElement.removeAttribute('height');
-
-            return h('div', { innerHTML: doc.documentElement.outerHTML, class: 'w-full dark:invert' });
+            doc.documentElement.classList.add('xl:w-2/3')
+            return h('div', { innerHTML: doc.documentElement.outerHTML, class: 'w-full dark:invert flex flex-col items-center' });
         } catch (error) {
             return h('div', { class: 'text-red-800 font-semibold text-4xl' }, () => h('span', {}, `⚠️`))
         }
