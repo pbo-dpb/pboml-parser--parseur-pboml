@@ -111,12 +111,12 @@ export default class Slice {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
         let classes = [
-            "prose-sm", "prose-td:border",
-            "prose-td:border-gray-300", "dark:prose-td:border-gray-700", "prose-td:p-2",
+            "prose-sm", "prose-p:my-0",
+            "prose-td:border", "prose-td:border-gray-300", "dark:prose-td:border-gray-700", "prose-td:p-2",
             "prose-th:border", "prose-th:border-gray-300", "dark:prose-th:border-gray-700", "prose-th:font-semibold", "prose-th:p-2", "prose-th:text-left",
             "prose-table:table-fixed", "prose-table:w-full",
         ]
-        return h('div', { class: classes, innerHTML: contentArray.map(src => md.render(src[language])).join("<br>") })
+        return h('div', { class: classes, innerHTML: contentArray.map(src => md.render(src[language])).join("") })
     }
 
     renderMetaVnodes(label, content, collapsible = false) {
