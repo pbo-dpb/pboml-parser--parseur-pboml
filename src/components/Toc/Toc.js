@@ -45,7 +45,7 @@ export default {
             flatArray.forEach((item) => {
                 const { level, ...rest } = item;
                 const node = {
-                    label: item.content[this.language],
+                    labels: this.buildLabelContent(item.content?.[this.language], item),
                     anchor: item.anchor
                 };
 
@@ -76,7 +76,7 @@ export default {
         labelTree() {
             return this.rawLabels.map((slice) => {
                 return {
-                    label: slice.label[this.language],
+                    labels: this.buildLabelContent(slice.label?.[this.language], slice),
                     anchor: slice.anchor
                 }
             })
@@ -95,6 +95,13 @@ export default {
         }
     },
     methods: {
+        buildLabelContent(content, slice) {
+            let labels = [];
+            if (slice.referenced_as?.[this.language])
+                labels.push(h('span', { class: 'font-light after:content-["•"] after:text-gray-500 after:mx-1' }, slice.referenced_as[this.language]))
+            labels.push(h('span', {}, content ?? '-'))
+            return labels;
+        },
         buildVnodeForItem(item, level = 0) {
             const levelSpecificClasses = liStyles[level];
             let aClasses = ['hover:text-blue-800', 'select-none', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
@@ -118,7 +125,7 @@ export default {
                                 dispatchEvent(evt);
                             }
                         }
-                    }, item.label),
+                    }, ...item.labels),
                 ((item.children && level <= 2) ? h('ol', {}, ...item.children.map(e => this.buildVnodeForItem(e, level + 1))) : null)
             ])
         },
