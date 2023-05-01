@@ -54,6 +54,15 @@ export default {
                     type: HeadingSlice
                 },
                 {
+                    label: this.strings.slice_type_table,
+                    type: TableSlice,
+                },
+                {
+                    label: this.strings.slice_type_svg,
+                    type: SvgSlice,
+                },
+
+                {
                     label: this.strings.slice_type_bitmap,
                     type: BitmapSlice
                 },
@@ -61,14 +70,8 @@ export default {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
                 },
-                {
-                    label: this.strings.slice_type_svg,
-                    type: SvgSlice,
-                },
-                {
-                    label: this.strings.slice_type_table,
-                    type: TableSlice,
-                }
+
+
 
             ]
         }
