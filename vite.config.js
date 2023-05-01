@@ -4,7 +4,6 @@ const path = require('path')
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: { https: true },
   base: "./",
   plugins: [vue({
     compilerOptions: {
