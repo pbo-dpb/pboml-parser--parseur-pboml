@@ -2,9 +2,9 @@
     <div class="flex flex-col gap-1">
         <div class="flex flex-row justify-between items-center">
             <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
-            <TinyButton :disabled="!canPaste" @click="handlePaste">
+            <TinyButton :disabled="!canPaste" @click="handlePaste" :title="editorStrings.paste_from_word">
                 <ClipboardDocumentListIcon class="w-4 h-4"></ClipboardDocumentListIcon>
-                <span class="sr-only">Paste</span>
+                <span class="sr-only">{{ editorStrings.paste_from_word }}</span>
             </TinyButton>
         </div>
 
@@ -17,6 +17,7 @@
 import TinyButton from "../TinyButton.vue"
 import { ClipboardDocumentListIcon } from '@heroicons/vue/24/outline'
 import Turndown from "turndown"
+import editorStrings from "../../../editor-strings"
 
 export default {
     props: ['modelValue', 'label'],
@@ -24,7 +25,8 @@ export default {
     data() {
         return {
             eluid: Math.random().toString(36).substring(2),
-            canPaste: true
+            canPaste: true,
+            editorStrings: editorStrings[document.documentElement.lang]
         }
     },
     components: {
