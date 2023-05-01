@@ -57,6 +57,8 @@ export default {
         'data_table_editor_emphasize': "Emphasize",
         'data_table_editor_delete': "Delete",
         'paste_from_word': "Paste from Word",
+        'collapse_all': 'Collapse all',
+        'expand_all': 'Expand all',
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -116,5 +118,7 @@ export default {
         'data_table_editor_emphasize': "Mettre en emphase",
         'data_table_editor_delete': "Supprimer",
         'paste_from_word': "Coller depuis Word",
+        'collapse_all': 'Collapse all',
+        'expand_all': 'Expand all',
     }
 }

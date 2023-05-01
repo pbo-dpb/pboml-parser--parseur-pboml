@@ -64,7 +64,8 @@ export default class Slice {
             callbacks: {
                 move: null,
                 delete: null
-            }
+            },
+            collapsed: false
         }
 
     }

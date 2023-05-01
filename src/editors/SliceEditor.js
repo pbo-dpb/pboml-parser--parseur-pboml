@@ -9,6 +9,7 @@ import MoveButton from "../components/Editor/MoveButton";
 
 
 import { ListBulletIcon } from "@heroicons/vue/24/solid";
+import SliceEditorCollapser from "./SliceEditorCollapser";
 
 export default {
     props: ["slice", "language"],
@@ -25,71 +26,81 @@ export default {
         }
 
 
+        return h('section', { class: 'relative' }, [
+            h(SliceEditorCollapser, { class: 'absolute -left-8 2xl:-left-16', 'aria-hidden': true, slice: this.slice }, () => []),
 
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
-            [
+            this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'selection-none relative h-24 overflow-hidden' }, [
+                h('div', { class: 'absolute bg-gradient-to-t from-white h-24 w-full z-10' }, ''),
+                this.slice._buildVnodes(this.language),
+            ]) : null,
 
-                h('legend',
-                    { class: `text-sm px-2 text-gray-600 flex flex-row gap-2 items-center w-full justify-between border-2 rounded py-2 ${presentationSpecificHeading.join(' ')}` },
-                    [
+            this.slice.state.collapsed ? null : h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
+                [
 
-                        h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),
+                    h('legend',
+                        { class: ` text-sm px-2 text-gray-600 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2 ${presentationSpecificHeading.join(' ')}` },
+                        [
 
-                        h('div', { class: 'flex flex-row gap-2' }, [
-                            h(DeleteButton, {
-                                'onDelete': (value) => {
-                                    this.$emit("delete-slice", this.slice);
-                                }
-                            }),
+                            h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),
 
-                            h(DuplicateButton, {
-                                'onDuplicate': (value) => {
-                                    this.$emit("duplicate-slice", this.slice);
-                                }
-                            }),
+                            h('div', { class: 'flex flex-row gap-2' }, [
+                                h(DeleteButton, {
+                                    'onDelete': (value) => {
+                                        this.$emit("delete-slice", this.slice);
+                                    }
+                                }),
 
-                            h(MoveButton, {
-                                canMoveUp: this.slice.state.canMoveUp,
-                                canMoveDown: this.slice.state.canMoveDown,
-                                'onMove': (direction) => {
-                                    this.$emit("move-slice", this.slice, direction);
-                                }
-                            }, () => []),
+                                h(DuplicateButton, {
+                                    'onDuplicate': (value) => {
+                                        this.$emit("duplicate-slice", this.slice);
+                                    }
+                                }),
 
-                            h('div', {
-                                'aria-hidden': true,
-                                'class': 'text-gray-400',
-                            }, "•"),
+                                h(MoveButton, {
+                                    canMoveUp: this.slice.state.canMoveUp,
+                                    canMoveDown: this.slice.state.canMoveDown,
+                                    'onMove': (direction) => {
+                                        this.$emit("move-slice", this.slice, direction);
+                                    }
+                                }, () => []),
 
-                            h(PreviewingButton, {
-                                'isPreviewing': this.slice.state.isPreviewing,
-                                'onPreviewing': (value) => {
-                                    this.slice.state.isEditingMeta = false;
-                                    this.slice.state.isPreviewing = value;
-                                }
-                            }, () => []),
+                                h('div', {
+                                    'aria-hidden': true,
+                                    'class': 'text-gray-400',
+                                }, "•"),
 
-                            h(MetaEditingButton, {
-                                'isEditing': this.slice.state.isEditingMeta,
-                                'onClick': (value) => {
-                                    this.slice.state.isPreviewing = false;
-                                    this.slice.state.isEditingMeta = !this.slice.state.isEditingMeta;
-                                }
-                            }),
+                                h(PreviewingButton, {
+                                    'isPreviewing': this.slice.state.isPreviewing,
+                                    'onPreviewing': (value) => {
+                                        this.slice.state.isEditingMeta = false;
+                                        this.slice.state.isPreviewing = value;
+                                    }
+                                }, () => []),
 
-
-
-
-                        ])
-
-
+                                h(MetaEditingButton, {
+                                    'isEditing': this.slice.state.isEditingMeta,
+                                    'onClick': (value) => {
+                                        this.slice.state.isPreviewing = false;
+                                        this.slice.state.isEditingMeta = !this.slice.state.isEditingMeta;
+                                    }
+                                }),
 
 
-                    ]),
-                this.slice.state.isPreviewing ? this.slice._buildVnodes(this.slice.state.isPreviewing) : h(Suspense, null, {
-                    default: () => h('div', { class: '' }, this.slice.__buildEditorsVnode()),
-                    fallback: () => h('template', null, LoadingIndicator)
-                })])
+
+
+                            ])
+
+
+
+
+
+                        ]),
+                    this.slice.state.isPreviewing ? this.slice._buildVnodes(this.slice.state.isPreviewing) : h(Suspense, null, {
+                        default: () => h('div', { class: '' }, this.slice.__buildEditorsVnode()),
+                        fallback: () => h('template', null, LoadingIndicator)
+                    }),
+                ])
+        ])
 
     }
 }

@@ -30,10 +30,25 @@
                             {{ strings.meta_section_title }}
                         </Tab>
                     </div>
-                    <TinyButton @click="shouldPresentDocumentStructure = !shouldPresentDocumentStructure">
-                        <Bars3Icon class="w-6 h-6"></Bars3Icon>
-                        <span class="sr-only">Structure</span>
-                    </TinyButton>
+                    <div class="flex flex-row items-center gap-2">
+
+                        <div class="flex flex-row gap-0.5" aria-hidden="true">
+                            <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)">
+                                <ArrowsPointingInIcon class="w-4 h-4"></ArrowsPointingInIcon>
+                                <span class="sr-only">{{ strings.collapse_all }}</span>
+                            </TinyButton>
+                            <TinyButton :title="strings.expand_all" @click="collapseSlices(false)">
+                                <ArrowsPointingOutIcon class="w-4 h-4"></ArrowsPointingOutIcon>
+                                <span class="sr-only">{{ strings.expand_all }}</span>
+                            </TinyButton>
+                        </div>
+                        <TinyButton title="Structure"
+                            @click="shouldPresentDocumentStructure = !shouldPresentDocumentStructure">
+                            <Bars3Icon class="w-4 h-4"></Bars3Icon>
+                            <span class="sr-only">Structure</span>
+                        </TinyButton>
+                    </div>
+
 
 
 
@@ -105,7 +120,7 @@ import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
 import AnnotationsEditor from "./AnnotationsEditor/AnnotationsEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
-import { Bars3Icon } from '@heroicons/vue/24/solid';
+import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/vue/24/solid';
 
 export default {
     props: {
@@ -136,6 +151,8 @@ export default {
         AnnotationsEditor,
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
+        ArrowsPointingInIcon,
+        ArrowsPointingOutIcon
     },
 
     watch: {
@@ -156,6 +173,11 @@ export default {
         }
     },
     methods: {
+        collapseSlices(collapse) {
+            this.pbomlDocument.slices.forEach(slice => {
+                slice.state.collapsed = collapse
+            });
+        },
         handlePbomlUpdate(newContent) {
             this.workingPboml = newContent;
         },
