@@ -46,7 +46,7 @@ export default class DataTableVariable {
     }
 
 
-    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true) {
+    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
         const md = new MarkdownDriver;
         md.shouldBreakNewLines(false);
 
@@ -55,11 +55,17 @@ export default class DataTableVariable {
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
-            unitSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 text-sm font-normal', innerHTML: md.render(this.unit[language]) });
+            unitSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.unit[language]) });
+        }
+
+        let groupSpan;
+        if (shouldIncludeGroup && this.group?.[language]) {
+            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
         return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky left-0 bg-gray-100 lg:bg-transparent dark:bg-gray-950`, scope: scope }, [
-            h('div', { class: 'flex flex-col gap-1' }, [
+            h('div', { class: 'flex flex-col gap-.5' }, [
+                groupSpan,
                 labelSpan,
                 unitSpan,
             ])

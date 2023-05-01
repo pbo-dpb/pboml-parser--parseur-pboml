@@ -16,8 +16,8 @@ export default {
         }
     },
     render() {
-
-        let strings = editorStrings[document.documentElement.lang];
+        const language = document.documentElement.lang;
+        let strings = editorStrings[language];
 
         // Actions thead cells
         let valueActionCells = [
@@ -51,15 +51,7 @@ export default {
             const [key, variable] = entry;
 
             let columns = [];
-            let headerCol = h('th', { class: `px-1 py-2 border-slate-300 border ${variable.emphasize ? 'bg-yellow-200' : 'bg-slate-200'}` }, [
-                h(BilingualInput, {
-                    modelValue: variable.label,
-                    'onUpdate:modelValue': (value) => {
-                        variable.label = value;
-                        this.$emit('update:modelValue', this.datatable.variables)
-                    }
-                }),
-            ]);
+            let headerCol = variable.getTableHeaderVnode('row', language, true, true)
 
             headerCol.props['width'] = `${100 / (this.datatable.bodyRowsCount + 1)}%`;
             columns.push(headerCol);
