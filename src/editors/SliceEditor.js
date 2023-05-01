@@ -27,7 +27,7 @@ export default {
 
 
         return h('section', { class: 'relative' }, [
-            h(SliceEditorCollapser, { class: 'absolute -left-8 2xl:-left-16', 'aria-hidden': true, slice: this.slice }, () => []),
+            h(SliceEditorCollapser, { class: 'absolute -left-8', 'aria-hidden': true, slice: this.slice }, () => []),
 
             this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'selection-none relative h-24 overflow-hidden' }, [
                 h('div', { class: 'absolute bg-gradient-to-t from-white h-24 w-full z-10' }, ''),
