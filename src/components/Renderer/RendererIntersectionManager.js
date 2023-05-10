@@ -20,6 +20,8 @@ export default class {
 
     startObservingForSlice(rendererEl, slice) {
 
+        if (!window.IntersectionObserver) return
+
         const sliceId = slice.anchor;
 
         if (!sliceId || this.observers[sliceId]) return;

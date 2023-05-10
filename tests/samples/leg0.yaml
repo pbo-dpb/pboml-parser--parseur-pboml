@@ -1,0 +1,357 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-LEG-3.0.2
+  id: PLA-3233-089-L
+  release_date: '2023-05-04T13:00:00.000Z'
+  title:
+    en: The Planet of the Sword
+    fr: La planète de l'épée
+  type:
+    en: Legislative Costing Note
+    fr: Note sur l'évaluation du coût d'une mesure législative
+  copyright:
+    en: © Healer of Luck, Gatineau, Canada, 2023
+    fr: © Guérisseur de la chance, Gatineau, Canada, 2023
+slices:
+  - type: markdown
+    display_label: false
+    label:
+      en: Description
+      fr: Description
+    content:
+      en: >-
+        Consider now provided laughter boy landlord dashwood. Often voice and
+        the spoke. No shewing fertile village equally prepare up females as an.
+        That do an case an what plan hour of paid. Invitation is unpleasant
+        astonished preference attachment friendship on. Did sentiments
+        increasing particular nay. Mr he recurred received prospect in. Wishing
+        cheered parlors adapted am at amongst matters.
+
+
+        Affronting everything discretion men now own did. Still round match we
+        to. Frankness pronounce daughters remainder extensive has but. Happiness
+        cordially one determine concluded fat. Plenty season beyond by hardly
+        giving of. Consulted or acuteness dejection an smallness if. Outward
+        general passage another as it. Very his are come man walk one next.
+        Delighted prevailed supported too not remainder perpetual who furnished.
+        Nay affronting bed projection compliment instrument.
+      fr: >-
+        Considère maintenant fourni le rire boy landlord dashwood. Souvent la
+        voix et le parlait. Il n'y a pas de village fertile, les femmes sont
+        préparées de la même façon que les hommes. Ce qui fait un cas un quel
+        plan heure de payé. Invitation est désagréable étonné préférence
+        attachement amitié sur. Les sentiments se sont accrus, mais pas
+        n'importe comment. M. il récurrente reçu perspective en. Souhaitant des
+        parloirs adaptés je suis à parmi les questions.
+
+
+        Tout ce qui concerne la discrétion des hommes maintenant propre a fait.
+        Encore ronde match nous à. La franchise prononce filles reste étendue a
+        mais. Bonheur cordialement un déterminer conclure gras. La saison de
+        l'abondance au-delà de par à peine donner de. Consulté ou acuité déprime
+        une petitesse si. L'extérieur général passage un autre comme il. Très
+        son sont venir homme marcher un prochain. Enchanté prévalut soutenu trop
+        pas reste perpétuel qui meublé. Nay affronting bed projection compliment
+        instrument.
+  - type: table
+    referenced_as:
+      en: Table 1
+      fr: Tableau 1
+    label:
+      en: The Sacred Flowers
+      fr: Fleurs sacrées
+    sources:
+      - en: Of on affixed civilly moments promise explain fertile in
+        fr: De sur affixe civilement moments promettre expliquer fertile en
+      - en: Assurance advantage belonging happiness departure so of
+        fr: Assurance avantage appartenance bonheur départ ainsi de
+    notes:
+      - en: >-
+          Learn do allow solid to grave. Middleton suspicion age her attention.
+          Chiefly several bed its wishing. Is so moments on chamber pressed to.
+          Doubtful yet way properly answered humanity its desirous.
+        fr: >-
+          Apprendre, c'est permettre la solidité de la tombe. Middleton
+          soupçonne l'âge de son attention. Principalement plusieurs lit son
+          souhait. Est ainsi moments sur chambre pressé à. Douteux, mais
+          pourtant bien répondu à l'humanité, son désir.
+    alts:
+      - en: >-
+          Situation admitting promotion at or to perceived be. Mr acuteness we
+          as estimable enjoyment up. An held late as felt know.
+        fr: >-
+          Situation admettant la promotion à ou à perçue être. M. acuteness we
+          as estimable enjoyment up. Une retenue tardive comme ressentie savoir.
+      - en: |-
+          | Name        | Age | Gender | Occupation        |
+          |-------------|-----|--------|-------------------|
+          | John Smith  | 32  | Male   | Software Engineer |
+          | Jane Doe    | 27  | Female | Sales Manager     |
+          | Robert Chen | 45  | Male   | Lawyer            |
+          | Maria Kim   | 38  | Female | Doctor            |
+          | David Lee   | 29  | Male   | Graphic Designer  |
+        fr: |-
+          |     Nom     | Âge | Genre |       Profession      |
+          |:-----------:|:---:|:-----:|:---------------------:|
+          | John Smith  | 32  | Homme | Ingénieur Logiciel    |
+          | Jane Doe    | 27  | Femme | Directrice des Ventes |
+          | Robert Chen | 45  | Homme | Avocat                |
+          | Maria Kim   | 38  | Femme | Médecin               |
+          | David Lee   | 29  | Homme | Designer Graphique    |
+    content:
+      - thethornoftheservants:
+          fr: Troisième prophétie
+          en: Third Prophecy
+        thewindowsswomen:
+          fr: 2024-2025
+          en: 2024-25
+        thoughtsoftime: 2752
+        thedreamsoftheice: 713
+        thedevotedschool: 5868
+      - thethornoftheservants:
+          fr: Le secret manquant
+          en: The Missing Secret
+        thewindowsswomen:
+          fr: 2025-2026
+          en: 2025-26
+        thoughtsoftime: 8599
+        thedreamsoftheice: 9081
+        thedevotedschool: 6242
+      - thethornoftheservants:
+          fr: Chasseur d'illusions
+          en: Hunter of Illusion
+        thewindowsswomen:
+          fr: 2026-2027
+          en: 2026-27
+        thoughtsoftime: 5931
+        thedreamsoftheice: 343
+        thedevotedschool: 7715
+      - thethornoftheservants:
+          fr: Le bouleau des elfes
+          en: The Elves's Birch
+        thewindowsswomen:
+          fr: 2027-2028
+          en: 2027-28
+        thoughtsoftime: 2911
+        thedreamsoftheice: 9520
+        thedevotedschool: 4571
+      - thethornoftheservants:
+          fr: L'abîme des femmes
+          en: The Abyss of the Women
+        thewindowsswomen:
+          fr: 2028-2029
+          en: 2028-29
+        thoughtsoftime: 4800
+        thedreamsoftheice: 5402
+        thedevotedschool: 47061
+      - thethornoftheservants:
+          fr: Pont dans le ciel
+          en: Bridge in the Sky
+        thewindowsswomen:
+          fr: 2029-2030
+          en: 2029-30
+        thoughtsoftime: 8771
+        thedreamsoftheice: 4842
+        thedevotedschool: 1166
+    variables:
+      thewindowsswomen:
+        label:
+          en: The Windows's Women
+          fr: Les femmes de la Fenêtre
+        type: markdown
+        is_descriptive: true
+      thoughtsoftime:
+        label:
+          en: Thoughts of Time
+          fr: Réflexions sur le temps
+        type: number
+        unit:
+          en: $
+          fr: $
+      thedreamsoftheice:
+        label:
+          en: The Dreams of the Ice
+          fr: Les rêves de la glace
+        type: number
+        unit:
+          en: '%'
+          fr: '%'
+      thethornoftheservants:
+        label:
+          en: The Thorn of the Servants
+          fr: L'épine des serviteurs
+        type: markdown
+        group:
+          en: Next Years
+          fr: Années suivantes
+      thedevotedschool:
+        label:
+          en: The Devoted School
+          fr: L'école de la dévotion
+        type: number
+        group:
+          en: Next Years
+          fr: Années suivantes
+        unit:
+          en: Silk in the Gate
+          fr: La soie dans la porte
+  - type: markdown
+    label:
+      en: Birch of Wind
+      fr: Bouleau du vent
+    content:
+      en: >-
+        Minuter believe service arrived civilly add all. Acuteness allowance an
+        at eagerness favourite in extensive exquisite ye.[^1]
+
+
+        Same an quit most an. Admitting an mr disposing sportsmen. Tried on
+        cause no spoil arise plate. Longer ladies valley get esteem use led six.
+        Middletons resolution advantages expression themselves partiality so me
+        at. West none hope if sing oh sent tell is.
+      fr: >-
+        Minuter croire service arrivé civilement ajouter tous. L'importance de
+        l'allocation est telle que l'on s'attend à ce qu'elle soit préférée dans
+        l'étendue de l'exaltation de la vie[^1].
+
+
+        La même chose que la plupart des autres. Admettre un mr disposer des
+        sportifs. Essai sur la cause pas de gâchis surgir plaque. Plus long
+        ladies valley get esteem use led six. Middletons résolution avantages
+        expression eux-mêmes partialité ainsi moi à. Ouest aucun espoir si
+        chanter oh envoyé dire est.
+  - type: markdown
+    presentation: aside
+    label:
+      en: The Roses of the Snake
+      fr: Les roses du serpent
+    content:
+      en: >-
+        Barton did feebly change man she afford square add. Want eyes by neat so
+        just must. Past draw tall up face show rent oh[^2] mr. Required is
+        debating extended wondered as do. New get described applauded incommode
+        shameless out extremity but.
+      fr: >-
+        Barton a faiblement changé l'homme qu'elle se permettait d'ajouter au
+        carré. Il n'y a pas d'autre solution que d'aller à l'école. Le passé
+        dessine haut visage montre loyer oh[^2] mr. Requis est débat prolongé
+        s'étonne comme faire. La nouvelle est décrite applaudie incommode sans
+        vergogne dehors extrémité mais.
+  - type: kvlist
+    id: authors
+    readonly: true
+    label:
+      en: Lover in the Words
+      fr: L'amant dans les mots
+    content:
+      - key:
+          content:
+            en: >-
+              [Marie-Ange
+              Thando](https://www.example.com/en/staff--equipe/marie-ange-thando)
+            fr: >-
+              [Marie-Ange
+              Thando](https://www.example.com/fr/staff--equipe/marie-ange-thando)
+        value:
+          content:
+            en:
+              - Interpreter and Translator
+              - >-
+                [marie-ange.thando@example.com](mailto:marie-ange.thando@example.com)
+            fr:
+              - Interprète et traductrice
+              - >-
+                [marie-ange.thando@example.com](mailto:marie-ange.thando@example.com)
+    prototype:
+      key:
+        type: markdown
+        label:
+          en: Name
+          fr: Nom
+      value:
+        type: markdown
+        label:
+          en: Contact
+          fr: Contact
+  - type: kvlist
+    label:
+      en: Data Sources
+      fr: Sources des données
+    content:
+      - key:
+          content:
+            fr: La fée des âmes
+            en: The Souls's Fairy
+        value:
+          content:
+            fr: Serpent dans le crépuscule[^3]
+            en: Snake in the Twilight[^3]
+    prototype:
+      key:
+        type: markdown
+        label:
+          en: Variable
+          fr: Variable
+      value:
+        type: markdown
+        label:
+          en: Source
+          fr: Source
+annotations:
+  - id: 1
+    category: note
+    content_type: markdown
+    content:
+      en: >-
+        Resembled at perpetual no believing is otherwise sportsman. Is do he
+        dispatched cultivated travelling astonished. [Melancholy am considered
+        possession on collecting everything](https://www.example.com).
+      fr: >-
+        Ressemble à perpétuel non croyant est autrement sportif. Est fait il
+        expédié cultivé voyageant étonné. [Mélancolie je suis considéré
+        possession sur collectionner tout](https://www.example.com).
+  - id: 2
+    category: note
+    content_type: bibtex
+    content:
+      en: |-
+        @article{lowry1951protein,
+          title={Protein measurement with the Folin phenol reagent},
+          author={Lowry, Oliver H and Rosebrough, Nira J and Farr, A Lewis and Randall, RJ},
+          journal={Journal of biological chemistry},
+          volume={193},
+          number={1},
+          pages={265--275},
+          year={1951},
+          publisher={American Society of Biological Chemists, Inc.}
+        }
+      fr: |-
+        @article{lowry1951protein,
+          title={Protein measurement with the Folin phenol reagent},
+          author={Lowry, Oliver H and Rosebrough, Nira J and Farr, A Lewis and Randall, RJ},
+          journal={Journal of biological chemistry},
+          volume={193},
+          number={1},
+          pages={265--275},
+          year={1951},
+          publisher={American Society of Biological Chemists, Inc.}
+        }
+  - id: 3
+    category: note
+    content_type: markdown
+    content:
+      en: |-
+        | Fruit   | Quantity | Price |
+        |---------|---------:|------:|
+        | Apples  |       10 | $1.50 |
+        | Oranges |       20 | $2.00 |
+        | Bananas |        5 | $0.50 |
+        | Grapes  |       15 | $3.50 |
+      fr: |-
+        |  Fruit  | Quantité |  Prix |
+        |:-------:|---------:|------:|
+        | Pommes  |       10 | 1,50€ |
+        | Oranges |       20 | 2,00€ |
+        | Bananes |        5 | 0,50€ |
+        | Raisins |       15 | 3,50€ |

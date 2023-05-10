@@ -15,5 +15,9 @@ export default defineConfig({
     rollupOptions: {
       input: ['./src/main.js', './index.html', 'index.fr.html', 'editor.html'],
     },
+  },
+  test: {
+    globals: true,
+    environment: 'happy-dom'
   }
 })
