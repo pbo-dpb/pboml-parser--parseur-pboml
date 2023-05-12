@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PBOML Parser</title>
+
+</head>
+
+<body class="dark:bg-gray-900">
+  <style>
+    @page {
+      size: 8.5in 11in;
+      margin: 1.2cm;
+    }
+  </style>
+
+
+  <div class="container mx-auto px-4 lg:px-0 grid grid-cols-6 my-8 gap-4">
+
+    <div class="col-span-4" id="body-container">
+    </div>
+    <nav class="col-span-2" id="toc-container">
+    </nav>
+  </div>
+</body>
+
+</html>
+
+<script>
+
+  test = (new URLSearchParams(window.location.search)).get('test');
+  if (!test) test = 'leg0';
+
+  async function loadTestPayload() {
+    document.title = `${test} - PBOML`;
+    const response = await fetch(`./tests/samples/${test.replace(/[^0-9a-zA-Z\_\-]/gm, '')}.yaml`);
+    const rawPayload = await response.text();
+    const encodedPayload = btoa(unescape(encodeURIComponent(rawPayload)));
+    const mainEl = document.getElementById('body-container');
+    mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}"></pboml-parser>`;
+    const sideEl = document.getElementById('toc-container');
+    sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
+  }
+
+  loadTestPayload();
+
+
+</script>
+
+<script type="module" src="/src/main.js"></script>
