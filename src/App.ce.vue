@@ -58,7 +58,7 @@ export default {
     prefix: {
       type: String,
       default: null
-    }
+    },
   },
   components: {
     Editor: defineAsyncComponent(() => import('./components/Editor/Editor.vue')),
@@ -139,8 +139,6 @@ export default {
         }, timeout);
 
       })
-
-
     },
 
 
@@ -164,7 +162,7 @@ export default {
       }
 
     }
-  }
+  },
 }
 </script>
 <style>

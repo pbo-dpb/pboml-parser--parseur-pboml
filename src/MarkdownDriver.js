@@ -1,5 +1,6 @@
 import { Remarkable } from 'remarkable';
 import { linkify } from 'remarkable/linkify';
+import Callbacks from './Callbacks';
 
 
 export default class MarkdownDriver {
@@ -47,7 +48,10 @@ export default class MarkdownDriver {
 
 
     render(content) {
-        return this.engine[this.renderInline ? 'renderInline' : 'render'](content);
+        content = Callbacks.getBeforeMarkdownRendering ? Callbacks.getBeforeMarkdownRendering(content) : content;
+        content = this.engine[this.renderInline ? 'renderInline' : 'render'](content);
+        content = Callbacks.getAfterMarkdownRendering ? Callbacks.getAfterMarkdownRendering(content) : content;
+        return content;
     }
 
 

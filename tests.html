@@ -49,6 +49,12 @@
   loadTestPayload();
 
 
+  document.pbomlCallbacks = {
+    afterMarkdownRendering: function (content) {
+      return content.replace('smallness', '<span class="text-xl font-semibold bg-gray-100 rounded p-1">to</span>')
+    }
+  }
+
 </script>
 
 <script type="module" src="/src/main.js"></script>
