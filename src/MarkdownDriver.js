@@ -48,9 +48,11 @@ export default class MarkdownDriver {
 
 
     render(content) {
+
         content = Callbacks.getBeforeMarkdownRendering ? Callbacks.getBeforeMarkdownRendering(content) : content;
         content = this.engine[this.renderInline ? 'renderInline' : 'render'](content);
         content = Callbacks.getAfterMarkdownRendering ? Callbacks.getAfterMarkdownRendering(content) : content;
+
         return content;
     }
 
