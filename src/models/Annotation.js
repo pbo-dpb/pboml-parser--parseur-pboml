@@ -67,7 +67,6 @@ export default class Annotation {
 
     renderMarkdown(language) {
         let markdownDriver = new MarkdownDriver();
-        markdownDriver.shouldRenderInline();
         markdownDriver.shouldConvertUrls();
         return markdownDriver.render(this.content[language] ? this.content[language] : this.content)
     }
