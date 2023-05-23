@@ -43,7 +43,8 @@ export default class Annotation {
         link.setAttribute('id', this.getReferenceAnchor(this.state.ref_count));
         link.setAttribute("role", "doc-noteref");
         link.setAttribute("aria-describedby", "pb__annotations-label");
-        link.innerText = this.id;
+        const textnode = document.createTextNode(this.id);
+        link.appendChild(textnode)
         sup.appendChild(link);
 
         this.state.ref_count++;
