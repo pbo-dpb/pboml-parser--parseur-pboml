@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-    .pboml-prose {
+    .pboml-prose, .pboml-non-reactive-prose {
       @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
     }
 }
