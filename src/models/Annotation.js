@@ -43,9 +43,7 @@ export default class Annotation {
         link.setAttribute('id', this.getReferenceAnchor(this.state.ref_count));
         link.setAttribute("role", "doc-noteref");
         link.setAttribute("aria-describedby", "pb__annotations-label");
-        // In test environment link is sometimes unavailable for some reason.
-        if (link && link.innerText)
-            link.innerText = this.id;
+        link.innerText = this.id;
         sup.appendChild(link);
 
         this.state.ref_count++;

@@ -18,7 +18,6 @@ export default class AnnotationAnchorsRenderer {
             if (!this.mainEl) return;
 
             this.mainEl.querySelectorAll(".pboml-prose").forEach(el => {
-
                 while (el.innerHTML.includes(`[^${annotation.id}]`)) {
                     el.innerHTML = el.innerHTML.replace(`[^${annotation.id}]`, annotation.getAnchorDomElement().outerHTML)
                 }
