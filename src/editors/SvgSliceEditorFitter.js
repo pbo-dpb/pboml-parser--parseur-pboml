@@ -21,8 +21,8 @@ export default {
                         setTimeout(() => {
                             this.$refs.renderer.classList.add('hidden');
                             this.$emit('fit', this.$refs.renderer.querySelector('svg').outerHTML)
-                        }, "200");
-                    }, "200");
+                        }, 200);
+                    }, 200);
 
                 },
             }, () => [
