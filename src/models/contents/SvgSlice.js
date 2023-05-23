@@ -9,6 +9,7 @@ export default class SvgSlice extends Slice {
             fr: payload.content?.fr
         }
         this.type = "svg"
+        this.state.renderedAnchorIdPrefix = `svg-slice-render-${Math.random().toString(36).substring(2)}-`;
     }
 
     renderReadonlyVnode(language) {
@@ -17,8 +18,7 @@ export default class SvgSlice extends Slice {
             const parser = new DOMParser();
 
             let doc = parser.parseFromString(this.content[language], "image/svg+xml")
-
-            doc.documentElement.setAttribute('viewBox', `0 0 ${doc.documentElement.getAttribute('width')} ${doc.documentElement.getAttribute('height')}`)
+            doc.documentElement.setAttribute('id', this.state.renderedAnchorIdPrefix + language);
             doc.documentElement.removeAttribute('width');
             doc.documentElement.removeAttribute('height');
             doc.documentElement.classList.add('xl:w-2/3')
