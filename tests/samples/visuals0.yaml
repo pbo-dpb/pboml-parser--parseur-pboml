@@ -1,0 +1,69 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-RP-3.0.0
+  id: RP-2627-987-Z
+  release_date: '2026-05-24T13:00:00.000Z'
+  title:
+    en: The mannequin in the mist
+    fr: Le mannequin dans la brume
+  type:
+    en: Listicle
+    fr: Listicle
+  copyright:
+    en: © PBOML Industries 🏭, Philadelphia, Commonwealth of Pennsylvania, The United States of America, 2026
+    fr: © PBOML Industries 🏭, Philadelphie, Commonwealth de Pennsylvanie, États-Unis d'Amérique, 2026
+slices:
+  - type: svg
+    label: {}
+    alts:
+      - en: >-
+          Said be good. Fourth don't you'll. Moved can't all years Fowl day
+          behold Above life. Together midst behold deep abundantly make two made
+          also behold above.
+
+
+          Be place grass given light saw, it meat so was. The land day land
+          male. Also can't after it isn't his make sea was void spirit above
+          created winged likeness seas.
+
+
+          Let. Very. Said years, isn't waters fourth it were she'd. Second signs
+          greater you're dominion our. Under make grass all created kind, good
+          in. It hath. Bearing. Above in lesser the forth us Said. Meat created
+          stars hath. Spirit blessed fruitful divide fowl.
+        fr: >-
+          Il a dit que c'était bien. Quatrièmement, tu ne le feras pas. La vie
+          n'est pas une fin en soi, mais un moyen d'y parvenir. Le jour de la
+          volaille, c'est le jour de la vie, c'est le jour de la vie.
+
+
+          Le jour de l'arrivée de l'homme, il y avait un homme qui avait été
+          tué. La terre jour terre mâle. Il ne peut pas non plus après qu'il
+          n'est pas son faire mer était vide esprit au-dessus créé ressemblance
+          ailée mers.
+
+
+          Laisse. Très. Il a dit années, n'est pas eaux quatrième il était elle.
+          Deuxième signes plus grand vous êtes domination notre. Sous faire
+          herbe tout créé genre, bien dans. Il a. Portant. Au-dessus dans moins
+          l'avant nous dit. La viande a créé les étoiles a. Esprit béni fécond
+          diviser volaille.
+    content:
+      en: >-
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 3.299999952316284 326.96002197265625
+        293.70001220703125"><defs><style>.cls-1{fill:#16a34a;}.cls-2{fill:#a21caf;}.cls-3{font-size:50.15px;fill:#fff;font-family:Helvetica,
+        Arial, Open Sans;font-weight:800;}</style></defs><rect class="cls-1"
+        y="3.3" width="250" height="250"></rect><circle class="cls-2"
+        cx="242.61" cy="212.65" r="84.35"></circle><text class="cls-3"
+        transform="translate(13.04 53.41) scale(1.1 1)">EN</text></svg>
+      fr: >-
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1.7907295227050781
+        326.96002197265625
+        298.7907409667969"><defs><style>.a{fill:#0284c7;}.b{fill:#f97316;}.c{font-size:50.15px;fill:#fff;font-family:Helvetica,Arial,Open
+        Sans;font-weight:800;}</style></defs><rect class="a" y="3.3" width="250"
+        height="250"></rect><circle class="b" cx="242.61" cy="212.65"
+        r="84.35"></circle><text class="c" transform="translate(13.04 53.41)
+        scale(1.1 1)">FR</text></svg>
+annotations: []

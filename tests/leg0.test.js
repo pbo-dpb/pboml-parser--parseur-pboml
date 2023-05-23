@@ -4,7 +4,7 @@ import Renderer from '../src/components/Renderer/Renderer.js'
 import leg0 from './samples/leg0.yaml?raw'
 import PBOMLDocument from '../src/models/PBOMLDocument.js'
 
-test('it should work', () => {
+test('leg0-e', () => {
 
     let pbomlDocument = PBOMLDocument.initFromYaml(leg0);
     const { getByText } = render(Renderer, {
@@ -13,7 +13,19 @@ test('it should work', () => {
             language: 'en'
         }
     })
-
     // assert output
     getByText('The Sacred Flowers')
+})
+
+test('leg0-f', () => {
+
+    let pbomlDocument = PBOMLDocument.initFromYaml(leg0);
+    const { getByText } = render(Renderer, {
+        props: {
+            pbomlDocument,
+            language: 'fr'
+        }
+    })
+    // assert output
+    getByText('Fleurs sacrées')
 })

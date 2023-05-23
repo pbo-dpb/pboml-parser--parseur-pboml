@@ -31,8 +31,13 @@
 </html>
 
 <script>
+  const params = new URLSearchParams(window.location.search);
 
-  test = (new URLSearchParams(window.location.search)).get('test');
+  let lang = params.get('lang');
+  if (!lang) lang = 'en';
+  document.documentElement.setAttribute('lang', lang);
+
+  let test = params.get('test');
   if (!test) test = 'leg0';
 
   async function loadTestPayload() {
