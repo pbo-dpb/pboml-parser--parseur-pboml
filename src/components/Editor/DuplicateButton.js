@@ -7,9 +7,10 @@ export default {
 
     render() {
         let actionNode = h(TinyButton, {
-            'aria-label': strings[document.documentElement.lang].delete_slice_button_label,
+            'aria-label': strings[document.documentElement.lang].duplicate_slice_button_label,
+            'title': strings[document.documentElement.lang].duplicate_slice_button_label,
             onClick: (e) => {
-                if (window.confirm('Duplicate?')) {
+                if (window.confirm(`${strings[document.documentElement.lang].duplicate_slice_button_label}?`)) {
                     this.$emit("duplicate")
                 }
             },

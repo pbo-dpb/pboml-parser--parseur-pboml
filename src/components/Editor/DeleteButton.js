@@ -8,9 +8,10 @@ export default {
     render() {
         let actionNode = h(TinyButton, {
             'aria-label': strings[document.documentElement.lang].delete_slice_button_label,
+            'title': strings[document.documentElement.lang].delete_slice_button_label,
             danger: true,
             onClick: (e) => {
-                if (window.confirm('Delete?')) {
+                if (window.confirm(`${strings[document.documentElement.lang].delete_slice_button_label}?`)) {
                     this.$emit("delete")
                 }
             },
