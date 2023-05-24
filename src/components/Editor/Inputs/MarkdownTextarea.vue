@@ -9,7 +9,7 @@
         </div>
 
         <textarea ref="payloadArea" :value="modelValue" :id="eluid" class="border border-gray-300 p-1 rounded h-96"
-            @input="emitUpdate($event.target.value)" @paste="handlePasta">
+            @input="emitUpdate($event.target.value)">
         </textarea>
     </div>
 </template>
@@ -36,6 +36,42 @@ export default {
         emitUpdate(value) {
             this.$emit('update:modelValue', value)
         },
+        sanitizeAndInsertMarkdown(markdown) {
+            /**
+                                     * Markdown customizations
+                                     */
+
+            // More regular Word
+            markdown = markdown.replaceAll('•	', '- ')
+                .replaceAll('o	', '- ')
+                .replaceAll('	', '- ')
+                // Catch weird word list rendering.
+                .replaceAll('·        ', '- ')
+                .replaceAll('·         ', '- ')
+                .replaceAll('o   ', '  - ')
+                .replaceAll('§  ', '    - ');
+
+
+            // Remove all pasted references.
+            markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
+            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[a-z]{1,}\\\\\\]\\]\\(file:\\/\\/([^|)])+\\)', 'g')), '🟠')
+
+            /**
+             * Replace or insert at current selection
+             */
+            let textarea = this.$refs.payloadArea;
+            if (textarea.selectionStart || textarea.selectionStart == '0') {
+                var startPos = textarea.selectionStart;
+                var endPos = textarea.selectionEnd;
+                textarea.value = textarea.value.substring(0, startPos)
+                    + markdown.trim()
+                    + textarea.value.substring(endPos, textarea.value.length);
+            } else {
+                textarea.value += markdown.trim();
+            }
+
+            this.emitUpdate(textarea.value)
+        },
         async handlePaste() {
             try {
                 const permission = await navigator.permissions.query({
@@ -49,26 +85,22 @@ export default {
 
                 const clipboardContents = await navigator.clipboard.read();
                 for (const item of clipboardContents) {
+
                     if (item.types.includes("text/html")) {
+
                         const blob = await item.getType("text/html");
 
                         // Convert HTML to Markdown
                         const turndownService = new Turndown()
-                        const markdown = turndownService.turndown(await blob.text())
+                        const blobText = await blob.text();
 
-                        // Replace or insert at current selection
-                        let textarea = this.$refs.payloadArea;
-                        if (textarea.selectionStart || textarea.selectionStart == '0') {
-                            var startPos = textarea.selectionStart;
-                            var endPos = textarea.selectionEnd;
-                            textarea.value = textarea.value.substring(0, startPos)
-                                + markdown
-                                + textarea.value.substring(endPos, textarea.value.length);
-                        } else {
-                            textarea.value += markdown;
-                        }
-
-                        this.emitUpdate(textarea.value)
+                        let markdown = turndownService.turndown(blobText)
+                        this.sanitizeAndInsertMarkdown(markdown);
+                        break;
+                    } else if (item.types.includes('text/plain')) {
+                        const blob = await item.getType("text/html");
+                        const markdown = await blob.text();
+                        this.sanitizeAndInsertMarkdown(markdown);
                         break;
                     }
 
