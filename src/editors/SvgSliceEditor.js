@@ -1,8 +1,10 @@
 import { h } from 'vue'
 import strings from "../editor-strings"
 import Details from '../components/Details'
-import SvgSliceEditorFitter from "./SvgSliceEditorFitter"
+import SvgFitter from "./SvgSliceTools/SvgFitter"
+import SvgWhiteRemover from "./SvgSliceTools/SvgWhiteRemover"
 import { ExclamationCircleIcon } from '@heroicons/vue/24/solid'
+import SvgSanitizer from './SvgSliceTools/SvgSanitizer'
 
 export default {
     props: ['slice'],
@@ -43,15 +45,26 @@ export default {
                 this.slice.content[language] ? h('div', { class: 'p-4', style: "background-color: rgba(249,250,251,0.1);background-image: repeating-linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9), repeating-linear-gradient(45deg, #f1f5f9 25%, rgba(249,250,251,0.1) 25%, rgba(249,250,251,0.1) 75%, #f1f5f9 75%, #f1f5f9);background-position: 0 0, 15px 15px;background-size: 30px 30px;" }, [
                     this.slice.renderReadonlyVnode(language),
                 ]) : h(ExclamationCircleIcon, { class: 'w-8 h-8 text-yellow-500' }),
-                h(Details, { label: strings[document.documentElement.lang].svg_slice_show_more_options_button_label }, {
-                    default: () => h('div', { class: 'w-full flex flex-col gap-2' }, [
-                        this.slice.content[language] ? h(SvgSliceEditorFitter, {
+
+                this.slice.content[language] ? h(Details, { label: strings[document.documentElement.lang].svg_slice_show_more_options_button_label }, {
+                    default: () => h('div', { class: 'w-full flex flex-wrap gap-2' }, [
+                        h(SvgFitter, {
                             svg: this.slice.content[language], 'onFit': (thenew) => {
                                 this.slice.content[language] = thenew;
                             }
-                        }) : null,
+                        }),
+                        h(SvgWhiteRemover, {
+                            svg: this.slice.content[language], 'onDone': (thenew) => {
+                                this.slice.content[language] = thenew;
+                            }
+                        }),
+                        h(SvgSanitizer, {
+                            svg: this.slice.content[language], 'onSanitize': (thenew) => {
+                                this.slice.content[language] = thenew;
+                            }
+                        }),
                     ])
-                }),
+                }) : null,
                 h(Details, {
                     label: strings[document.documentElement.lang].svg_slice_show_source_button_label
                 }, {
@@ -75,8 +88,6 @@ export default {
         }
     },
     render() {
-
-
         return h('div', { class: 'grid grid-cols-2 gap-4' }, [
             this.setupFormForLanguage('en'),
             this.setupFormForLanguage('fr')

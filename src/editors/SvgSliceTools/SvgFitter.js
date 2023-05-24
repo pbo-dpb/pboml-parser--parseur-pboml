@@ -1,6 +1,7 @@
 import { h } from 'vue'
-import TinyButton from "../components/Editor/TinyButton.vue"
+import TinyButton from "../../components/Editor/TinyButton.vue"
 import { ViewfinderCircleIcon } from '@heroicons/vue/24/solid';
+import editorStrings from '../../editor-strings';
 
 export default {
     props: {
@@ -27,7 +28,7 @@ export default {
                 },
             }, () => [
                 h(ViewfinderCircleIcon, { class: 'w-4 h-4' }),
-                'Fit'
+                editorStrings[document.documentElement.lang].svg_fit_tool
             ]),
 
 

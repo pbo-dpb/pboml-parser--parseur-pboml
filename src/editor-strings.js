@@ -40,7 +40,7 @@ export default {
         'bitmap_slice_source_label': 'Source (full resolution bitmap)',
         'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
         'svg_slice_show_source_button_label': 'Source code',
-        'svg_slice_show_more_options_button_label': 'More',
+        'svg_slice_show_more_options_button_label': 'SVG Tools',
         'data_table_visual_editor': 'Tabular data',
         'data_table_content_new': "Add values",
         'data_table_variables_editor': 'Variables',
@@ -60,6 +60,9 @@ export default {
         'paste_from_word': "Paste from Word",
         'collapse_all': 'Collapse all',
         'expand_all': 'Expand all',
+        'svg_fit_tool': 'Fit',
+        'svg_white_remover_tool': 'Remove white',
+        'svg_sanitizer_tool': 'Remove forbidden characters',
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -102,7 +105,7 @@ export default {
         'bitmap_slice_source_label': 'Source (bitmap en pleine résolution)',
         'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
         'svg_slice_show_source_button_label': 'Code source',
-        'svg_slice_show_more_options_button_label': 'Plus',
+        'svg_slice_show_more_options_button_label': 'Outils pour SVG',
         'data_table_visual_editor': 'Données tabulaires',
         'data_table_content_new': "Nouvelles valeurs",
         'data_table_variables_editor': 'Variables',
@@ -122,5 +125,8 @@ export default {
         'paste_from_word': "Coller depuis Word",
         'collapse_all': 'Collapse all',
         'expand_all': 'Expand all',
+        'svg_fit_tool': 'Adapter la boîte',
+        'svg_white_remover_tool': 'Enlever le blanc',
+        'svg_sanitizer_tool': 'Filtrer les caractères interdits',
     }
 }
