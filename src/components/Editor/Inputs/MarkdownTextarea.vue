@@ -17,6 +17,8 @@
 import TinyButton from "../TinyButton.vue"
 import { ClipboardDocumentListIcon } from '@heroicons/vue/24/outline'
 import Turndown from "turndown"
+import { tables as gfmTables } from 'joplin-turndown-plugin-gfm'
+
 import editorStrings from "../../../editor-strings"
 
 export default {
@@ -38,8 +40,8 @@ export default {
         },
         sanitizeAndInsertMarkdown(markdown) {
             /**
-                                     * Markdown customizations
-                                     */
+             * Markdown customizations
+             */
 
             // More regular Word
             markdown = markdown.replaceAll('•	', '- ')
@@ -55,6 +57,16 @@ export default {
             // Remove all pasted references.
             markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
             markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[a-z]{1,}\\\\\\]\\]\\(file:\\/\\/([^|)])+\\)', 'g')), '🟠')
+
+            // Use first row as table headers when no header is present
+            markdown = markdown.replace(/^\|[ \|]{1,}\|\n\| [ \-\|]{1,}\ \|\n\| [^\n]{1,} \|\n/gm, (match) => {
+                // Return the replacement leveraging the parameters.
+                const headerArr = match.split("\n")
+                if (headerArr.length != 4) return match;
+                return [headerArr[2], headerArr[1], headerArr[4]].join("\n")
+            });
+
+
 
             /**
              * Replace or insert at current selection
@@ -92,8 +104,8 @@ export default {
 
                         // Convert HTML to Markdown
                         const turndownService = new Turndown()
+                        turndownService.use(gfmTables)
                         const blobText = await blob.text();
-
                         let markdown = turndownService.turndown(blobText)
                         this.sanitizeAndInsertMarkdown(markdown);
                         break;
