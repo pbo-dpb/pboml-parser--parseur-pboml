@@ -17,7 +17,7 @@ export default {
     emits: ['update:datatable'],
     data() {
         return {
-            currentTab: 'importer',//'visual',
+            currentTab: 'visual',
             language: document.documentElement.lang
         }
     },
