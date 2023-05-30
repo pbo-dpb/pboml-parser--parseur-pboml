@@ -31,6 +31,12 @@
 </html>
 
 <script>
+  /**
+   * GET `tests.html` with the following URL parameters:
+   * - `test` the name of a test file (among ./tests/samples/*.yaml )
+   * - `lang` either `en` or `fr`
+   * - `edit` if "true" will open as en editor.
+   * */
   const params = new URLSearchParams(window.location.search);
 
   let lang = params.get('lang');
@@ -46,7 +52,10 @@
     const rawPayload = await response.text();
     const encodedPayload = btoa(unescape(encodeURIComponent(rawPayload)));
     const mainEl = document.getElementById('body-container');
-    mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}"></pboml-parser>`;
+
+    const editorAttribute = params.get('edit') === 'true' ? 'edit="true"' : '';
+
+    mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}" ${editorAttribute}></pboml-parser>`;
     const sideEl = document.getElementById('toc-container');
     sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
   }
