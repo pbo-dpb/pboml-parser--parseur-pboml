@@ -64,7 +64,7 @@ export default {
             let rows = [];
 
             props.slice.content.forEach((entry) => {
-                let kvBlock = h('div', { 'class': 'flex flex-col gap-2  py-2  pl-4 pr-2 border-r-2 border-gray-300' }, [
+                let kvBlock = h('div', { 'class': 'flex flex-col gap-2  p-2 border-r-2 border-gray-300' }, [
 
                     h(TinyButton, {
                         'class': 'place-self-end', 'innerHTML': "🗑️", danger: true, onClick: (e) => {
