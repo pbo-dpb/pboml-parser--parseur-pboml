@@ -9,7 +9,7 @@ export default {
         rebuildShadowDom() {
             let wrapper = document.createElement("div");
             wrapper.classList.add("w-full");
-            const shadowRoot = wrapper.attachShadow({ mode: 'closed' });
+            const shadowRoot = wrapper.attachShadow({ mode: 'open' });
             shadowRoot.innerHTML = this.payload;
             this.$el.replaceChildren(...[wrapper])
         }
