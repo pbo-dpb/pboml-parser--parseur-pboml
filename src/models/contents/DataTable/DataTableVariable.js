@@ -17,7 +17,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center leading-snug';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center leading-snug hyphens-auto';
 
     constructor(payload) {
         this.label = {
@@ -97,7 +97,6 @@ export default class DataTableVariable {
             case 'markdown':
                 const md = new MarkdownDriver;
                 md.shouldBreakNewLines(false);
-
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)
                 } catch (error) {
