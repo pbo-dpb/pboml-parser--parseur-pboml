@@ -1,5 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
+import SvgRenderer from '../../components/SvgRenderer';
 
 export default class SvgSlice extends Slice {
     constructor(payload) {
@@ -21,8 +22,8 @@ export default class SvgSlice extends Slice {
             doc.documentElement.setAttribute('id', this.state.renderedAnchorIdPrefix + language);
             doc.documentElement.removeAttribute('width');
             doc.documentElement.removeAttribute('height');
-            doc.documentElement.classList.add('xl:w-2/3')
-            return h('div', { innerHTML: doc.documentElement.outerHTML, class: 'w-full dark:invert flex flex-col items-center' });
+            return h(SvgRenderer, { payload: doc.documentElement.outerHTML, class: 'w-full @4xl/slice:w-2/3 self-center dark:invert flex flex-col' });
+            return h('div', { innerHTML: doc.documentElement.outerHTML, });
         } catch (error) {
             return h('div', { class: 'text-red-800 font-semibold text-4xl' }, () => h('span', {}, `⚠️`))
         }
