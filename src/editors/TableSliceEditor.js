@@ -9,6 +9,7 @@ import DataTable from '../models/contents/DataTable/DataTable'
 
 export default {
     props: ['slice'],
+    emits: ['update:datatable'],
     setup(props, { emit }) {
 
         if (props.slice.readonly) {
@@ -24,7 +25,7 @@ export default {
 
 
         return () => [
-            h(DataTableEditor, { datatable: props.slice.datatable })
+            h(DataTableEditor, { datatable: props.slice.datatable, "onUpdate:datatable": (d) => emit('update:datatable', d) })
         ]
 
 

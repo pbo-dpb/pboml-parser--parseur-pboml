@@ -2,6 +2,7 @@ import { h } from 'vue'
 import MarkdownDriver from '../../../MarkdownDriver';
 import rendererStrings from '../../../renderer-strings';
 import deepEqual from 'deep-equal';
+import DataTableEntry from './DataTableEntry';
 
 const defaults = {
     display_label: true,
@@ -11,7 +12,8 @@ const defaults = {
     group: null,
     emphasize: false,
     chart_type: 'bar',
-    unit: null
+    unit: null,
+    type: 'markdown'
 }
 
 export default class DataTableVariable {
@@ -23,7 +25,7 @@ export default class DataTableVariable {
             fr: payload.label?.fr
         }
 
-        this.type = payload.type;
+        this.type = payload.type !== undefined ? payload.type : defaults.type;
         this.readonly = payload.readonly;
         this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
         this.is_descriptive = payload.is_descriptive;
@@ -39,6 +41,19 @@ export default class DataTableVariable {
             en: payload.unit?.en ?? '',
             fr: payload.unit?.fr ?? ''
         } : null
+    }
+
+    static generateUniqueDataTableVariableId(label, otherVariables) {
+        let key = (label ? label : '').toLowerCase().replace('', '-').replace(/[^_a-z0-9]+/g, "")
+        if (!key) key = (Math.random() + 1).toString(36).substring(8);
+
+        if (!otherVariables) return key;
+
+        // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
+        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key]) {
+            key += (Math.random() + 1).toString(36).substring(8);
+        }
+        return key;
     }
 
     static getCellBaseClass() {

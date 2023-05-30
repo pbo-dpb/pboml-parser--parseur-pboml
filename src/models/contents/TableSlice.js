@@ -29,14 +29,13 @@ export default class TableSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/TableSliceEditor.js')), { slice: this, 'onUpdate:modelValue': (value) => { } }))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/TableSliceEditor.js')), { slice: this, 'onUpdate:datatable': (datatable) => { this.datatable = datatable } }))
         return vnodes;
     }
 
 
     toArray() {
         let array = super.toArray();
-
         const letDatatableArray = this.datatable.toArray();
         array.variables = letDatatableArray.variables;
         array.content = letDatatableArray.content;

@@ -1,21 +1,16 @@
-import { h } from 'vue'
+import { h, registerRuntimeCompiler } from 'vue'
 import DataTableVariableEditor from "./DataTableVariableEditor.js"
 import Button from "../Button.vue"
 import editorStrings from '../../../editor-strings.js'
 import { PlusIcon } from '@heroicons/vue/24/solid'
 import DataTableVariable from '../../../models/contents/DataTable/DataTableVariable.js'
-import DataTableEntry from '../../../models/contents/DataTable/DataTableEntry.js'
+
 export default {
     props: ['datatable'],
     methods: {
         addVariable(userVariableKey) {
-            let key = (userVariableKey ? userVariableKey : '').toLowerCase().replace(/[^_a-z0-9]+/g, "")
-            if (!key) return;
-
-            // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
-            while (Object.keys(DataTableEntry.defaults).includes(key) || this.datatable.variables[key]) {
-                key += (Math.random() + 1).toString(36).substring(8);
-            }
+            if (!userVariableKey) return;
+            let key = DataTableVariable.generateUniqueDataTableVariableId(userVariableKey, this.datatable.variables)
 
             let prefilledVariable;
             if (!this.datatable.variables || !Object.keys(this.datatable.variables).length) {

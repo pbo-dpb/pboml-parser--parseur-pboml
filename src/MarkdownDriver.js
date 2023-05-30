@@ -5,6 +5,10 @@ import Callbacks from './Callbacks';
 
 export default class MarkdownDriver {
 
+    static parseGenericMarkdown(markdown) {
+        const engine = new Remarkable();
+        return engine.render(markdown);
+    }
 
     constructor() {
         const engine = new Remarkable();
