@@ -14,21 +14,26 @@ export default {
 
     computed: {
         config() {
-            return {
-                data: {
-                    datasets: this.datasets,
-                },
-                options: {
+            try {
+                return {
+                    data: {
+                        datasets: this.datasets,
+                    },
+                    options: {
 
+                    }
                 }
+            } catch (error) {
+                return null;
             }
+
         },
 
         datasets() {
 
             let [descriptiveVariableKey, descriptiveVariable] = this.datatable.descriptiveVariableKeyPair;
 
-            if (!descriptiveVariableKey) throw "A descriptive variable must be set with `is_descriptive`=true to label the x axis."
+            if (!descriptiveVariableKey) throw new Error("A descriptive variable must be set with `is_descriptive`=true to label the x axis.")
 
             let series = [];
             let counter = 0;

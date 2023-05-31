@@ -6,7 +6,7 @@ import { PlusIcon } from '@heroicons/vue/24/solid'
 import DataTableVariable from '../../../models/contents/DataTable/DataTableVariable.js'
 
 export default {
-    props: ['datatable'],
+    props: ['datatable', 'showChartProperties'],
     methods: {
         addVariable(userVariableKey) {
             if (!userVariableKey) return;
@@ -31,6 +31,7 @@ export default {
             rows.push(h(DataTableVariableEditor, {
                 variable: variable,
                 variableKey: key,
+                showChartProperties: this.showChartProperties,
                 onDelete: () => this.datatable.deleteVariableWithKey(key)
             }))
         })

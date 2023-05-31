@@ -13,10 +13,10 @@ export default class ChartSlice extends Slice {
     constructor(payload) {
         super(payload);
         this.type = "chart"
-        if (payload.datatable) {
-            this.datatable = payload.datatable ? new DataTable(payload.datatable) : null;
-        } else if (payload.arraytable) {
+        if (payload.arraytable) {
             this.arraytable = new ArrayTable(payload.arraytable)
+        } else {
+            this.datatable = new DataTable(payload.datatable);
         }
     }
 
@@ -48,10 +48,7 @@ export default class ChartSlice extends Slice {
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h('div', { class: 'grid grid-cols-2 gap-2' }, [
-            this.renderReadonlyVnode('en'),
-            this.renderReadonlyVnode('fr')
-        ]))
+        vnodes.push(h(defineAsyncComponent(() => import('../../editors/ChartSliceEditor.js')), { slice: this, 'onUpdate:datatable': (datatable) => { this.datatable = datatable } }))
         return vnodes;
     }
 

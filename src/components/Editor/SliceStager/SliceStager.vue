@@ -21,6 +21,8 @@ import HeadingSlice from '../../../models/contents/HeadingSlice'
 import BitmapSlice from '../../../models/contents/BitmapSlice'
 import SvgSlice from '../../../models/contents/SvgSlice'
 import TableSlice from '../../../models/contents/TableSlice'
+import ChartSlice from '../../../models/contents/ChartSlice'
+
 
 import { PlusIcon } from '@heroicons/vue/24/solid'
 
@@ -69,6 +71,10 @@ export default {
                 {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
+                },
+                {
+                    label: this.strings.slice_type_chart,
+                    type: ChartSlice
                 },
 
 

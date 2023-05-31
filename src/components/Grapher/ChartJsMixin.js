@@ -20,6 +20,8 @@ export default {
     },
 
     render() {
+        if (!this.config) return (h('div', { class: 'text-red-800 font-semibold text-4xl' }, () => h('span', {}, `⚠️`)));
+
         return h('div', { class: 'flex flex-row justify-center w-full h-96 md:h-128' }, [
             h('canvas', { ref: 'chart', innerHTML: "", class: "w-full h-full" }, [
             ])
@@ -32,6 +34,7 @@ export default {
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const textColor = isDark ? '#f9fafb' : '#111827';
         let config = this.config;
+        if (!config) return
         config.options = {
             color: textColor,
             ...config.options,
