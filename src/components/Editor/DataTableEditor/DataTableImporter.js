@@ -41,7 +41,7 @@ export default {
 
             let tableArray = [...table.querySelectorAll('tr')].map((tr) => {
                 return [...tr.querySelectorAll('td, th')].map(td => {
-                    return td.innerText ? td.innerText.trim() : "—";
+                    return td.innerText ? td.innerText.trim() : "";
                 })
             })
 
@@ -72,9 +72,9 @@ export default {
                 entries.forEach(entry => {
                     if (entry[variable.key]?.is_descriptive)
                         entriesAreOnlyNumeric = false;
-                    if (typeof entry[variable.key]?.en !== 'undefined' && !englishFormattedNumberReg.test(entry[variable.key]?.en))
+                    if (typeof entry[variable.key]?.en !== 'undefined' && entry[variable.key]?.en !== '' && !englishFormattedNumberReg.test(entry[variable.key]?.en))
                         entriesAreOnlyNumeric = false;
-                    if (typeof entry[variable.key]?.fr !== 'undefined' && !frenchFormattedNumberReg.test(entry[variable.key]?.fr))
+                    if (typeof entry[variable.key]?.fr !== 'undefined' && entry[variable.key]?.fr !== '' && !frenchFormattedNumberReg.test(entry[variable.key]?.fr))
                         entriesAreOnlyNumeric = false;
                 })
                 if (entriesAreOnlyNumeric)

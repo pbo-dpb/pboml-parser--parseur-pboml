@@ -117,8 +117,8 @@ export default class DataTableVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
-        if (!value && value !== 0) {
-            // Gray out non 0 falsish values
+        if ((!value && value !== 0) || innerHTML === "NaN") {
+            // Gray out non 0 falsish or NaN values
             innerHTML = `<span class='sr-only'>${rendererStrings[language].empty_cell_label}</span>`;
             cellClasses += " bg-gray-100 dark:bg-gray-900"
         }
