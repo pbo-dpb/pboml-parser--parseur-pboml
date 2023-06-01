@@ -5,11 +5,11 @@ import NumberInput from "../Inputs/NumberInput.vue"
 import strings from "../../../editor-strings"
 import TinyButton from "../TinyButton.vue";
 import editorStrings from '../../../editor-strings';
-import { ArrowRightCircleIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid';
+import { ArrowRightCircleIcon, ChartBarIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid';
 import DataTableEntry from '../../../models/contents/DataTable/DataTableEntry';
 
 export default {
-    props: ['datatable'],
+    props: ['datatable', 'showChartProperties'],
     methods: {
         addValue() {
             this.datatable.content.push(new DataTableEntry())
@@ -25,16 +25,31 @@ export default {
             ...this.datatable.content.map((ct, index) => {
                 return h('td', { class: 'border border-slate-300 bg-slate-50 px-1 py-2 ' }, [
                     h('div', { class: 'flex flex-row justify-end gap-2' }, [
+
+
+
                         h(TinyButton, {
                             danger: true,
                             'aria-label': strings.data_table_editor_delete,
+                            title: strings.data_table_editor_delete,
                             onClick: () => this.datatable.content.splice(index, 1)
                         }, () => [
                             h(TrashIcon, { class: 'h-4 w-4' })
                         ]),
+
+                        this.showChartProperties ? h(TinyButton, {
+                            'aria-pressed': !ct.skip_chart,
+                            'aria-label': strings.data_table_entry_editor_var_skip_chart,
+                            'title': strings.data_table_entry_editor_var_skip_chart,
+                            onClick: () => this.datatable.content[index].skip_chart = !ct.skip_chart
+                        }, () => [
+                            h(ChartBarIcon, { class: 'h-4 w-4' })
+                        ]) : null,
+
                         h(TinyButton, {
                             'aria-pressed': ct.emphasize,
                             'aria-label': strings.data_table_editor_emphasize,
+                            'title': strings.data_table_editor_emphasize,
                             onClick: () => this.datatable.content[index].emphasize = !ct.emphasize
                         }, () => [
                             h(StarIcon, { class: 'h-4 w-4' })

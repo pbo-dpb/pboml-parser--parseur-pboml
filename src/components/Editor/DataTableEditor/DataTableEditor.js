@@ -54,7 +54,7 @@ export default {
                     default: () => [h(ArrowDownOnSquareIcon, { class: 'h-6 w-6' }, () => []), editorStrings[this.language].data_table_importer]
                 }),
             ]),
-            this.currentTab === 'visual' ? h(DataTableVisualEditor, { datatable: this.datatable, id: visualEditorId }) : null,
+            this.currentTab === 'visual' ? h(DataTableVisualEditor, { datatable: this.datatable, id: visualEditorId, showChartProperties: this.showChartProperties }) : null,
             this.currentTab === 'variables' ? h(DataTableVariablesEditor, { datatable: this.datatable, id: variablesEditorId, showChartProperties: this.showChartProperties }) : null,
             this.currentTab === 'importer' ? h(DataTableImporter, {
                 datatable: this.datatable, id: importerId, 'onImport': (d) => {
