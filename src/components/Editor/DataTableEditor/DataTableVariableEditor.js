@@ -3,7 +3,7 @@ import DataTableVariable from "../../../models/contents/DataTable/DataTableVaria
 import BilingualInput from '../../Editor/Inputs/BilingualInput.vue'
 import editorStrings from '../../../editor-strings'
 import tinyButton from "../TinyButton.vue"
-import { AdjustmentsVerticalIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid'
+import { AdjustmentsVerticalIcon, ChartBarIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import SelectInput from "../Inputs/SelectInput.vue"
 import CheckboxInput from "../Inputs/CheckboxInput.vue"
 import TinyButton from "../TinyButton.vue";
@@ -67,6 +67,19 @@ export default {
                     }, () => [
                         h(TrashIcon, { class: 'h-4 w-4' })
                     ]),
+
+                    this.variable.is_descriptive ? null : h(TinyButton, {
+                        'aria-label': strings.data_table_variables_editor_var_skip_chart,
+                        'aria-pressed': !this.variable.skip_chart,
+                        onClick: () => {
+                            this.variable.skip_chart = !this.variable.skip_chart
+                            this.$emit('update:modelValue', this.variable)
+                        }
+                    }, () => [
+                        h(ChartBarIcon, { class: 'h-4 w-4' })
+                    ]),
+
+
                     h(TinyButton, {
                         'aria-pressed': this.variable.emphasize,
                         'aria-label': strings.data_table_editor_emphasize,
@@ -77,6 +90,7 @@ export default {
                     }, () => [
                         h(StarIcon, { class: 'h-4 w-4' })
                     ]),
+
 
                 ])
             ]),
@@ -108,14 +122,7 @@ export default {
 
             ...this.showChartProperties ? [
 
-                this.variable.is_descriptive ? null : h(CheckboxInput, {
-                    label: strings.data_table_variables_editor_var_skip_chart,
-                    modelValue: this.variable.skip_chart,
-                    'onUpdate:modelValue': (value) => {
-                        this.variable.skip_chart = value
-                        this.$emit('update:modelValue', this.variable)
-                    }
-                }),
+
 
                 this.variable.is_descriptive ? null : h(SelectInput, {
                     choices: chartVariableTypeChoices,
