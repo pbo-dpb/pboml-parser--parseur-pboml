@@ -36,6 +36,7 @@ export default {
         let config = this.config;
         if (!config) return
         config.options = {
+            animation: null,
             color: textColor,
             ...config.options,
             locale: this.language,

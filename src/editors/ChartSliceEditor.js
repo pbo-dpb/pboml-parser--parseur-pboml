@@ -16,7 +16,9 @@ export default {
         slice: {
             deep: true,
             handler(nVal, oVal) {
-                this.updating = true;
+
+                // Save preview node height and use it to set the height of the placeholder so things don't move too much around
+                this.updating = this.$refs.previewNode?.offsetHeight ?? 0;
                 this.$nextTick(() => {
                     this.$nextTick(() => {
                         setTimeout(() => {
@@ -31,7 +33,7 @@ export default {
     },
     methods: {
         buildPreviewNode() {
-            return this.updating ? h('div', { class: 'h-96 md:h-128', ref: 'placeHolderNode' }) : h('div', { class: "grid grid-cols-2 gap-4", ref: 'previewNode' }, [
+            return this.updating ? h('div', { style: `height:${this.updating}px`, ref: 'placeHolderNode' }) : h('div', { class: "grid grid-cols-2 gap-4", ref: 'previewNode' }, [
                 this.slice.renderAsVnode("en"),
                 this.slice.renderAsVnode("fr"),
             ])

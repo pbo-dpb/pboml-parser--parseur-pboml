@@ -35,7 +35,7 @@ slices:
           chart_type: bar
           group: null
           unit: null
-        bc:
+        nifty:
           label:
             fr: Astucieux
             en: Nifty
@@ -47,7 +47,7 @@ slices:
           chart_type: bar
           group: null
           unit: null
-        ab:
+        puffy:
           label:
             fr: Bouffi
             en: Puffy
@@ -59,7 +59,7 @@ slices:
           chart_type: bar
           group: null
           unit: null
-        'on':
+        fluffy:
           label:
             en: Fluffy
             fr: Moelleux
@@ -71,7 +71,7 @@ slices:
           chart_type: scatter
           group: null
           unit: null
-        allotherprovincesterritories:
+        bouncy:
           label:
             fr: Bouncy
             en: Rebondissant
@@ -87,58 +87,58 @@ slices:
         - year:
             en: '2016'
             fr: '2016'
-          bc: 805
-          ab: 602
-          'on': 867
-          allotherprovincesterritories: 556
+          nifty: 805
+          puffy: 602
+          fluffy: 867
+          bouncy: 556
           emphasize: false
         - year:
             en: '2017'
             fr: '2017'
-          bc: 1296
-          ab: 744
-          'on': 1265
-          allotherprovincesterritories: 619
+          nifty: 1296
+          puffy: 744
+          fluffy: 1265
+          bouncy: 619
           emphasize: false
         - year:
             en: '2018'
             fr: '2018'
-          bc: 1348
-          ab: 805
-          'on': 1507
-          allotherprovincesterritories: 541
+          nifty: 1348
+          puffy: 805
+          fluffy: 1507
+          bouncy: 541
           emphasize: false
         - year:
             en: '2019'
             fr: '2019'
-          bc: 1020
-          ab: 626
-          'on': 1558
-          allotherprovincesterritories: 507
+          nifty: 1020
+          puffy: 626
+          fluffy: 1558
+          bouncy: 507
           emphasize: false
         - year:
             en: '2020'
             fr: '2020'
-          bc: 1794
-          ab: 1184
-          'on': 2461
-          allotherprovincesterritories: 984
+          nifty: 1794
+          puffy: 1184
+          fluffy: 2461
+          bouncy: 984
           emphasize: false
         - year:
             en: '2021'
             fr: '2021'
-          bc: 2333
-          ab: 1621
-          'on': 2864
-          allotherprovincesterritories: 1188
+          nifty: 2333
+          puffy: 1621
+          fluffy: 2864
+          bouncy: 1188
           emphasize: false
         - year:
             en: 2022*
             fr: 2022*
-          bc: 1712
-          ab: 1105
-          'on': 1853
-          allotherprovincesterritories: 690
+          nifty: 1712
+          puffy: 1105
+          fluffy: 1853
+          bouncy: 690
           emphasize: true
       state:
         caption: null
@@ -167,7 +167,7 @@ slices:
           chart_type: bar
           group: null
           unit: null
-        val1:
+        wf:
           label:
             en: Wacky Flippers
             fr: Flippers farfelus
@@ -178,7 +178,7 @@ slices:
           chart_type: bar
           group: null
           unit: null
-        vr2:
+        wj:
           label:
             en: Whimsy Jumbles
             fr: Méli-Mélos de fantaisie
@@ -192,16 +192,16 @@ slices:
       content:
         - emphasize: false
           year: 1
-          val1: 1
-          vr2: 2
+          wf: 1
+          wj: 2
         - emphasize: true
           year: 0.5
-          val1: 5
-          vr2: 4
+          wf: 5
+          wj: 4
         - emphasize: false
           year: 1.5
-          val1: 4
-          vr2: 5
+          wf: 4
+          wj: 5
       state:
         caption: null
 annotations: []

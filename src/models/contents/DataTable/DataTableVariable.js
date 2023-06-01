@@ -11,9 +11,13 @@ const defaults = {
     is_descriptive: false,
     group: null,
     emphasize: false,
-    chart_type: 'bar',
     unit: null,
-    type: 'markdown'
+    type: 'markdown',
+
+    // Chart related properties
+    chart_type: 'bar',
+    stack: null,
+    tension: 0
 }
 
 export default class DataTableVariable {
@@ -41,6 +45,9 @@ export default class DataTableVariable {
             en: payload.unit?.en ?? '',
             fr: payload.unit?.fr ?? ''
         } : null
+
+        this.stack = payload.stack !== undefined ? payload.stack : defaults.stack;
+        this.tension = payload.tension !== undefined ? payload.tension : defaults.tension;
     }
 
     static generateUniqueDataTableVariableId(label, otherVariables) {

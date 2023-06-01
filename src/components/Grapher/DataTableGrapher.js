@@ -100,6 +100,8 @@ export default {
 
                     let dataset = {
                         label: variable.label[this.language],
+                        cubicInterpolationMode: variable.tension === 'monotone' ? 'monotone' : 'default',
+                        tension: (variable.tension && variable.tension !== 'monotone') ? variable.tension : null,
                         type: variable.chart_type ? variable.chart_type : "bar",
                         backgroundColor: varEntries.map((v) => v.backgroundColor),
                         borderColor: varEntries.map((v) => v.borderColor),

@@ -97,14 +97,7 @@ export default {
                 }
             }),
 
-            h(CheckboxInput, {
-                label: strings.data_table_variables_editor_var_is_descriptive,
-                modelValue: this.variable.is_descriptive,
-                'onUpdate:modelValue': (value) => {
-                    this.variable.is_descriptive = value
-                    this.$emit('update:modelValue', this.variable)
-                }
-            }),
+
 
 
             /**
@@ -113,7 +106,7 @@ export default {
 
             ...this.showChartProperties ? [
 
-                h(CheckboxInput, {
+                this.variable.is_descriptive ? null : h(CheckboxInput, {
                     label: strings.data_table_variables_editor_var_skip_chart,
                     modelValue: this.variable.skip_chart,
                     'onUpdate:modelValue': (value) => {
@@ -122,7 +115,7 @@ export default {
                     }
                 }),
 
-                h(SelectInput, {
+                this.variable.is_descriptive ? null : h(SelectInput, {
                     choices: chartVariableTypeChoices,
                     label: strings.data_table_variables_editor_var_chart_type,
                     modelValue: this.variable.chart_type,
@@ -144,6 +137,17 @@ export default {
             }, () => [h(AdjustmentsVerticalIcon, { 'class': 'h-4 w-4' }), strings.data_table_variables_editor_advanced_toggle]),
 
             this.showAdvanced ? h('div', { class: 'border-l-2 border-blue-300 pl-2' }, [
+
+                h(CheckboxInput, {
+                    label: strings.data_table_variables_editor_var_is_descriptive,
+                    modelValue: this.variable.is_descriptive,
+                    'onUpdate:modelValue': (value) => {
+                        this.variable.is_descriptive = value
+                        this.$emit('update:modelValue', this.variable)
+                    }
+                }),
+
+
                 h(BilingualInput, {
                     label: strings.data_table_variables_editor_var_group,
                     modelValue: this.variable.group,
