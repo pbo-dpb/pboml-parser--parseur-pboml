@@ -46,6 +46,22 @@ export default {
 
             if (descriptiveVariable.type === "markdown") {
                 scales.x.type = "category"
+            } else {
+                let labels = this.datatable.content.map((ct) => ct[descriptiveVariableKey]).sort((a, b) => a - b);
+                // Initialize the smallestStepSize with a large value
+                let smallestStepSize = Infinity;
+
+                // Iterate through the array and calculate the differences between adjacent numbers
+                for (let i = 1; i < labels.length; i++) {
+                    const stepSize = labels[i] - labels[i - 1];
+
+                    // Update the smallestStepSize if the current stepSize is smaller
+                    if (stepSize < smallestStepSize) {
+                        smallestStepSize = stepSize;
+                    }
+                }
+                scales.x.type = "linear"
+                scales.x.ticks = { stepSize: smallestStepSize }
             }
 
             return scales
@@ -70,12 +86,15 @@ export default {
                     const varEntries = this.datatable.content.map(entry => {
                         if (entry.skip_chart) return null; // TODO Document this
                         let valForVar = entry[currentVariableKey];
+                        let xLabel = entry[descriptiveVariableKey]?.[this.language] ? entry[descriptiveVariableKey]?.[this.language] : entry[descriptiveVariableKey];
                         return {
-                            x: entry[descriptiveVariableKey]?.[this.language] ? entry[descriptiveVariableKey]?.[this.language] : entry[descriptiveVariableKey],
+                            x: xLabel,
                             y: (valForVar?.[this.language] ? valForVar[this.language] : valForVar),
                             backgroundColor: entry.emphasize ? this.emphasizeColor(new Color(variableColor)).hex() : variableColor,
-                            borderColor: entry.emphasize ? "#a855f7" : variableColor,
+                            borderColor: variable.chart_type !== 'line' && entry.emphasize ? "#a855f7" : variableColor,
                             borderWidth: entry.emphasize ? 2 : 0,
+                            pointRadius: entry.emphasize ? 7 : 5,
+
                         };
                     }).filter(n => n);
 
@@ -84,13 +103,18 @@ export default {
                         type: variable.chart_type ? variable.chart_type : "bar",
                         backgroundColor: varEntries.map((v) => v.backgroundColor),
                         borderColor: varEntries.map((v) => v.borderColor),
-                        borderWidth: varEntries.map((v) => v.borderWidth),
-                        data: varEntries
+                        borderWidth: variable.chart_type === 'line' ? 3 : varEntries.map((v) => v.borderWidth),
+                        pointRadius: varEntries.map((v) => v.pointRadius),
+                        data: varEntries,
+                        // Make sure we draw lines and lone points on top of bars
+                        order: counter - (variable.chart_type === 'line' ? 10 : 0) - (variable.chart_type === 'scatter' ? 20 : 0)
                     };
 
                     if (variable.group) {
                         dataset.stack = variable.group[this.language]; // TODO Document this (https://www.chartjs.org/docs/latest/samples/bar/stacked-groups.html)
                     }
+
+
 
                     series[counter] = dataset
                     counter++;

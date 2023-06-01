@@ -10,9 +10,17 @@ document:
   type:
     en: Pop-up Chart
     fr: Graphique spontané
+  copyright: {}
 slices:
   - type: chart
-    label: {}
+    label:
+      en: Snickerdoodle Wobble
+      fr: Tremblement des snickerdoodles
+    notes:
+      - en: >-
+          (*) Bearing appear rule darkness together under female creature night
+          replenish cattle said i wherein won't fowl.
+        fr: ' (*) Les animaux de la mer sont les mêmes que ceux de la mer, mais ils ne sont pas les mêmes. '
     datatable:
       variables:
         year:
@@ -29,8 +37,8 @@ slices:
           unit: null
         bc:
           label:
-            en: BC
-            fr: C.‑B.
+            fr: Astucieux
+            en: Nifty
           type: number
           display_label: true
           is_descriptive: false
@@ -41,8 +49,8 @@ slices:
           unit: null
         ab:
           label:
-            en: AB
-            fr: Alb.
+            fr: Bouffi
+            en: Puffy
           type: number
           display_label: true
           is_descriptive: false
@@ -53,26 +61,26 @@ slices:
           unit: null
         'on':
           label:
-            en: 'ON'
-            fr: Ont.
+            en: Fluffy
+            fr: Moelleux
           type: number
           display_label: true
           is_descriptive: false
           is_time: false
           skip_chart: false
-          chart_type: bar
+          chart_type: scatter
           group: null
           unit: null
         allotherprovincesterritories:
           label:
-            en: All other provinces & territories
-            fr: Ensemble des autres provinces et territoires
+            fr: Bouncy
+            en: Rebondissant
           type: number
           display_label: true
           is_descriptive: false
           is_time: false
           skip_chart: false
-          chart_type: bar
+          chart_type: line
           group: null
           unit: null
       content:
@@ -132,6 +140,68 @@ slices:
           'on': 1853
           allotherprovincesterritories: 690
           emphasize: true
+      state:
+        caption: null
+  - type: chart
+    label:
+      en: Wobbleflop Mingles
+      fr: Rencontres avec les Wobbleflop
+    notes:
+      - en: >-
+          In. Signs. Male moving seas together gathered. Very day said very Over
+          him behold.
+        fr: >-
+          Dans. Signes. Mâle mouvant mers ensemble rassemblé. Très jour dit très
+          Sur lui voir.
+    datatable:
+      variables:
+        year:
+          label:
+            en: year
+            fr: year
+          type: number
+          display_label: true
+          is_descriptive: true
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        val1:
+          label:
+            en: Wacky Flippers
+            fr: Flippers farfelus
+          type: number
+          display_label: true
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        vr2:
+          label:
+            en: Whimsy Jumbles
+            fr: Méli-Mélos de fantaisie
+          type: number
+          display_label: true
+          is_time: false
+          skip_chart: false
+          chart_type: line
+          group: null
+          unit: null
+      content:
+        - emphasize: false
+          year: 1
+          val1: 1
+          vr2: 2
+        - emphasize: true
+          year: 0.5
+          val1: 5
+          vr2: 4
+        - emphasize: false
+          year: 1.5
+          val1: 4
+          vr2: 5
       state:
         caption: null
 annotations: []
