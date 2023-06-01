@@ -3,13 +3,13 @@ pboml:
 document:
   form: T-RP-3.0.0
   id: RP-2627-987-Z
-  release_date: '2026-05-24T13:00:00.000Z'
+  release_date: '1968-09-24T13:00:00.000Z'
   title:
     en: Charts! Charts!! Charts!!!
     fr: Graphiques ! Graphiques !! Graphiques !!!
   type:
-    en: Pop-up Chart
-    fr: Graphique spontané
+    en: Pop-up
+    fr: Spontané
   copyright: {}
 slices:
   - type: chart
@@ -146,19 +146,19 @@ slices:
     label:
       en: Wobbleflop Mingles
       fr: Rencontres avec les Wobbleflop
-    notes:
-      - en: >-
-          In. Signs. Male moving seas together gathered. Very day said very Over
-          him behold.
-        fr: >-
-          Dans. Signes. Mâle mouvant mers ensemble rassemblé. Très jour dit très
-          Sur lui voir.
+#    notes:
+#      - en: >-
+#          In. Signs. Male moving seas together gathered. Very day said very Over
+#          him behold.
+#        fr: >-
+#          Dans. Signes. Mâle mouvant mers ensemble rassemblé. Très jour dit très
+#          Sur lui voir.
     datatable:
       variables:
         year:
           label:
-            en: year
-            fr: year
+            en: Mingles
+            fr: Rencontres
           type: number
           display_label: true
           is_descriptive: true

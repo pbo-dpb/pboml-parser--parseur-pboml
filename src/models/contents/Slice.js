@@ -158,13 +158,13 @@ export default class Slice {
     }
 
     _renderMetaVnodes(language) {
-        if (!this.sources.length && !this.notes.length) return [];
-
-        return h('div', { 'class': 'flex flex-col gap-2' }, [
+        const metasVnodes = [
             ...this.renderAltsVnodes(language),
             ...this.renderSourcesVnodes(language),
             ...this.renderNotesVnodes(language)
-        ])
+        ];
+
+        return metasVnodes.filter(v => v).length ? h('div', { 'class': 'flex flex-col gap-2' }, metasVnodes) : []
     }
 
 
