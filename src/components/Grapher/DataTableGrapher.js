@@ -21,13 +21,34 @@ export default {
                         datasets: this.datasets,
                     },
                     options: {
-
+                        scales: this.scales
                     }
                 }
             } catch (error) {
                 return null;
             }
 
+        },
+
+        scales() {
+            let [descriptiveVariableKey, descriptiveVariable] = this.datatable.descriptiveVariableKeyPair;
+            let xAxisLabel = descriptiveVariable.label?.[this.language]
+
+            let scales = {
+                x: {
+
+                    title: {
+                        text: xAxisLabel,
+                        display: xAxisLabel ? true : false,
+                    }
+                }
+            }
+
+            if (descriptiveVariable.type === "markdown") {
+                scales.x.type = "category"
+            }
+
+            return scales
         },
 
         datasets() {
@@ -53,7 +74,8 @@ export default {
                             x: entry[descriptiveVariableKey]?.[this.language] ? entry[descriptiveVariableKey]?.[this.language] : entry[descriptiveVariableKey],
                             y: (valForVar?.[this.language] ? valForVar[this.language] : valForVar),
                             backgroundColor: entry.emphasize ? this.emphasizeColor(new Color(variableColor)).hex() : variableColor,
-                            borderColor: entry.emphasize ? this.emphasizeColor(new Color(variableColor)).hex() : variableColor,
+                            borderColor: entry.emphasize ? "#a855f7" : variableColor,
+                            borderWidth: entry.emphasize ? 2 : 0,
                         };
                     }).filter(n => n);
 
@@ -62,6 +84,7 @@ export default {
                         type: variable.chart_type ? variable.chart_type : "bar",
                         backgroundColor: varEntries.map((v) => v.backgroundColor),
                         borderColor: varEntries.map((v) => v.borderColor),
+                        borderWidth: varEntries.map((v) => v.borderWidth),
                         data: varEntries
                     };
 

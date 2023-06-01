@@ -47,7 +47,8 @@ export default {
 
         let chartVariableTypeChoices = {
             'Bar': 'bar',
-            'Line': 'line'
+            'Line': 'line',
+            'Scatter': 'scatter'
         }
 
         return h('div', { class: `border border-gray-300 rounded p-2 flex flex-col gap-4 ${bgClass}` }, [

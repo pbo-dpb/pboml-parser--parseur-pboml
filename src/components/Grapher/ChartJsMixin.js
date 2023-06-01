@@ -49,6 +49,7 @@ export default {
                 ...config.options.plugins,
             },
 
+
         }
         this._chart = new Chart(
             this.$refs.chart.getContext('2d'),
