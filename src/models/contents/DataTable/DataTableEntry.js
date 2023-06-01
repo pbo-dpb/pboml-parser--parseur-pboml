@@ -2,7 +2,9 @@
 
 export default class DataTableEntry {
     static defaults = {
-        emphasize: false
+        emphasize: false,
+        tension: 0,
+        skip_chart: false
     }
 
     constructor(payload) {
@@ -16,6 +18,8 @@ export default class DataTableEntry {
         }
 
         this.emphasize = payload?.emphasize ? payload.emphasize : DataTableEntry.defaults.emphasize
+        this.skip_chart = payload?.skip_chart ? payload.skip_chart : DataTableEntry.defaults.skip_chart
+        this.tensions = payload?.tension ? payload.tension : DataTableEntry.defaults.tension
     }
 
 
