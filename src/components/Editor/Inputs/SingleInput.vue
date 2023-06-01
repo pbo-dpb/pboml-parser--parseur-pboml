@@ -8,16 +8,14 @@
             </markdown-input>
         </label>
 
+        <span v-if="hint" class="text-sm italic text-gray-700 dark:text-gray-300">{{ hint }}</span>
 
     </fieldset>
-
-
-
 </template>
 <script setup>
 
 import MarkdownInput from "./MarkdownInput.vue"
-const props = defineProps(['modelValue', 'label'])
+const props = defineProps(['modelValue', 'label', 'hint'])
 const emit = defineEmits(['update:modelValue'])
 
 

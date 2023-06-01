@@ -7,6 +7,8 @@ import { AdjustmentsVerticalIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/
 import SelectInput from "../Inputs/SelectInput.vue"
 import CheckboxInput from "../Inputs/CheckboxInput.vue"
 import TinyButton from "../TinyButton.vue";
+import SingleInput from "../Inputs/SingleInput.vue"
+
 
 export default {
     props: {
@@ -164,6 +166,16 @@ export default {
                         this.$emit('update:modelValue', this.variable)
                     }
                 }),
+
+                this.variable.chart_type === 'line' ? h(SingleInput, {
+                    label: strings.data_table_variables_editor_var_tension,
+                    hint: strings.data_table_variables_editor_var_tension_hint,
+                    modelValue: this.variable.tension,
+                    'onUpdate:modelValue': (value) => {
+                        this.variable.tension = value;
+                        this.$emit('update:modelValue', this.variable)
+                    }
+                }) : null,
 
             ]) : null,
 
