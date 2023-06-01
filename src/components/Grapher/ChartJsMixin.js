@@ -57,11 +57,19 @@ export default {
     },
 
     methods: {
+
+        emphasizeColor(color) {
+            return color.saturate(1).darken(0.5)
+        },
+
         colorForIndex(index, emphasize) {
             let colorForIndex = EquidistantColorPalette[index];
 
-            let color = Color(colorForIndex ? colorForIndex : "#666666").saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : (emphasize === false ? -0.25 : 0));
+            let color = Color(colorForIndex ? colorForIndex : "#666666");
 
+            if (emphasize) {
+                color = this.emphasizeColor(color);
+            }
             if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                 color = color.lighten(0.05).saturate(0.25);
             }

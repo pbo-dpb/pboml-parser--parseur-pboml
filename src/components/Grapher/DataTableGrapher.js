@@ -2,6 +2,7 @@ import { h } from 'vue'
 import Chart from 'chart.js/auto';
 import Datatable from "../../models/contents/DataTable/DataTable"
 import ChartJsMixin from './ChartJsMixin';
+import Color from "color";
 
 export default {
     mixins: [ChartJsMixin],
@@ -43,19 +44,25 @@ export default {
                 const [currentVariableKey, variable] = entry;
                 if (!variable.skip_chart && !variable.is_descriptive) { // TODO Document this
 
+                    const variableColor = variable.color ? variable.color : this.colorForIndex(counter, variable.emphasize);
+
+                    const varEntries = this.datatable.content.map(entry => {
+                        if (entry.skip_chart) return null; // TODO Document this
+                        let valForVar = entry[currentVariableKey];
+                        return {
+                            x: entry[descriptiveVariableKey]?.[this.language] ? entry[descriptiveVariableKey]?.[this.language] : entry[descriptiveVariableKey],
+                            y: (valForVar?.[this.language] ? valForVar[this.language] : valForVar),
+                            backgroundColor: entry.emphasize ? this.emphasizeColor(new Color(variableColor)).hex() : variableColor,
+                            borderColor: entry.emphasize ? this.emphasizeColor(new Color(variableColor)).hex() : variableColor,
+                        };
+                    }).filter(n => n);
+
                     let dataset = {
                         label: variable.label[this.language],
                         type: variable.chart_type ? variable.chart_type : "bar",
-                        backgroundColor: variable.color ? variable.color : this.colorForIndex(counter, variable.emphasize),
-                        borderColor: variable.color ? variable.color : this.colorForIndex(counter, variable.emphasize),
-                        data: this.datatable.content.map(entry => {
-                            if (entry.skip_chart) return null; // TODO Document this
-                            let valForVar = entry[currentVariableKey];
-                            return {
-                                x: entry[descriptiveVariableKey]?.[this.language] ? entry[descriptiveVariableKey]?.[this.language] : entry[descriptiveVariableKey],
-                                y: (valForVar?.[this.language] ? valForVar[this.language] : valForVar)
-                            };
-                        }).filter(n => n)
+                        backgroundColor: varEntries.map((v) => v.backgroundColor),
+                        borderColor: varEntries.map((v) => v.borderColor),
+                        data: varEntries
                     };
 
                     if (variable.group) {

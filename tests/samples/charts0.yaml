@@ -1,0 +1,137 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-RP-3.0.0
+  id: RP-2627-987-Z
+  release_date: '2026-05-24T13:00:00.000Z'
+  title:
+    en: Charts! Charts!! Charts!!!
+    fr: Graphiques ! Graphiques !! Graphiques !!!
+  type:
+    en: Pop-up Chart
+    fr: Graphique spontané
+slices:
+  - type: chart
+    label: {}
+    datatable:
+      variables:
+        year:
+          label:
+            en: Year
+            fr: Année
+          type: markdown
+          display_label: true
+          is_descriptive: true
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        bc:
+          label:
+            en: BC
+            fr: C.‑B.
+          type: number
+          display_label: true
+          is_descriptive: false
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        ab:
+          label:
+            en: AB
+            fr: Alb.
+          type: number
+          display_label: true
+          is_descriptive: false
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        'on':
+          label:
+            en: 'ON'
+            fr: Ont.
+          type: number
+          display_label: true
+          is_descriptive: false
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+        allotherprovincesterritories:
+          label:
+            en: All other provinces & territories
+            fr: Ensemble des autres provinces et territoires
+          type: number
+          display_label: true
+          is_descriptive: false
+          is_time: false
+          skip_chart: false
+          chart_type: bar
+          group: null
+          unit: null
+      content:
+        - year:
+            en: '2016'
+            fr: '2016'
+          bc: 805
+          ab: 602
+          'on': 867
+          allotherprovincesterritories: 556
+          emphasize: false
+        - year:
+            en: '2017'
+            fr: '2017'
+          bc: 1296
+          ab: 744
+          'on': 1265
+          allotherprovincesterritories: 619
+          emphasize: false
+        - year:
+            en: '2018'
+            fr: '2018'
+          bc: 1348
+          ab: 805
+          'on': 1507
+          allotherprovincesterritories: 541
+          emphasize: false
+        - year:
+            en: '2019'
+            fr: '2019'
+          bc: 1020
+          ab: 626
+          'on': 1558
+          allotherprovincesterritories: 507
+          emphasize: false
+        - year:
+            en: '2020'
+            fr: '2020'
+          bc: 1794
+          ab: 1184
+          'on': 2461
+          allotherprovincesterritories: 984
+          emphasize: false
+        - year:
+            en: '2021'
+            fr: '2021'
+          bc: 2333
+          ab: 1621
+          'on': 2864
+          allotherprovincesterritories: 1188
+          emphasize: false
+        - year:
+            en: 2022*
+            fr: 2022*
+          bc: 1712
+          ab: 1105
+          'on': 1853
+          allotherprovincesterritories: 690
+          emphasize: true
+      state:
+        caption: null
+annotations: []
