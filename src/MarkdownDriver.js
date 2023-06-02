@@ -1,36 +1,26 @@
 import { Remarkable } from 'remarkable';
 import { linkify } from 'remarkable/linkify';
 import Callbacks from './Callbacks';
+import { marked } from 'marked';
+import markedLinkifyIt from "marked-linkify-it";
+import DOMPurify from 'dompurify';
 
 
 export default class MarkdownDriver {
 
     static parseGenericMarkdown(markdown) {
-        const engine = new Remarkable();
-        return engine.render(markdown);
+        return DOMPurify.sanitize(marked.parse(markdown));
     }
 
     constructor() {
-        const engine = new Remarkable();
-        engine.block.ruler.disable(['footnote']);
-        this.engine = engine;
-        this.renderInline = false;
-        this.breakNewLines = true;
+        marked.use({
+            async: false,
+            pedantic: false,
+            gfm: true,
+            silent: true
+        });
     }
 
-
-    shouldAvoidBreakingInsideParagraphs() {
-        const md = this.engine;
-        md.renderer.rules.paragraph_open = (function () {
-            var original = md.renderer.rules.paragraph_open;
-            return function () {
-                var paragraph = original.apply(this, arguments);
-                if (paragraph === '<p>')
-                    return paragraph.substring(0, paragraph.length - 1) + ' class="break-inside-avoid-page">';
-                return paragraph
-            };
-        })();
-    }
 
 
     shouldRenderInline(val = true) {
@@ -39,14 +29,14 @@ export default class MarkdownDriver {
 
 
     shouldBreakNewLines(val = true) {
-        this.engine.set({
+        console.info('`shouldBreakNewLines` is deprecated. Marked do not break by default.')
+        /*this.engine.set({
             breaks: val
-        });
+        });*/
     }
 
     shouldConvertUrls() {
-        this.engine.use(linkify)
-
+        marked.use(markedLinkifyIt({}, {}));
     }
 
 
@@ -54,7 +44,14 @@ export default class MarkdownDriver {
     render(content) {
 
         content = Callbacks.getBeforeMarkdownRendering ? Callbacks.getBeforeMarkdownRendering(content) : content;
-        content = this.engine[this.renderInline ? 'renderInline' : 'render'](content);
+
+
+        if (this.renderInline) {
+            content = marked.parseInline(content)
+        } else {
+            content = marked.parse(content);
+        }
+        content = DOMPurify.sanitize(content);
         content = Callbacks.getAfterMarkdownRendering ? Callbacks.getAfterMarkdownRendering(content) : content;
 
         return content;

@@ -15,7 +15,6 @@ export default class MarkdownSlice extends Slice {
 
     renderReadonlyVnode(language) {
         const md = new MarkdownDriver();
-        md.shouldAvoidBreakingInsideParagraphs();
         return h('div', { class: "pboml-prose", innerHTML: md.render(this.content[language]) });
     }
 
