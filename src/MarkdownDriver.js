@@ -1,9 +1,8 @@
-import { Remarkable } from 'remarkable';
-import { linkify } from 'remarkable/linkify';
 import Callbacks from './Callbacks';
 import { marked } from 'marked';
 import markedLinkifyIt from "marked-linkify-it";
 import DOMPurify from 'dompurify';
+import markedKatex from "marked-katex-extension";
 
 
 export default class MarkdownDriver {
@@ -19,6 +18,12 @@ export default class MarkdownDriver {
             gfm: true,
             silent: true
         });
+
+        marked.use(markedKatex({
+            throwOnError: false,
+            output: 'mathml'
+        }));
+
     }
 
 
