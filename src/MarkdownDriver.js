@@ -35,9 +35,7 @@ export default class MarkdownDriver {
 
     shouldBreakNewLines(val = true) {
         console.info('`shouldBreakNewLines` is deprecated. Marked do not break by default.')
-        /*this.engine.set({
-            breaks: val
-        });*/
+
     }
 
     shouldConvertUrls() {

@@ -7,6 +7,7 @@ import Annotation from "./Annotation";
 import BitmapSlice from "./contents/BitmapSlice";
 import ChartSlice from "./contents/ChartSlice";
 import SvgSlice from "./contents/SvgSlice";
+import LaTeXSlice from "./contents/LaTeXSlice";
 
 
 export default class PBOMLDocument {
@@ -90,6 +91,8 @@ export default class PBOMLDocument {
                 return new BitmapSlice(el);
             case 'svg':
                 return new SvgSlice(el);
+            case 'LaTeX':
+                return new LaTeXSlice(el);
         }
     }
 
