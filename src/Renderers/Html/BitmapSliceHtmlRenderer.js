@@ -7,7 +7,7 @@ export default class BitmapSliceHtmlRenderer extends SliceHtmlRenderer {
     buildReadonlySourceNodeForResolution(language, resolution, format) {
 
         const attributes = {
-            'type': `bitmap/${format}`
+            'type': `image/${format}`
         };
 
         let srcSet = [];
