@@ -1,0 +1,65 @@
+pboml:
+  version: 1.0.0
+slices:
+  - type: bitmap
+    presentation: box
+    label:
+      en: CSC
+      fr: NCC
+    content:
+      en: >-
+        https://distribution-i696d61676573.pbo-dpb.ca/f2bfde1757423c44939494d17f74fb7ce5f2e4752f6129324a7b8485526a762a
+      fr: >-
+        https://distribution-i696d61676573.pbo-dpb.ca/b55329959a5699aad3712da533f77c754523328a2e8547ea0ffd4d5cd97fc030
+    thumbnails:
+      en:
+        sm_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/1256d6a3032d35acf32b77478624bcb7361ebefa77faf9efe3c006a40802bfdd
+        sm_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/43b4f743d10dfc33260155f0f7c69edd650f50d0c3607fd903da1e556eca9deb
+        sm_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/fa12d124a38e0b9ffe6a8c462a688f151147a317d2c86a139f8ef2022470a703
+        sm_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/fc607e3e8f13cbcc206cbc10c58f8d3c9f645f2a2e388a128d8cd0451bd23d63
+        md_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/b2fd4a9bcc0337e99a1a3cce3cbdacd4ed37417c8bb0bedd1f4c3d9f637a3f1d
+        md_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/5ed8fdd3fdff26ce1133f1422b6106b9597632d04da431437ab7ff4c4c73bd58
+        md_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/919bb9c3b0268e5ebc5a2d2a5557bc9e835dd8e3a66413699ee793c2fdaef1c4
+        md_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/68ef7f57c4de8ea09b1fc545ab2ac299bdd97bf7e3b997a8b6e7723b30bc6e15
+        lg_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/8042303c58fcefd075eb9048b7bb96e0707e28f117b57206c5b5d2002a32ac67
+        lg_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/02aca3a61fa2a2f578364d2bd6d00cc5cc2c30cc6f61b21e458ba85f47709378
+        lg_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/e06907f9036a2aef866a67ec0d2fe1f4462e408f491e5f13918c100933dd70d3
+        lg_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/031a9eea7ce6150389f83a103f0abe3335714cf19d8f75a7717bcd37e7825dc8
+      fr:
+        sm_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/7ac6eb9448cd005d89633c5b75987a0fb3a17051a32849a112f1e7cab35cdd3b
+        sm_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/085618c08a626f5096ad9ce4788bb7dc83c1cf380734e3065419ab0c4abe25d6
+        sm_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/6dfcadac047ebcef62c0b9021cab401c92a9eb2639d8ffe62490853de19ab36a
+        sm_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/52d428392d7eb73106c82900cef5220bc9fd046afedd4cadff3ea9d5e462661c
+        md_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/c00485e46ddca6f2829c40bd42c7f3adc3cd1b55006a0bf6cb09624955639c0f
+        md_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/709cba6d089e46cbd2aa53bd8f5a18fe2ec229bdc34e248c52143888ac2c0aa3
+        md_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/932ea35c446a7d8162cddaa918db4d2e0d46e2a700861bc21e61ff33e4f9d369
+        md_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/ecfce38827a919c2c47df4361e3b14dfe720b8a63b1acbfa31c63b83e1fb591d
+        lg_1x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/620b0deb58cb7e2523174c4caa126753341dca4ecaea1e7139b66f18c6e3a167
+        lg_1x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/ea843aaf419fcb92c5b2b7b6ce0572f14e5c0a1bc014152d52fdeda1b31e2f3a
+        lg_2x_webp: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/37b8d15ceaaa19036742e2000c871a6ce65d2ef6c49869949da28bd3ab0229e6
+        lg_2x_png: >-
+          https://distribution-i696d61676573.pbo-dpb.ca/1153bb851af82bbb1fd82184a9f89556f9a6614c4b2e143cfa61d8cbadcdbccd
+annotations: []

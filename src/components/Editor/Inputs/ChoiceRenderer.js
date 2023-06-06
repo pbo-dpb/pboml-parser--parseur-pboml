@@ -50,8 +50,8 @@ export default class ChoiceRenderer {
             }) : h('div', { 'class': 'w-6 h-6' }),
 
             h('div', { 'class': 'flex flex-col gap-1' }, [
-                clonedSlice.renderAsVnode("en"),
-                clonedSlice.renderAsVnode("fr")
+                clonedSlice.constructor.rendererForSliceRendererType(clonedSlice, 'html').renderAsVnode("en"),
+                clonedSlice.constructor.rendererForSliceRendererType(clonedSlice, 'html').renderAsVnode("fr"),
             ]),
 
         ])

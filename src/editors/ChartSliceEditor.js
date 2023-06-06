@@ -36,8 +36,9 @@ export default {
             return this.updating ?
                 h('div', { style: `height:${this.updating}px`, ref: 'placeHolderNode' }) :
                 h('div', { class: "grid grid-cols-2 gap-4", ref: 'previewNode' }, [
-                    this.slice.renderAsVnode("en"),
-                    this.slice.renderAsVnode("fr"),
+                    this.slice.constructor.rendererForSliceRendererType(this.slice, 'html').renderAsVnode("en"),
+                    this.slice.constructor.rendererForSliceRendererType(this.slice, 'html').renderAsVnode("fr"),
+
                 ])
         }
     },

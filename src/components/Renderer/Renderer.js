@@ -65,7 +65,8 @@ export default {
     return h('main', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
-        return slice.renderAsVnode(language);
+        const renderer = slice.constructor.rendererForSliceRendererType(slice, 'html')
+        return (renderer && renderer.renderAsVnode) ? renderer.renderAsVnode(language) : null;
       }),
       ...this._buildAnnotationsVnodes(language),
       ...this._buildFooterVnodes(language),

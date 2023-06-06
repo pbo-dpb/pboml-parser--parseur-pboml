@@ -1,6 +1,7 @@
 import { h, defineAsyncComponent } from 'vue'
 import KvListVariablePair from './KvListVariablePair';
 import Slice from "./Slice";
+import KvListSliceHtmlRenderer from '../../Renderers/Html/KvListSliceHtmlRenderer';
 const language = document.documentElement.lang;
 
 
@@ -37,11 +38,6 @@ export default class KvListSlice extends Slice {
         this.content = this.content.filter(kve => kve !== entry);
     }
 
-    renderReadonlyVnode(language) {
-        return h('dl', { 'class': 'flex flex-col gap-2 break-inside-avoid' }, (!!this.content.forEach ? this.content.map((kv) => {
-            return kv.getKvNode(language);
-        }) : null))
-    }
 
 
     _buildEditorInputVnodes() {
@@ -71,5 +67,12 @@ export default class KvListSlice extends Slice {
         return array;
     }
 
+
+    static rendererForSliceRendererType(slice, rendererType) {
+        switch (rendererType) {
+            case 'html':
+                return new KvListSliceHtmlRenderer(slice);
+        }
+    }
 
 }

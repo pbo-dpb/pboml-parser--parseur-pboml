@@ -1,12 +1,9 @@
 import { h, defineAsyncComponent, Suspense } from 'vue'
 import Slice from "./Slice";
-const ArrayTableGrapher = defineAsyncComponent(() => import('../../components/Grapher/ArrayTableGrapher.js'))
-const DataTableGrapher = defineAsyncComponent(() => import('../../components/Grapher/DataTableGrapher.js'))
-import LoadingIndicator from "../../components/LoadingIndicator.vue"
 import DataTable from './DataTable/DataTable';
 import ArrayTable from './ArrayTable/ArrayTable';
 
-import rendererStrings from '../../renderer-strings.js';
+import ChartSliceHtmlRenderer from '../../Renderers/Html/ChartSliceHtmlRenderer';
 
 
 export default class ChartSlice extends Slice {
@@ -21,30 +18,7 @@ export default class ChartSlice extends Slice {
     }
 
 
-    renderReadonlyVnode(language) {
 
-        let grapher;
-        if (this.datatable) {
-            grapher = h(DataTableGrapher, {
-                language: language,
-                datatable: this.datatable
-            })
-        } else if (this.arraytable) {
-            grapher = h(ArrayTableGrapher, {
-                language: language,
-                arraytable: this.arraytable
-            })
-        }
-
-        return h(Suspense, null, {
-            default: () => h('div', { class: 'flex print:block flex-col items-center justify-center' }, [
-                h('div', { class: `w-full` }, [
-                    grapher
-                ])
-            ]),
-            fallback: () => h('template', null, LoadingIndicator)
-        });
-    }
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
@@ -52,19 +26,6 @@ export default class ChartSlice extends Slice {
         return vnodes;
     }
 
-
-    renderAltsVnodes(language) {
-        if (!this.alts.length) {
-            let content;
-            if (this.datatable) {
-                content = this.datatable.renderReadonlyVnode(language)
-            } else if (this.arraytable) {
-                content = this.arraytable.renderReadonlyVnode(language)
-            }
-            return content ? this.renderMetaVnodes(rendererStrings[language].alts_label, content, language, true) : [];
-        };
-        return super.renderAltsVnodes(language);
-    }
 
 
 
@@ -75,5 +36,10 @@ export default class ChartSlice extends Slice {
         return array;
     }
 
-
+    static rendererForSliceRendererType(slice, rendererType) {
+        switch (rendererType) {
+            case 'html':
+                return new ChartSliceHtmlRenderer(slice);
+        }
+    }
 }

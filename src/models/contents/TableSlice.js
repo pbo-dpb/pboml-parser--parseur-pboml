@@ -1,6 +1,7 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 import DataTable from './DataTable/DataTable';
+import TableSliceHtmlRenderer from '../../Renderers/Html/TableSliceHtmlRenderer';
 
 
 export default class TableSlice extends Slice {
@@ -12,20 +13,6 @@ export default class TableSlice extends Slice {
         this.datatable.state.caption = this.labelStrings
     }
 
-
-    renderReadonlyVnode(language) {
-        let vnodes = super.renderReadonlyVnode(language);
-        vnodes.push(this.datatable.renderReadonlyVnode(language))
-        return vnodes;
-    }
-
-
-
-    renderAsVnode(language = document.documentElement.lang) {
-        let parentVnode = super.renderAsVnode(language);
-        parentVnode.props.class = `${parentVnode.props.class} break-inside-avoid-page`;
-        return parentVnode;
-    }
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
@@ -41,5 +28,15 @@ export default class TableSlice extends Slice {
         array.content = letDatatableArray.content;
         return array;
     }
+
+
+    static rendererForSliceRendererType(slice, rendererType) {
+        switch (rendererType) {
+            case 'html':
+                return new TableSliceHtmlRenderer(slice);
+        }
+    }
+
+
 
 }

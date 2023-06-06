@@ -1,5 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
+import LaTeXSliceHtmlRenderer from '../../Renderers/Html/LaTeXSliceHtmlRenderer';
 
 
 export default class LaTeXSlice extends Slice {
@@ -11,13 +12,6 @@ export default class LaTeXSlice extends Slice {
         }
         this.type = "LaTeX"
     }
-
-    renderReadonlyVnode(language) {
-        return h(defineAsyncComponent(() => import('../../components/LaTeXRenderer.js')), {
-            payload: this.content[language]
-        });
-    }
-
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
@@ -32,6 +26,13 @@ export default class LaTeXSlice extends Slice {
             fr: this.content?.fr
         }
         return array;
+    }
+
+    static rendererForSliceRendererType(slice, rendererType) {
+        switch (rendererType) {
+            case 'html':
+                return new LaTeXSliceHtmlRenderer(slice);
+        }
     }
 
 }

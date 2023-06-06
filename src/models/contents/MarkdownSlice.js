@@ -1,6 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import MarkdownDriver from "../../MarkdownDriver"
+import MarkdownSliceHtmlRenderer from '../../Renderers/Html/MarkdownSliceHtmlRenderer';
 
 
 export default class MarkdownSlice extends Slice {
@@ -11,11 +11,6 @@ export default class MarkdownSlice extends Slice {
             fr: payload.content?.fr
         }
         this.type = "markdown"
-    }
-
-    renderReadonlyVnode(language) {
-        const md = new MarkdownDriver();
-        return h('div', { class: "pboml-prose", innerHTML: md.render(this.content[language]) });
     }
 
 
@@ -32,6 +27,13 @@ export default class MarkdownSlice extends Slice {
             fr: this.content?.fr
         }
         return array;
+    }
+
+    static rendererForSliceRendererType(slice, rendererType) {
+        switch (rendererType) {
+            case 'html':
+                return new MarkdownSliceHtmlRenderer(slice);
+        }
     }
 
 }

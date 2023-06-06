@@ -18,8 +18,8 @@ export default {
             md.shouldRenderInline(true);
             return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
                 h('div', { class: 'col-span-2 font-bold', innerHTML: md.render(strings[document.documentElement.lang].readonly_slice) }),
-                props.slice.renderAsVnode("en"),
-                props.slice.renderAsVnode("fr"),
+                props.slice.constructor.rendererForSliceRendererType(props.slice, 'html').renderAsVnode("en"),
+                props.slice.constructor.rendererForSliceRendererType(props.slice, 'html').renderAsVnode("fr"),
             ])
         }
 
