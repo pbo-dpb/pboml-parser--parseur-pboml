@@ -6,6 +6,32 @@ document:
   type: {}
   copyright: {}
 slices:
+  - type: markdown
+    presentation: aside
+    label:
+      en: The Roses of the Snake
+      fr: Les roses du serpent
+    content:
+      en: >-
+        Barton did feebly change man she afford square add. Want eyes by neat so
+        just must. Past draw tall up face show rent oh[^2] mr. Required is
+        debating extended wondered as do: $dTI=\ -e\ast TI\ast d\tau/(1-\tau)$ New get described applauded incommode
+        shameless out extremity but.
+
+
+        $$
+        \underline{A}=\frac{\kappa}{\frac{1+e}{e}r^{-e}\left(1-t_0\right)^e}\ \ \ \mathrm{and} A=κ1+eer-e1-t1e.
+        $$
+      fr: >-
+        Barton a faiblement changé l'homme qu'elle se permettait d'ajouter au
+        carré. Il n'y a pas d'autre solution que d'aller à l'école. Le passé
+        dessine haut visage montre loyer oh[^2] mr. Requis est débat prolongé
+        s'étonne comme faire. La nouvelle est décrite applaudie incommode sans
+        vergogne dehors extrémité mais.
+
+        $$
+        Y_i=1+eer-e1-t0eAi,       Ai≤Aκ,                               A<Ai< A1+eer-e1-t1eAi,Ai≥A,
+        $$
   - type: LaTeX
     label: {}
     content:
