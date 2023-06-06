@@ -53,7 +53,6 @@ export default class KvListVariablePair {
         switch (type) {
             case 'markdown':
                 const md = new MarkdownDriver;
-                md.shouldBreakNewLines(false);
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)
                 } catch (error) {

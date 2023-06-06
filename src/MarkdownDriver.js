@@ -2,7 +2,7 @@ import Callbacks from './Callbacks';
 import { marked } from 'marked';
 import markedLinkifyIt from "marked-linkify-it";
 import DOMPurify from 'dompurify';
-import markedKatex from "marked-katex-extension";
+//import markedKatex from "marked-katex-extension";
 
 
 export default class MarkdownDriver {
@@ -19,10 +19,10 @@ export default class MarkdownDriver {
             silent: true
         });
 
-        marked.use(markedKatex({
+        /*marked.use(markedKatex({
             throwOnError: false,
             output: 'mathml'
-        }));
+        }));*/
 
     }
 
@@ -33,12 +33,8 @@ export default class MarkdownDriver {
     }
 
 
-    shouldBreakNewLines(val = true) {
-        console.info('`shouldBreakNewLines` is deprecated. Marked do not break by default.')
-
-    }
-
     shouldConvertUrls() {
+        console.info(`shouldConvertUrls is deprecated.`);
         marked.use(markedLinkifyIt({}, {}));
     }
 
@@ -54,7 +50,11 @@ export default class MarkdownDriver {
         } else {
             content = marked.parse(content);
         }
-        content = DOMPurify.sanitize(content);
+        // Only run sanitize if not in test environment (DOMPurify is not available in test environment)
+        if (process.env.NODE_ENV !== 'test')
+            content = DOMPurify.sanitize(content);
+
+
         content = Callbacks.getAfterMarkdownRendering ? Callbacks.getAfterMarkdownRendering(content) : content;
 
         return content;

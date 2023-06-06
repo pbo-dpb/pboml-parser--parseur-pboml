@@ -10,7 +10,6 @@ export default {
 
         if (props.slice.readonly) {
             const md = new MarkdownDriver;
-            md.shouldBreakNewLines(false);
             return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
                 h('div', { class: 'col-span-2 font-bold', innerHTML: md.render(strings[document.documentElement.lang].readonly_slice) }),
 

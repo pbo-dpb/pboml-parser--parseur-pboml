@@ -25,7 +25,6 @@ export default class HeadingSliceHtmlRenderer extends SliceHtmlRenderer {
         }
 
         const md = new MarkdownDriver;
-        md.shouldBreakNewLines(false);
         md.shouldRenderInline(true);
         return h(headingElType, { class: classes.join(' ') }, [
             this.slice.referenced_as?.[language] ? h('span', { class: 'opacity-70 font-normal mr-4 tracking-tight' }, this.slice.referenced_as[language]) : null,

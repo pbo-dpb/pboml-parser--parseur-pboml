@@ -70,8 +70,6 @@ export default class DataTableVariable {
 
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
         const md = new MarkdownDriver;
-        md.shouldBreakNewLines(false);
-
 
         let labelSpan = h('span', { class: this.display_label ? '' : 'sr-only', innerHTML: md.render(this.label[language]) });
 
@@ -103,7 +101,6 @@ export default class DataTableVariable {
         switch (this.type) {
             case 'markdown':
                 const md = new MarkdownDriver;
-                md.shouldBreakNewLines(false);
                 try {
                     innerHTML = md.render(value[language] ? value[language] : value)
                 } catch (error) {

@@ -41,7 +41,6 @@ export default class SliceHtmlRenderer {
 
     __renderMetaContentArrayVnodes(contentArray, language) {
         const md = new MarkdownDriver;
-        md.shouldBreakNewLines(false);
         let classes = [
             "prose-sm", "prose-p:my-0",
             "prose-td:border", "prose-td:border-gray-300", "dark:prose-td:border-gray-700", "prose-td:p-2",

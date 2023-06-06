@@ -48,7 +48,6 @@ export default {
 
         if (this.slice.readonly || !this.slice.datatable) {
             const md = new MarkdownDriver;
-            md.shouldBreakNewLines(false);
             md.shouldRenderInline(true);
             return () => h('div', {}, [
                 h('div', { class: 'font-bold', innerHTML: md.render(strings[document.documentElement.lang].readonly_slice) }),
