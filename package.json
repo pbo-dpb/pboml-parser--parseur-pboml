@@ -24,7 +24,7 @@
     "latex.js": "^0.12.6",
     "lodash.merge": "^4.6.2",
     "marked": "^5.0.4",
-    "marked-katex-extension": "^2.1.0",
+    "marked-katex-extension": "https://github.com/remyvhw/marked-katex-extension.git",
     "marked-linkify-it": "^3.0.2",
     "pdf-lib": "^1.17.1",
     "turndown": "^7.1.2",

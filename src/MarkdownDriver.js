@@ -2,7 +2,7 @@ import Callbacks from './Callbacks';
 import { marked } from 'marked';
 import markedLinkifyIt from "marked-linkify-it";
 import DOMPurify from 'dompurify';
-//import markedKatex from "marked-katex-extension";
+import markedKatex from "marked-katex-extension";
 
 
 export default class MarkdownDriver {
@@ -19,10 +19,11 @@ export default class MarkdownDriver {
             silent: true
         });
 
-        /*marked.use(markedKatex({
+        marked.use(markedKatex({
             throwOnError: false,
-            output: 'mathml'
-        }));*/
+            output: 'mathml',
+            delimiters: { inline: '$$' }
+        }));
 
     }
 
