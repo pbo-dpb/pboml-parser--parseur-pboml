@@ -23,7 +23,7 @@
     "js-yaml": "^4.1.0",
     "latex.js": "^0.12.6",
     "lodash.merge": "^4.6.2",
-    "marked": "^5.0.4",
+    "marked": "^5.0.5",
     "marked-katex-extension": "https://github.com/remyvhw/marked-katex-extension.git",
     "marked-linkify-it": "^3.0.2",
     "pdf-lib": "^1.17.1",
@@ -36,9 +36,9 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
     "happy-dom": "^9.20.3",
-    "postcss": "^8.4.23",
+    "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.9",
-    "vitest": "^0.31.4"
+    "vitest": "^0.32.0"
   }
 }
