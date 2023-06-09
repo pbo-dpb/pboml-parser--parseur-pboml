@@ -1,7 +1,5 @@
 @media print {
-  body {
-    text-rendering: optimizeLegibility;
-  }
+
 
   table {
     width: 100%;
@@ -10,10 +8,14 @@
   table,
   td,
   th {
-    border: 1px solid lightgray;
+    border: 1px solid #d1d5db;
     word-break: break-word;
     border-collapse: collapse;
+  }
 
+  td p,
+  th p {
+    margin: 0
   }
 
   tr {
@@ -49,6 +51,21 @@
     background-color: #f5f5f5;
   }
 
+  .pb__figure {
+    background-color: #f9fafb;
+  }
+
+  .pb__aside {
+    background-color: #eff6ff;
+  }
+
+  .pb__figure,
+  .pb__aside {
+    break-inside: avoid;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   table,
   blockquote,
   pre,
@@ -68,6 +85,7 @@
   h4,
   p,
   a {
+    text-rendering: optimizeLegibility;
     orphans: 3;
     widows: 3;
   }
@@ -77,7 +95,8 @@
   h3,
   h4,
   h5,
-  h6 {
+  h6,
+  dt {
     page-break-after: avoid;
     page-break-inside: avoid;
   }
@@ -95,9 +114,42 @@
   }
 
   .hidden,
-  .print\:hidden {
+  .print\:hidden,
+  .sr-only {
     display: none
   }
 
+  .font-semibold {
+    font-weight: 600;
+  }
+
+  .border-l-2 {
+    border-left: 0.125rem solid #f3f4f6;
+    padding-left: 0.5rem;
+  }
+
+  dd {
+    display: block;
+    margin-inline-start: 0;
+  }
+
+  font-normal {
+    font-weight: 400;
+  }
+
+  dl {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
+  .print\:list-none {
+    list-style: none;
+    padding-inline-start: 0;
+  }
+
+  .justify-end {
+    text-align: right
+  }
 
 }
