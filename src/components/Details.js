@@ -5,7 +5,7 @@ export default {
     render() {
 
         return h("details", {
-            'class': 'flex flex-col gap-2 border-l-2 border-blue-200 dark:border-blue-700 pl-2'
+            'class': 'print:hidden flex flex-col gap-2 border-l-2 border-blue-200 dark:border-blue-700 pl-2'
         },
 
             [
