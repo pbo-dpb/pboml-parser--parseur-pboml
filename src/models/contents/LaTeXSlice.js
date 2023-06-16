@@ -1,6 +1,5 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import LaTeXSliceHtmlRenderer from '../../Renderers/Html/LaTeXSliceHtmlRenderer';
 
 
 export default class LaTeXSlice extends Slice {
@@ -28,11 +27,14 @@ export default class LaTeXSlice extends Slice {
         return array;
     }
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new LaTeXSliceHtmlRenderer(slice);
+                return "LaTeXSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 }

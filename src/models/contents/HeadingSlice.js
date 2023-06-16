@@ -1,7 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 import MarkdownDriver from '../../MarkdownDriver';
-import HeadingSliceHtmlRenderer from '../../Renderers/Html/HeadingSliceHtmlRenderer';
 
 
 export default class HeadingSlice extends Slice {
@@ -55,11 +54,14 @@ export default class HeadingSlice extends Slice {
         return array;
     }
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new HeadingSliceHtmlRenderer(slice);
+                return "HeadingSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 }

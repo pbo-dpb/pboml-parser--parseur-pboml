@@ -3,7 +3,6 @@ import Slice from "./Slice";
 import DataTable from './DataTable/DataTable';
 import ArrayTable from './ArrayTable/ArrayTable';
 
-import ChartSliceHtmlRenderer from '../../Renderers/Html/ChartSliceHtmlRenderer';
 
 
 export default class ChartSlice extends Slice {
@@ -36,10 +35,13 @@ export default class ChartSlice extends Slice {
         return array;
     }
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new ChartSliceHtmlRenderer(slice);
+                return "ChartSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 }

@@ -1,9 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
-import Details from '../../components/Details.js';
 import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
-import rendererStrings from '../../renderer-strings.js';
-import MarkdownDriver from '../../MarkdownDriver.js';
-const SliceHtmlRenderer = import('../../Renderers/Html/SliceHtmlRenderer.js');
+
 
 const defaults = {
     presentation: null,
@@ -168,13 +165,13 @@ export default class Slice {
         return Object.fromEntries(Object.entries(serialization).filter(([_, v]) => v !== null));;
     }
 
-    static async rendererForSliceRendererType(slice, rendererType) {
-        const renderer = await SliceHtmlRenderer;
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new renderer.default(slice);
+                return "SliceHtmlRenderer";
         }
+        throw `No renderer object for renderer type ${rendererType}`;
     }
-
 
 }

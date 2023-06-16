@@ -1,5 +1,6 @@
 import { h } from 'vue'
 import deepEqual from 'deep-equal';
+import Renderer from '../../Renderer/Renderer';
 
 export default class ChoiceRenderer {
     constructor(slice) {
@@ -50,8 +51,8 @@ export default class ChoiceRenderer {
             }) : h('div', { 'class': 'w-6 h-6' }),
 
             h('div', { 'class': 'flex flex-col gap-1' }, [
-                clonedSlice.constructor.rendererForSliceRendererType(clonedSlice, 'html').renderAsVnode("en"),
-                clonedSlice.constructor.rendererForSliceRendererType(clonedSlice, 'html').renderAsVnode("fr"),
+                Renderer.methods.renderSliceAsVnode(clonedSlice, 'en'),
+                Renderer.methods.renderSliceAsVnode(clonedSlice, 'fr'),
             ]),
 
         ])

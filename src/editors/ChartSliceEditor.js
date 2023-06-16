@@ -3,6 +3,7 @@ import { h } from 'vue'
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
 import DataTableEditor from "../components/Editor/DataTableEditor/DataTableEditor.js"
+import Renderer from '../components/Renderer/Renderer'
 
 export default {
     props: ['slice'],
@@ -36,8 +37,8 @@ export default {
             return this.updating ?
                 h('div', { style: `height:${this.updating}px`, ref: 'placeHolderNode' }) :
                 h('div', { class: "grid grid-cols-2 gap-4", ref: 'previewNode' }, [
-                    this.slice.constructor.rendererForSliceRendererType(this.slice, 'html').renderAsVnode("en"),
-                    this.slice.constructor.rendererForSliceRendererType(this.slice, 'html').renderAsVnode("fr"),
+                    Renderer.methods.renderSliceAsVnode(this.slice, 'en'),
+                    Renderer.methods.renderSliceAsVnode(this.slice, 'fr'),
 
                 ])
         }

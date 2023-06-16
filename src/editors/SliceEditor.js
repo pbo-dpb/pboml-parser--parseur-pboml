@@ -6,6 +6,7 @@ import PreviewingButton from "../components/Editor/PreviewingButton";
 import DeleteButton from "../components/Editor/DeleteButton";
 import DuplicateButton from "../components/Editor/DuplicateButton";
 import MoveButton from "../components/Editor/MoveButton";
+import Renderer from "../components/Renderer/Renderer";
 
 
 import { ListBulletIcon } from "@heroicons/vue/24/solid";
@@ -31,7 +32,7 @@ export default {
 
             this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'selection-none relative h-24 overflow-hidden' }, [
                 h('div', { class: 'absolute bg-gradient-to-t from-white h-24 w-full z-10' }, ''),
-                this.slice.constructor.rendererForSliceRendererType(this.slice, 'html')._buildVnodes(this.language),
+                Renderer.methods.renderSliceAsVnode(this.slice, this.language),
             ]) : null,
 
             this.slice.state.collapsed ? null : h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
@@ -95,7 +96,8 @@ export default {
 
 
                         ]),
-                    this.slice.state.isPreviewing ? this.slice.constructor.rendererForSliceRendererType(this.slice, 'html')._buildVnodes(this.slice.state.isPreviewing) : h(Suspense, null, {
+
+                    this.slice.state.isPreviewing ? Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing) : h(Suspense, null, {
                         default: () => h('div', { class: '' }, this.slice.__buildEditorsVnode()),
                         fallback: () => h('template', null, LoadingIndicator)
                     }),

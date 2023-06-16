@@ -1,7 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
 import DataTable from './DataTable/DataTable';
-import TableSliceHtmlRenderer from '../../Renderers/Html/TableSliceHtmlRenderer';
 
 
 export default class TableSlice extends Slice {
@@ -30,13 +29,14 @@ export default class TableSlice extends Slice {
     }
 
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new TableSliceHtmlRenderer(slice);
+                return "TableSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
-
 
 
 }

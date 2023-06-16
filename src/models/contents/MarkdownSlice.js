@@ -29,11 +29,14 @@ export default class MarkdownSlice extends Slice {
         return array;
     }
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new MarkdownSliceHtmlRenderer(slice);
+                return "MarkdownSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 }

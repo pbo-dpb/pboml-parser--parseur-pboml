@@ -1,6 +1,5 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import SvgSliceHtmlRenderer from '../../Renderers/Html/SvgSliceHtmlRenderer';
 
 export default class SvgSlice extends Slice {
     constructor(payload) {
@@ -31,11 +30,13 @@ export default class SvgSlice extends Slice {
         return array;
     }
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new SvgSliceHtmlRenderer(slice);
+                return "SvgSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 }

@@ -1,8 +1,6 @@
 import { h, defineAsyncComponent } from 'vue'
 import KvListVariablePair from './KvListVariablePair';
 import Slice from "./Slice";
-import KvListSliceHtmlRenderer from '../../Renderers/Html/KvListSliceHtmlRenderer';
-const language = document.documentElement.lang;
 
 
 export default class KvListSlice extends Slice {
@@ -68,11 +66,13 @@ export default class KvListSlice extends Slice {
     }
 
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new KvListSliceHtmlRenderer(slice);
+                return "KvListSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 }

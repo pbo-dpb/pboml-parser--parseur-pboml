@@ -2,6 +2,7 @@ import { h } from 'vue'
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
+import Renderer from '../components/Renderer/Renderer'
 
 export default {
     props: ['slice'],
@@ -11,8 +12,8 @@ export default {
             const md = new MarkdownDriver;
             return () => h('div', { class: 'grid grid-cols-2 gap-4' }, [
                 h('div', { class: 'col-span-2 font-bold', innerHTML: md.render(strings[document.documentElement.lang].readonly_slice) }),
-                props.slice.constructor.rendererForSliceRendererType(props.slice, 'html').renderAsVnode("en"),
-                props.slice.constructor.rendererForSliceRendererType(props.slice, 'html').renderAsVnode("fr"),
+                Renderer.methods.renderSliceAsVnode(props.slice, 'en'),
+                Renderer.methods.renderSliceAsVnode(props.slice, 'fr'),
             ])
         }
 

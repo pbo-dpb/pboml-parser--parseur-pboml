@@ -1,6 +1,5 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import BitmapSliceHtmlRenderer from '../../Renderers/Html/BitmapSliceHtmlRenderer';
 
 export const BITMAP_RESOLUTIONS = { sm: 640, md: 768, lg: null };
 export const BITMAP_FORMATS = ['webp', 'png'];
@@ -44,11 +43,13 @@ export default class BitmapSlice extends Slice {
     }
 
 
-    static rendererForSliceRendererType(slice, rendererType) {
+
+    static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
             case 'html':
-                return new BitmapSliceHtmlRenderer(slice);
+                return "BitmapSliceHtmlRenderer";
         }
+        return super.rendererObjectForSliceRendererType(rendererType);
     }
 
 

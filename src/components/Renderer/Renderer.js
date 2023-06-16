@@ -3,6 +3,8 @@ import { h } from 'vue'
 import AnnotationAnchorsRenderer from "./AnnotationAnchorsRenderer";
 import Annotations from "./Annotations";
 import RendererIntersectionManager from "./RendererIntersectionManager";
+// import all html renderers with glob for vite compatibility
+const sliceHtmlRenderers = import.meta.glob('../../Renderers/Html/*.js', { eager: true })
 
 export default {
 
@@ -55,7 +57,11 @@ export default {
       (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
     },
 
-
+    renderSliceAsVnode(slice, language) {
+      const rendererObjectName = slice.constructor.rendererObjectForSliceRendererType('html');
+      let htmlRenderer = new sliceHtmlRenderers[`../../Renderers/Html/${rendererObjectName}.js`].default(slice);
+      return (htmlRenderer && htmlRenderer.renderAsVnode) ? htmlRenderer.renderAsVnode(language) : null;
+    },
   },
 
 
@@ -65,8 +71,7 @@ export default {
     return h('main', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...this.pbomlDocument.slices.map((slice) => {
-        const renderer = slice.constructor.rendererForSliceRendererType(slice, 'html')
-        return (renderer && renderer.renderAsVnode) ? renderer.renderAsVnode(language) : null;
+        return this.renderSliceAsVnode(slice, language);
       }),
       ...this._buildAnnotationsVnodes(language),
       ...this._buildFooterVnodes(language),
