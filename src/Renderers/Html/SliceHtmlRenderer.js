@@ -126,33 +126,33 @@ export default class SliceHtmlRenderer {
         return [
 
             h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
-                'presentation': this.presentation,
-                'isEditing': this.state.isEditingMeta,
+                'presentation': this.slice.presentation,
+                'isEditing': this.slice.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
-                    this.presentation = value;
+                    this.slice.presentation = value;
                 }
             })]),
 
             h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
-                'referenced_as': this.referenced_as,
-                'isEditing': this.state.isEditingMeta,
+                'referenced_as': this.slice.referenced_as,
+                'isEditing': this.slice.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
-                    this.referenced_as.en = value.en;
-                    this.referenced_as.fr = value.fr;
+                    this.slice.referenced_as.en = value.en;
+                    this.slice.referenced_as.fr = value.fr;
                 }
             })]),
 
 
             h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
-                'label': this.label,
-                'isEditing': this.state.isEditingMeta,
+                'label': this.slice.label,
+                'isEditing': this.slice.state.isEditingMeta,
                 'onUpdate:modelValue': (value) => {
-                    this.label.en = value.en;
-                    this.label.fr = value.fr
+                    this.slice.label.en = value.en;
+                    this.slice.label.fr = value.fr
                 }
             })]),
 
-            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
+            ...(this.slice.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
 
             h('div', { class: 'mt-4' }, [h(defineAsyncComponent(() => import('../../editors/SliceMetasEditor.js')), {
                 slice: this
@@ -162,19 +162,18 @@ export default class SliceHtmlRenderer {
 
     renderAsVnode(language = document.documentElement.lang) {
         let classes = ["flex flex-col gap-4 print:mt-4 @container/slice"];
-        classes.push(this.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
-        classes.push(this.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside" : "");
+        classes.push(this.slice.print_only ? 'hidden print:flex' : 'flex')
+        classes.push(this.slice.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
+        classes.push(this.slice.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside" : "");
 
         let elType = 'section';
-        if (this.presentation === 'figure') elType = 'figure';
-        else if (this.presentation === 'aside') elType = 'aside';
-
-        return h(elType, { class: classes.join(" "), id: this.anchor }, this._buildVnodes(language));
+        if (this.slice.presentation === 'figure') elType = 'figure';
+        else if (this.slice.presentation === 'aside') elType = 'aside';
+        return h(elType, { class: classes.join(" "), id: this.slice.anchor }, this._buildVnodes(language));
     }
 
     renderEditingVnode(language = document.documentElement.lang) {
-        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language, id: this.anchor });
+        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this.slice, language: language, id: this.slice.anchor });
 
     }
 
