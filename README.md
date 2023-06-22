@@ -61,6 +61,8 @@ if (!window.pboml_parser_loaded)
 
 ### Embed the renderer
 
+**❗ Only trusted content should be passed to the component, as it will (mostly) not be sanitized prior to rendering.**
+
 The renderer can then be inserted as follows:
 
 ```html
