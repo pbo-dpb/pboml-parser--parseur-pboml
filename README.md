@@ -99,6 +99,11 @@ npm install
 npm run dev
 ```
 
+### Run tests
+```
+npm run test
+```
+
 ### Compiles and minifies for production
 ```
 npm run build
