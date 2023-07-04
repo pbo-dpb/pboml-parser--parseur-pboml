@@ -5,6 +5,7 @@ import SvgFitter from "./SvgSliceTools/SvgFitter"
 import SvgWhiteRemover from "./SvgSliceTools/SvgWhiteRemover"
 import { ExclamationCircleIcon } from '@heroicons/vue/24/solid'
 import SvgSanitizer from './SvgSliceTools/SvgSanitizer'
+import SvgSliceHtmlRenderer from '../Renderers/Html/SvgSliceHtmlRenderer'
 
 export default {
     props: ['slice'],
@@ -17,6 +18,9 @@ export default {
 
     methods: {
         setupFormForLanguage(language) {
+            let sliceHTMLRenderer = new SvgSliceHtmlRenderer(this.slice);
+
+
             return h('div', { class: 'flex flex-col gap-4' }, [
                 h('div', { class: 'text-lg font-semibold' }, language),
                 h('label', { class: 'w-full flex flex-col gap-1' }, [
@@ -43,7 +47,9 @@ export default {
                     }),
                 ]),
                 this.slice.content[language] ? h('div', { class: 'p-4', style: "background-color: rgba(249,250,251,0.1);background-image: repeating-linear-gradient(45deg, #f1f5f9 25%, transparent 25%, transparent 75%, #f1f5f9 75%, #f1f5f9), repeating-linear-gradient(45deg, #f1f5f9 25%, rgba(249,250,251,0.1) 25%, rgba(249,250,251,0.1) 75%, #f1f5f9 75%, #f1f5f9);background-position: 0 0, 15px 15px;background-size: 30px 30px;" }, [
-                    this.slice.renderReadonlyVnode(language),
+                    sliceHTMLRenderer.renderReadonlyVnode(language),
+
+
                 ]) : h(ExclamationCircleIcon, { class: 'w-8 h-8 text-yellow-500' }),
 
                 this.slice.content[language] ? h(Details, { label: strings[document.documentElement.lang].svg_slice_show_more_options_button_label }, {

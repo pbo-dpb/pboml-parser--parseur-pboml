@@ -1,6 +1,5 @@
 import { h, defineAsyncComponent } from 'vue'
 import Slice from "./Slice";
-import MarkdownSliceHtmlRenderer from '../../Renderers/Html/MarkdownSliceHtmlRenderer';
 
 
 export default class MarkdownSlice extends Slice {
