@@ -2,7 +2,7 @@ import { h } from 'vue'
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
 import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
-import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
+import BigRadioInput from "../components/Editor/Inputs/BigRadioInput.vue"
 import Renderer from '../components/Renderer/Renderer'
 
 export default {
@@ -21,12 +21,12 @@ export default {
 
         return () => h('div', { class: 'flex flex-col gap-4' }, [
 
-            h(SelectInput, {
+            h(BigRadioInput, {
                 choices: {
-                    "H1 (n+0)": 0,
-                    "> H2 (n+1)": 1,
-                    ">> H3 (n+2)": 2,
-                    ">>> H4 (n+3)": 3,
+                    "H1": 0,
+                    "> H2": 1,
+                    ">> H3": 2,
+                    ">>> H4": 3,
                 },
                 modelValue: props.slice.level,
                 'onUpdate:modelValue': (value) => {
