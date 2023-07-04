@@ -46,7 +46,10 @@
   let test = params.get('test');
   if (!test) test = 'leg0';
 
+
+
   async function loadTestPayload() {
+
     document.title = `${test} - PBOML`;
     const response = await fetch(`./tests/samples/${test.replace(/[^0-9a-zA-Z\_\-]/gm, '')}.yaml`);
     const rawPayload = await response.text();
@@ -58,6 +61,13 @@
     mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}" ${editorAttribute}></pboml-parser>`;
     const sideEl = document.getElementById('toc-container');
     sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
+
+    document.addEventListener(
+      "pboml-editor-document-updated",
+      (e) => {
+        sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
+      }
+    );
   }
 
   loadTestPayload();

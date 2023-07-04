@@ -60,6 +60,9 @@ export default {
                 } else {
                     const parentLevel = level - 1;
                     const parentNodes = levels[parentLevel];
+                    if (!parentNodes) {
+                        return;
+                    }
                     const parentNode = parentNodes[parentNodes.length - 1];
 
                     if (!parentNode.children) {
