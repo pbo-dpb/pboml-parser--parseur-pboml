@@ -1,44 +1,110 @@
-# Vue 3 + Vite + Web Components (composants web)
+# PBOML Parser (English)
 
 ## Description
 
-### English
+This project takes the form of a web component that can render PBOML formatted content (the `renderer`). The Web component also includes an optionally loaded visual editor (the `editor`).
 
-This code provides a starting point for the development of research tools/interactive components that can be embedded on the PBO's main website.
-This template should help get you started developing with Vue 3 in Vite with the intent of building a standalone [Web Component](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+This project is under active development, and several concepts are set to change and evolve. It is not recommended for production use at this time.
 
-### Français
+### The PBOML language
 
-Ce code fournit un point de départ pour le développement d'outils de recherche/composants interactifs qui peuvent être intégrés au site Web principal du DPB.
-Ce modèle devrait vous aider à commencer à développer avec Vue 3 dans Vite avec l'intention de construire un [composant Web  (Web Component)] autonome (https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+⚠️ The PBOML language is under development. It is recommended not to use it in production as its implementation could change drastically.
 
-## Project setup // Mise en route
+YAML based, the PBOML language is used to serialize PBO reports, notes and election costings for storage, machine based edition and just in time rendering to multiple formats (HTML, Docx, PDF). To learn more about the PBOML language, [visit this project's Wiki](https://github.com/pbo-dpb/pboml-parser--parseur-pboml/wiki).
+
+## Demo
+
+### Sandbox
+
+The sandbox lets you visualize and interact with the various slices and their renderers.
+
+- [Sandbox](https://pboml-sandbox--bac-a-sable-pboml.opbo-bdpb.ca/)
+- [Source code](https://github.com/pbo-dpb/pboml-sandbox--bac-a-sable-pboml)
+
+### Renderer examples
+
+Some existing publications have already been converted to the PBOML format and are rendered from this format on the OPBO fallback site. This is notably the case for the following publications:
+
+- [A Distributional Analysis of the Clean Fuel Regulations](https://fallback--repli.pbo-dpb.ca/en/publications/RP-2324-004-S--distributional-analysis-clean-fuel-regulations--analyse-distributive-reglement-combustibles-propres)
+- [Personnel Expenditure Analysis — Update](https://fallback--repli.pbo-dpb.ca/en/publications/RP-2324-002-S--personnel-expenditure-analysis-update--examen-depenses-personnel-mise-jour)
+- [Cost estimate of Employment Insurance Board of Appeal](https://fallback--repli.pbo-dpb.ca/en/publications/LEG-2324-004-M--cost-estimate-employment-insurance-board-appeal--estimation-cout-conseil-appel-assurance-emploi)
+
+## Use the Web component
+
+⚠️ The Web component is under development. It is recommended not to use it in production as its implementation could change drastically.
+
+### Retrieve the current version of the script
+
+The following script allows you to retrieve the latest version of the script by consulting the manifest produced when it was compiled, and inject it on a given page.
+
+```js
+const PARSER_DOMAIN = "https://pboml.opbo-bdpb.ca/";
+
+function loadPbomlParser() {
+    window.pboml_parser_loaded = true;
+    fetch(`${PARSER_DOMAIN}manifest.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            for (const property in data) {
+                if (data[property].isEntry) {
+                    const script = document.createElement('script');
+                    script.src = `${PARSER_DOMAIN}${data[property].file}`;
+                    script.type = "module";
+                    document.head.appendChild(script);
+                }
+            }
+        });
+}
+if (!window.pboml_parser_loaded)
+    loadPbomlParser()
+```
+
+### Embed the renderer
+
+**❗ Only trusted content should be passed to the component, as it will (mostly) not be sanitized prior to rendering.**
+
+The renderer can then be inserted as follows:
+
+```html
+<pboml-parser payload="data:text/yaml;base64,{pboml}"></pboml-parser>
+```
+
+Where `{pboml}` is a base64 encoded PBOML document. The `payload` attribute can also be fed raw PBOML content, as long as it's encoded correctly. For example, a Vue.js app could embed the component as such:
+
+```html
+<pboml-parser :payload="pbomlString"></pboml-parser>
+```
+
+Where `pbomlDocument` is a raw PBOML document.
+
+### Embed the editor
+
+The visual editor can be embeded by adding and `edit` attribute set to `true`.
+
+```html
+<pboml-parser edit="true" payload="data:text/yaml;base64,{pboml}"></pboml-parser>
+```
+
+## Develop and build locally
+
+### 1. Project setup
 ```
 npm install
 ```
 
-## Compilation // Compilation
+### 2. Compilation with Vite
 
-### Compiles and hot-reloads for development // Compilations et recharges à chaud pour le développement
+### Compiles and hot-reloads for development
 ```
 npm run dev
 ```
 
-### Compiles and minifies for production // Compilation et miniaturisation pour la production
+### Run tests
+```
+npm run test
+```
+
+### Compiles and minifies for production
 ```
 npm run build
 ```
-
-## Interfaces // Interfaces
-
-### English
-
-A single component can be embedded in an ABCMS web page. An example of how the component is loaded in available in `index.html`.
-
-The web component can raise a `navigation-context-update` event to update the wrapper's UI. See `WrapperEventDispatcher.js` for more information on how to format this `CustomEvent`.
-
-### Français
-
-Un seul composant peut être intégré dans une page web ABCMS. Un exemple de la façon dont le composant est chargé est disponible dans `index.html`.
-
-Le composant Web peut déclencher un événement `navigation-context-update` pour mettre à jour l'interface utilisateur de la page ABCMS englobante. Voir `WrapperEventDispatcher.js` pour plus d'informations sur la façon de formater ce `CustomEvent`.
