@@ -13,11 +13,11 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "buffer": "^6.0.3",
-    "chart.js": "^4.3.0",
+    "chart.js": "^4.3.3",
     "citation-js": "^0.6.8",
     "color": "^4.2.3",
-    "deep-equal": "^2.2.1",
-    "dompurify": "^3.0.3",
+    "deep-equal": "^2.2.2",
+    "dompurify": "^3.0.5",
     "htmltidy2": "^1.1.1",
     "joplin-turndown-plugin-gfm": "^1.0.12",
     "js-yaml": "^4.1.0",
@@ -25,7 +25,7 @@
     "lodash.merge": "^4.6.2",
     "marked": "^5.1.0",
     "marked-katex-extension": "git+https://github.com/remyvhw/marked-katex-extension.git",
-    "marked-linkify-it": "^3.0.2",
+    "marked-linkify-it": "^3.1.1",
     "pdf-lib": "^1.17.1",
     "turndown": "^7.1.2",
     "vue": "^3.3.4"
@@ -33,12 +33,12 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/vue": "^7.0.0",
-    "@vitejs/plugin-vue": "^4.2.3",
-    "autoprefixer": "^10.4.14",
-    "happy-dom": "^9.20.3",
-    "postcss": "^8.4.24",
-    "tailwindcss": "^3.3.2",
-    "vite": "^4.3.9",
-    "vitest": "^0.32.1"
+    "@vitejs/plugin-vue": "^4.3.2",
+    "autoprefixer": "^10.4.15",
+    "happy-dom": "^10.10.4",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.2"
   }
 }
