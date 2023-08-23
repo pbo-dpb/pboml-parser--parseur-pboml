@@ -16,7 +16,6 @@ const defaults = {
 
     // Chart related properties
     chart_type: 'bar',
-    stack: null,
     tension: 0
 }
 
@@ -46,7 +45,6 @@ export default class DataTableVariable {
             fr: payload.unit?.fr ?? ''
         } : null
 
-        this.stack = payload.stack !== undefined ? payload.stack : defaults.stack;
         this.tension = payload.tension !== undefined ? payload.tension : defaults.tension;
     }
 
