@@ -20,9 +20,9 @@
             </label>
         </template>
         <template v-else>
-            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.en" @input="handleEnInput"
+            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.en" @update:model-value="handleEnInput"
                 label="EN"></markdown-textarea>
-            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.fr" @input="handleFrInput"
+            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.fr" @update:model-value="handleFrInput"
                 label="FR"></markdown-textarea>
         </template>
 
@@ -38,12 +38,20 @@ const props = defineProps(['modelValue', 'label', "inputSize"])
 const emit = defineEmits(['update:modelValue'])
 
 
-const handleEnInput = (event) => {
-    emit('update:modelValue', { en: event.target.value, fr: props.modelValue?.fr })
+const handleEnInput = (eventOrValue) => {
+    if (eventOrValue?.target?.value)
+        emit('update:modelValue', { en: eventOrValue.target.value, fr: props.modelValue?.fr })
+    else
+        emit('update:modelValue', { en: eventOrValue, fr: props.modelValue?.fr })
 }
 
-const handleFrInput = (event) => {
-    emit('update:modelValue', { fr: event.target.value, en: props.modelValue?.en })
+const handleFrInput = (eventOrValue) => {
+    if (!eventOrValue)
+        emit('update:modelValue', { en: eventOrValue, fr: props.modelValue?.fr })
+    else if (eventOrValue?.target?.value)
+        emit('update:modelValue', { en: eventOrValue.target.value, fr: props.modelValue?.fr })
+    else
+        emit('update:modelValue', { en: eventOrValue, fr: props.modelValue?.fr })
 }
 
 </script>
