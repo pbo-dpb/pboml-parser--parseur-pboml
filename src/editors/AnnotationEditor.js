@@ -3,6 +3,7 @@ import editorStrings from "../editor-strings"
 import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
 import BibtexTextarea from "../components/Editor/Inputs/BibtexTextarea.vue"
+import DeleteButton from "../components/Editor/DeleteButton"
 
 
 export default {
@@ -13,6 +14,7 @@ export default {
         }
     },
     props: ['annotation'],
+    emits: ["delete"],
     methods: {
         sanitizeId(id) {
             this.annotation.id = id ? id.replace(/[^a-z0-9\_\-]/gi, '') : ''
@@ -21,6 +23,12 @@ export default {
     render() {
         const strings = editorStrings[document.documentElement.lang];
         return [
+            h('div', { class: 'flex flex-row justify-end gap-4' }, [h(DeleteButton, {
+                'onDelete': () => {
+                    this.$emit("delete", this.annotation);
+                }
+            }
+            )]),
             h('div', { class: 'flex flex-col gap-1' }, [
                 h('label', {
                     class: `font-semibold ${!this.annotation.id ? 'text-red-800' : ''}`,

@@ -37,10 +37,12 @@ export default {
 
     render() {
         let strings = editorStrings[document.documentElement.lang]
-        return h('section', { 'class': "flex flex-col gap-4" }, [
+        return h('section', { 'class': "flex flex-col gap-4", "onDelete": (annotation) => { debugger } }, [
 
             this.pbomlDocument.annotations?.map((ann) => {
-                return ann.renderEditingVnode()
+                return ann.renderEditingVnode(document.documentElement.lang, (annotation) => {
+                    this.pbomlDocument.annotations.splice(this.pbomlDocument.annotations.indexOf(annotation), 1);
+                })
             }),
 
             h('div', h(Button, { 'innerText': `${strings.create_annotation} ➕`, "onClick": (e) => this.pushNewAnnotation(e) }))
