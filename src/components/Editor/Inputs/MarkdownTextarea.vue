@@ -56,7 +56,10 @@ export default {
 
             // Remove all pasted references.
             markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
-            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[a-z0-9]{1,}\\\\\\]\\]\\(file:\\/\\/([^|)])+\\)', 'g')), '[^🟠]')
+
+            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9]{1,}\\\\\\]\\]\\(file:([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
+                return `[^🟠]${p2}`;
+            })
             markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9]{1,}\\\]\]\(file:([^)])+\)', 'g')), '[^🟠]')
 
             // Use first row as table headers when no header is present
