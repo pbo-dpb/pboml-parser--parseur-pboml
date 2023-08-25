@@ -75,6 +75,9 @@ export default {
         'svg_fit_tool': 'Fit',
         'svg_white_remover_tool': 'Remove white',
         'svg_sanitizer_tool': 'Remove forbidden characters',
+        'editor_actions_preview': "Preview",
+        'editor_actions_export': "Export",
+        'editor_actions_source': "Source"
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -152,5 +155,8 @@ export default {
         'svg_fit_tool': 'Adapter la boîte',
         'svg_white_remover_tool': 'Enlever le blanc',
         'svg_sanitizer_tool': 'Filtrer les caractères interdits',
+        'editor_actions_preview': "Aperçu",
+        'editor_actions_export': "Exporter",
+        'editor_actions_source': "Source"
     }
 }

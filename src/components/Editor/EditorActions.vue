@@ -3,24 +3,25 @@
         <nav class="flex flex-row justify-end gap-2">
 
             <slot></slot>
-            <Button :disabled="disabled" @click="shouldDisplayPreview = (shouldDisplayPreview ? false : 'en')">
+            <Button :disabled="disabled" @click="shouldDisplayPreview = (shouldDisplayPreview ? false : 'en')"
+                :toggled="shouldDisplayPreview ? true : false" :title="strings.editor_actions_preview">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span class="sr-only">Export // Exporter</span>
+                <span class="sr-only">{{ strings.editor_actions_preview }}</span>
             </Button>
 
-            <Button v-if="!standalone" :disabled="disabled"
-                @click="shouldDisplayExportActions = !shouldDisplayExportActions" :toggled="shouldDisplayExportActions">
+            <Button :disabled="disabled" @click="shouldDisplayExportActions = !shouldDisplayExportActions"
+                :toggled="shouldDisplayExportActions" :title="strings.editor_actions_export">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
                 </svg>
-                <span class="sr-only">Export // Exporter</span>
+                <span class="sr-only">{{ strings.editor_actions_export }}</span>
             </Button>
         </nav>
 
@@ -38,8 +39,12 @@
             <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
         </div>
 
-        <div class="flex flex-col gap-2 bg-blue-100 shadow p-4" v-if="shouldDisplayPreview">
-            <nav class="flex flex-row gap-2 justify-end ">
+        <div class="flex flex-col gap-2 border-4 border-slate-500 border-dashed shadow-inner rounded p-4 -mx-4"
+            v-if="shouldDisplayPreview">
+            <nav class="flex flex-row gap-2 justify-end align-center">
+                <span class="mr-auto uppercase text-xl font-bold text-slate-500">{{ strings.editor_actions_preview
+                }} ({{ shouldDisplayPreview }})</span>
+
                 <Button @click="shouldDisplayPreview = 'en'" :toggled="shouldDisplayPreview === 'en'">
                     EN
                 </Button>
@@ -49,6 +54,8 @@
             </nav>
 
             <Renderer :pboml-document="pbomlDocument" :language="shouldDisplayPreview"></Renderer>
+
+            <span class="mr-auto uppercase text-xl font-bold text-slate-500">/{{ strings.editor_actions_preview }}</span>
 
         </div>
 
@@ -67,6 +74,8 @@ import PBOMLDocument from '../../models/PBOMLDocument';
 import PdfRenderer from "./PreprintExporter/PdfRenderer.js"
 import Button from './Button.vue';
 import Renderer from '../Renderer/Renderer';
+import strings from "../../editor-strings"
+
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
@@ -77,7 +86,8 @@ export default {
         return {
             shouldDisplayExportActions: false,
             shouldDisplayPreprintExporter: false,
-            shouldDisplayPreview: false
+            shouldDisplayPreview: false,
+            strings: strings[document.documentElement.lang]
         }
     },
     components: {

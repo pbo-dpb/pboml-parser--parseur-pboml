@@ -4,9 +4,9 @@
         :class="{
             'bg-blue-800 enabled:hover:bg-blue-700': primary,
             'bg-slate-800 enabled:hover:bg-slate-700': !primary,
-            'shadow-inner bg-blue-600': primary && toggled,
-            'shadow-inner bg-slate-600': !primary && toggled
-        }">
+            'shadow-inner aria-pressed:bg-blue-600': primary && toggled,
+            'shadow-inner aria-pressed:bg-slate-600': !primary && toggled
+        }" :aria-pressed="toggled">
 
         <slot></slot>
 
