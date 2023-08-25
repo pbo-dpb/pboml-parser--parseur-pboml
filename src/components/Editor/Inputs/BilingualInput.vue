@@ -46,12 +46,10 @@ const handleEnInput = (eventOrValue) => {
 }
 
 const handleFrInput = (eventOrValue) => {
-    if (!eventOrValue)
-        emit('update:modelValue', { en: eventOrValue, fr: props.modelValue?.fr })
-    else if (eventOrValue?.target?.value)
-        emit('update:modelValue', { en: eventOrValue.target.value, fr: props.modelValue?.fr })
+    if (eventOrValue?.target?.value)
+        emit('update:modelValue', { en: props.modelValue?.en, fr: eventOrValue.target.value })
     else
-        emit('update:modelValue', { en: eventOrValue, fr: props.modelValue?.fr })
+        emit('update:modelValue', { en: props.modelValue?.en, fr: eventOrValue })
 }
 
 </script>

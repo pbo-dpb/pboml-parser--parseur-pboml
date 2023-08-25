@@ -5,7 +5,7 @@ import NumberInput from "../Inputs/NumberInput.vue"
 import strings from "../../../editor-strings"
 import TinyButton from "../TinyButton.vue";
 import editorStrings from '../../../editor-strings';
-import { ArrowRightCircleIcon, ChartBarIcon, StarIcon, TrashIcon } from '@heroicons/vue/24/solid';
+import { ArrowRightCircleIcon, ChartBarIcon, StarIcon, TrashIcon, ExclamationTriangleIcon } from '@heroicons/vue/20/solid';
 import DataTableEntry from '../../../models/contents/DataTable/DataTableEntry';
 
 export default {
@@ -112,6 +112,13 @@ export default {
         return h('div', {
             class: 'flex flex-col gap-2'
         }, [
+
+            (!this.datatable.getAllUnitsUsedInTableForLanguage(language).length) ?
+                h('span', { 'class': 'rounded p-1 bg-orange-700 text-white text-xs flex flex-row gap-1 w-fit' }, [
+                    h(ExclamationTriangleIcon, { 'class': 'h-4 w-4' }, () => []),
+                    strings.data_table_has_no_units
+                ]) : null,
+
             h('table', {
                 class: `table table-fixed border-collapse border border-slate-300 dark:border-slate-700 w-full text-xs`
             }, [

@@ -71,7 +71,7 @@ export default class DataTable {
         return groups;
     }
 
-    getWholeTableUnitForLanguage(language) {
+    getAllUnitsUsedInTableForLanguage(language) {
 
         let units = [];
         Object.entries(this.variables).forEach((entry) => {
@@ -81,10 +81,19 @@ export default class DataTable {
             if (!unit || units.includes(unit)) return;
             units.push(unit)
         });
+        return units;
+
+    }
+
+    getWholeTableUnitForLanguage(language) {
+
+        const units = this.getAllUnitsUsedInTableForLanguage(language);
         if (units.length > 1) return null;
 
         return units[0];
     }
+
+
 
 
     __buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language) {
