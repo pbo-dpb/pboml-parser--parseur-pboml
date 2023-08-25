@@ -43,7 +43,12 @@ export default class MarkdownDriver {
 
     render(content) {
 
+        if (!["string", "number"].includes(typeof content)) {
+            content = "";
+        }
+
         content = Callbacks.getBeforeMarkdownRendering ? Callbacks.getBeforeMarkdownRendering(content) : content;
+
 
 
         if (this.renderInline) {
