@@ -39,7 +39,7 @@ export default {
                 [
 
                     h('legend',
-                        { class: ` text-sm px-2 text-gray-600 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2 ${presentationSpecificHeading.join(' ')}` },
+                        { class: ` text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2 ${presentationSpecificHeading.join(' ')}` },
                         [
 
                             h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),

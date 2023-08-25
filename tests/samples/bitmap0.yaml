@@ -2,7 +2,7 @@ pboml:
   version: 1.0.0
 slices:
   - type: bitmap
-    presentation: box
+    presentation: aside
     label:
       en: CSC
       fr: NCC
