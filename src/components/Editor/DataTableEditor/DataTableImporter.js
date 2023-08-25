@@ -62,8 +62,8 @@ export default {
 
         convertVariableToNumericWhenApplicable(variables, entries) {
             // Traverse entries and spot all numerical variables
-            const englishFormattedNumberReg = new RegExp('^-?[0-9,]*\\.?[0-9]*$', '')
-            const frenchFormattedNumberReg = new RegExp('^-?[0-9\\s]*\\,?[0-9]*$', '')
+            const englishFormattedNumberReg = new RegExp('^-?[0-9,]+\\.?[0-9]*$', '')
+            const frenchFormattedNumberReg = new RegExp('^-?[0-9\\s]+\\,?[0-9]*$', '')
             variables.forEach(variable => {
                 // Never convert descriptive variables so we don't accidentally convert years to numbers
                 if (variable.variable.is_descriptive) return;
@@ -73,7 +73,7 @@ export default {
 
                     if (entry[variable.key]?.is_descriptive)
                         entriesAreOnlyNumeric = false;
-                    if (typeof entry[variable.key]?.en !== 'undefined' && entry[variable.key]?.en !== '' && !englishFormattedNumberReg.test(entry[variable.key]?.en))
+                    if (typeof entry[variable.key]?.en !== 'undefined' && entry[variable.key]?.en !== '-' && entry[variable.key]?.en !== '' && !englishFormattedNumberReg.test(entry[variable.key]?.en))
                         entriesAreOnlyNumeric = false;
                     if (typeof entry[variable.key]?.fr !== 'undefined' && entry[variable.key]?.fr !== '' && !frenchFormattedNumberReg.test(entry[variable.key]?.fr))
                         entriesAreOnlyNumeric = false;
