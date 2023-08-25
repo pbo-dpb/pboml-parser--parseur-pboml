@@ -4,7 +4,8 @@
 
 
         <label class="flex flex-row items-center text-left">
-            <markdown-input :value="modelValue" @input="handleInput" class="border border-gray-300 p-1 w-full">
+            <markdown-input :value="modelValue" @input="handleInput" @blur="$emit('blur', $event)"
+                class="border border-gray-300 p-1 w-full">
             </markdown-input>
         </label>
 
@@ -16,7 +17,7 @@
 
 import MarkdownInput from "./MarkdownInput.vue"
 const props = defineProps(['modelValue', 'label', 'hint'])
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'blur'])
 
 
 const handleInput = (event) => {

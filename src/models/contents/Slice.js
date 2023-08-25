@@ -117,6 +117,15 @@ export default class Slice {
                 }
             })]),
 
+
+            h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceIdEditor.js')), {
+                'id': this.id,
+                'isEditing': this.state.isEditingMeta,
+                'onUpdate:modelValue': (value) => {
+                    this.id = value ? value : null;
+                }
+            })]),
+
             ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
 
             h('div', { class: 'mt-4' }, [h(defineAsyncComponent(() => import('../../editors/SliceMetasEditor.js')), {
