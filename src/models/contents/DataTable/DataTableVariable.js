@@ -5,7 +5,6 @@ import deepEqual from 'deep-equal';
 import DataTableEntry from './DataTableEntry';
 
 const defaults = {
-    display_label: true,
     is_time: false,
     skip_chart: false,
     is_descriptive: false,
@@ -30,7 +29,6 @@ export default class DataTableVariable {
 
         this.type = payload.type !== undefined ? payload.type : defaults.type;
         this.readonly = payload.readonly;
-        this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
         this.is_descriptive = payload.is_descriptive;
         this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
@@ -69,7 +67,7 @@ export default class DataTableVariable {
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
         const md = new MarkdownDriver;
 
-        let labelSpan = h('span', { class: this.display_label ? '' : 'sr-only', innerHTML: md.render(this.label[language]) });
+        let labelSpan = h('span', { innerHTML: md.render(this.label[language]) });
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -135,7 +133,6 @@ export default class DataTableVariable {
             label: { en: this.label?.en, fr: this.label?.fr },
             type: this.type,
             readonly: this.readonly,
-            display_label: this.display_label,
             is_descriptive: this.is_descriptive,
             is_time: this.is_time,
             group: this.group,
