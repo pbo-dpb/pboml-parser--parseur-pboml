@@ -7,7 +7,11 @@
         <legend v-if="label" class="font-semibold px-1 w-full">{{ label }}</legend>
 
         <template v-if="inputSize !== 'lg'">
-            <label class="flex flex-col @sm:flex-row items-center text-left">
+            <markdown-textarea label="EN" :multiline="false" :model-value="modelValue?.en"
+                @update:model-value="handleEnInput" class="border border-gray-300 p-1 w-full"></markdown-textarea>
+            <markdown-textarea label="FR" :multiline="false" :model-value="modelValue?.fr"
+                @update:model-value="handleFrInput" class="border border-gray-300 p-1 w-full"></markdown-textarea>
+            <!--<label class="flex flex-col @sm:flex-row items-center text-left">
                 <span class="w-8 p-1 text-center tracking-tighter">EN</span>
                 <markdown-input :value="modelValue?.en" @input="handleEnInput" class="border border-gray-300 p-1 w-full">
                 </markdown-input>
@@ -18,11 +22,12 @@
                 <markdown-input :value="modelValue?.fr" @input="handleFrInput" class="border border-gray-300 p-1 w-full">
                 </markdown-input>
             </label>
+            -->
         </template>
         <template v-else>
-            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.en" @update:model-value="handleEnInput"
+            <markdown-textarea class="w-1/2 px-2" :model-value="modelValue?.en" @update:model-value="handleEnInput"
                 label="EN"></markdown-textarea>
-            <markdown-textarea class="w-1/2 px-2" :model-Value="modelValue?.fr" @update:model-value="handleFrInput"
+            <markdown-textarea class="w-1/2 px-2" :model-value="modelValue?.fr" @update:model-value="handleFrInput"
                 label="FR"></markdown-textarea>
         </template>
 

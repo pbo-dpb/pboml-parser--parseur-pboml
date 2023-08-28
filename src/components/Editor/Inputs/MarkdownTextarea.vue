@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-1 @sm:flex-row">
         <div class="flex flex-row justify-between items-center">
             <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
             <TinyButton :disabled="!canPaste" @click="handlePaste" :title="editorStrings.paste_from_word">
@@ -8,9 +8,12 @@
             </TinyButton>
         </div>
 
-        <textarea ref="payloadArea" :value="modelValue" :id="eluid" class="border border-gray-300 p-1 rounded h-96"
-            @input="emitUpdate($event.target.value)">
+        <textarea v-if="multiline" ref="payloadArea" :value="modelValue" :id="eluid"
+            class="border border-gray-300 p-1 rounded h-96" @input="emitUpdate($event.target.value)">
         </textarea>
+
+        <input type="text" v-else ref="payloadArea" :value="modelValue" :id="eluid"
+            class="border border-gray-300 p-1 rounded w-full" @input="emitUpdate($event.target.value)" />
     </div>
 </template>
 <script>
@@ -22,7 +25,14 @@ import { tables as gfmTables } from 'joplin-turndown-plugin-gfm'
 import editorStrings from "../../../editor-strings"
 
 export default {
-    props: ['modelValue', 'label'],
+    props: {
+        'modelValue': { required: true },
+        'label': {},
+        'multiline': {
+            type: Boolean,
+            default: true
+        }
+    },
     emits: ['update:modelValue'],
     data() {
         return {
@@ -57,10 +67,10 @@ export default {
             // Remove all pasted references.
             markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
 
-            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9]{1,}\\\\\\]\\]\\(file:([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
+            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9a-z]{1,}\\\\\\]\\]\\(file:([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
                 return `[^🟠]${p2}`;
             })
-            markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9]{1,}\\\]\]\(file:([^)])+\)', 'g')), '[^🟠]')
+            markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9a-z]{1,}\\\]\]\(file:([^)])+\)', 'g')), '[^🟠]')
 
             // Use first row as table headers when no header is present
             markdown = markdown.replace(/^\|[ \|]{1,}\|\n\| [ \-\|]{1,}\ \|\n\| [^\n]{1,} \|\n/gm, (match) => {
