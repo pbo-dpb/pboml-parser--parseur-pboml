@@ -67,7 +67,7 @@ export default class DataTableVariable {
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
         const md = new MarkdownDriver;
 
-        let labelSpan = h('span', { innerHTML: md.render(this.label[language]) });
+        let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose" });
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -102,6 +102,7 @@ export default class DataTableVariable {
                 } catch (error) {
                     innerHTML = ""
                 }
+                cellClasses += " pboml-prose";
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);

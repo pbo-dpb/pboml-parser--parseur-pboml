@@ -102,7 +102,7 @@ slices:
     content:
       - thethornoftheservants:
           fr: Troisième prophétie
-          en: Third Prophecy
+          en: Third Prophecy[^1]
         thewindowsswomen:
           fr: 2024-2025
           en: 2024-25
@@ -179,7 +179,7 @@ slices:
           fr: '%'
       thethornoftheservants:
         label:
-          en: The Thorn of the Servants
+          en: The Thorn of the Servants[^1]
           fr: L'épine des serviteurs
         type: markdown
         group:
