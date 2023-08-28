@@ -100,9 +100,9 @@ export default {
                     if (firstValueForEntry) {
                         let cleanedUpNumber;
                         if (languageOfFirstValueForEntry === 'en')
-                            cleanedUpNumber = firstValueForEntry.replace(",", "");
+                            cleanedUpNumber = firstValueForEntry.replaceAll(",", "");
                         else if (languageOfFirstValueForEntry === 'fr')
-                            cleanedUpNumber = firstValueForEntry.replace(" ", "").replace(",", ".");
+                            cleanedUpNumber = firstValueForEntry.replaceAll(" ", "").replaceAll(",", ".");
                         entry[numVar.key] = +cleanedUpNumber;
                     }
                 });

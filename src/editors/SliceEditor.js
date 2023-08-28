@@ -86,18 +86,11 @@ export default {
                                     }
                                 }),
 
-
-
-
                             ])
-
-
-
-
 
                         ]),
 
-                    this.slice.state.isPreviewing ? h('div', { class: 'border-4 border-slate-100 border-dashed p-4' }, [
+                    this.slice.state.isPreviewing ? h('div', { class: 'border-4 border-slate-100 border-dashed p-4 rounded' }, [
                         h('div', { class: "uppercase text-xl font-bold text-slate-500 -mt-2 mb-2 pb-2 border-b-4 border-slate-100 border-dashed" }, `${editorStrings[this.language].editor_actions_preview} (${this.slice.state.isPreviewing})`),
                         Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing)
                     ]) : h(Suspense, null, {
