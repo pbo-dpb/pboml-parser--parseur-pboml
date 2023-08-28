@@ -30,7 +30,7 @@
                             {{ strings.meta_section_title }}
                         </Tab>
                     </div>
-                    <div class="flex flex-row items-center gap-2">
+                    <div v-if="currentTab === 'slices'" class="flex flex-row items-center gap-2">
 
                         <div class="flex flex-row gap-0.5" aria-hidden="true">
                             <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)">
@@ -42,7 +42,7 @@
                                 <span class="sr-only">{{ strings.expand_all }}</span>
                             </TinyButton>
                         </div>
-                        <TinyButton title="Structure"
+                        <TinyButton title="Structure" :aria-pressed="shouldPresentDocumentStructure"
                             @click="shouldPresentDocumentStructure = !shouldPresentDocumentStructure">
                             <Bars3Icon class="w-4 h-4"></Bars3Icon>
                             <span class="sr-only">Structure</span>

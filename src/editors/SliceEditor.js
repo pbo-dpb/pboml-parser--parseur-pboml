@@ -97,7 +97,7 @@ export default {
 
                         ]),
 
-                    this.slice.state.isPreviewing ? Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing) : h(Suspense, null, {
+                    this.slice.state.isPreviewing ? h('div', { class: 'border-4 border-slate-500 border-dashed p-4' }, [Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing)]) : h(Suspense, null, {
                         default: () => h('div', { class: 'flex flex-col gap-4' }, this.slice.__buildEditorsVnode()),
                         fallback: () => h('template', null, LoadingIndicator)
                     }),
