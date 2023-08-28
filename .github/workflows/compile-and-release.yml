@@ -9,9 +9,9 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
       - run: npm ci
       - run: npm run build
       - uses: montudor/action-zip@v1
