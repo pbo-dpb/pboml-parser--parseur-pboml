@@ -75,7 +75,7 @@ export default {
                         entriesAreOnlyNumeric = false;
                     if (typeof entry[variable.key]?.en !== 'undefined' && entry[variable.key]?.en !== '-' && entry[variable.key]?.en !== '' && !englishFormattedNumberReg.test(entry[variable.key]?.en))
                         entriesAreOnlyNumeric = false;
-                    if (typeof entry[variable.key]?.fr !== 'undefined' && entry[variable.key]?.fr !== '' && !frenchFormattedNumberReg.test(entry[variable.key]?.fr))
+                    if (typeof entry[variable.key]?.fr !== 'undefined' && entry[variable.key]?.en !== '-' && entry[variable.key]?.fr !== '' && !frenchFormattedNumberReg.test(entry[variable.key]?.fr))
                         entriesAreOnlyNumeric = false;
                 })
                 if (entriesAreOnlyNumeric)
