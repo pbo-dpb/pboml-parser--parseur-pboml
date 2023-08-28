@@ -39,11 +39,13 @@
             <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
         </div>
 
-        <div class="flex flex-col gap-2 border-4 border-slate-500 border-dashed shadow-inner rounded p-4 -mx-4"
+        <div class="flex flex-col gap-2 border-4 border-slate-100 border-dashed shadow-inner rounded p-4 -mx-4"
             v-if="shouldDisplayPreview">
             <nav class="flex flex-row gap-2 justify-end align-center">
-                <span class="mr-auto uppercase text-xl font-bold text-slate-500">{{ strings.editor_actions_preview
-                }} ({{ shouldDisplayPreview }})</span>
+                <span
+                    class="mr-auto uppercase text-xl font-bold text-slate-500 mb-2 pb-2 border-b-4 border-slate-100 border-dashed">{{
+                        strings.editor_actions_preview
+                    }} ({{ shouldDisplayPreview }})</span>
 
                 <Button @click="shouldDisplayPreview = 'en'" :toggled="shouldDisplayPreview === 'en'">
                     EN

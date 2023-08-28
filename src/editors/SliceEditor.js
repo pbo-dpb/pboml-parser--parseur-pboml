@@ -97,7 +97,10 @@ export default {
 
                         ]),
 
-                    this.slice.state.isPreviewing ? h('div', { class: 'border-4 border-slate-500 border-dashed p-4' }, [Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing)]) : h(Suspense, null, {
+                    this.slice.state.isPreviewing ? h('div', { class: 'border-4 border-slate-100 border-dashed p-4' }, [
+                        h('div', { class: "uppercase text-xl font-bold text-slate-500 -mt-2 mb-2 pb-2 border-b-4 border-slate-100 border-dashed" }, `${editorStrings[this.language].editor_actions_preview} (${this.slice.state.isPreviewing})`),
+                        Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing)
+                    ]) : h(Suspense, null, {
                         default: () => h('div', { class: 'flex flex-col gap-4' }, this.slice.__buildEditorsVnode()),
                         fallback: () => h('template', null, LoadingIndicator)
                     }),
