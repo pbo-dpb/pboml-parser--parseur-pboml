@@ -104,7 +104,7 @@ export default class Annotation {
     }
 
 
-    renderEditingVnode(language = document.documentElement.lang, deleteCallback) {
+    renderEditingVnode(language = document.documentElement.lang, deleteCallback, readonlyId = false) {
 
 
         return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
@@ -113,7 +113,8 @@ export default class Annotation {
                 annotation: this,
                 onDelete: () => {
                     deleteCallback(this)
-                }
+                },
+                readonlyId
             }),
 
         ])

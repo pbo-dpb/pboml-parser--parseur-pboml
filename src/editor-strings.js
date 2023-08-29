@@ -30,6 +30,7 @@ export default {
         'annotation_id_helper': "You can refer to this annotation using the following string: ",
         'annotation_content_type_label': "Content type",
         'annotation_content_label': "Content",
+        'annotation_auto_keep_organized_checkbox': "Enforce numerical order",
         'slice_meta_type_sources': "Sources",
         'slice_meta_type_notes': "Notes",
         'slice_meta_type_alts': "Textual descriptions",
@@ -78,7 +79,7 @@ export default {
         'svg_sanitizer_tool': 'Remove forbidden characters',
         'editor_actions_preview': "Preview",
         'editor_actions_export': "Export",
-        'editor_actions_source': "Source"
+        'editor_actions_source': "Source",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -111,6 +112,7 @@ export default {
         'annotation_id_helper': "Vous pouvez référer à cette annotation en utilisant la chaine suivante : ",
         'annotation_content_type_label': "Type de contenu",
         'annotation_content_label': "Contenu",
+        'annotation_auto_keep_organized_checkbox': "Appliquer l'ordre numérique",
         'slice_meta_type_sources': "Sources",
         'slice_meta_type_notes': "Notes",
         'slice_meta_type_alts': "Descriptions textuelles",
@@ -159,6 +161,6 @@ export default {
         'svg_sanitizer_tool': 'Filtrer les caractères interdits',
         'editor_actions_preview': "Aperçu",
         'editor_actions_export': "Exporter",
-        'editor_actions_source': "Source"
+        'editor_actions_source': "Source",
     }
 }

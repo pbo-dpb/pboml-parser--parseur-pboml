@@ -1,4 +1,4 @@
-import { h, defineAsyncComponent } from "vue"
+import { h, defineAsyncComponent, readonly } from "vue"
 import editorStrings from "../editor-strings"
 import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
@@ -13,7 +13,7 @@ export default {
                 Math.random().toString(36).substring(2)
         }
     },
-    props: ['annotation'],
+    props: ['annotation', 'readonlyId'],
     emits: ["delete"],
     methods: {
         sanitizeId(id) {
@@ -35,8 +35,9 @@ export default {
                     for: `${this.inuid}-id`,
                 }, strings.annotation_id_label),
                 h('input', {
-                    class: `border  p-1 rounded ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'}`,
+                    class: `border  p-1 rounded ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'} ${this.readonlyId ? 'bg-gray-100' : ''}`,
                     id: `${this.inuid}-id`,
+                    readonly: this.readonlyId,
                     value: this.annotation.id,
                     'onChange': (e) => { this.sanitizeId(e.target.value); },
                 }),
