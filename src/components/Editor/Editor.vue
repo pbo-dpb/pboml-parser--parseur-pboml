@@ -33,11 +33,13 @@
                     <div v-if="currentTab === 'slices'" class="flex flex-row items-center gap-2">
 
                         <div class="flex flex-row gap-0.5" aria-hidden="true">
-                            <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)">
+                            <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)"
+                                :aria-pressed="areAllSlicesCollapsed">
                                 <ArrowsPointingInIcon class="w-4 h-4"></ArrowsPointingInIcon>
                                 <span class="sr-only">{{ strings.collapse_all }}</span>
                             </TinyButton>
-                            <TinyButton :title="strings.expand_all" @click="collapseSlices(false)">
+                            <TinyButton :title="strings.expand_all" @click="collapseSlices(false)"
+                                :aria-pressed="areAllSlicesExpanded">
                                 <ArrowsPointingOutIcon class="w-4 h-4"></ArrowsPointingOutIcon>
                                 <span class="sr-only">{{ strings.expand_all }}</span>
                             </TinyButton>
@@ -171,6 +173,16 @@ export default {
             deep: true
         }
     },
+
+    computed: {
+        areAllSlicesCollapsed() {
+            return !this.pbomlDocument.slices.some(slice => !slice.state.collapsed);
+        },
+        areAllSlicesExpanded() {
+            return !this.pbomlDocument.slices.some(slice => slice.state.collapsed);
+        },
+    },
+
     methods: {
         collapseSlices(collapse) {
             this.pbomlDocument.slices.forEach(slice => {
