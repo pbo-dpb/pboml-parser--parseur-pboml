@@ -117,7 +117,6 @@ import Button from './Button.vue';
 import TinyButton from './TinyButton.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
-import AnnotationsEditor from "./AnnotationsEditor/AnnotationsEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
 import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/vue/24/solid';
@@ -148,7 +147,7 @@ export default {
         SliceStager,
         DocumentMetaEditor,
         Tab,
-        AnnotationsEditor,
+        AnnotationsEditor: defineAsyncComponent(() => import('./AnnotationsEditor/AnnotationsEditor.js')),
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
         ArrowsPointingInIcon,

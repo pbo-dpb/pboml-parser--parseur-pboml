@@ -4,6 +4,7 @@ import SelectInput from "../components/Editor/Inputs/SelectInput.vue"
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue"
 import BibtexTextarea from "../components/Editor/Inputs/BibtexTextarea.vue"
 import DeleteButton from "../components/Editor/DeleteButton"
+import MoveButton from "../components/Editor/MoveButton";
 
 
 export default {
@@ -13,8 +14,8 @@ export default {
                 Math.random().toString(36).substring(2)
         }
     },
-    props: ['annotation', 'readonlyId'],
-    emits: ["delete"],
+    props: ['annotation', 'readonlyId', 'canMoveUp', 'canMoveDown'],
+    emits: ["delete", "move"],
     methods: {
         sanitizeId(id) {
             this.annotation.id = id ? id.replace(/[^a-z0-9\_\-]/gi, '') : ''
@@ -22,22 +23,34 @@ export default {
     },
     render() {
         const strings = editorStrings[document.documentElement.lang];
-        return [
-            h('div', { class: 'flex flex-row justify-end gap-4' }, [h(DeleteButton, {
-                'onDelete': () => {
-                    this.$emit("delete", this.annotation);
-                }
-            }
-            )]),
-            h('div', { class: 'flex flex-col gap-1' }, [
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
+            h('legend', { class: `text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2` }, [
+                h('div', { class: 'font-semibold text-lg flex flex-row gap-2 font-mono' }, `[^${this.annotation.id}]`),
+                h('div', { class: 'flex flex-row justify-end gap-1' }, [
+                    h(DeleteButton, {
+                        'onDelete': () => {
+                            this.$emit("delete", this.annotation);
+                        }
+                    }
+                    ),
+                    h(MoveButton, {
+                        canMoveUp: this.canMoveUp,
+                        canMoveDown: this.canMoveDown,
+                        'onMove': (direction, event) => {
+                            this.$emit("move", direction, event);
+                        }
+                    }, () => []),
+                ]),
+            ]),
+
+            this.readonlyId ? null : h('div', { class: 'flex flex-col gap-1' }, [
                 h('label', {
                     class: `font-semibold ${!this.annotation.id ? 'text-red-800' : ''}`,
                     for: `${this.inuid}-id`,
                 }, strings.annotation_id_label),
                 h('input', {
-                    class: `border  p-1 rounded ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'} ${this.readonlyId ? 'bg-gray-100' : ''}`,
+                    class: `border  p-1 rounded ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'}`,
                     id: `${this.inuid}-id`,
-                    readonly: this.readonlyId,
                     value: this.annotation.id,
                     'onChange': (e) => { this.sanitizeId(e.target.value); },
                 }),
@@ -95,7 +108,7 @@ export default {
                         }
                     })]),
             ]) : null,
-        ]
+        ])
 
     }
 

@@ -104,21 +104,4 @@ export default class Annotation {
     }
 
 
-    renderEditingVnode(language = document.documentElement.lang, deleteCallback, readonlyId = false) {
-
-
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
-
-            h(defineAsyncComponent(() => import('../editors/AnnotationEditor.js')), {
-                annotation: this,
-                onDelete: () => {
-                    deleteCallback(this)
-                },
-                readonlyId
-            }),
-
-        ])
-
-    }
-
 }

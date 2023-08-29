@@ -4,6 +4,7 @@ import CheckboxInput from "../Inputs/CheckboxInput.vue"
 import { h } from 'vue'
 import Annotation from "../../../models/Annotation"
 import AnnotationsEditorNewButton from "./AnnotationsEditorNewButton"
+import AnnotationEditor from "../../../editors/AnnotationEditor"
 export default {
     props: ["pbomlDocument"],
 
@@ -82,16 +83,42 @@ export default {
                 }
             }),
 
-            this.pbomlDocument.annotations?.map((ann, i) => {
+            this.pbomlDocument.annotations?.map((annotation, i) => {
                 return [
 
                     // Prepend the first one with an annotation
                     i === 0 ? h(AnnotationsEditorNewButton, { soft: true, "onClick": (e) => this.pushNewAnnotation(e, 0) }) : null,
 
-                    ann.renderEditingVnode(document.documentElement.lang, (annotation) => {
-                        this.pbomlDocument.annotations.splice(this.pbomlDocument.annotations.indexOf(annotation), 1);
-                        this.renumberSlices();
-                    }, this.keepOrganized),
+                    h(AnnotationEditor, {
+                        annotation,
+                        canMoveUp: i !== 0,
+                        canMoveDown: i !== this.pbomlDocument.annotations.length - 1,
+                        onDelete: () => {
+                            this.pbomlDocument.annotations.splice(this.pbomlDocument.annotations.indexOf(annotation), 1);
+                            this.renumberSlices();
+                        },
+                        onMove: (direction, e) => {
+                            const from = i;
+                            const to = direction === 'up' ? from - 1 : from + 1;
+                            const el = this.pbomlDocument.annotations.splice(from, 1)[0];
+                            this.pbomlDocument.annotations.splice(to, 0, el);
+
+                            if (e && e.target) {
+                                const targetEl = e.target;
+                                this.$nextTick(() => {
+                                    targetEl.scrollIntoView({
+                                        behavior: 'instant',
+                                        block: 'center',
+                                        inline: 'center'
+                                    })
+                                })
+                            }
+
+                            this.renumberSlices()
+
+                        },
+                        'readonlyId': this.keepOrganized
+                    }),
 
                     // Add a soft button after each slice except the last one
                     i === (this.pbomlDocument.annotations.length - 1) ? null : h(AnnotationsEditorNewButton, { soft: true, "onClick": (e) => this.pushNewAnnotation(e, i + 1) })
