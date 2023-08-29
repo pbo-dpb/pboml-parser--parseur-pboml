@@ -136,8 +136,7 @@ export default class Slice {
 
 
     renderEditingVnode(language = document.documentElement.lang) {
-        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language, id: this.anchor });
-
+        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language, id: this.anchor, key: this.anchor });
     }
 
     get anchor() {

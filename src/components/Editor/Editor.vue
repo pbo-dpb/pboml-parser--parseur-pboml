@@ -67,9 +67,7 @@
                             :class="{ 'grid-cols-5': shouldPresentDocumentStructure }">
 
                             <div class="col-span-4">
-                                <editor-blocks :pboml-document="pbomlDocument" @delete-slice="handleDeleteSlice"
-                                    @move-slice="handleMoveSlice" @duplicate-slice="handleDuplicateSlice"></editor-blocks>
-                                <slice-stager @new="handleNewSlice" ref="slicestager"></slice-stager>
+                                <editor-slices :pboml-document="pbomlDocument"></editor-slices>
                             </div>
                             <nav class="" v-if="shouldPresentDocumentStructure">
                                 <div class="flex flex-row justify-end sticky top-0 -mt-4 pt-4">
@@ -100,9 +98,6 @@
 
 
 
-
-
-
         </template>
 
         <yaml-editor v-if="shouldEditRaw" :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></yaml-editor>
@@ -114,7 +109,7 @@
 import { defineAsyncComponent } from 'vue'
 import PBOMLDocument from '../../models/PBOMLDocument';
 import EditorActions from './EditorActions.vue';
-import EditorBlocks from './EditorBlocks/EditorBlocks.js';
+import EditorSlices from './EditorSlices/EditorSlices.js';
 import Button from './Button.vue';
 import TinyButton from './TinyButton.vue';
 import SliceStager from "./SliceStager/SliceStager.vue";
@@ -142,7 +137,7 @@ export default {
 
     components: {
         EditorActions,
-        EditorBlocks,
+        EditorSlices,
         Button,
         TinyButton,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
@@ -204,29 +199,7 @@ export default {
                 this.shouldEditRaw = true;
             }
         },
-        handleNewSlice(slice) {
-            // Force a rerender of the slices editor block.
-            this.currentTab = null;
-            this.pbomlDocument.addSlice(slice);
-            this.$nextTick(() => {
-                this.currentTab = 'slices';
-                this.$nextTick(() => {
-                    setTimeout(() => {
-                        this.$refs.slicestager.$el.scrollIntoView(false)
-                    }, "300")
 
-                })
-            })
-        },
-        handleDeleteSlice(slice) {
-            this.pbomlDocument.deleteSlice(slice);
-        },
-        handleDuplicateSlice(slice) {
-            this.pbomlDocument.duplicateSlice(slice);
-        },
-        handleMoveSlice(slice, direction) {
-            this.pbomlDocument.moveSlice(slice, direction);
-        }
     },
 
 }

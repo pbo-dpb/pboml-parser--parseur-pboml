@@ -115,7 +115,6 @@ export default class PBOMLDocument {
 
     toArray() {
         const documents = [];
-
         let mainDocument = {
             pboml: {
                 version: "1.0.0"
@@ -153,9 +152,14 @@ export default class PBOMLDocument {
         return this.toArray().map(doc => yaml.dump(doc)).join('---\n');
     }
 
-    addSlice(slice) {
-        this.slices.push(slice);
+    addSlice(slice, index = null) {
+        if (index || index === 0) {
+            this.slices.splice(index, 0, slice)
+        } else {
+            this.slices.push(slice);
+        }
         this.resetSlicesMoveability();
+        this.scrollToSliceAtIndex((index || index === 0) ? index : this.slices.length - 1);
     }
 
     scrollToSliceAtIndex(index) {

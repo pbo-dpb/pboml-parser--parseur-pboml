@@ -1,17 +1,25 @@
 <template>
-    <div class="flex flex-col gap-2 border-t border-blue-300 pt-2">
-        <div class="flex flex-row text-xl font-thin text-blue-800 items-center gap-2">
-            <PlusIcon class="w-4 h-4"></PlusIcon> <span class=''>{{
-                strings.create_slice
-            }}</span>
-        </div>
-        <div class="grid grid-cols-8 gap-4">
-            <TinyButton
-                class="rounded bg-blue-100 hover:bg-blue-300 text-sm text-blue-800 p-2 flex flex-col gap-2 w-full text-center"
-                v-for="button in buttons" @click="generateSliceFromButton(button)">
-                {{ button.label }}
-            </TinyButton>
-        </div>
+    <div class="flex flex-col justify-center">
+        <button @click="expanded = !expanded" class="w-fit mx-auto hover:text-blue-800"
+            :class="{ 'shadow-inner text-blue-500': expanded, 'text-blue-300': !expanded }" :alt="strings.create_slice"
+            :aria-expanded="expanded" :aria-controls="stagerId">
+            <PlusCircleIcon aria-hidden="true" class="w-6 h-6" /><span class="sr-only">{{ strings.create_slice }}</span>
+        </button>
+        <transition enter-active-class="duration-300 ease-out" enter-from-class="transform opacity-0"
+            enter-to-class="opacity-100" leave-active-class="duration-200 ease-in" leave-from-class="opacity-100"
+            leave-to-class="transform opacity-0">
+
+            <div v-if="expanded" class="flex flex-col gap-2 border-t border-blue-500 pt-2" :id="stagerId">
+                <div class="grid grid-cols-8 gap-4">
+                    <button
+                        class="rounded bg-blue-300 hover:bg-blue-800 text-sm  text-blue-900 hover:text-white p-2 flex flex-col gap-2 w-full text-center items-center justify-center"
+                        v-for="button in buttons" @click="generateSliceFromButton(button)">
+                        {{ button.label }}
+                    </button>
+                </div>
+            </div>
+
+        </transition>
     </div>
 </template>
 <script>
@@ -24,7 +32,7 @@ import TableSlice from '../../../models/contents/TableSlice'
 import ChartSlice from '../../../models/contents/ChartSlice'
 
 
-import { PlusIcon } from '@heroicons/vue/24/solid'
+import { PlusCircleIcon } from '@heroicons/vue/24/solid'
 
 import TinyButton from "../TinyButton.vue"
 
@@ -33,17 +41,25 @@ const language = document.documentElement.lang;
 
 
 export default {
+    emits: ["new"],
+    props: {
+        soft: Boolean,
+    },
 
     data() {
         return {
             strings: editorStrings[language],
+            expanded: false,
+            stagerId: Math.random().toString(36).substring(2)
         }
     },
     components: {
         TinyButton,
-        PlusIcon,
+        PlusCircleIcon,
     },
-
+    mounted() {
+        if (!this.soft) this.expanded = true;
+    },
     computed: {
         buttons() {
             return [
@@ -86,6 +102,7 @@ export default {
         generateSliceFromButton(button) {
             let newSlice = new button.type({});
             this.$emit('new', newSlice);
+            this.expanded = false;
         }
     }
 
