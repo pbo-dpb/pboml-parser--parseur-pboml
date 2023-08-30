@@ -103,7 +103,13 @@ export default {
                             cleanedUpNumber = firstValueForEntry.replaceAll(",", "");
                         else if (languageOfFirstValueForEntry === 'fr')
                             cleanedUpNumber = firstValueForEntry.replaceAll(" ", "").replaceAll(",", ".");
-                        entry[numVar.key] = +cleanedUpNumber;
+
+                        if (cleanedUpNumber === "" || cleanedUpNumber === "-")
+                            entry[numVar.key] = null;
+                        else
+                            entry[numVar.key] = +cleanedUpNumber;
+
+
                     }
                 });
 
