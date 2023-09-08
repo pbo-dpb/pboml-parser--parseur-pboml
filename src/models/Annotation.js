@@ -3,14 +3,12 @@ import MarkdownDriver from '../MarkdownDriver';
 import rendererStrings from '../renderer-strings';
 
 const defaults = {
-    category: "note",
     content_type: 'markdown'
 }
 
 export default class Annotation {
     constructor(payload) {
         this.id = payload?.id
-        this.category = payload.category ? payload.category : defaults.category;
         this.content_type = payload.content_type ? payload.content_type : defaults.content_type;
 
         this.content = {
@@ -54,7 +52,6 @@ export default class Annotation {
     toArray() {
         return {
             id: this.id,
-            category: this.category,
             content_type: this.content_type,
             content: {
                 en: this.content?.en,

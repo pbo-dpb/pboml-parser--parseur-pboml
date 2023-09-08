@@ -300,7 +300,6 @@ slices:
           fr: Source
 annotations:
   - id: 1
-    category: note
     content_type: markdown
     content:
       en: >-
@@ -312,7 +311,6 @@ annotations:
         expédié cultivé voyageant étonné. [Mélancolie je suis considéré
         possession sur collectionner tout](https://www.example.com).
   - id: 2
-    category: note
     content_type: bibtex
     content:
       en: |-
@@ -338,7 +336,6 @@ annotations:
           publisher={American Society of Biological Chemists, Inc.}
         }
   - id: 3
-    category: note
     content_type: markdown
     content:
       en: |-
