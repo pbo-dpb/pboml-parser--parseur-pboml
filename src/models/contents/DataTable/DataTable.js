@@ -68,6 +68,8 @@ export default class DataTable {
             updatedGroup[key] = variable;
             groups.set(groupName, updatedGroup)
         });
+
+
         return groups;
     }
 
@@ -136,7 +138,7 @@ export default class DataTable {
     __buildTableNodes(language) {
 
         let groups = this.groupsMapForLanguage(language);
-        const shouldUseGroupsPresentation = groups.size > 1;
+        const shouldUseGroupsPresentation = groups.size > 1 || (groups.size === 1 && groups.keys().next().value !== "");
 
         let nodes = [
             this.__buildTableCaptionNodes(language),
@@ -152,7 +154,7 @@ export default class DataTable {
 
                 let groupCell;
                 if (shouldUseGroupsPresentation && isFirst) {
-                    let cellClasses = (groupName ? DataTableVariable.getCellBaseClass() : '') + (isLg ? '' : ' w-32')
+                    let cellClasses = (groupName ? `${DataTableVariable.getCellBaseClass()} pboml-prose` : '') + (isLg ? '' : ' w-32')
                     groupCell = h('th', { scope: 'rowgroup', rowspan: Object.values(variables).length, class: cellClasses }, groupName);
                 }
 

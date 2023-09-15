@@ -19,7 +19,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-.5 text-center leading-snug hyphens-auto';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug hyphens-auto text-sm';
 
     constructor(payload) {
         this.label = {
@@ -67,7 +67,7 @@ export default class DataTableVariable {
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
         const md = new MarkdownDriver;
 
-        let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose" });
+        let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose text-sm" });
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -106,6 +106,7 @@ export default class DataTableVariable {
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);
+                cellClasses += " lining-nums tabular-nums";
                 break;
             case 'fy':
                 // Will break in 2100, sorry.
