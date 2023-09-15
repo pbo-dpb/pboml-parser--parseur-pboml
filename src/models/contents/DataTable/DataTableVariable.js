@@ -120,7 +120,7 @@ export default class DataTableVariable {
         }
 
         if ((!value && value !== 0) || innerHTML === "NaN" || innerHTML === "") {
-            // Gray out non 0 falsish or NaN values
+            // Gray out non 0 falsish,  NaN values or completely empty cells.
             innerHTML = `<span class='sr-only'>${rendererStrings[language].empty_cell_label}</span>`;
             cellClasses += " bg-gray-100 dark:bg-gray-900"
         }
