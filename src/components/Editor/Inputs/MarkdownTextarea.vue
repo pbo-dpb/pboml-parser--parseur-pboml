@@ -55,6 +55,7 @@ export default {
 
             // More regular Word
             markdown = markdown.replaceAll('•	', '- ')
+                .replaceAll('×', '-')
                 .replaceAll('o	', '- ')
                 .replaceAll('	', '- ')
                 // Catch weird word list rendering.

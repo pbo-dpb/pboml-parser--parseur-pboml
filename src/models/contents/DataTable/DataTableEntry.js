@@ -19,7 +19,7 @@ export default class DataTableEntry {
 
         this.emphasize = payload?.emphasize ? payload.emphasize : DataTableEntry.defaults.emphasize
         this.skip_chart = payload?.skip_chart ? payload.skip_chart : DataTableEntry.defaults.skip_chart
-        this.tensions = payload?.tension ? payload.tension : DataTableEntry.defaults.tension
+        this.tension = payload?.tension ? payload.tension : DataTableEntry.defaults.tension
     }
 
 
