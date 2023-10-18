@@ -79,7 +79,7 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky left-0 bg-gray-100 lg:bg-transparent dark:bg-gray-950`, scope: scope }, [
+        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 bg-[rgba(219,234,254,0.8)] dark:bg-[rgba(3,7,18,0.8)]  backdrop-blur-sm lg:backdrop-blur-none lg:bg-transparent`, scope: scope }, [
             h('div', { class: 'flex flex-col gap-.5' }, [
                 groupSpan,
                 labelSpan,

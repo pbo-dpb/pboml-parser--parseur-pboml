@@ -190,11 +190,12 @@ export default class DataTable {
 
         let globalUnit = this.getWholeTableUnitForLanguage(language)
 
+        if (globalUnit) vnodes.push(h('div', { 'aria-hidden': true, class: 'font-thin text-gray-800 dark:text-gray-200 border-l-2 border-gray-200 dark:border-gray-700  pl-2' }, `${globalUnit}`))
+
         vnodes.push(h('div', {
             class: 'overflow-x-auto'
         }, [
-            globalUnit ? h('div', { 'aria-hidden': true, class: 'font-thin text-gray-800 dark:text-gray-200 border-l-2 border-gray-200 dark:border-gray-700 mb-2 pl-2' }, `${globalUnit}`) : null,
-            h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse  break-inside-avoid lg:table print:table print:text-sm` },
+            h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse break-inside-avoid lg:table print:table print:text-sm` },
                 this.__buildTableNodes(language),
             ),
 

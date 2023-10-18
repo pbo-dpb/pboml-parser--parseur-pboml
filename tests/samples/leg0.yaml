@@ -55,6 +55,51 @@ slices:
         pas reste perpétuel qui meublé. Nay affronting bed projection compliment
         instrument.
   - type: table
+    label:
+      en: Multi-Year Cost
+      fr: Coût sur plusieurs années
+    content:
+      - fiscalyear:
+          en: 3501-02
+          fr: 3501-3502
+        totalcost: 52
+      - fiscalyear:
+          en: 3502-03
+          fr: 3502-3503
+        totalcost: 0
+      - fiscalyear:
+          en: 3503-04
+          fr: 3503-3504
+        totalcost: 0
+      - fiscalyear:
+          en: 3504-05
+          fr: 3504-3505
+        totalcost: null
+      - fiscalyear:
+          en: 3505-06
+          fr: 3505-3506
+        totalcost: 0
+      - fiscalyear:
+          en: Total
+          fr: Total
+        totalcost: 52
+    variables:
+      fiscalyear:
+        label:
+          en: Fiscal Year
+          fr: Exercice financier
+        readonly: true
+        is_descriptive: true
+      totalcost:
+        label:
+          en: Total cost
+          fr: Coût total
+        type: number
+        readonly: false
+        unit:
+          en: $ millions
+          fr: Millions de dollars
+  - type: table
     referenced_as:
       en: Table 1
       fr: Tableau 1
