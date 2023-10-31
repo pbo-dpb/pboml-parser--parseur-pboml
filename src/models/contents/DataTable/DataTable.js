@@ -13,7 +13,8 @@ export default class DataTable {
         this.variables = variables;
 
         let dataTableEntries = [];
-        this.content = (payload?.content ?? []).map(entry => {
+        const content = payload?.content ?? [];
+        this.content = (Symbol.iterator in content ? content : []).map(entry => {
             return new DataTableEntry(entry);
         });
 
