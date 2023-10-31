@@ -1,0 +1,1067 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-LEG-3.0.2
+  id: PLA-3233-089-L
+  release_date: '2023-05-04T13:00:00.000Z'
+  title:
+    en: The Planet of the Sword
+    fr: La planète de l'épée
+  type:
+    en: Hunters And Cats
+    fr: Chasseurs et chats
+  copyright:
+    en: © Healer of Luck, Gatineau, Canada, 2023
+    fr: © Guérisseur de la chance, Gatineau, Canada, 2023
+slices:
+  - type: html
+    label: {}
+    css: "table{background-color: lavender} tr:nth-child(even):not(:first-child) {background-color: pink} thead{background-color: bisque} @media (prefers-color-scheme: dark) {table {rotate: -3deg}}"
+    content:
+      en: >-
+        <p>The PBO has estimated the cost of C-234. Compared to the previous
+        cost estimate for C-206, PBO has projected total marketable natural gas
+        and propane use in the agricultural sector for Alberta, Saskatchewan,
+        Manitoba, and Ontario based on:</p>
+
+        <ul>
+
+        <li>
+
+        <p>New projections of natural gas use in the industrial sector (by
+        province) in Canada’s Energy Future Current Policies Scenario (EF2021)
+        published by the Canada Energy Regulator (CER).²</p>
+
+        </li>
+
+        <li>
+
+        <p>Projections of propane demand other than petrochemical demand
+        included in the CER EF2021.³</p>
+
+        </li>
+
+        </ul>
+
+        <p>The PBO continues to use the assumption that the total projected
+        usage of natural gas and propane by farmers are eligible for the carbon
+        pricing exemption, as a very small portion of these fuels have been
+        assigned for personal use.</p>
+
+        <h2>Bill C-234 costing</h2>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>$ millions</strong></th>
+
+        <th><strong>2022-23</strong></th>
+
+        <th><strong>2023-24</strong></th>
+
+        <th><strong>2024-25</strong></th>
+
+        <th><strong>2025-26</strong></th>
+
+        <th><strong>2026-27</strong></th>
+
+        <th><strong>2027-28</strong></th>
+
+        <th><strong>2028-29</strong></th>
+
+        <th><strong>2029-30</strong></th>
+
+        <th><strong>2030-31</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Natural gas</td>
+
+        <td>47</td>
+
+        <td>62</td>
+
+        <td>76</td>
+
+        <td>90</td>
+
+        <td>103</td>
+
+        <td>116</td>
+
+        <td>129</td>
+
+        <td>141</td>
+
+        <td>153</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>9</td>
+
+        <td>12</td>
+
+        <td>15</td>
+
+        <td>18</td>
+
+        <td>21</td>
+
+        <td>24</td>
+
+        <td>27</td>
+
+        <td>30</td>
+
+        <td>33</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>57</td>
+
+        <td>74</td>
+
+        <td>92</td>
+
+        <td>108</td>
+
+        <td>124</td>
+
+        <td>140</td>
+
+        <td>155</td>
+
+        <td>171</td>
+
+        <td>186</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Carbon price ($ per tonne)</td>
+
+        <td>50</td>
+
+        <td>65</td>
+
+        <td>80</td>
+
+        <td>95</td>
+
+        <td>110</td>
+
+        <td>125</td>
+
+        <td>140</td>
+
+        <td>155</td>
+
+        <td>170</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h2>Breakdown</h2>
+
+        <h3>Alberta</h3>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>$ millions</strong></th>
+
+        <th><strong>2022-23</strong></th>
+
+        <th><strong>2023-24</strong></th>
+
+        <th><strong>2024-25</strong></th>
+
+        <th><strong>2025-26</strong></th>
+
+        <th><strong>2026-27</strong></th>
+
+        <th><strong>2027-28</strong></th>
+
+        <th><strong>2028-29</strong></th>
+
+        <th><strong>2029-30</strong></th>
+
+        <th><strong>2030-31</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Natural gas</td>
+
+        <td>11</td>
+
+        <td>14</td>
+
+        <td>17</td>
+
+        <td>20</td>
+
+        <td>23</td>
+
+        <td>27</td>
+
+        <td>30</td>
+
+        <td>33</td>
+
+        <td>36</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>1</td>
+
+        <td>2</td>
+
+        <td>2</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>4</td>
+
+        <td>4</td>
+
+        <td>5</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>13</td>
+
+        <td>16</td>
+
+        <td>20</td>
+
+        <td>23</td>
+
+        <td>26</td>
+
+        <td>30</td>
+
+        <td>34</td>
+
+        <td>37</td>
+
+        <td>41</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h3>Saskatchewan</h3>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>$ millions</strong></th>
+
+        <th><strong>2022-23</strong></th>
+
+        <th><strong>2023-24</strong></th>
+
+        <th><strong>2024-25</strong></th>
+
+        <th><strong>2025-26</strong></th>
+
+        <th><strong>2026-27</strong></th>
+
+        <th><strong>2027-28</strong></th>
+
+        <th><strong>2028-29</strong></th>
+
+        <th><strong>2029-30</strong></th>
+
+        <th><strong>2030-31</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Natural gas</td>
+
+        <td>7</td>
+
+        <td>9</td>
+
+        <td>11</td>
+
+        <td>13</td>
+
+        <td>15</td>
+
+        <td>17</td>
+
+        <td>18</td>
+
+        <td>20</td>
+
+        <td>22</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>7</td>
+
+        <td>9</td>
+
+        <td>11</td>
+
+        <td>13</td>
+
+        <td>15</td>
+
+        <td>17</td>
+
+        <td>19</td>
+
+        <td>21</td>
+
+        <td>23</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <hr />
+
+        <p>¹ Parliament of Canada, <a
+        href="https://www.parl.ca/DocumentViewer/en/44-1/bill/C-234/first-reading">Bill
+        C-234</a>, accessed April 04, 2022</p>
+
+        <p>² The Current Policies Scenario includes policies publicly announced
+        prior to August 2021. It therefore includes the increased carbon pricing
+        under the Federal Strengthened Climate Plan.</p>
+
+        <p>³ Other demands of propane are used as a proxy for the total finale
+        energy use of propane.</p>
+      fr: >-
+        <p>Le 23 juin 2021, le directeur parlementaire du budget (DPB) a publié
+        une note législative sur le coût de l’exemption de la taxe fédérale sur
+        le carbone pour le gaz naturel commercialisable et le propane utilisés
+        par les machineries agricoles admissibles, comme le prévoyait le projet
+        de loi C-206 (43e législature, 2e session).</p>
+
+        <p>Le 7 février 2022, le projet de loi connexe C-234 : Loi modifiant la
+        Loi sur la tarification de la pollution causée par les gaz à effet de
+        serre, a été déposé au Parlement. Ce projet de loi élargit la définition
+        de machinerie agricole admissible à l’exemption de la taxe fédérale sur
+        le carbone pour inclure : a) tout bien qui sert au chauffage ou au
+        refroidissement d’un bâtiment ou d’une structure semblable, notamment
+        celui ou celle utilisé pour l’élevage ou le logement d’animaux de ferme;
+        b) les séchoirs à grains¹.</p>
+
+        <p>Le DPB a estimé le coût du projet de loi C-234. Comparativement à
+        l’estimation précédente établie pour le projet de loi C-206, le DPB a
+        projeté l’utilisation du gaz naturel commercialisable et du propane dans
+        le secteur agricole de Alberta, de la Saskatchewan, du Manitoba et de
+        l’Ontario en se basant sur:</p>
+
+        <ul>
+
+        <li>
+
+        <p>les nouvelles projections concernant l’utilisation du gaz naturel
+        dans le secteur industriel (par province) selon le scénario des
+        politiques actuelles sur l’avenir énergétique du Canada (Avenir
+        énergétique 2021) publié par la Régie de l’énergie du Canada (REC)²;</p>
+
+        </li>
+
+        <li>
+
+        <p>les projections concernant la demande de propane autre que la demande
+        du secteur pétrochimique incluse dans Avenir énergétique 2021 de la
+        REC³.</p>
+
+        </li>
+
+        </ul>
+
+        <p>Le DPB continue de s’appuyer sur l’hypothèse selon laquelle
+        l’utilisation totale projetée de gaz naturel et de propane par les
+        agriculteurs est admissible à l’exemption de la tarification du carbone,
+        une très petite partie de ces combustibles étant réservée à des fins
+        personnelles.</p>
+
+        <h2>Établissement du coût du projet de loi C-234</h2>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>En millions de $</strong></th>
+
+        <th><strong>2022-2023</strong></th>
+
+        <th><strong>2023-2024</strong></th>
+
+        <th><strong>2024-2025</strong></th>
+
+        <th><strong>2025-2026</strong></th>
+
+        <th><strong>2026-2027</strong></th>
+
+        <th><strong>2027-2028</strong></th>
+
+        <th><strong>2028-2029</strong></th>
+
+        <th><strong>2029-2030</strong></th>
+
+        <th><strong>2030-2031</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Gas naturel</td>
+
+        <td>47</td>
+
+        <td>62</td>
+
+        <td>76</td>
+
+        <td>90</td>
+
+        <td>103</td>
+
+        <td>116</td>
+
+        <td>129</td>
+
+        <td>141</td>
+
+        <td>153</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>9</td>
+
+        <td>12</td>
+
+        <td>15</td>
+
+        <td>18</td>
+
+        <td>21</td>
+
+        <td>24</td>
+
+        <td>27</td>
+
+        <td>30</td>
+
+        <td>33</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>57</td>
+
+        <td>74</td>
+
+        <td>92</td>
+
+        <td>108</td>
+
+        <td>124</td>
+
+        <td>140</td>
+
+        <td>155</td>
+
+        <td>171</td>
+
+        <td>186</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Prix du carbone ($ par tonne)</td>
+
+        <td>50</td>
+
+        <td>65</td>
+
+        <td>80</td>
+
+        <td>95</td>
+
+        <td>110</td>
+
+        <td>125</td>
+
+        <td>140</td>
+
+        <td>155</td>
+
+        <td>170</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h2>Détail</h2>
+
+        <h3>Alberta</h3>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>En millions de $</strong></th>
+
+        <th><strong>2022-2023</strong></th>
+
+        <th><strong>2023-2024</strong></th>
+
+        <th><strong>2024-2025</strong></th>
+
+        <th><strong>2025-2026</strong></th>
+
+        <th><strong>2026-2027</strong></th>
+
+        <th><strong>2027-2028</strong></th>
+
+        <th><strong>2028-2029</strong></th>
+
+        <th><strong>2029-2030</strong></th>
+
+        <th><strong>2030-2031</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Gas naturel</td>
+
+        <td>11</td>
+
+        <td>14</td>
+
+        <td>17</td>
+
+        <td>20</td>
+
+        <td>23</td>
+
+        <td>27</td>
+
+        <td>30</td>
+
+        <td>33</td>
+
+        <td>36</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>1</td>
+
+        <td>2</td>
+
+        <td>2</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>3</td>
+
+        <td>4</td>
+
+        <td>4</td>
+
+        <td>5</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>13</td>
+
+        <td>16</td>
+
+        <td>20</td>
+
+        <td>23</td>
+
+        <td>26</td>
+
+        <td>30</td>
+
+        <td>34</td>
+
+        <td>37</td>
+
+        <td>41</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+        <h3>Saskatchewan</h3>
+
+        <table>
+
+        <thead>
+
+        <tr>
+
+        <th><strong>En millions de $</strong></th>
+
+        <th><strong>2022-2023</strong></th>
+
+        <th><strong>2023-2024</strong></th>
+
+        <th><strong>2024-2025</strong></th>
+
+        <th><strong>2025-2026</strong></th>
+
+        <th><strong>2026-2027</strong></th>
+
+        <th><strong>2027-2028</strong></th>
+
+        <th><strong>2028-2029</strong></th>
+
+        <th><strong>2029-2030</strong></th>
+
+        <th><strong>2030-2031</strong></th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr>
+
+        <td>Gas naturel</td>
+
+        <td>7</td>
+
+        <td>9</td>
+
+        <td>11</td>
+
+        <td>13</td>
+
+        <td>15</td>
+
+        <td>17</td>
+
+        <td>18</td>
+
+        <td>20</td>
+
+        <td>22</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Propane</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>0</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        <td>1</td>
+
+        </tr>
+
+        <tr>
+
+        <td>Total</td>
+
+        <td>7</td>
+
+        <td>9</td>
+
+        <td>11</td>
+
+        <td>13</td>
+
+        <td>15</td>
+
+        <td>17</td>
+
+        <td>19</td>
+
+        <td>21</td>
+
+        <td>23</td>
+
+        </tr>
+
+        </tbody>
+
+        </table>
+
+
+        <hr />
+
+        <p>¹ Parlement du Canada, <a
+        href="https://www.parl.ca/DocumentViewer/fr/44-1/projet-loi/C-234/premiere-lecture">projet
+        de loi C-234</a>, consulté le 4 avril 2022.</p>
+
+        <p>² Le scénario des politiques actuelles englobe les politiques
+        annoncées publiquement avant août 2021. Il comprend donc la hausse de la
+        tarification du carbone visée par le Plan climatique renforcé du
+        gouvernement fédéral.</p>
+
+        <p>³ D’autres demandes de propane servent à calculer la demande de
+        propane pour utilisation finale.</p>
+  - type: html
+    label:
+      en: Unstyled content
+      fr: Contenu non-stylé
+    remove_default_styles: true
+    content:
+      en: |-
+
+        <h3>Manitoba</h3>
+        <table>
+        <thead>
+        <tr>
+        <th><strong>$ millions</strong></th>
+        <th><strong>2022-23</strong></th>
+        <th><strong>2023-24</strong></th>
+        <th><strong>2024-25</strong></th>
+        <th><strong>2025-26</strong></th>
+        <th><strong>2026-27</strong></th>
+        <th><strong>2027-28</strong></th>
+        <th><strong>2028-29</strong></th>
+        <th><strong>2029-30</strong></th>
+        <th><strong>2030-31</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Natural gas</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        </tr>
+        <tr>
+        <td>Propane</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+        <td>6</td>
+        </tr>
+        <tr>
+        <td>Total</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+        <td>6</td>
+        <td>6</td>
+        </tr>
+        </tbody>
+        </table>
+        <h3>Ontario</h3>
+        <table>
+        <thead>
+        <tr>
+        <th><strong>$ millions</strong></th>
+        <th><strong>2022-23</strong></th>
+        <th><strong>2023-24</strong></th>
+        <th><strong>2024-25</strong></th>
+        <th><strong>2025-26</strong></th>
+        <th><strong>2026-27</strong></th>
+        <th><strong>2027-28</strong></th>
+        <th><strong>2028-29</strong></th>
+        <th><strong>2029-30</strong></th>
+        <th><strong>2030-31</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Natural gas</td>
+        <td>29</td>
+        <td>39</td>
+        <td>48</td>
+        <td>56</td>
+        <td>65</td>
+        <td>73</td>
+        <td>80</td>
+        <td>87</td>
+        <td>94</td>
+        </tr>
+        <tr>
+        <td>Propane</td>
+        <td>6</td>
+        <td>8</td>
+        <td>10</td>
+        <td>12</td>
+        <td>14</td>
+        <td>16</td>
+        <td>17</td>
+        <td>19</td>
+        <td>21</td>
+        </tr>
+        <tr>
+        <td>Total</td>
+        <td>36</td>
+        <td>47</td>
+        <td>58</td>
+        <td>68</td>
+        <td>78</td>
+        <td>88</td>
+        <td>98</td>
+        <td>107</td>
+        <td>116</td>
+        </tr>
+        </tbody>
+        </table>
+      fr: |-
+        <h3>Manitoba</h3>
+        <table>
+        <thead>
+        <tr>
+        <th><strong>En millions de $</strong></th>
+        <th><strong>2022-2023</strong></th>
+        <th><strong>2023-2024</strong></th>
+        <th><strong>2024-2025</strong></th>
+        <th><strong>2025-2026</strong></th>
+        <th><strong>2026-2027</strong></th>
+        <th><strong>2027-2028</strong></th>
+        <th><strong>2028-2029</strong></th>
+        <th><strong>2029-2030</strong></th>
+        <th><strong>2030-2031</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Gas naturel</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+        </tr>
+        <tr>
+        <td>Propane</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+        <td>6</td>
+        </tr>
+        <tr>
+        <td>Total</td>
+        <td>2</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>4</td>
+        <td>5</td>
+        <td>5</td>
+        <td>6</td>
+        <td>6</td>
+        </tr>
+        </tbody>
+        </table>
+        <h3>Ontario</h3>
+        <table>
+        <thead>
+        <tr>
+        <th><strong>En millions de $</strong></th>
+        <th><strong>2022-2023</strong></th>
+        <th><strong>2023-2024</strong></th>
+        <th><strong>2024-2025</strong></th>
+        <th><strong>2025-2026</strong></th>
+        <th><strong>2026-2027</strong></th>
+        <th><strong>2027-2028</strong></th>
+        <th><strong>2028-2029</strong></th>
+        <th><strong>2029-2030</strong></th>
+        <th><strong>2030-2031</strong></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td>Gas naturel</td>
+        <td>29</td>
+        <td>39</td>
+        <td>48</td>
+        <td>56</td>
+        <td>65</td>
+        <td>73</td>
+        <td>80</td>
+        <td>87</td>
+        <td>94</td>
+        </tr>
+        <tr>
+        <td>Propane</td>
+        <td>6</td>
+        <td>8</td>
+        <td>10</td>
+        <td>12</td>
+        <td>14</td>
+        <td>16</td>
+        <td>17</td>
+        <td>19</td>
+        <td>21</td>
+        </tr>
+        <tr>
+        <td>Total</td>
+        <td>36</td>
+        <td>47</td>
+        <td>58</td>
+        <td>68</td>
+        <td>78</td>
+        <td>88</td>
+        <td>98</td>
+        <td>107</td>
+        <td>116</td>
+        </tr>
+        </tbody>
+        </table>
+annotations: []

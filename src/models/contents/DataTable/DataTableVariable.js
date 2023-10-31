@@ -126,7 +126,6 @@ export default class DataTableVariable {
         } else if (emphasize) {
             shouldEmphasizeCell = true;
         }
-        console.log(shouldEmphasizeCell)
         if ((!value && value !== 0) || innerHTML === "NaN" || innerHTML === "") {
             // Gray out non 0 falsish,  NaN values or completely empty cells.
             innerHTML = `<span class='sr-only'>${rendererStrings[language].empty_cell_label}</span>`;

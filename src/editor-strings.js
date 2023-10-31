@@ -17,6 +17,8 @@ export default {
         'slice_type_chart': "Chart",
         'slice_type_svg': 'SVG Vector',
         'slice_type_LaTeX': "LaTeX",
+        'slice_type_html': "HTML",
+        'advanced_slice_warning': "This type of slice is not recommended. Only use this type of slice when necessary. Are you sure you want to continue ?",
         'slice_title_field_label': "Title",
         'slice_referenced_as_field_label': "Anchor",
         'slice_id_hint': "This reference will only appear in the document's source code.",
@@ -80,6 +82,7 @@ export default {
         'editor_actions_preview': "Preview",
         'editor_actions_export': "Export",
         'editor_actions_source': "Source",
+        'html_slice_should_remove_default_styles': "Remove default styles (Tailwind)",
     },
     fr: {
         "meta_section_title": "Propriétés du document",
@@ -99,6 +102,8 @@ export default {
         'slice_type_chart': "Graphique",
         'slice_type_svg': 'SVG Vector',
         'slice_type_LaTeX': "LaTeX",
+        'slice_type_html': "HTML",
+        'advanced_slice_warning': "Ce type de tranche n'est pas recommandé. Utilisez-le seulement lorsque nécessaire. Êtes-vous sûr de vouloir continuer ?",
         'slice_title_field_label': "Titre",
         'slice_referenced_as_field_label': "Ancre",
         'slice_id_hint': "Cette référence n'apparaîtra que dans le code source du document.",
@@ -162,5 +167,6 @@ export default {
         'editor_actions_preview': "Aperçu",
         'editor_actions_export': "Exporter",
         'editor_actions_source': "Source",
+        'html_slice_should_remove_default_styles': "Enlever les styles par défaut (Tailwind)",
     }
 }

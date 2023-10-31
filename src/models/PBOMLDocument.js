@@ -8,6 +8,7 @@ import BitmapSlice from "./contents/BitmapSlice";
 import ChartSlice from "./contents/ChartSlice";
 import SvgSlice from "./contents/SvgSlice";
 import LaTeXSlice from "./contents/LaTeXSlice";
+import HtmlSlice from "./contents/HtmlSlice";
 
 
 export default class PBOMLDocument {
@@ -93,6 +94,8 @@ export default class PBOMLDocument {
                 return new SvgSlice(el);
             case 'LaTeX':
                 return new LaTeXSlice(el);
+            case 'html':
+                return new HtmlSlice(el);
         }
     }
 

@@ -50,9 +50,6 @@ export default class MarkdownDriver {
                 fiscalYearRegex.lastIndex++;
             }
 
-            m.forEach((match, groupIndex) => {
-                console.log(`Found match, group ${groupIndex}: ${match}`);
-            });
             content = content.replaceAll(m[0], ` style="hyphenate-character: '';">${m[1]}&shy;-${m[2]}<`);
 
         }

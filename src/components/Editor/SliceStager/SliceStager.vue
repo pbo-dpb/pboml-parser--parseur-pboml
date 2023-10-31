@@ -11,12 +11,13 @@
             enter-to-class="opacity-100" leave-active-class="duration-200 ease-in" leave-from-class="opacity-100"
             leave-to-class="transform opacity-0">
 
-            <div v-if="expanded" class="flex flex-col gap-2 border border-blue-500 p-2" :id="stagerId">
+            <div v-if="expanded" class="flex flex-col gap-2 border border-blue-500 p-2 rounded" :id="stagerId">
                 <div class="grid grid-cols-8 gap-4">
                     <button
-                        class="rounded bg-blue-300 hover:bg-blue-800 text-sm  text-blue-900 hover:text-white p-2 flex flex-col gap-2 w-full text-center items-center justify-center"
+                        class="rounded bg-blue-100 hover:bg-blue-800 text-sm  text-blue-900 hover:text-white p-2 flex flex-col gap-2 w-full text-center items-center justify-center"
                         v-for="button in buttons" @click="generateSliceFromButton(button)">
                         {{ button.label }}
+                        <BeakerIcon class="w-4 h-4" v-if="button.advanced" />
                     </button>
                 </div>
             </div>
@@ -33,8 +34,9 @@ import SvgSlice from '../../../models/contents/SvgSlice'
 import TableSlice from '../../../models/contents/TableSlice'
 import ChartSlice from '../../../models/contents/ChartSlice'
 import LaTeXSlice from '../../../models/contents/LaTeXSlice'
+import HtmlSlice from '../../../models/contents/HtmlSlice'
 
-import { PlusCircleIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { PlusCircleIcon, XMarkIcon, BeakerIcon } from '@heroicons/vue/24/solid'
 
 import TinyButton from "../TinyButton.vue"
 
@@ -58,7 +60,8 @@ export default {
     components: {
         TinyButton,
         PlusCircleIcon,
-        XMarkIcon
+        XMarkIcon,
+        BeakerIcon
     },
     mounted() {
         if (!this.soft) this.expanded = true;
@@ -84,10 +87,6 @@ export default {
                 },
 
                 {
-                    label: this.strings.slice_type_bitmap,
-                    type: BitmapSlice
-                },
-                {
                     label: this.strings.slice_type_kvlist,
                     type: KvListSlice
                 },
@@ -95,11 +94,23 @@ export default {
                     label: this.strings.slice_type_chart,
                     type: ChartSlice
                 },
+                {
+                    label: this.strings.slice_type_bitmap,
+                    type: BitmapSlice,
+                    advanced: true
+                },
 
                 {
                     label: this.strings.slice_type_LaTeX,
-                    type: LaTeXSlice
+                    type: LaTeXSlice,
+                    advanced: true
                 },
+
+                {
+                    label: this.strings.slice_type_html,
+                    type: HtmlSlice,
+                    advanced: true
+                }
 
 
 
@@ -108,6 +119,8 @@ export default {
     },
     methods: {
         generateSliceFromButton(button) {
+
+            if (button.advanced && !window.confirm(this.strings.advanced_slice_warning)) return;
             let newSlice = new button.type({});
             this.$emit('new', newSlice);
             this.expanded = false;
