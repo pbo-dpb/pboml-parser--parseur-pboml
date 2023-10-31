@@ -19,7 +19,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug hyphens-auto leading-snug text-balance hyphens-auto';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug leading-snug text-balance hyphens-auto';
 
     constructor(payload) {
         this.label = {
