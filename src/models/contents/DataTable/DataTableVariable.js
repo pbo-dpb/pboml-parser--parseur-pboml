@@ -19,7 +19,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug hyphens-auto leading-snug';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug hyphens-auto leading-snug text-balance hyphens-auto';
 
     constructor(payload) {
         this.label = {
@@ -79,7 +79,7 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 text-balance`;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
         if (this.emphasize) {
             cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
         } else {

@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 @layer components {
+
+  .text-balance {
+    text-wrap: balance;
+  }
 
   .pboml-prose,
   .pboml-non-reactive-prose {
@@ -18,8 +25,4 @@
 
 .prose> :last-child {
   margin-bottom: 0;
-}
-
-.text-balance {
-  text-wrap: balance;
 }
