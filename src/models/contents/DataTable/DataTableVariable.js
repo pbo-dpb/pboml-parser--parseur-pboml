@@ -79,7 +79,15 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        return h('th', { class: `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 bg-[rgba(219,234,254,0.8)] dark:bg-[rgba(3,7,18,0.8)]  backdrop-blur-sm lg:backdrop-blur-none lg:bg-transparent`, scope: scope }, [
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2`;
+        if (this.emphasize) {
+            cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
+        } else {
+            cellClasses += " bg-[rgba(219,234,254,0.8)] dark:bg-[rgba(3,7,18,0.8)] lg:bg-transparent";
+        }
+        cellClasses += " backdrop-blur-sm lg:backdrop-blur-none";
+
+        return h('th', { class: cellClasses, scope: scope }, [
             h('div', { class: 'flex flex-col gap-.5' }, [
                 groupSpan,
                 labelSpan,
@@ -90,7 +98,7 @@ export default class DataTableVariable {
 
 
 
-    getTableCellVnode(value, scope = null, language) {
+    getTableCellVnode(value, scope = null, language, emphasize = false) {
 
         let cellClasses = DataTableVariable.#cellBaseClass;
         let innerHTML;
@@ -119,11 +127,25 @@ export default class DataTableVariable {
                 innerHTML = value[language] ? value[language] : value;
         }
 
+        let shouldEmphasizeCell = false;
+        if (this.emphasize) {
+            shouldEmphasizeCell = true;
+        } else if (emphasize) {
+            shouldEmphasizeCell = true;
+        }
+        console.log(shouldEmphasizeCell)
         if ((!value && value !== 0) || innerHTML === "NaN" || innerHTML === "") {
             // Gray out non 0 falsish,  NaN values or completely empty cells.
             innerHTML = `<span class='sr-only'>${rendererStrings[language].empty_cell_label}</span>`;
-            cellClasses += " bg-gray-100 dark:bg-gray-900"
+            if (this.shouldEmphasizeCell) {
+                cellClasses += " bg-gray-200 dark:bg-gray-800";
+            } else {
+                cellClasses += " bg-gray-100 dark:bg-gray-900";
+            }
+        } else if (shouldEmphasizeCell) {
+            cellClasses += " bg-yellow-100 dark:bg-yellow-800";
         }
+
 
         return h(this.is_descriptive ? 'th' : 'td', { class: cellClasses, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
     }

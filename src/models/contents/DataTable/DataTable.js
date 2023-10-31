@@ -109,7 +109,7 @@ export default class DataTable {
         columns.push(headerCol);
 
         this.content.forEach(content => {
-            let cell = variable.getTableCellVnode(content[key], 'col', language);
+            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize);
             if (isLg)
                 cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
             else
