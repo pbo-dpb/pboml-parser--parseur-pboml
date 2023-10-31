@@ -7,7 +7,7 @@ export default class HeadingSliceHtmlRenderer extends SliceHtmlRenderer {
     renderReadonlyVnode(language) {
 
         let headingElType = `h${2 + this.slice.level}`;
-        let classes = ['font-thin'];
+        let classes = ['font-thin', 'text-balance'];
 
         switch (this.slice.level) {
             case 0:

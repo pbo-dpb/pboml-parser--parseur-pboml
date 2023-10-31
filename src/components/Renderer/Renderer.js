@@ -27,7 +27,7 @@ export default {
       return [h("header", { class: 'flex flex-col gap-1' },
         [
           (this.pbomlDocument.type?.[language] ? (h("div", { class: "text-xl", innerHTML: this.pbomlDocument.type[language] })) : null),
-          (this.pbomlDocument.title?.[language] ? h("h1", { class: "font-thin text-4xl", innerHTML: this.pbomlDocument.title[language] }) : null),
+          (this.pbomlDocument.title?.[language] ? h("h1", { class: "font-thin text-4xl text-balance", innerHTML: this.pbomlDocument.title[language] }) : null),
           h("div", { class: "text-sm text-gray-800 dark:text-gray-200", innerHTML: this.pbomlDocument.localizedReleaseDate?.[language] })
         ]
       )

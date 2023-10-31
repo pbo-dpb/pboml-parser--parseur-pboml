@@ -39,6 +39,26 @@ export default class MarkdownDriver {
         marked.use(markedLinkifyIt({}, {}));
     }
 
+    /* Hackish method to prevent Firefox from rendering fiscal years on two lines with the dash character not being the hypenation character. */
+    #addHyphenationPointsToFiscalYearOnlyContent(content) {
+        const fiscalYearRegex = /\>([\d]{4})\-([\d]{2,4})\</gm;
+
+        let m;
+        while ((m = fiscalYearRegex.exec(content)) !== null) {
+
+            if (m.index === fiscalYearRegex.lastIndex) {
+                fiscalYearRegex.lastIndex++;
+            }
+
+            m.forEach((match, groupIndex) => {
+                console.log(`Found match, group ${groupIndex}: ${match}`);
+            });
+            content = content.replaceAll(m[0], ` style="hyphenate-character: '';">${m[1]}&shy;-${m[2]}<`);
+
+        }
+
+        return content;
+    }
 
 
     render(content) {
@@ -50,6 +70,10 @@ export default class MarkdownDriver {
         content = Callbacks.getBeforeMarkdownRendering ? Callbacks.getBeforeMarkdownRendering(content) : content;
 
 
+        /*
+        Special transformations
+        */
+
 
         if (this.renderInline) {
             content = marked.parseInline(content)
@@ -60,6 +84,7 @@ export default class MarkdownDriver {
         if (process.env.NODE_ENV !== 'test')
             content = DOMPurify.sanitize(content);
 
+        content = this.#addHyphenationPointsToFiscalYearOnlyContent(content);
 
         content = Callbacks.getAfterMarkdownRendering ? Callbacks.getAfterMarkdownRendering(content) : content;
 

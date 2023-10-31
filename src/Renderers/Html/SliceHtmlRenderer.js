@@ -18,7 +18,7 @@ export default class SliceHtmlRenderer {
         if ((!this.slice.display_label && !force) || !this.slice.label?.[language]) return null;
 
         let labelNodeType = 'h2'
-        let labelNodeClasses = ["font-thin break-after-avoid"]
+        let labelNodeClasses = ["font-thin", "break-after-avoid", "text-balance"]
 
         if (this.slice.presentation) {
             labelNodeType = 'header'

@@ -79,7 +79,7 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2`;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 text-balance`;
         if (this.emphasize) {
             cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
         } else {
@@ -115,13 +115,6 @@ export default class DataTableVariable {
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);
                 cellClasses += " lining-nums tabular-nums";
-                break;
-            case 'fy':
-                // Will break in 2100, sorry.
-                if (language === 'fr')
-                    innerHTML = `20${String(value).substring(0, 1)}-20${String(value).substring(2)}`;
-                else
-                    innerHTML = `20${String(value).substring(0, 1)}-${String(value).substring(2)}`;
                 break;
             default:
                 innerHTML = value[language] ? value[language] : value;
