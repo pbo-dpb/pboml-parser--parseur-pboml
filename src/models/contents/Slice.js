@@ -5,7 +5,8 @@ import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
 const defaults = {
     presentation: null,
     readonly: false,
-    display_label: true
+    display_label: true,
+    print_only: false
 }
 
 export default class Slice {
@@ -16,7 +17,7 @@ export default class Slice {
         this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
         this.presentation = payload.presentation !== undefined ? payload.presentation : defaults.presentation;
         this.choices = payload.choices;
-        this.print_only = payload.print_only;
+        this.print_only = payload.print_only !== undefined ? payload.print_only : defaults.print_only;
 
         this.referenced_as = {
             en: payload.referenced_as?.en,
@@ -152,6 +153,7 @@ export default class Slice {
             readonly: this.readonly,
             display_label: this.display_label,
             presentation: this.presentation,
+            print_only: this.print_only,
             choices: this.choices,
             referenced_as: (this.referenced_as.fr || this.referenced_as.en) ? this.referenced_as : null,
             label: {
