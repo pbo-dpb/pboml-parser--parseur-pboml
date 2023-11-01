@@ -22,6 +22,15 @@ export default {
                 "prose",
                 "dark:prose-invert",
                 "max-w-none",
+                "prose-headings:font-thin",
+                "prose-table:block",
+                "prose-a:text-blue-800",
+                "dark:prose-a:text-blue-200",
+                "prose-table:overflow-x-scroll",
+                "prose-table:whitespace-nowrap",
+                "lg:prose-table:table",
+                "lg:prose-table:whitespace-normal",
+                "leading-relaxed",
             ]);
             wrapperElement.innerHTML = DOMPurify.sanitize(this.payload);
             shadowRoot.appendChild(wrapperElement);
@@ -30,11 +39,13 @@ export default {
             let sheets = [];
 
             if (!this.removeDefaultStyles) {
+                // Tailwind
                 const sheet = cssom(new CSSStyleSheet());
                 const tw = twind(config, sheet);
                 sheets.push(sheet.target);
 
                 observe(tw, shadowRoot);
+
             }
 
 
