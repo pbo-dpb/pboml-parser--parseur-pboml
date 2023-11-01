@@ -1,4 +1,6 @@
 import { h } from "vue"
+import DOMPurify from 'dompurify';
+
 
 export default {
     props: ['payload'],
@@ -10,7 +12,7 @@ export default {
             let wrapper = document.createElement("div");
             wrapper.classList.add("w-full");
             const shadowRoot = wrapper.attachShadow({ mode: 'open' });
-            shadowRoot.innerHTML = this.payload;
+            shadowRoot.innerHTML = DOMPurify.sanitize(this.payload);
             this.$el.replaceChildren(...[wrapper])
         }
     },
