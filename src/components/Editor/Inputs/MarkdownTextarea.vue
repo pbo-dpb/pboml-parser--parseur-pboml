@@ -9,7 +9,7 @@
         </div>
 
         <textarea v-if="multiline" ref="payloadArea" :value="modelValue" :id="eluid"
-            class="border border-gray-300 p-1 rounded h-96" @input="emitUpdate($event.target.value)">
+            class="border border-gray-300 p-1 rounded h-96 w-full" @input="emitUpdate($event.target.value)">
         </textarea>
 
         <input type="text" v-else ref="payloadArea" :value="modelValue" :id="eluid"
