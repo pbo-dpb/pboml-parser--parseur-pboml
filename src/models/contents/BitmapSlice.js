@@ -18,7 +18,6 @@ export default class BitmapSlice extends Slice {
         };
 
         this.display_label = payload.display_label === false ? false : true;
-        this.presentation = payload.presentation ? payload.presentation : 'figure';
         this.type = "bitmap"
     }
 
