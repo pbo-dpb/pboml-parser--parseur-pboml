@@ -115,7 +115,6 @@ export default {
      */
     handleHashChange(e) {
 
-
       let selector;
       if (e == false || e?.type == 'hashchange') {
         // Ignore shebang and common Vue Router navigations.
@@ -125,13 +124,13 @@ export default {
         selector = e.detail;
       }
 
-
       const timeout = this.edit || !this.firstInitializationCompleted ? 850 : 10
-      if (!selector) return;
       this.$nextTick(() => {
         setTimeout(() => {
-          let childel = this.$el.querySelector(`#${selector}`)
-          if (selector && childel) {
+
+          let childel = selector ? this.$el.querySelector(`#${selector}`) : this.$el;
+
+          if (childel) {
             childel.scrollIntoView({
               behavior: 'smooth',
             });

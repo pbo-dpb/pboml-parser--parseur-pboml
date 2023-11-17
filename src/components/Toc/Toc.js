@@ -1,4 +1,6 @@
 import { h } from 'vue'
+import RendererStrings from "../../renderer-strings"
+import { ArrowUturnUpIcon } from '@heroicons/vue/20/solid';
 
 import PBOMLDocument from "../../models/PBOMLDocument"
 
@@ -20,6 +22,10 @@ export default {
         shouldFollowAnchorIntersectionVisibility: {
             type: Boolean,
             default: true
+        },
+        hideTop: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -85,12 +91,18 @@ export default {
             })
         },
         tree() {
+            let tree = [
+                this.hideTop ? null : {
+                    labels: [h('span', { class: 'text-sm inline-flex items-center gap-1 pb-1' }, [h('span', RendererStrings[this.language]['top']), h(ArrowUturnUpIcon, { class: 'w-2 h-2' })])],
+                    anchor: null
+                }
+            ];
             if (this.rawHeaderSlices && this.rawHeaderSlices.length > 0) {
-                return this.headerTree;
+                tree.push(...this.headerTree);
             } else if (this.rawLabels && this.rawLabels.length > 0) {
-                return this.labelTree;
+                tree.push(...this.labelTree);
             }
-            return []
+            return tree;
         },
         // A list of anchors id that are present in the tree
         anchors() {
@@ -107,7 +119,7 @@ export default {
         },
         buildVnodeForItem(item, level = 0) {
             const levelSpecificClasses = liStyles[level];
-            let aClasses = ['hover:text-blue-800', 'select-none', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
+            let aClasses = ['cursor-pointer', 'hover:text-blue-800', 'select-none', 'hover:dark:text-blue-200', 'hover:underline', 'print:text-black', 'print:no-underline', 'transition-all', 'duration-500'];
 
             if (this.shouldFollowAnchorIntersectionVisibility && item.anchor === this.currentlyVisibleAnchor) {
                 aClasses.push(...['text-gray-900', 'dark:text-gray-100'])
@@ -115,16 +127,25 @@ export default {
                 aClasses.push(...['text-blue-900', 'dark:text-blue-100',])
             }
 
+            if (!item.anchor) {
+                aClasses.push(...['print:hidden'])
+            }
+
             return h('li', { class: [...levelSpecificClasses, ''].join(' ') }, [
                 h('a',
                     {
                         class: aClasses.join(' '),
-                        href: `#${item.anchor}`,
+                        href: item.anchor ? `#${item.anchor}` : null,
                         id: `toci-${item.anchor}`,
                         onClick: (e) => {
+
                             if (location.hash && !/^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) {
                                 e.preventDefault();
                                 const evt = new CustomEvent("pbomlnavigate", { bubbles: true, detail: item.anchor });
+                                dispatchEvent(evt);
+                            } else if (!item.anchor) {
+                                history.pushState(null, null, ' ');
+                                const evt = new CustomEvent("pbomlnavigate", { bubbles: true, detail: null });
                                 dispatchEvent(evt);
                             }
                         }
