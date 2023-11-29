@@ -6,7 +6,8 @@
       </template>
       <template v-else>
         <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone" :prefix="prefix"></Editor>
-        <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"></Renderer>
+        <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"
+          :language="language"></Renderer>
       </template>
     </div>
     <template #fallback>
@@ -59,6 +60,14 @@ export default {
       type: String,
       default: null
     },
+
+    /**
+     * A language to use. Defaults to the main page's language.
+     */
+    language: {
+      type: String,
+      default: null
+    }
   },
   components: {
     Editor: defineAsyncComponent(() => import('./components/Editor/Editor.vue')),

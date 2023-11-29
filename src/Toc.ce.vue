@@ -1,7 +1,7 @@
 <template>
     <Suspense>
         <div class="dark:text-white">
-            <Toc v-if="pbomlDocument" :pboml-document="pbomlDocument"></Toc>
+            <Toc v-if="pbomlDocument" :pboml-document="pbomlDocument" :language="language"></Toc>
         </div>
         <template #fallback>
             <LoadingIndicator class="w-8 h-8" />
@@ -34,6 +34,14 @@ export default {
          * multiple pboml documents are displayed on the same page.
          */
         prefix: {
+            type: String,
+            default: null
+        },
+
+        /**
+         * A language to use. Defaults to the main page's language.
+         */
+        language: {
             type: String,
             default: null
         }
