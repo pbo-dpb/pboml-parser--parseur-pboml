@@ -31,11 +31,11 @@
     "marked-linkify-it": "^3.1.6",
     "pdf-lib": "^1.17.1",
     "turndown": "^7.1.2",
-    "vue": "^3.3.8"
+    "vue": "^3.3.9"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@testing-library/vue": "^8.0.0",
+    "@testing-library/vue": "^8.0.1",
     "@vitejs/plugin-vue": "^4.5.0",
     "autoprefixer": "^10.4.16",
     "happy-dom": "^12.10.3",
