@@ -66,7 +66,7 @@ export default {
      */
     language: {
       type: String,
-      default: null
+      default: document.documentElement.lang
     }
   },
   components: {
