@@ -84,7 +84,7 @@ export default {
         'editor_actions_export': "Export",
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Remove default styles (Tailwind)",
-        "append_structure_from_markdown": "Import structure from Markdown",
+        "append_structure_from_markdown": "Append structure from Markdown",
     },
     fr: {
         "structure_section_title": "Structure",
@@ -171,6 +171,6 @@ export default {
         'editor_actions_export': "Exporter",
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Enlever les styles par défaut (Tailwind)",
-        "append_structure_from_markdown": "Importer une structure depuis Markdown",
+        "append_structure_from_markdown": "Ajouter une structure depuis Markdown",
     }
 }

@@ -23,6 +23,7 @@ import { RectangleGroupIcon } from '@heroicons/vue/24/outline'
 import { Marked } from 'marked';
 import HeadingSlice from "../../../../models/contents/HeadingSlice";
 import MarkdownSlice from "../../../../models/contents/MarkdownSlice";
+import TableSlice from "../../../../models/contents/TableSlice";
 
 export default {
     props: ["pbomlDocument"],
@@ -129,7 +130,6 @@ export default {
             const marked = new Marked();
             marked.use({
                 walkTokens: (token) => {
-
                     if (token.type === 'heading') {
                         let payload = { content: {} };
                         payload.content[language] = token.text;
@@ -142,6 +142,8 @@ export default {
                         if (previousSlice && previousSlice.type === "markdown")
                             return;
                         slices.push(new MarkdownSlice({}));
+                    } else if (token.type === 'table') {
+                        slices.push(new TableSlice({}));
                     }
 
                 }
