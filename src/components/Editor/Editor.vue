@@ -29,6 +29,10 @@
                             @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
                         </Tab>
+                        <Tab :controls="'structure'" :selected="currentTab === 'structure'"
+                            @click="currentTab = 'structure'">
+                            {{ strings.structure_section_title }}
+                        </Tab>
                     </div>
                     <div v-if="currentTab === 'slices'" class="flex flex-row items-center gap-2">
 
@@ -86,6 +90,12 @@
                             aria-labelledby="tab-meta">
                             <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
                         </div>
+
+                        <div id="structure" role="tabpanel" tabindex="0" aria-labelledby="tab-structure"
+                            v-if="currentTab === 'structure'">
+                            <structure-editor :pboml-document="pbomlDocument"></structure-editor>
+                        </div>
+
                     </div>
 
 
@@ -145,6 +155,7 @@ export default {
         DocumentMetaEditor,
         Tab,
         AnnotationsEditor: defineAsyncComponent(() => import('./AnnotationsEditor/AnnotationsEditor.js')),
+        StructureEditor: defineAsyncComponent(() => import('./StructureEditor/StructureEditor.js')),
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
         ArrowsPointingInIcon,

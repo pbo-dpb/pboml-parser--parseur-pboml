@@ -1,8 +1,9 @@
 export default {
     en: {
+        "structure_section_title": "Structure",
         "meta_section_title": "Document properties",
         "slices_section_title": "Slices",
-        "annotations_section_title": "Notes & references",
+        "annotations_section_title": "Notes & refs",
         "document_title_label": "Document title",
         "document_id_label": "ID",
         "document_copyright_label": "Copyright notice",
@@ -83,11 +84,13 @@ export default {
         'editor_actions_export': "Export",
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Remove default styles (Tailwind)",
+        "append_structure_from_markdown": "Import structure from Markdown",
     },
     fr: {
+        "structure_section_title": "Structure",
         "meta_section_title": "Propriétés du document",
         "slices_section_title": "Tranches",
-        "annotations_section_title": "Notes et références",
+        "annotations_section_title": "Notes et réf.",
         "document_title_label": "Titre du document",
         "document_id_label": "ID",
         "document_copyright_label": "Avis de droit d'auteur",
@@ -168,5 +171,6 @@ export default {
         'editor_actions_export': "Exporter",
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Enlever les styles par défaut (Tailwind)",
+        "append_structure_from_markdown": "Importer une structure depuis Markdown",
     }
 }
