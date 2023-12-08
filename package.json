@@ -16,7 +16,7 @@
     "@twind/preset-typography": "^1.0.7",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
     "buffer": "^6.0.3",
-    "chart.js": "^4.4.0",
+    "chart.js": "^4.4.1",
     "citation-js": "^0.7.4",
     "color": "^4.2.3",
     "deep-equal": "^2.2.3",
@@ -28,10 +28,10 @@
     "lodash.merge": "^4.6.2",
     "marked": "^10.0.0",
     "marked-katex-extension": "^4.0.4",
-    "marked-linkify-it": "^3.1.6",
+    "marked-linkify-it": "^3.1.7",
     "pdf-lib": "^1.17.1",
     "turndown": "^7.1.2",
-    "vue": "^3.3.9"
+    "vue": "^3.3.10"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
@@ -39,9 +39,9 @@
     "@vitejs/plugin-vue": "^4.5.0",
     "autoprefixer": "^10.4.16",
     "happy-dom": "^12.10.3",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.3.6",
     "vite": "^4.5.0",
-    "vitest": "^0.34.6"
+    "vitest": "^1.0.2"
   }
 }
