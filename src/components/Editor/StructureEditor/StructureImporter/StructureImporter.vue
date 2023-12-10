@@ -24,6 +24,7 @@ import { Marked } from 'marked';
 import HeadingSlice from "../../../../models/contents/HeadingSlice";
 import MarkdownSlice from "../../../../models/contents/MarkdownSlice";
 import TableSlice from "../../../../models/contents/TableSlice";
+import SvgSlice from "../../../../models/contents/SvgSlice";
 
 export default {
     props: ["pbomlDocument"],
@@ -130,6 +131,7 @@ export default {
             const marked = new Marked();
             marked.use({
                 walkTokens: (token) => {
+
                     if (token.type === 'heading') {
                         let payload = { content: {} };
                         payload.content[language] = token.text;
@@ -144,6 +146,8 @@ export default {
                         slices.push(new MarkdownSlice({}));
                     } else if (token.type === 'table') {
                         slices.push(new TableSlice({}));
+                    } else if (token.type === 'image') {
+                        slices.push(new SvgSlice({}));
                     }
 
                 }
