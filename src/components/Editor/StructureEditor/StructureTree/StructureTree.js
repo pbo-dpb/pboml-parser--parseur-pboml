@@ -17,12 +17,15 @@ export default {
         }
     },
     render() {
+        let currentLevel = 0;
         return h('ul', { class: 'flex flex-col gap-2 pb-4' }, [
             ...this.pbomlDocument.slices.map((slice, index) => {
+                if (slice.type === "heading") currentLevel = slice.level;
                 return h(StructureTreeSlice, {
                     slice: slice,
                     index: index,
                     draggedSliceIndex: this.currentlyDraggedSliceIndex,
+                    level: currentLevel,
                     onDragstart: (event) => {
                         this.currentlyDraggedSlice = slice
                         event.dataTransfer.effectAllowed = 'move';

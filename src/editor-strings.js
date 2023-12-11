@@ -19,6 +19,18 @@ export default {
         'slice_type_svg': 'SVG Vector',
         'slice_type_LaTeX': "LaTeX",
         'slice_type_html': "HTML",
+
+        'slice_type_abbrev_markdown': "MKD",
+        'slice_type_abbrev_kvlist': "KV",
+        'slice_type_abbrev_heading': "H",
+        'slice_type_abbrev_bitmap': 'BMP',
+        'slice_type_abbrev_table': "TBL",
+        'slice_type_abbrev_chart': "CHA",
+        'slice_type_abbrev_svg': 'SVG',
+        'slice_type_abbrev_LaTeX': "LTX",
+        'slice_type_abbrev_html': "HTM",
+
+
         'advanced_slice_warning': "This type of slice is not recommended. Only use this type of slice when necessary. Are you sure you want to continue ?",
         'slice_title_field_label': "Title",
         'slice_referenced_as_field_label': "Anchor",
@@ -106,6 +118,17 @@ export default {
         'slice_type_svg': 'SVG Vector',
         'slice_type_LaTeX': "LaTeX",
         'slice_type_html': "HTML",
+
+        'slice_type_abbrev_markdown': "MKD",
+        'slice_type_abbrev_kvlist': "CV",
+        'slice_type_abbrev_heading': "ET",
+        'slice_type_abbrev_bitmap': 'BMP',
+        'slice_type_abbrev_table': "TBL",
+        'slice_type_abbrev_chart': "GRA",
+        'slice_type_abbrev_svg': 'SVG',
+        'slice_type_abbrev_LaTeX': "LTX",
+        'slice_type_abbrev_html': "HTM",
+
         'advanced_slice_warning': "Ce type de tranche n'est pas recommandé. Utilisez-le seulement lorsque nécessaire. Êtes-vous sûr de vouloir continuer ?",
         'slice_title_field_label': "Titre",
         'slice_referenced_as_field_label': "Ancre",
