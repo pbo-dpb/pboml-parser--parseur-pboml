@@ -114,8 +114,7 @@ export default {
             });
 
 
-        }
-        ,
+        },
 
         canImport() {
             return this.visualStructureHtml && this.importedStructure.filter((s) => typeof s === "string").length === 0;
