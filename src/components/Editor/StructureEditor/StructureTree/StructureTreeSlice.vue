@@ -84,7 +84,6 @@ export default {
         },
         draggedOverClasses() {
             return {
-                'bg-blue-100': this.isBeingDraggedOver,
                 'border-b-4 border-b-blue-300': this.index > this.draggedSliceIndex && this.isBeingDraggedOver,
                 'border-t-4 border-t-blue-300': this.index < this.draggedSliceIndex && this.isBeingDraggedOver,
             }
