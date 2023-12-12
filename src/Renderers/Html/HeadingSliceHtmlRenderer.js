@@ -20,7 +20,7 @@ export default class HeadingSliceHtmlRenderer extends SliceHtmlRenderer {
                 classes.push('text-xl border-b  border-gray-100 dark:border-gray-800');
                 break;
             case 3:
-                classes.push('italic border-b border-gray-100 dark:border-gray-800');
+                classes.push('border-b border-gray-100 dark:border-gray-800');
                 break;
         }
 
