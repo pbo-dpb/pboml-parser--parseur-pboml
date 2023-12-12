@@ -37,7 +37,7 @@ export default {
 
     computed: {
         rawHeaderSlices() {
-            return this.pbomlDocument.slices.filter(slice => slice.type === 'heading');
+            return this.pbomlDocument.slices.filter(slice => slice.type === 'heading').filter(slice => (slice?.level ?? 0) < 3);
         },
         rawLabels() {
             return this.pbomlDocument.slices.filter(slice => slice.label && slice.label[this.language] && slice.display_label !== false);
