@@ -27,31 +27,24 @@ export default class PBOMLDocument {
         if (!mainDocument || !this.pbomlVersion)
             throw "PBOML document is invalid : missing main document and/or PBOML version.";
 
-        if (mainDocument['document']) {
+        this.copyright = {
+            en: mainDocument.document?.copyright?.en,
+            fr: mainDocument.document?.copyright?.fr
+        };
+        this.form = mainDocument.document?.form;
+        this.type = mainDocument.document?.type;
 
-            this.copyright = mainDocument.document?.copyright;
-            this.form = mainDocument.document?.form;
-            this.type = mainDocument.document?.type;
+        this.id = mainDocument.document?.id;
 
-            this.id = mainDocument.document?.id;
-
-            this.release_date = mainDocument.document?.release_date;
-            if (this.release_date) {
-                this.release_date = new Date(this.release_date);
-            }
-
-            this.title = mainDocument.document?.title;
-
-        } else {
-            this.copyright = null;
-            this.form = null;
-            this.type = null;
-            this.id = null;
-            this.release_date = null;
-            this.title = null;
+        this.release_date = mainDocument.document?.release_date ?? null;
+        if (this.release_date) {
+            this.release_date = new Date(this.release_date);
         }
 
-
+        this.title = {
+            en: mainDocument.document?.title?.en,
+            fr: mainDocument.document?.title?.fr
+        };
 
 
         let counter = 0;
