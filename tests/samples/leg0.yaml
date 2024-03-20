@@ -319,6 +319,7 @@ slices:
         label:
           en: Contact
           fr: Contact
+      display_labels: true
   - type: kvlist
     label:
       en: Data Sources

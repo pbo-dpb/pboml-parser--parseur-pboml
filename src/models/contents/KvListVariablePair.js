@@ -36,7 +36,7 @@ export default class KvListVariablePair {
         }
 
 
-        this.display_label = payload?.display_label;
+        this.display_labels = payload.display_labels === undefined ? prototype?.display_labels : payload.display_labels;
         this.prototype = prototype;
 
 
@@ -72,14 +72,20 @@ export default class KvListVariablePair {
     getKeyVnode(language) {
 
         return h('dt', { class: "" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label, language), class: defaultProseClasses }) : null,
+            ...(this.display_labels ? [
+                h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.key.label, language), class: `${defaultProseClasses} prose-p:font-semibold prose-p:tracking-tight prose-p:uppercase text-sm` }),
+                h('span', { role: 'separator', innerHTML: ' • ', class: `${defaultProseClasses}` })
+            ] : []),
             h('span', { class: `${defaultProseClasses} prose-p:font-semibold prose-a:font-semibold`, innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.key.type, this.key.content, language) })
         ]);
     }
 
     getValueVnode(language) {
         return h('dd', { class: "col-span-2" }, [
-            this.display_label ? h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label, language), class: defaultProseClasses }) : null,
+            ...(this.display_labels ? [
+                h('span', { innerHTML: this.renderKeyOrValueContentToHtml('markdown', this.prototype.value.label, language), class: `${defaultProseClasses} prose-p:font-semibold prose-p:tracking-tight prose-p:uppercase text-sm` }),
+                h('span', { role: 'separator', innerHTML: ' • ', class: `${defaultProseClasses} ` })
+            ] : []),
             h('span', { class: defaultProseClasses, innerHTML: this.renderKeyOrValueContentToHtml(this.prototype.value.type, this.value.content, language) })
         ]);
     }
