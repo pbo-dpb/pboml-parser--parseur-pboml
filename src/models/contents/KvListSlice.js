@@ -22,7 +22,7 @@ export default class KvListSlice extends Slice {
                     fr: payload.prototype?.value?.label?.fr,
                 }
             },
-            display_labels: payload.prototype?.display_labels
+            display_labels: payload.prototype?.display_labels ? true : false
         }
 
         this.content = (payload.content && !!payload.content.forEach) ? payload.content.map((el) => new KvListVariablePair(this.prototype, el)) : [];
@@ -58,8 +58,13 @@ export default class KvListSlice extends Slice {
             value: {
                 type: this.prototype?.value.type,
                 label: { en: this.prototype?.value.label.en, fr: this.prototype?.value.label.fr }
-            }
+            },
+
         };
+
+        if (this.prototype?.display_labels === true) {
+            array['prototype']['display_labels'] = true;
+        }
 
         array.content = !!this.content.forEach ? this.content.map(kvp => kvp.toArray()) : [];
 

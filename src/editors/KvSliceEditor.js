@@ -4,6 +4,7 @@ import TinyButton from "../components/Editor/TinyButton.vue"
 import strings from "../editor-strings"
 import MarkdownDriver from '../MarkdownDriver'
 import Renderer from '../components/Renderer/Renderer'
+import CheckboxInput from '../components/Editor/Inputs/CheckboxInput.vue'
 
 export default {
     props: ['slice', 'isEditingMeta'],
@@ -53,7 +54,17 @@ export default {
                                 props.slice.prototype.value.label = value;
                             }
                         }),
+
+
                     ]),
+                    h(CheckboxInput, {
+                        class: "w-full",
+                        modelValue: props.slice.prototype.display_labels,
+                        label: strings[document.documentElement.lang].kv_slice_display_labels_label,
+                        'onUpdate:modelValue': (value) => {
+                            props.slice.prototype.display_labels = value ? true : false;
+                        }
+                    }),
                 )
             }
 

@@ -35,10 +35,8 @@ export default class KvListVariablePair {
             }
         }
 
-
         this.display_labels = payload.display_labels === undefined ? prototype?.display_labels : payload.display_labels;
         this.prototype = prototype;
-
 
     }
 
