@@ -36,7 +36,7 @@ export default {
 
 
                                 h(BilingualInput, {
-                                    inputSize: (this.meta_type === 'alts' ? 'lg' : null),
+                                    inputSize: ((this.meta_type === 'alts' || this.meta_type === 'notes') ? 'lg' : null),
                                     modelValue: mt,
                                     class: 'w-full',
                                     'onUpdate:modelValue': (value) => { mt.en = value.en; mt.fr = value.fr }
