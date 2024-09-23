@@ -5,11 +5,13 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "./",
-  plugins: [basicSsl(), vue({
-    compilerOptions: {
-      customElement: true,
-    },
-  })],
+  plugins: [
+    basicSsl(),
+    vue({
+      compilerOptions: {
+        customElement: true,
+      },
+    })],
   build: {
     manifest: true,
     rollupOptions: {
@@ -19,5 +21,8 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom'
-  }
+  },
+  optimizeDeps: {
+    exclude: ['*.keep'],
+  },
 })
