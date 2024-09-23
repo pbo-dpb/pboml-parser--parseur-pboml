@@ -2,7 +2,7 @@
   <Suspense>
     <div class="dark:text-white">
       <template v-if="loaded && !pbomlDocument">
-        <FilePicker @pick="handlePick" :prefix="prefix"></FilePicker>
+        <FilePicker v-if="edit" @pick="handlePick" :prefix="prefix"></FilePicker>
       </template>
       <template v-else>
         <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone" :prefix="prefix"></Editor>
@@ -87,8 +87,6 @@ export default {
         this._payload = this.payload;
       }
 
-    } else if (!this.payload && !this.standalone) {
-      await this.attemptToLoadPayloadFromUrlParameter();
     }
 
     if (this._payload) {
@@ -153,23 +151,7 @@ export default {
     handlePick(pickedDocument) {
       this.pbomlDocument = pickedDocument
     },
-    async attemptToLoadPayloadFromUrlParameter() {
-      const queryString = window.location.search;
-      if (!queryString) return;
-      const params = new URLSearchParams(queryString);
-      if (params.get('payload')) {
-        this._payload = params.get('payload');
-        return;
-      }
 
-
-      if (params.get('payload-url')) {
-        const response = await fetch(params.get('payload-url'));
-        if (!response || !response.ok) return;
-        this._payload = await response.text();
-      }
-
-    }
   },
 }
 </script>
