@@ -44,8 +44,15 @@
   document.documentElement.setAttribute('lang', lang);
 
   let test = params.get('test');
-  if (!test) test = 'leg0';
+  if (!test) test = null;
 
+  document.addEventListener(
+    "pboml-editor-document-updated",
+    (e) => {
+      const sideEl = document.getElementById('toc-container');
+      sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
+    }
+  );
 
 
   async function loadTestPayload() {
@@ -62,15 +69,28 @@
     const sideEl = document.getElementById('toc-container');
     sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
 
-    document.addEventListener(
-      "pboml-editor-document-updated",
-      (e) => {
-        sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
-      }
-    );
+
+  }
+  async function loadEditor() {
+
+    document.title = `TEST - PBOML`;
+
+    const mainEl = document.getElementById('body-container');
+
+    const editorAttribute = params.get('edit') === 'true' ? 'edit="true"' : '';
+
+    mainEl.innerHTML = `<pboml-parser ${editorAttribute}></pboml-parser>`;
+    const sideEl = document.getElementById('toc-container');
+    sideEl.innerHTML = `<pboml-toc></pboml-toc>`;
+
+
   }
 
-  loadTestPayload();
+
+  if (test)
+    loadTestPayload();
+  else
+    loadEditor();
 
 
   document.pbomlCallbacks = {
