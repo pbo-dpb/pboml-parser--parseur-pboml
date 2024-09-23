@@ -8,8 +8,6 @@ This project is under active development, and several concepts are set to change
 
 ### The PBOML language
 
-⚠️ The PBOML language is under development. It is recommended not to use it in production as its implementation could change drastically.
-
 YAML based, the PBOML language is used to serialize PBO reports, notes and election costings for storage, machine based edition and just in time rendering to multiple formats (HTML, Docx, PDF). To learn more about the PBOML language, [visit this project's Wiki](https://github.com/pbo-dpb/pboml-parser--parseur-pboml/wiki).
 
 ## Demo
@@ -30,8 +28,6 @@ Some existing publications have already been converted to the PBOML format and a
 - [Cost estimate of Employment Insurance Board of Appeal](https://fallback--repli.pbo-dpb.ca/en/publications/LEG-2324-004-M--cost-estimate-employment-insurance-board-appeal--estimation-cout-conseil-appel-assurance-emploi)
 
 ## Use the Web component
-
-⚠️ The Web component is under development. It is recommended not to use it in production as its implementation could change drastically.
 
 ### Retrieve the current version of the script
 
