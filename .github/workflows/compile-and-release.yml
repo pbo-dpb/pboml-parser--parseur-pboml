@@ -4,14 +4,14 @@ jobs:
   compile-assets-and-push-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - run: npm ci
       - run: npm run build
       - uses: montudor/action-zip@v1
@@ -42,7 +42,7 @@ jobs:
   deploy-pdf-generation-script:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Deploy to Lambda
         uses: appleboy/lambda-action@master
         with:
