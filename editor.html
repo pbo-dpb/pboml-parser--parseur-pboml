@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>  
-    <link rel="stylesheet" type="text/css" href="/src/index.css">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PBOML</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src;script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src *">
-  </head>
-  <body>
-    <div class="container mx-auto py-8">
-      <pboml-parser edit="true"></pboml-parser>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/src/index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PBOML</title>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self';worker-src 'none'">
+</head>
+
+<body>
+  <div class="container mx-auto py-8">
+    <pboml-parser edit="true"></pboml-parser>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
 </html>
