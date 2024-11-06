@@ -50,7 +50,8 @@
     "pboml-editor-document-updated",
     (e) => {
       const sideEl = document.getElementById('toc-container');
-      sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
+      if (sideEl)
+        sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
     }
   );
 

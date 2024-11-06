@@ -4,8 +4,8 @@
         <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw"
             :standalone="standalone">
             <Button @click="handleRawEditorToggle" :toggled="shouldEditRaw" :title="strings.editor_actions_source"><svg
-                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="w-6 h-6">
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
                 </svg><span class="sr-only">{{ strings.editor_actions_source }}</span>
@@ -48,6 +48,13 @@
                                 <span class="sr-only">{{ strings.expand_all }}</span>
                             </TinyButton>
                         </div>
+                        <TinyButton
+                            :title="enhancedPreviewWindow ? strings.close_enhanced_preview : strings.open_enhanced_preview"
+                            :aria-pressed="(enhancedPreviewWindow ? true : false)" @click="toggleEnhancedPreview">
+                            <RectangleGroupIcon class="w-4 h-4"></RectangleGroupIcon>
+                            <span class="sr-only">{{ enhancedPreviewWindow ? strings.close_enhanced_preview :
+                                strings.open_enhanced_preview }}</span>
+                        </TinyButton>
                         <TinyButton title="Structure" :aria-pressed="shouldPresentDocumentStructure"
                             @click="shouldPresentDocumentStructure = !shouldPresentDocumentStructure">
                             <Bars3Icon class="w-4 h-4"></Bars3Icon>
@@ -126,7 +133,7 @@ import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
-import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/vue/24/solid';
+import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon, RectangleGroupIcon } from '@heroicons/vue/24/solid';
 
 export default {
     props: {
@@ -141,7 +148,8 @@ export default {
             workingPboml: '',
             strings: strings[document.documentElement.lang],
             currentTab: "slices",
-            shouldPresentDocumentStructure: false
+            shouldPresentDocumentStructure: false,
+            enhancedPreviewWindow: null
         }
     },
 
@@ -159,7 +167,8 @@ export default {
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
         ArrowsPointingInIcon,
-        ArrowsPointingOutIcon
+        ArrowsPointingOutIcon,
+        RectangleGroupIcon
     },
 
     watch: {
@@ -175,6 +184,7 @@ export default {
                     }
                 });
                 document.dispatchEvent(event);
+                this.injectEnhancedPreviewContent();
             },
             deep: true
         }
@@ -211,7 +221,103 @@ export default {
             }
         },
 
-    },
+
+        injectEnhancedPreviewContent() {
+            if (!this.enhancedPreviewWindow) {
+                return;
+            }
+            const encodedPayload = btoa(unescape(encodeURIComponent(this.pbomlDocument.serialize())));
+            const container = this.enhancedPreviewWindow.document.body.querySelector("div");
+
+            let enPbomlPreview = this.enhancedPreviewWindow.document.getElementById("en-pboml-preview");
+
+            if (!enPbomlPreview) {
+                enPbomlPreview = document.createElement("pboml-parser");
+                enPbomlPreview.setAttribute("language", "en");
+                enPbomlPreview.style.backgroundColor = "white";
+                enPbomlPreview.style.padding = "16px";
+                enPbomlPreview.id = "en-pboml-preview";
+                container.appendChild(enPbomlPreview);
+            }
+
+            enPbomlPreview.setAttribute("payload", `data:text/yaml;base64,${encodedPayload}`);
+
+            let frPbomlPreview = this.enhancedPreviewWindow.document.getElementById("fr-pboml-preview");
+
+            if (!frPbomlPreview) {
+                frPbomlPreview = document.createElement("pboml-parser");
+                frPbomlPreview.setAttribute("language", "fr");
+                frPbomlPreview.style.backgroundColor = "white";
+                frPbomlPreview.style.padding = "16px";
+                frPbomlPreview.id = "fr-pboml-preview";
+                container.appendChild(frPbomlPreview);
+            }
+
+            frPbomlPreview.setAttribute("payload", `data:text/yaml;base64,${encodedPayload}`);
+        },
+
+        toggleEnhancedPreview() {
+
+            if (!this.enhancedPreviewWindow) {
+
+                const enhancedPreviewTitle = this.strings.enhanced_preview_title;
+                const desiredViewport = `${document.documentElement.clientWidth}x${document.documentElement.clientHeight}`;
+
+
+                const newHmtl = document.createElement("html");
+                const newHead = document.createElement("head");
+                const newBody = document.createElement("body");
+                newHmtl.appendChild(newHead);
+                newHmtl.appendChild(newBody);
+
+                // Container
+                const container = document.createElement("div");
+                container.style.display = "grid";
+                container.style.gridTemplateColumns = 'auto auto';
+                container.style.gap = "8px";
+                container.style.backgroundColor = "#f1f5f9";
+                newBody.appendChild(container);
+
+                const enhancedPreviewWindow = window.open("", enhancedPreviewTitle, `${desiredViewport},toolbar=no,menubar=no,location=no`);
+
+                if (!enhancedPreviewWindow) {
+                    window.alert("The enhanced preview window was blocked by the popup blocker. Please allow popups for this site.");
+                    return;
+                }
+
+                enhancedPreviewWindow.document.body.innerHTML = newHmtl.innerHTML;
+
+                // Script tag
+                const pbomlScriptTag = document.createElement("script");
+                pbomlScriptTag.src = window.pbomlParserScriptUrl;
+                pbomlScriptTag.type = "module";
+                enhancedPreviewWindow.document.head.appendChild(pbomlScriptTag);
+
+                this.enhancedPreviewWindow = enhancedPreviewWindow;
+
+                this.enhancedPreviewWindow.onbeforeunload = () => {
+                    this.enhancedPreviewWindow = null;
+                };
+
+                // Also listen on close on this window to avoid orphaned windows
+                window.addEventListener("beforeunload", () => {
+                    if (this.enhancedPreviewWindow) {
+                        this.enhancedPreviewWindow.close();
+                        this.enhancedPreviewWindow = null;
+                    }
+                });
+
+                this.injectEnhancedPreviewContent();
+
+            } else {
+                this.enhancedPreviewWindow.close();
+                this.enhancedPreviewWindow = null;
+
+            }
+
+        },
+
+    }
 
 }
 </script>
