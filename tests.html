@@ -63,11 +63,20 @@
     const encodedPayload = btoa(unescape(encodeURIComponent(rawPayload)));
     const mainEl = document.getElementById('body-container');
 
-    const editorAttribute = params.get('edit') === 'true' ? 'edit="true"' : '';
+    const isEditing = params.get('edit') === 'true';
+    const editorAttribute = isEditing ? 'edit="true"' : '';
 
     mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}" ${editorAttribute}></pboml-parser>`;
     const sideEl = document.getElementById('toc-container');
-    sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
+
+    if (isEditing) {
+      sideEl.remove();
+      mainEl.classList.remove('col-span-4');
+      mainEl.classList.add('col-span-6');
+    } else {
+      sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
+    }
+
 
 
   }

@@ -57,7 +57,8 @@
 
             <Renderer :pboml-document="pbomlDocument" :language="shouldDisplayPreview"></Renderer>
 
-            <span class="mr-auto uppercase text-xl font-bold text-slate-500">/{{ strings.editor_actions_preview }}</span>
+            <span class="mr-auto uppercase text-xl font-bold text-slate-500">/{{ strings.editor_actions_preview
+                }}</span>
 
         </div>
 
