@@ -306,8 +306,10 @@ export default {
                         this.enhancedPreviewWindow = null;
                     }
                 });
-
+                
                 this.injectEnhancedPreviewContent();
+
+                
 
             } else {
                 this.enhancedPreviewWindow.close();
