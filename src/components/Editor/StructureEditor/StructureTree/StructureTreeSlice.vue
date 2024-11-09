@@ -1,14 +1,16 @@
 <template>
     <li draggable="true"
         class="transition-all cursor-pointer border  border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group"
-        @dragstart="handleDragStart" @dragend="resetDragCues" @dragover.prevent="handleDragover"
-        :class="{ 'opacity-30': isDragging, ...draggedOverClasses, ...levelIndentClasses }" @dragenter=""
-        @dragleave="isBeingDraggedOver = false" @drop.prevent="resetDragCues">
+        @dragstart="handleDragStart" @dragend="resetDragCues" @dragover.prevent="handleDragover" :class="{
+            'opacity-30': isDragging, ...draggedOverClasses, ...levelIndentClasses,
+            'bg-blue-50': this.slice.presentation === 'aside',
+            'bg-slate-50': this.slice.presentation === 'figure'
+        }" @dragenter="" @dragleave="isBeingDraggedOver = false" @drop.prevent="resetDragCues">
         <ArrowsUpDownIcon class="h-4 w-4 text-blue-200 group-hover:text-blue-800"></ArrowsUpDownIcon>
         <div class="flex">
             <div :title="localizedSliceType" class="font-semibold w-12">{{
                 localizedSliceTypeAbbr
-            }}</div>
+                }}</div>
             <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor }}</div>
         </div>
     </li>

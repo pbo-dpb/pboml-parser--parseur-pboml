@@ -129,7 +129,6 @@ import EditorActions from './EditorActions.vue';
 import EditorSlices from './EditorSlices/EditorSlices.js';
 import Button from './Button.vue';
 import TinyButton from './TinyButton.vue';
-import SliceStager from "./SliceStager/SliceStager.vue";
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
@@ -159,7 +158,6 @@ export default {
         Button,
         TinyButton,
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
-        SliceStager,
         DocumentMetaEditor,
         Tab,
         AnnotationsEditor: defineAsyncComponent(() => import('./AnnotationsEditor/AnnotationsEditor.js')),
@@ -306,10 +304,10 @@ export default {
                         this.enhancedPreviewWindow = null;
                     }
                 });
-                
+
                 this.injectEnhancedPreviewContent();
 
-                
+
 
             } else {
                 this.enhancedPreviewWindow.close();
