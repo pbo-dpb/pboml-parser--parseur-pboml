@@ -68,10 +68,10 @@ export default {
             // Remove all pasted references.
             markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
 
-            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9a-z]{1,}\\\\\\]\\]\\(file:([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
+            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9a-z]{1,}\\\\\\]\\]\\(([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
                 return `[^🟠]${p2}`;
             })
-            markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9a-z]{1,}\\\]\]\(file:([^)])+\)', 'g')), '[^🟠]')
+            markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9a-z]{1,}\\\]\]\(([^)])+\)', 'g')), '[^🟠]')
 
             // Use first row as table headers when no header is present
             markdown = markdown.replace(/^\|[ \|]{1,}\|\n\| [ \-\|]{1,}\ \|\n\| [^\n]{1,} \|\n/gm, (match) => {
@@ -125,7 +125,7 @@ export default {
                         this.sanitizeAndInsertMarkdown(markdown);
                         break;
                     } else if (item.types.includes('text/plain')) {
-                        const blob = await item.getType("text/html");
+                        const blob = await item.getType("text/plain");
                         const markdown = await blob.text();
                         this.sanitizeAndInsertMarkdown(markdown);
                         break;
