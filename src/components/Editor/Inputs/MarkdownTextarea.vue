@@ -1,28 +1,28 @@
 <template>
-    <div class="flex flex-col gap-1 @sm:flex-row">
+    <div class="flex flex-col gap-1 @sm:flex-row text-gray-700 focus-within:text-purple-800">
         <div class="flex flex-row justify-between items-center">
             <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
-            <TinyButton :disabled="!canPaste" @click="handlePaste" :title="editorStrings.paste_from_word" tabindex="-1">
-                <ClipboardDocumentListIcon class="w-4 h-4"></ClipboardDocumentListIcon>
-                <span class="sr-only">{{ editorStrings.paste_from_word }}</span>
-            </TinyButton>
+            <PasteFromOfficeButton @click="handlePaste" class="@sm:hidden "></PasteFromOfficeButton>
         </div>
 
         <textarea v-if="multiline" ref="payloadArea" :value="modelValue" :id="eluid"
-            class="border border-gray-300 p-1 rounded h-96 w-full" @input="emitUpdate($event.target.value)">
+            class="border border-gray-300 p-1 rounded h-96 w-full outline-purple-800 text-gray-800"
+            @input="emitUpdate($event.target.value)">
         </textarea>
 
         <input type="text" v-else ref="payloadArea" :value="modelValue" :id="eluid"
-            class="border border-gray-300 p-1 rounded w-full" @input="emitUpdate($event.target.value)" />
+            class="border border-gray-300 p-1 rounded w-full outline-purple-800  text-gray-800"
+            @input="emitUpdate($event.target.value)" />
+
+        <PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>
     </div>
 </template>
 <script>
-import TinyButton from "../TinyButton.vue"
-import { ClipboardDocumentListIcon } from '@heroicons/vue/24/outline'
+
 import Turndown from "turndown"
 import { tables as gfmTables } from 'joplin-turndown-plugin-gfm'
 
-import editorStrings from "../../../editor-strings"
+import PasteFromOfficeButton from "./PasteFromOfficeButton.vue"
 
 export default {
     props: {
@@ -37,13 +37,9 @@ export default {
     data() {
         return {
             eluid: Math.random().toString(36).substring(2),
-            canPaste: true,
-            editorStrings: editorStrings[document.documentElement.lang]
         }
     },
-    components: {
-        TinyButton, ClipboardDocumentListIcon
-    },
+    components: { PasteFromOfficeButton },
     methods: {
         emitUpdate(value) {
             this.$emit('update:modelValue', value)

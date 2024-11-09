@@ -2,6 +2,7 @@ import editorStrings from "../editor-strings";
 import { h, defineAsyncComponent } from 'vue'
 import TinyButton from "../components/Editor/TinyButton.vue"
 import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue"
+import { PlusIcon } from "@heroicons/vue/16/solid";
 
 export default {
     props: ["slice", "meta_type"],
@@ -54,10 +55,12 @@ export default {
 
                     h(TinyButton, {
                         'class': "self-center",
-                        'innerHTML': "➕", onClick: (e) => {
+                        onClick: (e) => {
                             this.slice[this.meta_type].push({ en: "", fr: "" });
                         }
-                    })
+                    }, () => [
+                        h(PlusIcon, { class: "size-4" })
+                    ])
                 ]),
 
 

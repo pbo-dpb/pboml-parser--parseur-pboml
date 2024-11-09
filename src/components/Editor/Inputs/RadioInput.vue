@@ -4,7 +4,7 @@
         <legend v-if="label" class="font-semibold">{{ label }}</legend>
         <div class="flex flex-col gap-0.5">
             <label v-for="(choice, value) in choices"
-                class="flex flex-row justify-between gap-2 text-sm font-semibold text-gray-700 hover:text-gray-800 has-[:checked]:bg-blue-50 rounded px-2 py-1">
+                class="flex flex-row justify-between gap-2 text-sm font-semibold text-gray-700 hover:text-gray-800 has-[:checked]:bg-purple-50 rounded px-2 py-1">
                 <div class="flex flex-row gap-1 items-center">
                     <component v-if="choice.icon" :is="choice.icon" class="size-4"></component>
                     <span v-if="choice.label">{{ choice.label }}</span>

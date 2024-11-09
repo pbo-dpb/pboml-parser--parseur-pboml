@@ -7,7 +7,7 @@
                 class="p-2 text-left font-semibold text-sm flex flex-row justify-between items-center"
                 @click="currentVariableKey = key" :class="{
                     'bg-white cursor-pointer text-gray-700 hover:text-gray-800': key !== currentVariableKey,
-                    'bg-blue-100 cursor-default': key === currentVariableKey
+                    'bg-purple-100 cursor-default': key === currentVariableKey
                 }">
                 <div class="flex flex-row items-center gap-2 min-w-0">
                     <div>

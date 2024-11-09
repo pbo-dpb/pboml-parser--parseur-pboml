@@ -2,10 +2,8 @@ import { h } from 'vue'
 import DataTableVariable from "../../../models/contents/DataTable/DataTableVariable"
 import BilingualInput from '../../Editor/Inputs/BilingualInput.vue'
 import editorStrings from '../../../editor-strings'
-import tinyButton from "../TinyButton.vue"
 import { ChartBarIcon, StarIcon, TrashIcon, KeyIcon } from '@heroicons/vue/24/solid'
 import SelectInput from "../Inputs/SelectInput.vue"
-import CheckboxInput from "../Inputs/CheckboxInput.vue"
 import TinyButton from "../TinyButton.vue";
 import SingleInput from "../Inputs/SingleInput.vue"
 import RadioInput from '../Inputs/RadioInput.vue'
@@ -37,7 +35,7 @@ export default {
         const strings = editorStrings[language];
 
         let typesInputChoices = {
-            'markdown': { label: "Markdown", icon: LanguageIcon },
+            'markdown': { label: strings.data_table_variables_editor_var_type_markdown, icon: LanguageIcon },
             'number': { label: strings.data_table_variables_editor_var_type_number, icon: HashtagIcon }
         }
 

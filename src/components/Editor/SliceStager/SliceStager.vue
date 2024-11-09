@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col ">
         <button @click="expanded = !expanded" class="w-fit mx-auto hover:text-blue-800 transition-all" :class="{
-            'shadow-inner text-blue-500 ml-auto mr-0': expanded, 'text-blue-800': !expanded
+            ' text-blue-800 ml-auto mr-0 relative top-8 right-2': expanded, 'text-blue-800 ': !expanded
         }" :alt="strings.create_slice" :aria-expanded="expanded" :aria-controls="stagerId">
             <PlusCircleIcon v-if="!expanded" aria-hidden="true" class="w-6 h-6" /><span class="sr-only">{{
                 strings.create_slice }}</span>
@@ -11,7 +11,8 @@
             enter-to-class="opacity-100" leave-active-class="duration-200 ease-in" leave-from-class="opacity-100"
             leave-to-class="transform opacity-0">
 
-            <div v-if="expanded" class="flex flex-col gap-2 border border-blue-500 p-2 rounded" :id="stagerId">
+            <div v-if="expanded" class="flex flex-col gap-2 border-purple-800 border-2 p-2 rounded pt-10"
+                :id="stagerId">
                 <div class="grid grid-cols-8 gap-4">
                     <button
                         class="rounded bg-blue-100 hover:bg-blue-800 text-sm  text-blue-900 hover:text-white p-2 flex flex-col gap-2 w-full text-center items-center justify-center"
