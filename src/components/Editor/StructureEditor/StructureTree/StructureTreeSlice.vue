@@ -1,5 +1,6 @@
 <template>
-    <li draggable="true" class="transition-all  border  border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group"
+    <li draggable="true"
+        class="transition-all  border  border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group items-center"
         @dragstart="handleDragStart" @dragend="resetDragCues" @dragover.prevent="handleDragover" :class="{
             'opacity-30': isDragging, ...draggedOverClasses, ...levelIndentClasses,
             'bg-blue-50': this.slice.presentation === 'aside',
@@ -8,8 +9,8 @@
         }" @dragenter="" @dragleave="isBeingDraggedOver = false" @drop.prevent="resetDragCues"
         @dblclick="toggleEditor">
         <ArrowsUpDownIcon class="h-4 w-4 text-blue-200 group-hover:text-blue-800"></ArrowsUpDownIcon>
-        <div class="flex flex-row justify-between w-full">
-            <div class="flex">
+        <div class="flex flex-row justify-between w-full items-center">
+            <div class="flex items-center">
                 <div :title="localizedSliceType" class="font-semibold w-12">{{
                     localizedSliceTypeAbbr
                 }}</div>
