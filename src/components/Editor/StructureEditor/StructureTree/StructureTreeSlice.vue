@@ -1,27 +1,38 @@
 <template>
-    <li draggable="true"
-        class="transition-all cursor-pointer border  border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group"
+    <li draggable="true" class="transition-all  border  border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group"
         @dragstart="handleDragStart" @dragend="resetDragCues" @dragover.prevent="handleDragover" :class="{
             'opacity-30': isDragging, ...draggedOverClasses, ...levelIndentClasses,
             'bg-blue-50': this.slice.presentation === 'aside',
-            'bg-slate-50': this.slice.presentation === 'figure'
-        }" @dragenter="" @dragleave="isBeingDraggedOver = false" @drop.prevent="resetDragCues">
+            'bg-slate-50': this.slice.presentation === 'figure',
+            'cursor-pointer': !showEditor
+        }" @dragenter="" @dragleave="isBeingDraggedOver = false" @drop.prevent="resetDragCues"
+        @dblclick="toggleEditor">
         <ArrowsUpDownIcon class="h-4 w-4 text-blue-200 group-hover:text-blue-800"></ArrowsUpDownIcon>
-        <div class="flex">
-            <div :title="localizedSliceType" class="font-semibold w-12">{{
-                localizedSliceTypeAbbr
+        <div class="flex flex-row justify-between w-full">
+            <div class="flex">
+                <div :title="localizedSliceType" class="font-semibold w-12">{{
+                    localizedSliceTypeAbbr
                 }}</div>
-            <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor }}</div>
+                <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor }}
+                </div>
+            </div>
+            <button @click="toggleEditor" class="p-1 hover:bg-blue-100 rounded">
+                <PencilIcon class="size-4 text-blue-200 group-hover:text-blue-800"></PencilIcon>
+                <span class="sr-only">{{ editorStrings.edit }}</span>
+            </button>
         </div>
+        <StructureTreeEditDialog v-if="showEditor" :slice="slice" @close="toggleEditor"></StructureTreeEditDialog>
     </li>
+
 </template>
 <script>
 import Slice from '../../../../models/contents/Slice';
 import editorStrings from "../../../../editor-strings"
-import { ArrowsUpDownIcon } from '@heroicons/vue/24/outline';
+import { ArrowsUpDownIcon, PencilIcon } from '@heroicons/vue/24/outline';
+import StructureTreeEditDialog from './StructureTreeEditDialog';
 
 export default {
-    components: { ArrowsUpDownIcon },
+    components: { ArrowsUpDownIcon, StructureTreeEditDialog, PencilIcon },
     props: {
         slice: {
             type: Slice,
@@ -45,7 +56,8 @@ export default {
             language: document.documentElement.lang,
             editorStrings: editorStrings[document.documentElement.lang],
             isDragging: false,
-            isBeingDraggedOver: false
+            isBeingDraggedOver: false,
+            showEditor: false,
         };
     },
     methods: {
@@ -60,6 +72,9 @@ export default {
             event.preventDefault();
             this.isBeingDraggedOver = true;
         },
+        toggleEditor() {
+            this.showEditor = !this.showEditor;
+        }
     },
     computed: {
         localizedSliceType() {

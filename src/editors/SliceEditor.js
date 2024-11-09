@@ -28,7 +28,7 @@ export default {
 
 
         return h('section', { class: 'relative' }, [
-            h(SliceEditorCollapser, { class: 'absolute -left-8', slice: this.slice }, () => []),
+            this.$attrs.onMoveSlice ? h(SliceEditorCollapser, { class: 'absolute -left-8', slice: this.slice }, () => []) : null,
 
             this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'selection-none relative h-24 overflow-hidden', inert: true }, [
                 h('div', { class: 'absolute bg-gradient-to-t from-white h-24 w-full z-10' }, ''),
@@ -45,25 +45,25 @@ export default {
                             h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),
 
                             h('div', { class: 'flex flex-row gap-2' }, [
-                                h(DeleteButton, {
+                                this.$attrs.onDeleteSlice ? h(DeleteButton, {
                                     'onDelete': (value) => {
                                         this.$emit("delete-slice", this.slice);
                                     }
-                                }),
+                                }) : null,
 
-                                h(DuplicateButton, {
+                                this.$attrs.onDuplicateSlice ? h(DuplicateButton, {
                                     'onDuplicate': (value) => {
                                         this.$emit("duplicate-slice", this.slice);
                                     }
-                                }),
+                                }) : null,
 
-                                h(MoveButton, {
+                                this.$attrs.onMoveSlice ? h(MoveButton, {
                                     canMoveUp: this.slice.state.canMoveUp,
                                     canMoveDown: this.slice.state.canMoveDown,
                                     'onMove': (direction) => {
                                         this.$emit("move-slice", this.slice, direction);
                                     }
-                                }, () => []),
+                                }, () => []) : null,
 
                                 h('div', {
                                     'aria-hidden': true,

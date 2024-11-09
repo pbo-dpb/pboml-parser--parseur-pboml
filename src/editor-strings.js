@@ -1,5 +1,7 @@
 export default {
     en: {
+        "close": "Close",
+        "edit": "Edit",
         "structure_section_title": "Structure",
         "meta_section_title": "Document properties",
         "slices_section_title": "Slices",
@@ -104,6 +106,8 @@ export default {
         "append_structure_from_markdown": "Append structure from Markdown",
     },
     fr: {
+        "close": "Fermer",
+        "edit": "Éditer",
         "structure_section_title": "Structure",
         "meta_section_title": "Propriétés du document",
         "slices_section_title": "Tranches",
