@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-1 @sm:flex-row">
         <div class="flex flex-row justify-between items-center">
             <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
-            <TinyButton :disabled="!canPaste" @click="handlePaste" :title="editorStrings.paste_from_word">
+            <TinyButton :disabled="!canPaste" @click="handlePaste" :title="editorStrings.paste_from_word" tabindex="-1">
                 <ClipboardDocumentListIcon class="w-4 h-4"></ClipboardDocumentListIcon>
                 <span class="sr-only">{{ editorStrings.paste_from_word }}</span>
             </TinyButton>
