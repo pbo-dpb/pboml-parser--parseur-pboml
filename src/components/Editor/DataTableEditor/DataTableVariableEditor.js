@@ -8,7 +8,8 @@ import SelectInput from "../Inputs/SelectInput.vue"
 import CheckboxInput from "../Inputs/CheckboxInput.vue"
 import TinyButton from "../TinyButton.vue";
 import SingleInput from "../Inputs/SingleInput.vue"
-
+import RadioInput from '../Inputs/RadioInput.vue'
+import { HashtagIcon, LanguageIcon } from '@heroicons/vue/16/solid'
 
 
 export default {
@@ -36,9 +37,9 @@ export default {
         const strings = editorStrings[language];
 
         let typesInputChoices = {
-            'Markdown': 'markdown'
+            'markdown': { label: "Markdown", icon: LanguageIcon },
+            'number': { label: strings.data_table_variables_editor_var_type_number, icon: HashtagIcon }
         }
-        typesInputChoices[strings.data_table_variables_editor_var_type_number] = 'number';
 
         let chartVariableTypeChoices = {
             'Bar': 'bar',
@@ -99,6 +100,15 @@ export default {
                 ])
             ]),
 
+            h(RadioInput, {
+                choices: typesInputChoices,
+                label: strings.data_table_variables_editor_var_type,
+                modelValue: this.variable.type,
+                'onUpdate:modelValue': (value) => {
+                    this.variable.type = value;
+                }
+            }),
+
             h(BilingualInput, {
                 label: strings.data_table_variables_editor_var_label,
                 modelValue: this.variable.label,
@@ -108,22 +118,13 @@ export default {
                 }
             }),
 
-            h(SelectInput, {
-                choices: typesInputChoices,
-                label: strings.data_table_variables_editor_var_type,
-                modelValue: this.variable.type,
-                'onUpdate:modelValue': (value) => {
-                    this.variable.type = value;
-                }
-            }),
+
 
             /**
              * Charting
              */
 
             ...this.showChartProperties ? [
-
-
 
                 this.variable.is_descriptive ? null : h(SelectInput, {
                     choices: chartVariableTypeChoices,
