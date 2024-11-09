@@ -122,6 +122,12 @@ export default {
 
             if (button.advanced && !window.confirm(this.strings.advanced_slice_warning)) return;
             let newSlice = new button.type({});
+
+            // Customize the slice presentation.
+            if ([BitmapSlice, SvgSlice, TableSlice, HtmlSlice, ChartSlice].includes(button.type)) {
+                newSlice.presentation = "figure";
+            }
+
             this.$emit('new', newSlice);
             this.expanded = false;
         }
