@@ -8,8 +8,6 @@ import DuplicateButton from "../components/Editor/DuplicateButton";
 import MoveButton from "../components/Editor/MoveButton";
 import Renderer from "../components/Renderer/Renderer";
 
-
-import { ListBulletIcon } from "@heroicons/vue/24/solid";
 import SliceEditorCollapser from "./SliceEditorCollapser";
 
 export default {
