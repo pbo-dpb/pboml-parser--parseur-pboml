@@ -65,6 +65,14 @@ export default {
                                     }
                                 }, () => []) : null,
 
+                                /*h(MoveButton, {
+                                    canMoveUp: this.slice.state.canMoveUp,
+                                    canMoveDown: this.slice.state.canMoveDown,
+                                    'onMove': (direction) => {
+                                        this.$emit("move-slice", this.slice, direction);
+                                    }
+                                }, () => []),*/
+
                                 h('div', {
                                     'aria-hidden': true,
                                     'class': 'text-gray-400',
