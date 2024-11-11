@@ -105,6 +105,10 @@ export default {
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Remove default styles (Tailwind)",
         "append_structure_from_markdown": "Append structure from Markdown",
+        "edit_source_code": "Edit source code",
+        "stop_editing_source_code": "Stop editing source code",
+        "apply": "Apply",
+        "slice_source_code_warning_type_mismatch": "Changing the slice type from the source code may cause the editor to malfunction. A page reload might be necessary.",
     },
     fr: {
         "close": "Fermer",
@@ -210,5 +214,9 @@ export default {
         'editor_actions_source': "Source",
         'html_slice_should_remove_default_styles': "Enlever les styles par défaut (Tailwind)",
         "append_structure_from_markdown": "Ajouter une structure depuis Markdown",
+        "edit_source_code": "Éditer le code source",
+        "stop_editing_source_code": "Arrêter l'édition du code source",
+        "apply": "Appliquer",
+        "slice_source_code_warning_type_mismatch": "Changer le type de tranche depuis le code-source peut entraîner un dysfonctionnement de l'éditeur. Un rechargement de la page pourrait être nécessaire.",
     }
 }
