@@ -19,6 +19,7 @@
 <script>
 import yaml from 'js-yaml'
 import { Buffer } from 'buffer';
+import debounce from 'lodash.debounce';
 
 import { ref, defineAsyncComponent, computed } from 'vue'
 import LoadingIndicator from './components/LoadingIndicator.vue'
@@ -76,25 +77,11 @@ export default {
     Renderer,
   },
 
+
+
   async created() {
 
-    if (this.payload) {
-
-      // Accept a base64 encoded payload as long as it's presented as a data-url
-      if (typeof this.payload === "string" && this.payload.startsWith('data:text/yaml;base64,')) {
-        this._payload = Buffer.from(this.payload.split(',')[1], 'base64').toString('utf8');
-      } else {
-        this._payload = this.payload;
-      }
-
-    }
-
-    if (this._payload) {
-      let payload = yaml.loadAll(this._payload);
-      this.pbomlDocument = new PBOMLDocument(payload, this.prefix)
-    } else {
-      this.pbomlDocument = null
-    }
+    this.loadDocumentFromPayload();
     this.loaded = true;
   },
 
@@ -107,6 +94,11 @@ export default {
     }
     // Avoid running scrolling on tab change; Chrome agressively re-runs
     this.firstInitializationCompleted = true;
+
+    if (!this.edi) {
+      this.subscribeToPayloadUpdates();
+    }
+
   },
 
   beforeUnmount() {
@@ -147,10 +139,55 @@ export default {
       })
     },
 
+    loadDocumentFromPayload() {
+      if (this.payload) {
+
+        // Accept a base64 encoded payload as long as it's presented as a data-url
+        if (typeof this.payload === "string" && this.payload.startsWith('data:text/yaml;base64,')) {
+          this._payload = Buffer.from(this.payload.split(',')[1], 'base64').toString('utf8');
+        } else {
+          this._payload = this.payload;
+        }
+
+      }
+
+      if (this._payload) {
+        let payload = yaml.loadAll(this._payload);
+        this.pbomlDocument = new PBOMLDocument(payload, this.prefix)
+      } else {
+        this.pbomlDocument = null
+      }
+    },
+
 
     handlePick(pickedDocument) {
       this.pbomlDocument = pickedDocument
     },
+
+
+    subscribeToPayloadUpdates() {
+      const targetNode = this.$el.getRootNode().host;
+
+      // Options for the observer (which mutations to observe)
+      const config = { attributes: true, childList: false, subtree: false };
+
+      // Callback function to execute when mutations are observed
+      const callback = (mutationList, observer) => {
+        for (const mutation of mutationList) {
+          if (mutation.type === "attributes" && mutation.attributeName === "payload") {
+            this.loadDocumentFromPayload();
+            console.log("Debounce");
+            break;
+          }
+        }
+      };
+
+      // Create an observer instance linked to the callback function
+      const observer = new MutationObserver(debounce(callback, 500));
+
+      // Start observing the target node for configured mutations
+      observer.observe(targetNode, config);
+    }
 
   },
 }

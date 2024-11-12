@@ -200,7 +200,6 @@ export default {
         const language = document.documentElement.lang;
         let strings = editorStrings[language];
 
-
         // Second screen
         let flowDom = [
 
@@ -239,6 +238,7 @@ export default {
 
             h(CheckboxInput, {
                 label: strings.data_table_importer_append_checkbox, modelValue: this.shouldMergeNotReplace,
+                disabled: Object.values(this.datatable.variables).length === 0,
                 modelValue: !this.shouldMergeNotReplace,
                 'onUpdate:modelValue': (value) => {
                     this.shouldMergeNotReplace = !this.shouldMergeNotReplace

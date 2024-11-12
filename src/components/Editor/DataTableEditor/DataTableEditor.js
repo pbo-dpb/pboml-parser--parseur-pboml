@@ -1,7 +1,7 @@
 import { h } from 'vue'
 
 import DataTableVisualEditor from './DataTableVisualEditor';
-import DataTableVariablesEditor from './DataTableVariablesEditor';
+import DataTableVariablesEditor from './DataTableVariablesEditor.vue';
 import DataTableImporter from './DataTableImporter';
 
 import Tab from "../Tabs/Tab.vue"
