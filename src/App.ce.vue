@@ -95,7 +95,7 @@ export default {
     // Avoid running scrolling on tab change; Chrome agressively re-runs
     this.firstInitializationCompleted = true;
 
-    if (!this.edi) {
+    if (!this.edit) {
       this.subscribeToPayloadUpdates();
     }
 
@@ -176,7 +176,6 @@ export default {
         for (const mutation of mutationList) {
           if (mutation.type === "attributes" && mutation.attributeName === "payload") {
             this.loadDocumentFromPayload();
-            console.log("Debounce");
             break;
           }
         }
