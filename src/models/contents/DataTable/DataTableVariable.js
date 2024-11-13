@@ -12,6 +12,7 @@ const defaults = {
     emphasize: false,
     unit: null,
     type: 'markdown',
+    presentation_style: 'auto',
 
     // Chart related properties
     chart_type: 'bar',
@@ -30,6 +31,7 @@ export default class DataTableVariable {
         this.type = payload.type !== undefined ? payload.type : defaults.type;
         this.readonly = payload.readonly;
         this.is_descriptive = payload.is_descriptive;
+        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : defaults.presentation_style;
         this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
         this.emphasize = (payload.emphasize !== defaults.emphasize) ? payload.emphasize : defaults.emphasize;
@@ -156,6 +158,7 @@ export default class DataTableVariable {
             emphasize: this.emphasize,
             chart_type: this.chart_type,
             unit: this.unit,
+            presentation_style: this.presentation_style,
         }
 
         // Remove default values and empty objects from output

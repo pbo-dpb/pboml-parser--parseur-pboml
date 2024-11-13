@@ -109,6 +109,10 @@ export default {
         "stop_editing_source_code": "Stop editing source code",
         "apply": "Apply",
         "slice_source_code_warning_type_mismatch": "Changing the slice type from the source code may cause the editor to malfunction. A page reload might be necessary.",
+        "data_table_variables_presentation_type": "Presentation style",
+        "data_table_variables_presentation_type_auto": "Auto",
+        "data_table_variables_presentation_type_accounting": "Accounting",
+        "data_table_variables_presentation_type_text": "Text",
     },
     fr: {
         "close": "Fermer",
@@ -218,5 +222,9 @@ export default {
         "stop_editing_source_code": "Arrêter l'édition du code source",
         "apply": "Appliquer",
         "slice_source_code_warning_type_mismatch": "Changer le type de tranche depuis le code-source peut entraîner un dysfonctionnement de l'éditeur. Un rechargement de la page pourrait être nécessaire.",
+        "data_table_variables_presentation_type": "Style de présentation",
+        "data_table_variables_presentation_type_auto": "Auto",
+        "data_table_variables_presentation_type_accounting": "Comptabilité",
+        "data_table_variables_presentation_type_text": "Texte",
     }
 }
