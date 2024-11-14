@@ -48,7 +48,7 @@ export default {
         let presentationStyleChoices = {
             'auto': strings.data_table_variables_presentation_type_auto,
             'accounting': strings.data_table_variables_presentation_type_accounting,
-            'text': strings.data_table_variables_presentation_type_text,
+            'prose': strings.data_table_variables_presentation_type_prose,
         }
 
         return h('div', { class: `flex flex-col gap-4 ` }, [

@@ -112,7 +112,7 @@ export default {
         "data_table_variables_presentation_type": "Presentation style",
         "data_table_variables_presentation_type_auto": "Auto",
         "data_table_variables_presentation_type_accounting": "Accounting",
-        "data_table_variables_presentation_type_text": "Text",
+        "data_table_variables_presentation_type_prose": "Prose",
     },
     fr: {
         "close": "Fermer",
@@ -225,6 +225,6 @@ export default {
         "data_table_variables_presentation_type": "Style de présentation",
         "data_table_variables_presentation_type_auto": "Auto",
         "data_table_variables_presentation_type_accounting": "Comptabilité",
-        "data_table_variables_presentation_type_text": "Texte",
+        "data_table_variables_presentation_type_prose": "Prose",
     }
 }
