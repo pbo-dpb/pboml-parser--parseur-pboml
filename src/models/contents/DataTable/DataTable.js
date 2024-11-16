@@ -3,20 +3,22 @@ import DataTableVariable from "./DataTableVariable";
 import DataTableEntry from './DataTableEntry';
 const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
 
+
+
+
 export default class DataTable {
 
+    
     static defaults = {
-        presentation_style: 'auto',
+        presentation_style: 'prose',
     }
-
 
     constructor(payload) {
         let variables = {};
 
-        const presentationStyle = payload?.presentation_style ?? 'auto';
         Object.entries(payload?.variables ?? {}).forEach((entry) => {
             const [key, value] = entry;
-            variables[key] = new DataTableVariable(value, presentationStyle);
+            variables[key] = new DataTableVariable(value);
         });
         this.variables = variables;
 
@@ -26,6 +28,9 @@ export default class DataTable {
         this.content = (Symbol.iterator in content ? content : []).map(entry => {
             return new DataTableEntry(entry);
         });
+
+        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : DataTable.defaults.presentation_style;
+
 
         this.state = {
             caption: null
@@ -111,7 +116,7 @@ export default class DataTable {
     __buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language) {
 
         let columns = [];
-        let headerCol = variable.getTableHeaderVnode('row', language, !this.getWholeTableUnitForLanguage(language));
+        let headerCol = variable.getTableHeaderVnode('row', language, !this.getWholeTableUnitForLanguage(language), false, this);
         if (isLg)
             headerCol.props['width'] = `${100 * (1 / (shouldUseGroupsPresentation ? 6 : 3))}%`;
         else
@@ -119,7 +124,7 @@ export default class DataTable {
         columns.push(headerCol);
 
         this.content.forEach(content => {
-            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize, this.presentationStyle);
+            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize, this);
             if (isLg)
                 cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
             else

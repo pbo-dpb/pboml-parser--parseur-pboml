@@ -110,7 +110,7 @@ export default {
         "apply": "Apply",
         "slice_source_code_warning_type_mismatch": "Changing the slice type from the source code may cause the editor to malfunction. A page reload might be necessary.",
         "data_table_variables_presentation_type": "Presentation style",
-        "data_table_variables_presentation_type_auto": "Auto",
+        "data_table_variables_presentation_type_inherit": "Auto",
         "data_table_variables_presentation_type_accounting": "Accounting",
         "data_table_variables_presentation_type_prose": "Prose",
     },
@@ -223,7 +223,7 @@ export default {
         "apply": "Appliquer",
         "slice_source_code_warning_type_mismatch": "Changer le type de tranche depuis le code-source peut entraîner un dysfonctionnement de l'éditeur. Un rechargement de la page pourrait être nécessaire.",
         "data_table_variables_presentation_type": "Style de présentation",
-        "data_table_variables_presentation_type_auto": "Auto",
+        "data_table_variables_presentation_type_inherit": "Auto",
         "data_table_variables_presentation_type_accounting": "Comptabilité",
         "data_table_variables_presentation_type_prose": "Prose",
     }
