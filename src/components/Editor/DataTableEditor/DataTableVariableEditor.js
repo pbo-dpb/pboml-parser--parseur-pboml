@@ -45,6 +45,12 @@ export default {
             'Scatter': 'scatter'
         }
 
+        let presentationStyleChoices = {
+            'auto': strings.data_table_variables_presentation_type_auto,
+            'accounting': strings.data_table_variables_presentation_type_accounting,
+            'prose': strings.data_table_variables_presentation_type_prose,
+        }
+
         return h('div', { class: `flex flex-col gap-4 ` }, [
             h('div', { class: 'flex flex-row justify-between' }, [
                 h('span', { class: `font-semibold text-gray-800 font-mono text-lg` }, this.variableKey),
@@ -104,6 +110,15 @@ export default {
                 modelValue: this.variable.type,
                 'onUpdate:modelValue': (value) => {
                     this.variable.type = value;
+                }
+            }),
+
+            h(RadioInput, {
+                choices: presentationStyleChoices,
+                label: strings.data_table_variables_presentation_type,
+                modelValue: this.variable.presentation_style,
+                'onUpdate:modelValue': (value) => {
+                    this.variable.presentation_style = value;
                 }
             }),
 

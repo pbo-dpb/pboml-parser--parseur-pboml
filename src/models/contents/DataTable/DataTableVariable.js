@@ -12,6 +12,7 @@ const defaults = {
     emphasize: false,
     unit: null,
     type: 'markdown',
+    presentation_style: 'auto',
 
     // Chart related properties
     chart_type: 'bar',
@@ -19,7 +20,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 text-center leading-snug leading-snug text-balance hyphens-auto';
+    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
 
     constructor(payload) {
         this.label = {
@@ -30,6 +31,7 @@ export default class DataTableVariable {
         this.type = payload.type !== undefined ? payload.type : defaults.type;
         this.readonly = payload.readonly;
         this.is_descriptive = payload.is_descriptive;
+        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : defaults.presentation_style;
         this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
         this.emphasize = (payload.emphasize !== defaults.emphasize) ? payload.emphasize : defaults.emphasize;
@@ -79,7 +81,7 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} text-left sticky z-50 -left-2 `;
         if (this.emphasize) {
             cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
         } else {
@@ -101,7 +103,25 @@ export default class DataTableVariable {
     getTableCellVnode(value, scope = null, language, emphasize = false) {
 
         let cellClasses = DataTableVariable.#cellBaseClass;
+
+        let presentation_style = this.presentation_style;
+        if (presentation_style === 'auto' && !this.is_descriptive) {
+            switch (this.type) {
+                case 'markdown':
+                    presentation_style = 'prose';
+                    break;
+                case 'number':
+                    presentation_style = 'accounting';
+                    break;
+                default:
+                    presentation_style = 'prose';
+            }
+        } else if (presentation_style === 'auto' && this.is_descriptive) {
+            presentation_style = 'accounting';
+        }
+
         let innerHTML;
+
         switch (this.type) {
             case 'markdown':
                 const md = new MarkdownDriver;
@@ -110,14 +130,21 @@ export default class DataTableVariable {
                 } catch (error) {
                     innerHTML = ""
                 }
-                cellClasses += " pboml-prose prose-p:leading-tight";
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);
-                cellClasses += " lining-nums tabular-nums";
                 break;
             default:
                 innerHTML = value[language] ? value[language] : value;
+        }
+
+        switch (presentation_style) {
+            case 'prose':
+                cellClasses += " pboml-prose prose-p:leading-tight text-center";
+                break;
+            case 'accounting':
+                cellClasses += " slashed-zero tabular-nums text-right pl-2";
+                break;
         }
 
         let shouldEmphasizeCell = false;
@@ -156,6 +183,7 @@ export default class DataTableVariable {
             emphasize: this.emphasize,
             chart_type: this.chart_type,
             unit: this.unit,
+            presentation_style: this.presentation_style,
         }
 
         // Remove default values and empty objects from output

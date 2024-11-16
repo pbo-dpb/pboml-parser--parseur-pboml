@@ -4,15 +4,24 @@ import DataTableEntry from './DataTableEntry';
 const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
 
 export default class DataTable {
+
+    static defaults = {
+        presentation_style: 'auto',
+    }
+
+
     constructor(payload) {
         let variables = {};
+
+        const presentationStyle = payload?.presentation_style ?? 'auto';
         Object.entries(payload?.variables ?? {}).forEach((entry) => {
             const [key, value] = entry;
-            variables[key] = new DataTableVariable(value);
+            variables[key] = new DataTableVariable(value, presentationStyle);
         });
         this.variables = variables;
 
-        let dataTableEntries = [];
+
+
         const content = payload?.content ?? [];
         this.content = (Symbol.iterator in content ? content : []).map(entry => {
             return new DataTableEntry(entry);
@@ -110,7 +119,7 @@ export default class DataTable {
         columns.push(headerCol);
 
         this.content.forEach(content => {
-            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize);
+            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize, this.presentationStyle);
             if (isLg)
                 cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
             else
@@ -214,6 +223,13 @@ export default class DataTable {
             const [key, value] = entry;
             array.variables[key] = value.toArray();
         });
+
+        // Remove default values from  output
+        for (const [key, value] of Object.entries(DataTable.defaults)) {
+            if (array[key] == value) {
+                delete array[key];
+            }
+        }
 
         array.content = this.content.map((entry) => entry.toArray());
         return array;
