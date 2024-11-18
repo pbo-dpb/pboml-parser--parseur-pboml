@@ -64,6 +64,7 @@ export default {
         'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
         'svg_slice_show_source_button_label': 'Source code',
         'svg_slice_show_more_options_button_label': 'SVG Tools',
+        'data_table_settings_editor': 'Properties',
         'data_table_visual_editor': 'Tabular data',
         'data_table_content_new': "Add values",
         'data_table_variables_editor': 'Variables',
@@ -113,6 +114,9 @@ export default {
         "data_table_variables_presentation_type_inherit": "Auto",
         "data_table_variables_presentation_type_accounting": "Accounting",
         "data_table_variables_presentation_type_prose": "Prose",
+        "data_table_presentation_type": "Presentation style",
+        "data_table_presentation_type_accounting": "Accounting",
+        "data_table_presentation_type_prose": "Prose",
     },
     fr: {
         "close": "Fermer",
@@ -177,6 +181,7 @@ export default {
         'bitmap_slice_fill_from_clipboard': "Fill from clipboard",
         'svg_slice_show_source_button_label': 'Code source',
         'svg_slice_show_more_options_button_label': 'Outils pour SVG',
+        'data_table_settings_editor': 'Paramètres',
         'data_table_visual_editor': 'Données tabulaires',
         'data_table_content_new': "Nouvelles valeurs",
         'data_table_variables_editor': 'Variables',
@@ -226,5 +231,8 @@ export default {
         "data_table_variables_presentation_type_inherit": "Auto",
         "data_table_variables_presentation_type_accounting": "Comptabilité",
         "data_table_variables_presentation_type_prose": "Prose",
+        "data_table_presentation_type": "Style de présentation",
+        "data_table_presentation_type_accounting": "Comptabilité",
+        "data_table_presentation_type_prose": "Prose",
     }
 }

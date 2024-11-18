@@ -3,12 +3,9 @@ import DataTableVariable from "./DataTableVariable";
 import DataTableEntry from './DataTableEntry';
 const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
 
-
-
-
 export default class DataTable {
 
-    
+
     static defaults = {
         presentation_style: 'prose',
     }
@@ -221,13 +218,9 @@ export default class DataTable {
 
 
     toArray() {
-        let array = {};
-
-        array.variables = {};
-        Object.entries(this.variables).forEach((entry) => {
-            const [key, value] = entry;
-            array.variables[key] = value.toArray();
-        });
+        let array = {
+            presentation_style: this.presentation_style
+        };
 
         // Remove default values from  output
         for (const [key, value] of Object.entries(DataTable.defaults)) {
@@ -235,6 +228,13 @@ export default class DataTable {
                 delete array[key];
             }
         }
+
+        array.variables = {};
+
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, value] = entry;
+            array.variables[key] = value.toArray();
+        });
 
         array.content = this.content.map((entry) => entry.toArray());
         return array;
