@@ -3,9 +3,9 @@ import MarkdownDriver from '../../../MarkdownDriver';
 import rendererStrings from '../../../renderer-strings';
 import deepEqual from 'deep-equal';
 import DataTableEntry from './DataTableEntry';
+import { ArrowTurnDownRightIcon, ChevronDoubleRightIcon } from '@heroicons/vue/16/solid';
 
 const defaults = {
-    is_time: false,
     skip_chart: false,
     is_descriptive: false,
     group: null,
@@ -13,6 +13,7 @@ const defaults = {
     unit: null,
     type: 'markdown',
     presentation_style: 'inherit',
+    level: 0,
 
     // Chart related properties
     chart_type: 'bar',
@@ -32,10 +33,10 @@ export default class DataTableVariable {
         this.readonly = payload.readonly;
         this.is_descriptive = payload.is_descriptive;
         this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : defaults.presentation_style;
-        this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
         this.emphasize = (payload.emphasize !== defaults.emphasize) ? payload.emphasize : defaults.emphasize;
         this.chart_type = payload.chart_type ? payload.chart_type : defaults.chart_type;
+        this.level = payload.level ? payload.level : defaults.level;
         this.group = payload.group ? {
             en: payload.group?.en ?? '',
             fr: payload.group?.fr ?? ''
@@ -96,12 +97,44 @@ export default class DataTableVariable {
         }
         cellClasses += " backdrop-blur-sm lg:backdrop-blur-none";
 
+        let cellContent = [];
+
+        if (this.level > 0) {
+            Array.from(Array(this.level).keys()).forEach((c) => {
+                if (c < this.level - 1) {
+                    cellContent.push(h('span', { class: 'size-2 shrink-0 grow-0', ariaHidden: true }, ' '));
+                } else {
+                    let opacity;
+                    switch (this.level) {
+                        case 1:
+                            opacity = "opacity-20"
+                            break;
+                        case 2:
+                            opacity = "opacity-30"
+                            break;
+                        case 3:
+                            opacity = "opacity-40"
+                            break;
+                        case 4:
+                            opacity = "opacity-50"
+                            break;
+                    }
+                    cellContent.push(h(ArrowTurnDownRightIcon, { class: `size-4 shrink-0 grow-0 text-gray-500 dark:text-gray-500 ${opacity}` }));
+                    cellContent.push(h('span', { class: 'sr-only' }, rendererStrings[language].indented_datatable_variable.replace(':level', this.level)));
+                }
+
+            }
+            )
+        }
+
+        cellContent.push(h('div', { class: `flex flex-col gap-.5` }, [
+            groupSpan,
+            labelSpan,
+            unitSpan,
+        ]));
+
         return h('th', { class: cellClasses, scope: scope }, [
-            h('div', { class: 'flex flex-col gap-.5' }, [
-                groupSpan,
-                labelSpan,
-                unitSpan,
-            ])
+            h('div', { class: 'flex flex-row items-center gap-0.5' }, cellContent)
         ]);
     }
 
@@ -176,13 +209,13 @@ export default class DataTableVariable {
             type: this.type,
             readonly: this.readonly,
             is_descriptive: this.is_descriptive,
-            is_time: this.is_time,
             group: this.group,
             skip_chart: this.skip_chart,
             emphasize: this.emphasize,
             chart_type: this.chart_type,
             unit: this.unit,
             presentation_style: this.presentation_style,
+            level: this.level,
         }
 
         // Remove default values and empty objects from output

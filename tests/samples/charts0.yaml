@@ -30,7 +30,6 @@ slices:
           type: markdown
           display_label: true
           is_descriptive: true
-          is_time: false
           skip_chart: false
           chart_type: bar
           group: null
@@ -42,7 +41,6 @@ slices:
           type: number
           display_label: true
           is_descriptive: false
-          is_time: false
           skip_chart: false
           chart_type: bar
           group: null
@@ -54,7 +52,6 @@ slices:
           type: number
           display_label: true
           is_descriptive: false
-          is_time: false
           skip_chart: false
           chart_type: bar
           group: null
@@ -66,7 +63,6 @@ slices:
           type: number
           display_label: true
           is_descriptive: false
-          is_time: false
           skip_chart: false
           chart_type: scatter
           group: null
@@ -78,7 +74,6 @@ slices:
           type: number
           display_label: true
           is_descriptive: false
-          is_time: false
           skip_chart: false
           chart_type: line
           group: null
@@ -162,7 +157,6 @@ slices:
           type: number
           display_label: true
           is_descriptive: true
-          is_time: false
           skip_chart: false
           chart_type: bar
           group: null
@@ -173,7 +167,6 @@ slices:
             fr: Flippers farfelus
           type: number
           display_label: true
-          is_time: false
           skip_chart: false
           chart_type: bar
           group: null
@@ -184,7 +177,6 @@ slices:
             fr: Méli-Mélos de fantaisie
           type: number
           display_label: true
-          is_time: false
           skip_chart: false
           chart_type: line
           group: null
