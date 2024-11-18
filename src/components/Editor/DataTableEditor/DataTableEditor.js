@@ -3,11 +3,11 @@ import { h } from 'vue'
 import DataTableVisualEditor from './DataTableVisualEditor';
 import DataTableVariablesEditor from './DataTableVariablesEditor.vue';
 import DataTableImporter from './DataTableImporter';
-import DataTableSettingsEditor from './DataTableSettingsEditor.vue';
+import DataTableDisplayEditor from './DataTableDisplayEditor.vue';
 import Tab from "../Tabs/Tab.vue"
 import editorStrings from '../../../editor-strings';
 import DataTable from '../../../models/contents/DataTable/DataTable';
-import { Cog6ToothIcon, ArrowDownOnSquareIcon, TableCellsIcon, VariableIcon } from '@heroicons/vue/16/solid';
+import { ArrowDownOnSquareIcon, TableCellsIcon, VariableIcon, PaintBrushIcon } from '@heroicons/vue/16/solid';
 
 export default {
     props: {
@@ -26,7 +26,7 @@ export default {
         let editorId = (Math.random() + 1).toString(36).substring(5);
         const visualEditorId = `data_table_editor_${editorId}`;
         const variablesEditorId = `variables_editor_${editorId}`;
-        const settingsEditorId = `settings_editor_${editorId}`;
+        const displayEditorId = `display_editor_${editorId}`;
         const importerId = `importer_${editorId}`;
         return h('div', { class: 'flex flex-col gap-4' }, [
 
@@ -50,11 +50,11 @@ export default {
 
                 h(Tab, {
                     size: 'md',
-                    controls: settingsEditorId,
-                    selected: this.currentTab === 'settings',
-                    'onClick': () => this.currentTab = 'settings'
+                    controls: displayEditorId,
+                    selected: this.currentTab === 'display',
+                    'onClick': () => this.currentTab = 'display'
                 }, {
-                    default: () => [h(Cog6ToothIcon, { class: 'size-4' }, () => []), editorStrings[this.language].data_table_settings_editor]
+                    default: () => [h(PaintBrushIcon, { class: 'size-4' }, () => []), editorStrings[this.language].data_table_display_editor]
                 }),
 
                 h(Tab, {
@@ -69,8 +69,8 @@ export default {
             ]),
             this.currentTab === 'visual' ? h(DataTableVisualEditor, { datatable: this.datatable, id: visualEditorId, showChartProperties: this.showChartProperties }) : null,
             this.currentTab === 'variables' ? h(DataTableVariablesEditor, { datatable: this.datatable, id: variablesEditorId, showChartProperties: this.showChartProperties }) : null,
-            this.currentTab === 'settings' ? h(DataTableSettingsEditor, {
-                datatable: this.datatable, id: settingsEditorId
+            this.currentTab === 'display' ? h(DataTableDisplayEditor, {
+                datatable: this.datatable, id: displayEditorId
             }) : null,
             this.currentTab === 'importer' ? h(DataTableImporter, {
                 datatable: this.datatable, id: importerId, 'onImport': (d) => {
