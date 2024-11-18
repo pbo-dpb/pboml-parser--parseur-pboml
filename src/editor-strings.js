@@ -117,6 +117,7 @@ export default {
         "data_table_presentation_type": "Presentation style",
         "data_table_presentation_type_accounting": "Accounting",
         "data_table_presentation_type_prose": "Prose",
+        "data_table_variable_level": "Indentation level",
     },
     fr: {
         "close": "Fermer",
@@ -234,5 +235,6 @@ export default {
         "data_table_presentation_type": "Style de présentation",
         "data_table_presentation_type_accounting": "Comptabilité",
         "data_table_presentation_type_prose": "Prose",
+        "data_table_variable_level": "Niveau d'indentation",
     }
 }

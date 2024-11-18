@@ -148,7 +148,21 @@ export default {
                     }
                 }),
 
-            ] : [],
+            ] : [
+                this.variable.is_descriptive ? null : h(SelectInput, {
+                    choices: {
+                        '0': 0,
+                        '↳ 1': 1,
+                        '_↳ 2': 2,
+                        '__↳ 3': 3,
+                    },
+                    label: strings.data_table_variable_level,
+                    modelValue: this.variable.level,
+                    'onUpdate:modelValue': (value) => {
+                        this.variable.level = Number.parseInt(value);
+                    }
+                }),
+            ],
 
 
 
