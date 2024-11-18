@@ -5,18 +5,17 @@ const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 102
 
 export default class DataTable {
 
-    static defaults = {
-        presentation_style: 'auto',
-    }
 
+    static defaults = {
+        presentation_style: 'prose',
+    }
 
     constructor(payload) {
         let variables = {};
 
-        const presentationStyle = payload?.presentation_style ?? 'auto';
         Object.entries(payload?.variables ?? {}).forEach((entry) => {
             const [key, value] = entry;
-            variables[key] = new DataTableVariable(value, presentationStyle);
+            variables[key] = new DataTableVariable(value);
         });
         this.variables = variables;
 
@@ -26,6 +25,9 @@ export default class DataTable {
         this.content = (Symbol.iterator in content ? content : []).map(entry => {
             return new DataTableEntry(entry);
         });
+
+        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : DataTable.defaults.presentation_style;
+
 
         this.state = {
             caption: null
@@ -111,7 +113,7 @@ export default class DataTable {
     __buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language) {
 
         let columns = [];
-        let headerCol = variable.getTableHeaderVnode('row', language, !this.getWholeTableUnitForLanguage(language));
+        let headerCol = variable.getTableHeaderVnode('row', language, !this.getWholeTableUnitForLanguage(language), false, this);
         if (isLg)
             headerCol.props['width'] = `${100 * (1 / (shouldUseGroupsPresentation ? 6 : 3))}%`;
         else
@@ -119,7 +121,7 @@ export default class DataTable {
         columns.push(headerCol);
 
         this.content.forEach(content => {
-            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize, this.presentationStyle);
+            let cell = variable.getTableCellVnode(content[key], 'col', language, content.emphasize, this);
             if (isLg)
                 cell.props['width'] = `${(100 * (2 / 3)) / (this.bodyRowsCount)}%`;
             else
@@ -216,13 +218,9 @@ export default class DataTable {
 
 
     toArray() {
-        let array = {};
-
-        array.variables = {};
-        Object.entries(this.variables).forEach((entry) => {
-            const [key, value] = entry;
-            array.variables[key] = value.toArray();
-        });
+        let array = {
+            presentation_style: this.presentation_style
+        };
 
         // Remove default values from  output
         for (const [key, value] of Object.entries(DataTable.defaults)) {
@@ -230,6 +228,13 @@ export default class DataTable {
                 delete array[key];
             }
         }
+
+        array.variables = {};
+
+        Object.entries(this.variables).forEach((entry) => {
+            const [key, value] = entry;
+            array.variables[key] = value.toArray();
+        });
 
         array.content = this.content.map((entry) => entry.toArray());
         return array;

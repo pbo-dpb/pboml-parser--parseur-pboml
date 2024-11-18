@@ -46,7 +46,7 @@ export default {
         }
 
         let presentationStyleChoices = {
-            'auto': strings.data_table_variables_presentation_type_auto,
+            'inherit': strings.data_table_variables_presentation_type_inherit,
             'accounting': strings.data_table_variables_presentation_type_accounting,
             'prose': strings.data_table_variables_presentation_type_prose,
         }

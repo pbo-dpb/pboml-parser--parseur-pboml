@@ -25,6 +25,7 @@ export default class TableSlice extends Slice {
         const letDatatableArray = this.datatable.toArray();
         array.variables = letDatatableArray.variables;
         array.content = letDatatableArray.content;
+        array.presentation_style = letDatatableArray.presentation_style;
         return array;
     }
 

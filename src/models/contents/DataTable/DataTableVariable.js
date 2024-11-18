@@ -12,7 +12,7 @@ const defaults = {
     emphasize: false,
     unit: null,
     type: 'markdown',
-    presentation_style: 'auto',
+    presentation_style: 'inherit',
 
     // Chart related properties
     chart_type: 'bar',
@@ -66,7 +66,7 @@ export default class DataTableVariable {
     }
 
 
-    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false) {
+    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false, owningDataTable) {
         const md = new MarkdownDriver;
 
         let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
@@ -81,7 +81,14 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
         }
 
-        let cellClasses = `${DataTableVariable.#cellBaseClass} text-left sticky z-50 -left-2 `;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
+
+        if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {
+            cellClasses += " text-center ";
+        } else {
+            cellClasses += " text-left px-2";
+        }
+
         if (this.emphasize) {
             cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
         } else {
@@ -100,25 +107,17 @@ export default class DataTableVariable {
 
 
 
-    getTableCellVnode(value, scope = null, language, emphasize = false) {
+    getTableCellVnode(value, scope = null, language, emphasize = false, owningDataTable = null) {
 
         let cellClasses = DataTableVariable.#cellBaseClass;
 
         let presentation_style = this.presentation_style;
-        if (presentation_style === 'auto' && !this.is_descriptive) {
-            switch (this.type) {
-                case 'markdown':
-                    presentation_style = 'prose';
-                    break;
-                case 'number':
-                    presentation_style = 'accounting';
-                    break;
-                default:
-                    presentation_style = 'prose';
-            }
-        } else if (presentation_style === 'auto' && this.is_descriptive) {
+        if (presentation_style === 'inherit' && owningDataTable && owningDataTable.presentation_style === 'prose') {
+            presentation_style = "prose";
+        } else if (presentation_style === 'inherit' && owningDataTable && owningDataTable.presentation_style === 'accounting') {
             presentation_style = 'accounting';
         }
+
 
         let innerHTML;
 
@@ -143,7 +142,7 @@ export default class DataTableVariable {
                 cellClasses += " pboml-prose prose-p:leading-tight text-center";
                 break;
             case 'accounting':
-                cellClasses += " slashed-zero tabular-nums text-right pl-2";
+                cellClasses += " slashed-zero tabular-nums text-right px-2";
                 break;
         }
 
