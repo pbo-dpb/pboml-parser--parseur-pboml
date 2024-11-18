@@ -5,7 +5,6 @@ import deepEqual from 'deep-equal';
 import DataTableEntry from './DataTableEntry';
 
 const defaults = {
-    is_time: false,
     skip_chart: false,
     is_descriptive: false,
     group: null,
@@ -32,7 +31,6 @@ export default class DataTableVariable {
         this.readonly = payload.readonly;
         this.is_descriptive = payload.is_descriptive;
         this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : defaults.presentation_style;
-        this.is_time = payload.is_time !== undefined ? payload.is_time : defaults.is_time;
         this.skip_chart = payload.skip_chart ? true : false
         this.emphasize = (payload.emphasize !== defaults.emphasize) ? payload.emphasize : defaults.emphasize;
         this.chart_type = payload.chart_type ? payload.chart_type : defaults.chart_type;
@@ -176,7 +174,6 @@ export default class DataTableVariable {
             type: this.type,
             readonly: this.readonly,
             is_descriptive: this.is_descriptive,
-            is_time: this.is_time,
             group: this.group,
             skip_chart: this.skip_chart,
             emphasize: this.emphasize,
