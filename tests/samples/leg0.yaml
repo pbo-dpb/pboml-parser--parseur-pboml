@@ -199,6 +199,7 @@ slices:
         thoughtsoftime: 8771
         thedreamsoftheice: 4842
         thedevotedschool: 1166
+    presentation_style: accounting
     variables:
       thewindowsswomen:
         label:
@@ -222,6 +223,7 @@ slices:
         unit:
           en: '%'
           fr: '%'
+        level: 1
       thethornoftheservants:
         label:
           en: The Thorn of the Servants[^1]
