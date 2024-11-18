@@ -83,10 +83,10 @@ export default class DataTableVariable {
 
         let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
 
-        if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {  
+        if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {
             cellClasses += " text-center ";
         } else {
-            cellClasses += " text-left ";
+            cellClasses += " text-left px-2";
         }
 
         if (this.emphasize) {
@@ -118,7 +118,7 @@ export default class DataTableVariable {
             presentation_style = 'accounting';
         }
 
-        
+
         let innerHTML;
 
         switch (this.type) {
@@ -142,7 +142,7 @@ export default class DataTableVariable {
                 cellClasses += " pboml-prose prose-p:leading-tight text-center";
                 break;
             case 'accounting':
-                cellClasses += " slashed-zero tabular-nums text-right pl-2";
+                cellClasses += " slashed-zero tabular-nums text-right px-2";
                 break;
         }
 
