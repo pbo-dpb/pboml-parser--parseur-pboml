@@ -26,7 +26,7 @@ export default class DataTable {
             return new DataTableEntry(entry);
         });
 
-        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : DataTable.defaults.presentation_style;
+        this.presentation_style = (payload?.presentation_style && payload.presentation_style !== undefined) ? payload.presentation_style : DataTable.defaults.presentation_style;
 
 
         this.state = {
