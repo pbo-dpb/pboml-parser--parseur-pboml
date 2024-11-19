@@ -83,7 +83,7 @@ export default class DataTableVariable {
             labelSpan = h('div', { class: `font-mono` }, this.key)
 
         } else {
-            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
+            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
         }
 
         let unitSpan;
@@ -139,14 +139,14 @@ export default class DataTableVariable {
             )
         }
 
-        cellContent.push(h('div', { class: `flex flex-col gap-.5` }, [
+        cellContent.push(h('div', { class: `flex flex-col gap-.5 w-full` }, [
             groupSpan,
             labelSpan,
             unitSpan,
         ]));
 
         return h('th', { class: cellClasses, scope: scope }, [
-            h('div', { class: 'flex flex-row items-center gap-0.5' }, cellContent)
+            h('div', { class: 'flex flex-row items-center gap-0.5 w-full' }, cellContent)
         ]);
     }
 
