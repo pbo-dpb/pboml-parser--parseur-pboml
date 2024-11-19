@@ -59,7 +59,7 @@ export default class DataTableVariable {
         if (!otherVariables) return key;
 
         // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
-        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key]) {
+        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
             key += (Math.random() + 1).toString(36).substring(8);
         }
         return key;

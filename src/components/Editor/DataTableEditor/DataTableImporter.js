@@ -56,7 +56,8 @@ export default {
                 },
                 is_descriptive: (this.locationOfVars === "row" && rowColIndex === 0) || (this.locationOfVars === "col" && rowIndex === 0)
             });
-            let key = DataTableVariable.generateUniqueDataTableVariableId(Object.values(variable.label).filter(x => x)?.[0], otherVariables.map(v => v.variable))
+
+            let key = DataTableVariable.generateUniqueDataTableVariableId(Object.values(variable.label).filter(x => x)?.[0], otherVariables)
             return { key, variable }
         },
 
