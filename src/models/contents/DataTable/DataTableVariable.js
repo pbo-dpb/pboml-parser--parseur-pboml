@@ -72,16 +72,19 @@ export default class DataTableVariable {
 
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, editorStyle = false, owningDataTable) {
         const md = new MarkdownDriver;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
+
+        if (editorStyle && this.is_descriptive) {
+            cellClasses += " border-l-yellow-500 border-l-2 ";
+        }
 
         let labelSpan;
         if (editorStyle) {
-            labelSpan = h('div', { class: 'flex flex-col gap-0.5' }, [
-                h('div', { class: "font-mono" }, this.key)
-            ]);
+            labelSpan = h('div', { class: `font-mono` }, this.key)
+
         } else {
             labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
         }
-
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -92,8 +95,6 @@ export default class DataTableVariable {
         if (editorStyle && this.group?.[language]) {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
-
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
 
         if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {
             cellClasses += " text-center ";
