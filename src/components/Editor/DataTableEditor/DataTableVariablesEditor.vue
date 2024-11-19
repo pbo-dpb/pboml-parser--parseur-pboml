@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex flex-row gap-2 items-center">
                     <StarIcon class="size-4" v-if="variable.emphasize" />
-                    <KeyIcon class="size-4" v-if="variable.is_descriptive" />
+                    <KeyIcon class="size-4 text-yellow-600 drop-shadow" v-if="variable.is_descriptive" />
                 </div>
             </div>
             <button class="flex flex-row gap-2 p-2 text-blue-700 hover:text-blue-800 font-semibold items-center text-sm"
