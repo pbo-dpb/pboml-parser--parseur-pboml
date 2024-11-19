@@ -247,6 +247,7 @@ export default {
 
 
             this.dataTable ? h('div', { class: 'flex flex-col gap-2' }, [
+
                 'EN',
                 this.dataTable.renderReadonlyVnode('en'),
                 'FR',
