@@ -23,7 +23,10 @@ const defaults = {
 export default class DataTableVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
 
-    constructor(payload) {
+    constructor(payload, key) {
+
+        this.key = key;
+
         this.label = {
             en: payload.label?.en,
             fr: payload.label?.fr
@@ -56,7 +59,7 @@ export default class DataTableVariable {
         if (!otherVariables) return key;
 
         // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
-        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key]) {
+        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
             key += (Math.random() + 1).toString(36).substring(8);
         }
         return key;
@@ -67,10 +70,21 @@ export default class DataTableVariable {
     }
 
 
-    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false, owningDataTable) {
+    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, editorStyle = false, owningDataTable) {
         const md = new MarkdownDriver;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
 
-        let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
+        if (editorStyle && this.is_descriptive) {
+            cellClasses += " border-l-yellow-500 border-l-2 ";
+        }
+
+        let labelSpan;
+        if (editorStyle) {
+            labelSpan = h('div', { class: `font-mono` }, this.key)
+
+        } else {
+            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
+        }
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -78,11 +92,9 @@ export default class DataTableVariable {
         }
 
         let groupSpan;
-        if (shouldIncludeGroup && this.group?.[language]) {
-            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
+        if (editorStyle && this.group?.[language]) {
+            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
-
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
 
         if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {
             cellClasses += " text-center ";
@@ -127,14 +139,14 @@ export default class DataTableVariable {
             )
         }
 
-        cellContent.push(h('div', { class: `flex flex-col gap-.5` }, [
+        cellContent.push(h('div', { class: `flex flex-col gap-.5 w-full` }, [
             groupSpan,
             labelSpan,
             unitSpan,
         ]));
 
         return h('th', { class: cellClasses, scope: scope }, [
-            h('div', { class: 'flex flex-row items-center gap-0.5' }, cellContent)
+            h('div', { class: 'flex flex-row items-center gap-0.5 w-full' }, cellContent)
         ]);
     }
 
@@ -162,6 +174,7 @@ export default class DataTableVariable {
                 } catch (error) {
                     innerHTML = ""
                 }
+                cellClasses += " pboml-prose prose-p:leading-tight ";
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);
@@ -172,7 +185,7 @@ export default class DataTableVariable {
 
         switch (presentation_style) {
             case 'prose':
-                cellClasses += " pboml-prose prose-p:leading-tight text-center";
+                cellClasses += " text-center";
                 break;
             case 'accounting':
                 cellClasses += " slashed-zero tabular-nums text-right px-2";
