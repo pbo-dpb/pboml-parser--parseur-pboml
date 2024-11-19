@@ -32,7 +32,7 @@ export default class DataTableVariable {
         this.type = payload.type !== undefined ? payload.type : defaults.type;
         this.readonly = payload.readonly;
         this.is_descriptive = payload.is_descriptive;
-        this.presentation_style = payload.presentation_style !== undefined ? payload.presentation_style : defaults.presentation_style;
+        this.presentation_style = (payload?.presentation_style && payload.presentation_style !== undefined) ? payload.presentation_style : defaults.presentation_style;
         this.skip_chart = payload.skip_chart ? true : false
         this.emphasize = (payload.emphasize !== defaults.emphasize) ? payload.emphasize : defaults.emphasize;
         this.chart_type = payload.chart_type ? payload.chart_type : defaults.chart_type;
