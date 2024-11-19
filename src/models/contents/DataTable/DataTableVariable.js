@@ -174,6 +174,7 @@ export default class DataTableVariable {
                 } catch (error) {
                     innerHTML = ""
                 }
+                cellClasses += " pboml-prose prose-p:leading-tight ";
                 break;
             case 'number':
                 innerHTML = (new Intl.NumberFormat(language)).format(value);
@@ -184,7 +185,7 @@ export default class DataTableVariable {
 
         switch (presentation_style) {
             case 'prose':
-                cellClasses += " pboml-prose prose-p:leading-tight text-center";
+                cellClasses += " text-center";
                 break;
             case 'accounting':
                 cellClasses += " slashed-zero tabular-nums text-right px-2";
