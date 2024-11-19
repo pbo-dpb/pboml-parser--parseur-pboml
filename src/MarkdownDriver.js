@@ -35,7 +35,6 @@ export default class MarkdownDriver {
 
 
     shouldConvertUrls() {
-        console.info(`shouldConvertUrls is deprecated.`);
         marked.use(markedLinkifyIt({}, {}));
     }
 
