@@ -58,6 +58,7 @@ export default {
             });
 
             let key = DataTableVariable.generateUniqueDataTableVariableId(Object.values(variable.label).filter(x => x)?.[0], otherVariables)
+            variable.key = key;
             return { key, variable }
         },
 
@@ -140,7 +141,7 @@ export default {
                 row.forEach((rowCol, rowColIndex) => {
                     if (this.locationOfVars === "row") {
                         if (rowIndex === 0) {
-                            variables.push(this.getKeyVariableWrapperForRowCol(tables, rowIndex, rowColIndex, variables))
+                            variables.push(this.getKeyVariableWrapperForRowCol(tables, rowIndex, rowColIndex, variables));
                         } else {
                             if (!entries[rowIndex - 1]) {
                                 entries.push({})
