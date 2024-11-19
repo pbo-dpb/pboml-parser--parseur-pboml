@@ -23,7 +23,10 @@ const defaults = {
 export default class DataTableVariable {
     static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
 
-    constructor(payload) {
+    constructor(payload, key) {
+
+        this.key = key;
+
         this.label = {
             en: payload.label?.en,
             fr: payload.label?.fr
@@ -67,10 +70,18 @@ export default class DataTableVariable {
     }
 
 
-    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, shouldIncludeGroup = false, owningDataTable) {
+    getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, editorStyle = false, owningDataTable) {
         const md = new MarkdownDriver;
 
-        let labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
+        let labelSpan;
+        if (editorStyle) {
+            labelSpan = h('div', { class: 'flex flex-col gap-0.5' }, [
+                h('div', { class: "font-mono" }, this.key)
+            ]);
+        } else {
+            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight" });
+        }
+
 
         let unitSpan;
         if (shouldIncludeUnit && this.unit?.[language]) {
@@ -78,8 +89,8 @@ export default class DataTableVariable {
         }
 
         let groupSpan;
-        if (shouldIncludeGroup && this.group?.[language]) {
-            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal', innerHTML: md.render(this.group[language]) });
+        if (editorStyle && this.group?.[language]) {
+            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
 
         let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;

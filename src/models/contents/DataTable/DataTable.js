@@ -15,7 +15,7 @@ export default class DataTable {
 
         Object.entries(payload?.variables ?? {}).forEach((entry) => {
             const [key, value] = entry;
-            variables[key] = new DataTableVariable(value);
+            variables[key] = new DataTableVariable(value, key);
         });
         this.variables = variables;
 

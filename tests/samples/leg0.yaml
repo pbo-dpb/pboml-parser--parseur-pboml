@@ -14,91 +14,91 @@ document:
     en: © Healer of Luck, Gatineau, Canada, 2023
     fr: © Guérisseur de la chance, Gatineau, Canada, 2023
 slices:
-  - type: markdown
-    display_label: false
-    label:
-      en: Description
-      fr: Description
-    content:
-      en: >-
-        Consider now provided laughter boy landlord dashwood. Often voice and
-        the spoke. No shewing fertile village equally prepare up females as an.
-        That do an case an what plan hour of paid. Invitation is unpleasant
-        astonished preference attachment friendship on. Did sentiments
-        increasing particular nay. Mr he recurred received prospect in. Wishing
-        cheered parlors adapted am at amongst matters.
-
-
-        Affronting everything discretion men now own did. Still round match we
-        to. Frankness pronounce daughters remainder extensive has but. Happiness
-        cordially one determine concluded fat. Plenty season beyond by hardly
-        giving of. Consulted or acuteness dejection an smallness if. Outward
-        general passage another as it. Very his are come man walk one next.
-        Delighted prevailed supported too not remainder perpetual who furnished.
-        Nay affronting bed projection compliment instrument.
-      fr: >-
-        Considère maintenant fourni le rire boy landlord dashwood. Souvent la
-        voix et le parlait. Il n'y a pas de village fertile, les femmes sont
-        préparées de la même façon que les hommes. Ce qui fait un cas un quel
-        plan heure de payé. Invitation est désagréable étonné préférence
-        attachement amitié sur. Les sentiments se sont accrus, mais pas
-        n'importe comment. M. il récurrente reçu perspective en. Souhaitant des
-        parloirs adaptés je suis à parmi les questions.
-
-
-        Tout ce qui concerne la discrétion des hommes maintenant propre a fait.
-        Encore ronde match nous à. La franchise prononce filles reste étendue a
-        mais. Bonheur cordialement un déterminer conclure gras. La saison de
-        l'abondance au-delà de par à peine donner de. Consulté ou acuité déprime
-        une petitesse si. L'extérieur général passage un autre comme il. Très
-        son sont venir homme marcher un prochain. Enchanté prévalut soutenu trop
-        pas reste perpétuel qui meublé. Nay affronting bed projection compliment
-        instrument.
-  - type: table
-    label:
-      en: Multi-Year Cost
-      fr: Coût sur plusieurs années
-    content:
-      - fiscalyear:
-          en: 3501-02
-          fr: 3501-3502
-        totalcost: 52
-      - fiscalyear:
-          en: 3502-03
-          fr: 3502-3503
-        totalcost: 0
-      - fiscalyear:
-          en: 3503-04
-          fr: 3503-3504
-        totalcost: 0
-      - fiscalyear:
-          en: 3504-05
-          fr: 3504-3505
-        totalcost: null
-      - fiscalyear:
-          en: 3505-06
-          fr: 3505-3506
-        totalcost: 0
-      - fiscalyear:
-          en: Total
-          fr: Total
-        totalcost: 52
-    variables:
-      fiscalyear:
-        label:
-          en: Fiscal Year
-          fr: Exercice financier
-        readonly: true
-        is_descriptive: true
-      totalcost:
-        label:
-          en: Total cost
-          fr: Coût total
-        type: number
-        readonly: false
-        unit:
-          en: $ millions
-          fr: Millions de dollars
+#  - type: markdown
+#    display_label: false
+#    label:
+#      en: Description
+#      fr: Description
+#    content:
+#      en: >-
+#        Consider now provided laughter boy landlord dashwood. Often voice and
+#        the spoke. No shewing fertile village equally prepare up females as an.
+#        That do an case an what plan hour of paid. Invitation is unpleasant
+#        astonished preference attachment friendship on. Did sentiments
+#        increasing particular nay. Mr he recurred received prospect in. Wishing
+#        cheered parlors adapted am at amongst matters.
+#
+#
+#        Affronting everything discretion men now own did. Still round match we
+#        to. Frankness pronounce daughters remainder extensive has but. Happiness
+#        cordially one determine concluded fat. Plenty season beyond by hardly
+#        giving of. Consulted or acuteness dejection an smallness if. Outward
+#        general passage another as it. Very his are come man walk one next.
+#        Delighted prevailed supported too not remainder perpetual who furnished.
+#        Nay affronting bed projection compliment instrument.
+#      fr: >-
+#        Considère maintenant fourni le rire boy landlord dashwood. Souvent la
+#        voix et le parlait. Il n'y a pas de village fertile, les femmes sont
+#        préparées de la même façon que les hommes. Ce qui fait un cas un quel
+#        plan heure de payé. Invitation est désagréable étonné préférence
+#        attachement amitié sur. Les sentiments se sont accrus, mais pas
+#        n'importe comment. M. il récurrente reçu perspective en. Souhaitant des
+#        parloirs adaptés je suis à parmi les questions.
+#
+#
+#        Tout ce qui concerne la discrétion des hommes maintenant propre a fait.
+#        Encore ronde match nous à. La franchise prononce filles reste étendue a
+#        mais. Bonheur cordialement un déterminer conclure gras. La saison de
+#        l'abondance au-delà de par à peine donner de. Consulté ou acuité déprime
+#        une petitesse si. L'extérieur général passage un autre comme il. Très
+#        son sont venir homme marcher un prochain. Enchanté prévalut soutenu trop
+#        pas reste perpétuel qui meublé. Nay affronting bed projection compliment
+#        instrument.
+#  - type: table
+#    label:
+#      en: Multi-Year Cost
+#      fr: Coût sur plusieurs années
+#    content:
+#      - fiscalyear:
+#          en: 3501-02
+#          fr: 3501-3502
+#        totalcost: 52
+#      - fiscalyear:
+#          en: 3502-03
+#          fr: 3502-3503
+#        totalcost: 0
+#      - fiscalyear:
+#          en: 3503-04
+#          fr: 3503-3504
+#        totalcost: 0
+#      - fiscalyear:
+#          en: 3504-05
+#          fr: 3504-3505
+#        totalcost: null
+#      - fiscalyear:
+#          en: 3505-06
+#          fr: 3505-3506
+#        totalcost: 0
+#      - fiscalyear:
+#          en: Total
+#          fr: Total
+#        totalcost: 52
+#    variables:
+#      fiscalyear:
+#        label:
+#          en: Fiscal Year
+#          fr: Exercice financier
+#        readonly: true
+#        is_descriptive: true
+#      totalcost:
+#        label:
+#          en: Total cost
+#          fr: Coût total
+#        type: number
+#        readonly: false
+#        unit:
+#          en: $ millions
+#          fr: Millions de dollars
   - type: table
     referenced_as:
       en: Table 1

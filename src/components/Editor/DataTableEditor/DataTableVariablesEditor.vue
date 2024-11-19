@@ -65,7 +65,7 @@ export default {
             } else {
                 prefilledVariable = { label: { en: userVariableKey, fr: userVariableKey }, type: 'number' }
             }
-            this.datatable.variables[key] = new DataTableVariable(prefilledVariable);
+            this.datatable.variables[key] = new DataTableVariable(prefilledVariable, key);
             this.currentVariableKey = key;
         },
         handleDelete(key) {
