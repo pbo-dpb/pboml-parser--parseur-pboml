@@ -3,7 +3,7 @@ import { h } from 'vue'
 import DataTableVisualEditor from './DataTableVisualEditor';
 import DataTableVariablesEditor from './DataTableVariablesEditor.vue';
 import DataTableImporter from './DataTableImporter';
-import DataTableDisplayEditor from './DataTableDisplayEditor.vue';
+import DataTableDisplayEditor from './DataTableDisplayEditor/DataTableDisplayEditor.vue';
 import Tab from "../Tabs/Tab.vue"
 import editorStrings from '../../../editor-strings';
 import DataTable from '../../../models/contents/DataTable/DataTable';

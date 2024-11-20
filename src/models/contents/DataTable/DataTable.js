@@ -2,6 +2,7 @@ import { h } from 'vue'
 import DataTableVariable from "./DataTableVariable";
 import DataTableEntry from './DataTableEntry';
 import rendererStrings from '../../../renderer-strings';
+import DataTableEntryGroup from './DataTableEntryGroup';
 
 const isLg = ((window.innerWidth > 0) ? window.innerWidth : screen.width) >= 1024;
 
@@ -10,6 +11,7 @@ export default class DataTable {
 
     static defaults = {
         presentation_style: 'prose',
+        entrygroups: []
     }
 
     constructor(payload) {
@@ -26,6 +28,11 @@ export default class DataTable {
         const content = payload?.content ?? [];
         this.content = (Symbol.iterator in content ? content : []).map(entry => {
             return new DataTableEntry(entry);
+        });
+
+        const entrygroups = payload?.entrygroups ?? [];
+        this.entrygroups = (Symbol.iterator in entrygroups ? entrygroups : []).map(entrygroup => {
+            return new DataTableEntryGroup(entrygroup);
         });
 
         this.presentation_style = (payload?.presentation_style && payload.presentation_style !== undefined) ? payload.presentation_style : DataTable.defaults.presentation_style;
@@ -279,6 +286,14 @@ export default class DataTable {
         });
 
         array.content = this.content.map((entry) => entry.toArray());
+
+        if (this.entrygroups.length > 0) {
+            array.entrygroups = this.entrygroups.map((entrygroup) => entrygroup.toArray());
+        } else {
+            delete array.entrygroups
+        }
+
+
         return array;
     }
 

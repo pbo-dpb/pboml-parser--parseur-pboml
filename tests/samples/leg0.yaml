@@ -200,6 +200,13 @@ slices:
         thedreamsoftheice: 4842
         thedevotedschool: 1166
     presentation_style: accounting
+    entrygroups:
+      - {}
+      - label:
+          en: Case of the Fake Lynx
+          fr: L'affaire du faux lynx
+        span: 4
+      - {}
     variables:
       thewindowsswomen:
         label:
