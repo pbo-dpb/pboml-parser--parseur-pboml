@@ -52,16 +52,17 @@ export default class DataTableVariable {
         this.tension = payload.tension !== undefined ? payload.tension : defaults.tension;
     }
 
-    static generateUniqueDataTableVariableId(label, otherVariables) {
-        let key = (label ? label : '').toLowerCase().replace('', '-').replace(/[^_a-z0-9]+/g, "")
+    static generateUniqueDataTableVariableId(label, otherVariables, groupname) {
+        let key = (`${groupname ? groupname : ''} ${label ? label : ''}`).toLowerCase().replace('', '-').replace(/[^_a-z0-9]+/g, "")
         if (!key) key = (Math.random() + 1).toString(36).substring(8);
 
         if (!otherVariables) return key;
 
-        // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
-        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
-            key += (Math.random() + 1).toString(36).substring(8);
+        // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the start and end
+        while (!/^[a-z]/.test(key) || Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
+            key = (Math.random() + 1).toString(36).substring(8).replace(/[^a-z]+/g, "") + key;
         }
+
         return key;
     }
 
