@@ -171,6 +171,23 @@ export default class DataTable {
         const tHeadVariables = this.__tHeadVariables(language);
         let rows = [];
 
+        if (this.entrygroups.length > 0) {
+            // Create a super row.
+            let superRow = [
+                h('th', { colspan: shouldUseGroupsPresentation ? 2 : 1 }, [
+                    h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label)
+                ]
+                ),
+                ...this.entrygroups.map((entrygroup, index) => {
+                    return h('th', { colspan: entrygroup.span }, [
+                        entrygroup.label[language] ? entrygroup.label[language] : [h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label)]
+                    ]);
+                })
+            ];
+
+            rows.push(h('tr', {}, superRow));
+        }
+
         for (const [key, variable] of Object.entries(tHeadVariables)) {
             let columns = this.__buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language, true)
 
@@ -188,6 +205,27 @@ export default class DataTable {
         return h('thead', {}, rows);
     }
 
+    __buildColgroupNode(shouldUseGroupsPresentation, language) {
+        if (this.entrygroups.length === 0) return null;
+
+        let colgroup = [
+            shouldUseGroupsPresentation ? h('col', {}) : null, // Group column
+            h('col', {}) // Variable column
+        ];
+
+        this.entrygroups.forEach((entrygroup, index) => {
+            let classes;
+            if (entrygroup.label[language] && index % 2) {
+                classes = 'border-t-4 border-t-slate-400';
+            } else if (entrygroup.label[language] && !(index % 2)) {
+                classes = 'border-t-4 border-t-slate-200';
+            }
+            colgroup.push(h('col', { span: entrygroup.span, class: classes })); // Entry column
+        });
+
+        return h('colgroup', {}, colgroup);
+    }
+
     __buildTableNodes(language) {
 
         let groups = this.groupsMapForLanguage(language);
@@ -197,6 +235,7 @@ export default class DataTable {
 
         let nodes = [
             this.__buildTableCaptionNodes(language),
+            this.__buildColgroupNode(shouldUseGroupsPresentation, language),
             this.__buildTheadNode(shouldUseGroupsPresentation, language)
         ];
 
