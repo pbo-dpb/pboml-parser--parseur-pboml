@@ -166,8 +166,13 @@ export default class DataTable {
 
         for (const [key, variable] of Object.entries(tHeadVariables)) {
             let columns = this.__buildTableRowColumnsNodes(shouldUseGroupsPresentation, key, variable, language, true)
+
+            let cellGroupName = variable.group?.[language] ?? '';
+
             rows.push(h('tr', {}, [
-                shouldUseGroupsPresentation ? h('td', { class: (isLg ? '' : ' w-32') }, '') : null,
+                shouldUseGroupsPresentation ? h('td', { class: `text-center font-semibold text-sm text-slate-700 ${(isLg ? '' : ' w-32')}` }, cellGroupName ? cellGroupName : [
+                    h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label),
+                ]) : null,
                 ...columns
             ]))
 
