@@ -224,6 +224,7 @@ slices:
           en: '%'
           fr: '%'
         level: 1
+        is_descriptive: true
       thethornoftheservants:
         label:
           en: The Thorn of the Servants[^1]

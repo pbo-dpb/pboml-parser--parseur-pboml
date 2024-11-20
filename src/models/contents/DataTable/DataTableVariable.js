@@ -211,7 +211,15 @@ export default class DataTableVariable {
         }
 
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: cellClasses, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        let cellAttributes = { class: cellClasses, innerHTML };
+
+        if (this.is_descriptive && scope) {
+            cellAttributes.scope = scope;
+        } else {
+            cellAttributes.role = 'cell';
+        }
+
+        return h(this.is_descriptive ? 'th' : 'td', cellAttributes);
     }
 
 
