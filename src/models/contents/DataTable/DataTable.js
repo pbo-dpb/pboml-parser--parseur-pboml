@@ -179,7 +179,14 @@ export default class DataTable {
                 ]
                 ),
                 ...this.entrygroups.map((entrygroup, index) => {
-                    return h('th', { colspan: entrygroup.span }, [
+                    let classes;
+                    if (entrygroup.label[language] && index % 2) {
+                        classes = 'border-b-4 border-b-slate-400 dark:border-b-slate-600';
+                    } else if (entrygroup.label[language] && !(index % 2)) {
+                        classes = 'border-b-4 border-b-neutral-300 dark:border-b-neutral-700';
+                    }
+
+                    return h('th', { colspan: entrygroup.span, class: `text-slate-700  dark:text-slate-300 ${classes}` }, [
                         entrygroup.label[language] ? entrygroup.label[language] : [h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label)]
                     ]);
                 })
@@ -194,7 +201,7 @@ export default class DataTable {
             let cellGroupName = variable.group?.[language] ?? '';
 
             rows.push(h('tr', {}, [
-                shouldUseGroupsPresentation ? h('td', { class: `text-center font-semibold text-sm text-slate-700 ${(isLg ? '' : ' w-32')}` }, cellGroupName ? cellGroupName : [
+                shouldUseGroupsPresentation ? h('td', { class: `text-center font-semibold text-sm text-slate-700 dark:text-slate-300 ${(isLg ? '' : ' w-32')}` }, cellGroupName ? cellGroupName : [
                     h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label),
                 ]) : null,
                 ...columns
@@ -214,13 +221,8 @@ export default class DataTable {
         ];
 
         this.entrygroups.forEach((entrygroup, index) => {
-            let classes;
-            if (entrygroup.label[language] && index % 2) {
-                classes = 'border-t-4 border-t-slate-400';
-            } else if (entrygroup.label[language] && !(index % 2)) {
-                classes = 'border-t-4 border-t-slate-200';
-            }
-            colgroup.push(h('col', { span: entrygroup.span, class: classes })); // Entry column
+
+            colgroup.push(h('col', { span: entrygroup.span })); // Entry column
         });
 
         return h('colgroup', {}, colgroup);

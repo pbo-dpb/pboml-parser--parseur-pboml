@@ -206,7 +206,9 @@ slices:
           en: Case of the Fake Lynx
           fr: L'affaire du faux lynx
         span: 4
-      - {}
+      - label:
+          en: Two of a Kind
+          fr: Deux de la même espèce
     variables:
       thewindowsswomen:
         label:
