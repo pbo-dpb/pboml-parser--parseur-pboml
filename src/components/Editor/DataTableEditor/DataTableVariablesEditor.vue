@@ -5,7 +5,7 @@
         <div class="col-span-2 flex flex-col divide-y divide-gray-300">
             <div role="button" v-for="(variable, key) in datatable.variables" class="p-2 text-left "
                 @click="currentVariableKey = key" :class="{
-                    'bg-white cursor-pointer text-gray-700 hover:text-gray-800': key !== currentVariableKey,
+                    'bg-white cursor-pointer text-gray-700 hover:text-blue-800 hover:bg-blue-50 ': key !== currentVariableKey,
                     'bg-purple-100 cursor-default': key === currentVariableKey
                 }">
                 <DataTableVariablesEditorVariablePreview :variable="variable" />
