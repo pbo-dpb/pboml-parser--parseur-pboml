@@ -83,7 +83,7 @@ export default class DataTableVariable {
         if (editorStyle) {
             labelSpan = h('div', { class: `font-mono` }, this.key)
 
-        } else {
+        } else if (this.label[language]) {
             labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
         }
 
@@ -139,12 +139,22 @@ export default class DataTableVariable {
             }
             )
         }
-
         cellContent.push(h('div', { class: `flex flex-col gap-.5 w-full` }, [
             groupSpan,
             labelSpan,
             unitSpan,
         ]));
+
+        if (!editorStyle && this.type === 'separator') {
+            const colspan = owningDataTable.content.length + 1;
+            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 text-center shadow-inner`, role: "separator", colspan }, [
+                labelSpan ? h('div', { class: 'flex flex-row items-center gap-0.5 w-full py-1 justify-center font-semibold' }, cellContent) : h('div', { class: "h-1" })
+            ]);
+        }
+
+
+
+
 
         return h('th', { class: cellClasses, scope: scope }, [
             h('div', { class: 'flex flex-row items-center gap-0.5 w-full' }, cellContent)

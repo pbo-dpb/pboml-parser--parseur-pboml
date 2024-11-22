@@ -136,6 +136,8 @@ export default class DataTable {
             headerCol.props['class'] += ' w-32'
         columns.push(headerCol);
 
+        if (variable.type === 'separator') return columns;
+
         this.content.forEach(content => {
             let cell = variable.getTableCellVnode(content[key], inThead ? 'col' : false, language, content.emphasize, this);
             if (isLg)

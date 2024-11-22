@@ -7,7 +7,7 @@ import SelectInput from "../Inputs/SelectInput.vue"
 import TinyButton from "../TinyButton.vue";
 import SingleInput from "../Inputs/SingleInput.vue"
 import RadioInput from '../Inputs/RadioInput.vue'
-import { HashtagIcon, LanguageIcon } from '@heroicons/vue/16/solid'
+import { HashtagIcon, LanguageIcon, MinusIcon } from '@heroicons/vue/16/solid'
 
 
 export default {
@@ -36,7 +36,8 @@ export default {
 
         let typesInputChoices = {
             'markdown': { label: strings.data_table_variables_editor_var_type_markdown, icon: LanguageIcon },
-            'number': { label: strings.data_table_variables_editor_var_type_number, icon: HashtagIcon }
+            'number': { label: strings.data_table_variables_editor_var_type_number, icon: HashtagIcon },
+            'separator': { label: strings.data_table_variables_editor_var_type_separator, icon: MinusIcon },
         }
 
         let chartVariableTypeChoices = {

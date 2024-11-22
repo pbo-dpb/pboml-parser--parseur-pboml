@@ -4,6 +4,7 @@
             <div>
                 <LanguageIcon class="size-4" v-if="variable.type === 'markdown'" />
                 <HashtagIcon class="size-4" v-if="variable.type === 'number'" />
+                <MinusIcon class="size-4" v-if="variable.type === 'separator'" />
             </div>
             <div class="overflow-hidden" :title="variable.key"><span class="overflow-hidden font-mono">{{ variable.key
                     }}</span></div>
@@ -16,6 +17,6 @@
 </template>
 <script setup>
 const props = defineProps(['variable'])
-import { HashtagIcon, KeyIcon, LanguageIcon, StarIcon } from "@heroicons/vue/16/solid"
+import { HashtagIcon, KeyIcon, LanguageIcon, StarIcon, MinusIcon } from "@heroicons/vue/16/solid"
 
 </script>
