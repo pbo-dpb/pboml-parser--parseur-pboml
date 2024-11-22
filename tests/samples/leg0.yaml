@@ -216,6 +216,8 @@ slices:
           fr: Les femmes de la Fenêtre
         type: markdown
         is_descriptive: true
+      caseoftheonetoedjackal:
+        type: separator
       thoughtsoftime:
         label:
           en: Thoughts of Time

@@ -252,10 +252,13 @@ export default class DataTableVariable {
 
         // Remove default values and empty objects from output
         for (const [key, value] of Object.entries(defaults)) {
-
             if (deepEqual(arrayout[key], value) || deepEqual(arrayout[key], { en: '', fr: '' }) || deepEqual(arrayout[key], { en: '' }) || deepEqual(arrayout[key], { fr: '' })) {
                 delete arrayout[key];
             }
+        }
+
+        if (!arrayout?.label?.en && !arrayout?.label?.fr) {
+            delete arrayout.label;
         }
 
 
