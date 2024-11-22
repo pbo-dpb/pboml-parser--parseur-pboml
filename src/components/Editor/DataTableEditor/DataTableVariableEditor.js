@@ -173,7 +173,11 @@ export default {
                 label: strings.data_table_variables_editor_var_group,
                 modelValue: this.variable.group,
                 'onUpdate:modelValue': (value) => {
-                    this.variable.group = value;
+
+                    this.variable.group = {
+                        en: value?.en ? value.en.trim() : value.en,
+                        fr: value?.fr ? value.fr.trim() : value.fr
+                    };
                     this.$emit('update:modelValue', this.variable)
                 }
             }),

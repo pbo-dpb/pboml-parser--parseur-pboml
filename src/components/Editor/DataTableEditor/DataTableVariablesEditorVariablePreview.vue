@@ -6,6 +6,9 @@
                 <HashtagIcon class="size-4" v-if="variable.type === 'number'" />
                 <MinusIcon class="size-4" v-if="variable.type === 'separator'" />
             </div>
+            <div v-if="groupAbbrev" class="bg-slate-100 rounded w-8 text-center text-xs">
+                {{ groupAbbrev }}
+            </div>
             <div class="overflow-hidden" :title="variable.key"><span class="overflow-hidden font-mono">{{ variable.key
                     }}</span></div>
         </div>
@@ -16,7 +19,26 @@
     </div>
 </template>
 <script setup>
-const props = defineProps(['variable'])
+import { computed } from 'vue'
 import { HashtagIcon, KeyIcon, LanguageIcon, StarIcon, MinusIcon } from "@heroicons/vue/16/solid"
+
+const props = defineProps(['variable'])
+
+const language = document.documentElement.lang
+
+const groupAbbrev = computed(() => {
+    if (!props.variable.group?.[language]) return null;
+
+    let abbrev;
+    let splitGroup = props.variable.group[language].split(' ')
+    if (splitGroup.length > 1) {
+        abbrev = splitGroup.slice(0, 3).map(word => word.replace(/[^a-zA-Z0-9]/g, '-')?.[0]).filter(x => x).join('')
+    } else {
+        abbrev = splitGroup[0].slice(0, 3)
+    }
+
+    return `${abbrev}`.toUpperCase();
+
+})
 
 </script>
