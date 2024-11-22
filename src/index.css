@@ -18,6 +18,10 @@
     @apply backdrop-blur;
   }
 
+  tbody th:not([scope]), tbody th:has(+ th:not([scope])) {
+    @apply text-slate-700 dark:text-slate-300 border-y-2 border-y-slate-200;
+  }
+
 
 }
 

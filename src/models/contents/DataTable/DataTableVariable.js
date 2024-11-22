@@ -52,16 +52,17 @@ export default class DataTableVariable {
         this.tension = payload.tension !== undefined ? payload.tension : defaults.tension;
     }
 
-    static generateUniqueDataTableVariableId(label, otherVariables) {
-        let key = (label ? label : '').toLowerCase().replace('', '-').replace(/[^_a-z0-9]+/g, "")
+    static generateUniqueDataTableVariableId(label, otherVariables, groupname) {
+        let key = (`${groupname ? groupname : ''} ${label ? label : ''}`).toLowerCase().replace('', '-').replace(/[^_a-z0-9]+/g, "")
         if (!key) key = (Math.random() + 1).toString(36).substring(8);
 
         if (!otherVariables) return key;
 
-        // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the end
-        while (Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
-            key += (Math.random() + 1).toString(36).substring(8);
+        // Avoid collisions with DataTableEntry formatting properties (eg. emphasize) or existing keys by appending a random string at the start and end
+        while (!/^[a-z]/.test(key) || Object.keys(DataTableEntry.defaults).includes(key) || otherVariables[key] || Object.values(otherVariables).some((v) => v.key === key)) {
+            key = (Math.random() + 1).toString(36).substring(8).replace(/[^a-z]+/g, "") + key;
         }
+
         return key;
     }
 
@@ -82,7 +83,7 @@ export default class DataTableVariable {
         if (editorStyle) {
             labelSpan = h('div', { class: `font-mono` }, this.key)
 
-        } else {
+        } else if (this.label[language]) {
             labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
         }
 
@@ -138,12 +139,22 @@ export default class DataTableVariable {
             }
             )
         }
-
         cellContent.push(h('div', { class: `flex flex-col gap-.5 w-full` }, [
             groupSpan,
             labelSpan,
             unitSpan,
         ]));
+
+        if (!editorStyle && this.type === 'separator') {
+            const colspan = owningDataTable.content.length + 1;
+            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 text-center shadow-inner`, role: "separator", colspan }, [
+                labelSpan ? h('div', { class: 'flex flex-row items-center gap-0.5 w-full py-1 justify-center font-semibold' }, cellContent) : h('div', { class: "h-1" })
+            ]);
+        }
+
+
+
+
 
         return h('th', { class: cellClasses, scope: scope }, [
             h('div', { class: 'flex flex-row items-center gap-0.5 w-full' }, cellContent)
@@ -211,7 +222,15 @@ export default class DataTableVariable {
         }
 
 
-        return h(this.is_descriptive ? 'th' : 'td', { class: cellClasses, scope: (this.is_descriptive && scope ? scope : null), innerHTML });
+        let cellAttributes = { class: cellClasses, innerHTML };
+
+        if (this.is_descriptive && scope) {
+            cellAttributes.scope = scope;
+        } else {
+            cellAttributes.role = 'cell';
+        }
+
+        return h(this.is_descriptive ? 'th' : 'td', cellAttributes);
     }
 
 
@@ -233,10 +252,13 @@ export default class DataTableVariable {
 
         // Remove default values and empty objects from output
         for (const [key, value] of Object.entries(defaults)) {
-
             if (deepEqual(arrayout[key], value) || deepEqual(arrayout[key], { en: '', fr: '' }) || deepEqual(arrayout[key], { en: '' }) || deepEqual(arrayout[key], { fr: '' })) {
                 delete arrayout[key];
             }
+        }
+
+        if (!arrayout?.label?.en && !arrayout?.label?.fr) {
+            delete arrayout.label;
         }
 
 

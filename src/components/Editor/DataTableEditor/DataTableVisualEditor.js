@@ -82,7 +82,7 @@ export default {
                             this.$emit('update:modelValue', this.datatable.content)
                         }
                     });
-                } else {
+                } else if (variable.type === 'number') {
                     cellContent = h(NumberInput, {
                         modelValue: content[key],
                         'onUpdate:modelValue': (value) => {

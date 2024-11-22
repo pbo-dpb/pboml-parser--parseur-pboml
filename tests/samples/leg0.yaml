@@ -200,6 +200,15 @@ slices:
         thedreamsoftheice: 4842
         thedevotedschool: 1166
     presentation_style: accounting
+    entrygroups:
+      - {}
+      - label:
+          en: Case of the Fake Lynx
+          fr: L'affaire du faux lynx
+        span: 4
+      - label:
+          en: Two of a Kind
+          fr: Deux de la même espèce
     variables:
       thewindowsswomen:
         label:
@@ -207,6 +216,8 @@ slices:
           fr: Les femmes de la Fenêtre
         type: markdown
         is_descriptive: true
+      caseoftheonetoedjackal:
+        type: separator
       thoughtsoftime:
         label:
           en: Thoughts of Time
@@ -224,6 +235,7 @@ slices:
           en: '%'
           fr: '%'
         level: 1
+        is_descriptive: true
       thethornoftheservants:
         label:
           en: The Thorn of the Servants[^1]

@@ -12,6 +12,7 @@ import DataTableVariable from '../../../models/contents/DataTable/DataTableVaria
 import DataTableEntry from '../../../models/contents/DataTable/DataTableEntry';
 import DataTable from '../../../models/contents/DataTable/DataTable';
 import merge from "lodash.merge";
+import Turndown from "turndown"
 
 export default {
     props: ['datatable'],
@@ -22,6 +23,7 @@ export default {
                 fr: ''
             },
             shouldMergeNotReplace: true,
+            useLineBreakForVariableGroupName: true,
             locationOfVars: 'col',
         }
     },
@@ -38,10 +40,12 @@ export default {
             template.innerHTML = html;
             let table = template.content.querySelector('table');
             if (!table) return null;
-
+            const turndownService = new Turndown()
             let tableArray = [...table.querySelectorAll('tr')].map((tr) => {
                 return [...tr.querySelectorAll('td, th')].map(td => {
-                    return td.innerText ? td.innerText.trim() : "";
+                    let content = turndownService.turndown(td.innerHTML);
+                    let innerText = content ? content.trim() : "";
+                    return innerText.split("\n").filter(n => n.trim()).join("\n");
                 })
             })
 
@@ -49,15 +53,37 @@ export default {
         },
 
         getKeyVariableWrapperForRowCol(tables, rowIndex, rowColIndex, otherVariables) {
+            let label = {
+                en: tables.en?.[rowIndex]?.[rowColIndex],
+                fr: tables.fr?.[rowIndex]?.[rowColIndex],
+            };
+
+            let group = null;
+
+            if (this.useLineBreakForVariableGroupName && label.en && label.en.includes("\n")) {
+
+                let parts = label.en.split("\n");
+                group = {
+                    en: parts.shift()
+                }
+
+                label.en = parts.join("\n");
+            }
+
+            if (group && label.fr && label.fr.includes("\n")) {
+                let parts = label.fr.split("\n");
+                group.fr = parts.shift();
+                label.fr = parts.join("\n");
+            }
+
+
             let variable = new DataTableVariable({
-                label: {
-                    en: tables.en?.[rowIndex]?.[rowColIndex],
-                    fr: tables.fr?.[rowIndex]?.[rowColIndex],
-                },
+                label: label,
+                group: group,
                 is_descriptive: (this.locationOfVars === "row" && rowColIndex === 0) || (this.locationOfVars === "col" && rowIndex === 0)
             });
 
-            let key = DataTableVariable.generateUniqueDataTableVariableId(Object.values(variable.label).filter(x => x)?.[0], otherVariables)
+            let key = DataTableVariable.generateUniqueDataTableVariableId(Object.values(variable.label).filter(x => x)?.[0], otherVariables, group?.en ?? null);
             variable.key = key;
             return { key, variable }
         },
@@ -196,7 +222,7 @@ export default {
             choices[`${strings.data_table_importer_var_on_first_row}`] = "row";
             choices[`${strings.data_table_importer_var_on_first_col}`] = "col";
             return choices;
-        }
+        },
     },
     render() {
         const language = document.documentElement.lang;
@@ -239,13 +265,24 @@ export default {
 
 
             h(CheckboxInput, {
-                label: strings.data_table_importer_append_checkbox, modelValue: this.shouldMergeNotReplace,
+                label: strings.data_table_importer_append_checkbox,
+                modelValue: this.shouldMergeNotReplace,
                 disabled: Object.values(this.datatable.variables).length === 0,
                 modelValue: !this.shouldMergeNotReplace,
                 'onUpdate:modelValue': (value) => {
                     this.shouldMergeNotReplace = !this.shouldMergeNotReplace
                 }
             }),
+
+            h(CheckboxInput, {
+                label: strings.data_table_use_line_break_for_variable_group_names,
+                modelValue: this.useLineBreakForVariableGroupName,
+                modelValue: this.useLineBreakForVariableGroupName,
+                'onUpdate:modelValue': (value) => {
+                    this.useLineBreakForVariableGroupName = !this.useLineBreakForVariableGroupName
+                }
+            }),
+
 
 
             this.dataTable ? h('div', { class: 'flex flex-col gap-2' }, [

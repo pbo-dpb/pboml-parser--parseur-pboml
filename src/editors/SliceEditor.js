@@ -101,7 +101,6 @@ export default {
 
                                 h(SliceSourceCodeEditButton, {
                                     'onEditing': (value) => {
-                                        console.log(value);
                                         this.resetSliceState()
                                         this.slice.state.isEditingSourceCode = value;
                                     },
