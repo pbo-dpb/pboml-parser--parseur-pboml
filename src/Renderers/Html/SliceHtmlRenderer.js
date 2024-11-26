@@ -98,9 +98,9 @@ export default class SliceHtmlRenderer {
     }
 
 
-    _buildVnodes(language) {
+    buildVnodes(language, skipTitle = false) {
         return [
-            this._renderLabelTitleVnode(language),
+            skipTitle ? null : this._renderLabelTitleVnode(language),
             this.renderReadonlyVnode(language),
             this._renderMetaVnodes(language)
         ];
@@ -160,7 +160,7 @@ export default class SliceHtmlRenderer {
         ];
     }
 
-    renderAsVnode(language = document.documentElement.lang) {
+    getSliceWrapperVnode() {
         let classes = ["flex flex-col gap-4 print:mt-4 @container/slice"];
         classes.push(this.slice.print_only ? 'hidden print:flex' : 'flex')
         classes.push(this.slice.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
@@ -169,7 +169,19 @@ export default class SliceHtmlRenderer {
         let elType = 'section';
         if (this.slice.presentation === 'figure') elType = 'figure';
         else if (this.slice.presentation === 'aside') elType = 'aside';
-        return h(elType, { class: classes.join(" "), id: this.slice.anchor }, this._buildVnodes(language));
+        return h(elType, { class: classes.join(" "), id: this.slice.anchor }, []);
+    }
+
+    renderAsVnode(language = document.documentElement.lang, wrap = true) {
+
+        if (wrap) {
+            let sliceWrapper = this.getSliceWrapperVnode();
+            sliceWrapper.children = this.buildVnodes(language);
+            return sliceWrapper;
+        }
+
+
+        return this.buildVnodes(language);
     }
 
     renderEditingVnode(language = document.documentElement.lang) {

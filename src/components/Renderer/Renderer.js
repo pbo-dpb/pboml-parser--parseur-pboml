@@ -57,21 +57,52 @@ export default {
       (new AnnotationAnchorsRenderer(this.$refs.main, this.pbomlDocument.annotations)).render();
     },
 
-    renderSliceAsVnode(slice, language) {
+    getSliceRenderer(slice) {
       const rendererObjectName = slice.constructor.rendererObjectForSliceRendererType('html');
       let htmlRenderer = new sliceHtmlRenderers[`../../Renderers/Html/${rendererObjectName}.js`].default(slice);
-      return (htmlRenderer && htmlRenderer.renderAsVnode) ? htmlRenderer.renderAsVnode(language) : null;
+      return htmlRenderer;
     },
+
+    renderSliceAsVnode(slice, language) {
+      const sliceRenderer = this.getSliceRenderer(slice);
+      return (sliceRenderer && sliceRenderer.renderAsVnode) ? sliceRenderer.renderAsVnode(language) : null;
+    },
+
   },
 
 
   render() {
     const language = this.language ? this.language : document.documentElement.lang;
 
+    let slices = [];
+
+    let previousSliceReferenceName = null;
+
+    this.pbomlDocument.slices.forEach((slice) => {
+      if (slice.referenced_as?.[language]) {
+        if (previousSliceReferenceName === slice.referenced_as[language]) {
+          slices[slices.length - 1].push(slice);
+        } else {
+          slices.push([slice]);
+          previousSliceReferenceName = slice.referenced_as[language];
+        }
+      } else {
+        slices.push(slice);
+        previousSliceReferenceName = null;
+      }
+    });
+
     return h('main', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
-      ...this.pbomlDocument.slices.map((slice) => {
-        return this.renderSliceAsVnode(slice, language);
+      ...slices.map((slice) => {
+        if (Array.isArray(slice)) {
+
+          let wrapperVnode = this.getSliceRenderer(slice[0]).getSliceWrapperVnode();
+          wrapperVnode.children = slice.map((s, i) => this.getSliceRenderer(s).buildVnodes(language, i > 0));
+          return wrapperVnode;
+        } else {
+          return this.renderSliceAsVnode(slice, language);
+        }
       }),
       ...this._buildAnnotationsVnodes(language),
       ...this._buildFooterVnodes(language),
@@ -83,21 +114,13 @@ export default {
       this.renderAnnotationAnchors();
     })
 
-
-
-
-
     this.pbomlDocument.slices.forEach((slice) => {
       this.$nextTick(() => this.intersectionManager.startObservingForSlice(this.$el, slice))
     })
-
-
   },
 
   beforeUnmount() {
-
     this.intersectionManager.stopObserving()
-
   },
 
   updated() {
