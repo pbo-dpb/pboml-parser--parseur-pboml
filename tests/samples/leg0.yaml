@@ -3,7 +3,7 @@ pboml:
 document:
   form: T-LEG-3.0.2
   id: PLA-3233-089-L
-  release_date: '2023-05-04T13:00:00.000Z'
+  release_date: '2025-05-04T13:00:00.000Z'
   title:
     en: The Planet of the Sword
     fr: La planète de l'épée
@@ -11,8 +11,8 @@ document:
     en: Hunters And Cats
     fr: Chasseurs et chats
   copyright:
-    en: © Healer of Luck, Gatineau, Canada, 2023
-    fr: © Guérisseur de la chance, Gatineau, Canada, 2023
+    en: © Healer of Luck, Gatineau, Canada, 2025
+    fr: © Guérisseur de la chance, Gatineau, Canada, 2025
 slices:
   - type: markdown
     display_label: false
@@ -199,24 +199,13 @@ slices:
         thoughtsoftime: 8771
         thedreamsoftheice: 4842
         thedevotedschool: 1166
-    presentation_style: accounting
-    entrygroups:
-      - {}
-      - label:
-          en: Case of the Fake Lynx
-          fr: L'affaire du faux lynx
-        span: 4
-      - label:
-          en: Two of a Kind
-          fr: Deux de la même espèce
     variables:
       thewindowsswomen:
         label:
           en: The Windows's Women
           fr: Les femmes de la Fenêtre
-        type: markdown
         is_descriptive: true
-      caseoftheonetoedjackal:
+      separatorwitoutlabel:
         type: separator
       thoughtsoftime:
         label:
@@ -226,21 +215,25 @@ slices:
         unit:
           en: $
           fr: $
+      bionicleviathan:
+        label:
+          en: Bionic Leviathan
+          fr: Léviathan bionique
+        type: separator
       thedreamsoftheice:
         label:
           en: The Dreams of the Ice
           fr: Les rêves de la glace
         type: number
+        is_descriptive: true
         unit:
           en: '%'
           fr: '%'
         level: 1
-        is_descriptive: true
       thethornoftheservants:
         label:
           en: The Thorn of the Servants[^1]
           fr: L'épine des serviteurs
-        type: markdown
         group:
           en: Next Years
           fr: Années suivantes
@@ -255,6 +248,16 @@ slices:
         unit:
           en: Silk in the Gate
           fr: La soie dans la porte
+    presentation_style: accounting
+    entrygroups:
+      - {}
+      - label:
+          en: Case of the Fake Lynx
+          fr: L'affaire du faux lynx
+        span: 4
+      - label:
+          en: Two of a Kind
+          fr: Deux de la même espèce
   - type: markdown
     label:
       en: Birch of Wind
@@ -281,10 +284,10 @@ slices:
         expression eux-mêmes partialité ainsi moi à. Ouest aucun espoir si
         chanter oh envoyé dire est.
   - type: markdown
-    referenced_as:
-        en: Table 1
-        fr: Tableau 1
     presentation: aside
+    referenced_as:
+      en: Box 1
+      fr: Boîte 1
     label:
       en: The Roses of the Snake
       fr: Les roses du serpent
@@ -292,34 +295,41 @@ slices:
       en: >-
         Barton did feebly change man she afford square add. Want eyes by neat so
         just must. Past draw tall up face show rent oh[^2] mr. Required is
-        debating extended wondered as do: $$dTI=\ -e\ast TI\ast d\tau/(1-\tau)$$ New get described applauded incommode
-        shameless out extremity but.
+        debating extended wondered as do: $$dTI=\ -e\ast TI\ast d\tau/(1-\tau)$$
+        New get described applauded incommode shameless out extremity but.
       fr: >-
         Barton a faiblement changé l'homme qu'elle se permettait d'ajouter au
         carré. Il n'y a pas d'autre solution que d'aller à l'école. Le passé
         dessine haut visage montre loyer oh[^2] mr. Requis est débat prolongé
-        s'étonne comme faire. La nouvelle est décrite applaudie incommode sans
-        vergogne dehors extrémité mais.
+        s'étonne comme faire : $$dTI=\ -e\ast TI\ast d\tau/(1-\tau)$$ La
+        nouvelle est décrite applaudie incommode sans vergogne dehors extrémité
+        mais.
   - type: markdown
-    referenced_as:
-        en: Table 1
-        fr: Tableau 1
     presentation: aside
+    referenced_as:
+      en: Box 1
+      fr: Boîte 1
     label:
       en: The Roses of the Snake (2)
       fr: Les roses du serpent (2)
     content:
       en: >-
-        Barton did feebly change man she afford square add. Want eyes by neat so
-        just must. Past draw tall up face show rent oh[^2] mr. Required is
-        debating extended wondered as do: $$dTI=\ -e\ast TI\ast d\tau/(1-\tau)$$ New get described applauded incommode
-        shameless out extremity but.
+        But I must explain to you how all this mistaken idea of denouncing
+        pleasure and praising pain was born and I will give you a complete
+        account of the system, and expound the actual teachings of the great
+        explorer of the truth, the master-builder of human happiness. No one
+        rejects, dislikes, or avoids pleasure itself, because it is pleasure,
+        but because those who do not know how to pursue pleasure rationally
+        encounter consequences that are extremely painful.
       fr: >-
-        Barton a faiblement changé l'homme qu'elle se permettait d'ajouter au
-        carré. Il n'y a pas d'autre solution que d'aller à l'école. Le passé
-        dessine haut visage montre loyer oh[^2] mr. Requis est débat prolongé
-        s'étonne comme faire. La nouvelle est décrite applaudie incommode sans
-        vergogne dehors extrémité mais.
+        Mais je dois vous expliquer comment est née cette idée erronée de
+        dénoncer le plaisir et de faire l'éloge de la douleur, et je vais vous
+        faire un exposé complet du système, en vous exposant les enseignements
+        réels du grand explorateur de la vérité, le maître d'œuvre du bonheur
+        humain. Personne ne rejette, n'aime ou n'évite le plaisir lui-même,
+        parce qu'il est plaisir, mais parce que ceux qui ne savent pas
+        poursuivre rationnellement le plaisir rencontrent des conséquences
+        extrêmement douloureuses.
   - type: kvlist
     id: authors
     readonly: true

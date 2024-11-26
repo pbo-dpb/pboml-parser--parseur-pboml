@@ -97,10 +97,10 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
 
-        if (this.presentation_style === 'prose' || (owningDataTable?.presentation_style === 'prose' && this.presentation_style === 'inherit')) {
-            cellClasses += " text-center ";
+        if (owningDataTable?.presentation_style === 'accounting') {
+            cellClasses += " text-left px-2 ";
         } else {
-            cellClasses += " text-left px-2";
+            cellClasses += " text-center ";
         }
 
         if (this.emphasize) {
@@ -147,8 +147,8 @@ export default class DataTableVariable {
 
         if (!editorStyle && this.type === 'separator') {
             const colspan = owningDataTable.content.length + 1;
-            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 text-center shadow-inner`, role: "separator", colspan }, [
-                labelSpan ? h('div', { class: 'flex flex-row items-center gap-0.5 w-full py-1 justify-center font-semibold' }, cellContent) : h('div', { class: "h-1" })
+            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 shadow-inner`, role: "separator", colspan }, [
+                labelSpan ? h('div', { class: 'flex flex-row gap-0.5 w-full py-1 font-semibold' }, cellContent) : h('div', { class: "h-1" })
             ]);
         }
 
