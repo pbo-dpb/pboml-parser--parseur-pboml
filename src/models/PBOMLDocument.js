@@ -33,6 +33,7 @@ export default class PBOMLDocument {
         };
         this.form = mainDocument.document?.form;
         this.type = mainDocument.document?.type;
+        this.userData = mainDocument.document?.userData;
 
         this.id = mainDocument.document?.id;
 
@@ -133,6 +134,7 @@ export default class PBOMLDocument {
                 version: this.version,
                 id: this.id,
                 release_date: this.release_date ? this.release_date.toISOString() : null,
+                userData: this.userData,
                 title: {
                     en: this.title?.en,
                     fr: this.title?.fr
