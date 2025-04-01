@@ -15,7 +15,7 @@
     "@twind/core": "^1.1.3",
     "@twind/preset-tailwind": "^1.1.4",
     "@twind/preset-typography": "^1.0.7",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.4.21",
     "buffer": "^6.0.3",
     "chart.js": "^4.4.8",
     "citation-js": "^0.7.18",
