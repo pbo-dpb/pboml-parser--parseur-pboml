@@ -18,7 +18,7 @@
     "autoprefixer": "^10.4.21",
     "buffer": "^6.0.3",
     "chart.js": "^4.4.9",
-    "citation-js": "^0.7.18",
+    "citation-js": "^0.7.19",
     "color": "^5.0.0",
     "deep-equal": "^2.2.3",
     "dompurify": "^3.2.5",
