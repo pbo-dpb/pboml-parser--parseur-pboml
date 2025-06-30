@@ -68,3 +68,7 @@ input {
 .prose> :last-child {
   margin-bottom: 0;
 }
+
+table p {
+  @apply m-0;
+}
