@@ -17,7 +17,7 @@
     "@twind/preset-typography": "^1.0.7",
     "autoprefixer": "^10.4.21",
     "buffer": "^6.0.3",
-    "chart.js": "^4.4.9",
+    "chart.js": "^4.5.0",
     "citation-js": "^0.7.19",
     "color": "^5.0.0",
     "deep-equal": "^2.2.3",
@@ -28,14 +28,14 @@
     "latex.js": "^0.12.6",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
-    "marked": "^15.0.12",
+    "marked": "^16.0.0",
     "marked-katex-extension": "^5.1.4",
-    "marked-linkify-it": "^3.1.12",
+    "marked-linkify-it": "^3.1.13",
     "pdf-lib": "^1.17.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
     "turndown": "^7.2.0",
-    "vue": "^3.5.14"
+    "vue": "^3.5.17"
   },
   "devDependencies": {
     "@testing-library/vue": "^8.1.0",
