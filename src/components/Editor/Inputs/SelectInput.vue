@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-1 w-full">
 
         <label v-if="label" class="font-semibold" :for="inputUuid">{{ label }}</label>
-        <select @change="handleInput" :id="inputUuid" class="border border-gray-300 p-1 w-full rounded" :value="modelValue">
+        <select @change="handleInput" :id="inputUuid" class="border border-gray-300 p-1 w-full rounded-sm" :value="modelValue">
             <option v-for="(value, label) in choices" :value="value">{{ label }}</option>
         </select>
     </div>

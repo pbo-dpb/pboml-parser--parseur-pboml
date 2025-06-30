@@ -38,7 +38,7 @@ export default class ChoiceRenderer {
         let isSelected = this.isChoiceSelected(choice);
 
         return h('div', {
-            class: `flex flex-row gap-2 border border-blue-300 p-2 rounded items-center ${isSelected ? 'bg-blue-100' : 'bg-slate-100'}`,
+            class: `flex flex-row gap-2 border border-blue-300 p-2 rounded-sm items-center ${isSelected ? 'bg-blue-100' : 'bg-slate-100'}`,
             role: "radio",
             "aria-checked": isSelected,
             onClickCapture: () => {

@@ -74,10 +74,10 @@ export default {
             }),
 
             h('div', { class: 'grid grid-cols-2 gap-4' }, [
-                h('figure', { class: "shadow flex justify-center items-center" }, [
+                h('figure', { class: "shadow-sm flex justify-center items-center" }, [
                     props.slice.content.en ? h('img', { src: props.slice.content.en, class: 'max-h-64' }) : h('span', '❌'),
                 ]),
-                h('figure', { class: "shadow flex justify-center items-center" }, [
+                h('figure', { class: "shadow-sm flex justify-center items-center" }, [
                     props.slice.content.fr ? h('img', { src: props.slice.content.fr, class: 'max-h-64' }) : h('span', '❌'),
                 ]),
             ]),

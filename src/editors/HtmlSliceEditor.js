@@ -38,7 +38,7 @@ export default {
                 h('div', { "class": "flex flex-col gap-2" }, [
                     h('label', { 'class': 'font-semibold' }, "CSS"),
                     h("textarea", {
-                        'class': "border border-gray-300 rounded p-1 h-96 font-mono",
+                        'class': "border border-gray-300 rounded-sm p-1 h-96 font-mono",
                         value: props.slice.css,
                         'onChange': (e) => {
                             props.slice.css = e.target.value ? e.target.value : null;
@@ -53,7 +53,7 @@ export default {
             h('div', { "class": "flex flex-col gap-2" }, [
                 h('label', { 'class': 'font-semibold' }, "EN"),
                 h("textarea", {
-                    'class': "border border-gray-300 rounded p-1 h-96 font-mono",
+                    'class': "border border-gray-300 rounded-sm p-1 h-96 font-mono",
                     value: props.slice.content['en'],
                     'onChange': (e) => {
                         emit('update:modelValue', {
@@ -67,7 +67,7 @@ export default {
             h('div', { "class": "flex flex-col gap-2" }, [
                 h('label', { 'class': 'font-semibold' }, "FR"),
                 h("textarea", {
-                    'class': "border border-gray-300 rounded p-1 h-96 font-mono",
+                    'class': "border border-gray-300 rounded-sm p-1 h-96 font-mono",
                     value: props.slice.content['fr'],
                     'onChange': (e) => {
                         emit('update:modelValue', {

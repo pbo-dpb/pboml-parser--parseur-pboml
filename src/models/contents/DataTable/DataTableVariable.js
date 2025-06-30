@@ -94,7 +94,7 @@ export default class DataTableVariable {
 
         let groupSpan;
         if (editorStyle && this.group?.[language]) {
-            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded w-fit px-1', innerHTML: md.render(this.group[language]) });
+            groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded-sm w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
 
         if (owningDataTable?.presentation_style === 'accounting') {
@@ -108,7 +108,7 @@ export default class DataTableVariable {
         } else {
             cellClasses += " bg-[rgba(219,234,254,0.8)] dark:bg-[rgba(3,7,18,0.8)] lg:bg-transparent";
         }
-        cellClasses += " backdrop-blur-sm lg:backdrop-blur-none";
+        cellClasses += " backdrop-blur-xs lg:backdrop-blur-none";
 
         let cellContent = [];
 

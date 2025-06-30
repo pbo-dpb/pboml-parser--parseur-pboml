@@ -127,7 +127,7 @@ export default {
 
             return h('div', { class: 'flex flex-col gap-4' }, [
                 h('div', { class: 'border-l-4 border-amber-300 pl-4' }, metas),
-                h('div', { class: 'p-4 bg-slate-100 rounded flex flex-col gap-8' }, rows)
+                h('div', { class: 'p-4 bg-slate-100 rounded-sm flex flex-col gap-8' }, rows)
             ])
 
 

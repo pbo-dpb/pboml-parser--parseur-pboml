@@ -23,8 +23,8 @@ export default {
     },
     render() {
         const strings = editorStrings[document.documentElement.lang];
-        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded` }, [
-            h('legend', { class: `text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2` }, [
+        return h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded-sm` }, [
+            h('legend', { class: `text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded-sm py-2` }, [
                 h('div', { class: 'font-semibold text-lg flex flex-row gap-2 font-mono' }, `[^${this.annotation.id}]`),
                 h('div', { class: 'flex flex-row justify-end gap-1' }, [
                     h(DeleteButton, {
@@ -49,12 +49,12 @@ export default {
                     for: `${this.inuid}-id`,
                 }, strings.annotation_id_label),
                 h('input', {
-                    class: `border  p-1 rounded ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'}`,
+                    class: `border  p-1 rounded-sm ${!this.annotation.id ? 'border-red-800' : 'border-gray-300'}`,
                     id: `${this.inuid}-id`,
                     value: this.annotation.id,
                     'onChange': (e) => { this.sanitizeId(e.target.value); },
                 }),
-                this.annotation.id ? h('p', { class: 'text-sm' }, [strings.annotation_id_helper, h('span', { class: 'font-mono rounded bg-gray-100' }, `[^${this.annotation.id}]`)]) : null
+                this.annotation.id ? h('p', { class: 'text-sm' }, [strings.annotation_id_helper, h('span', { class: 'font-mono rounded-sm bg-gray-100' }, `[^${this.annotation.id}]`)]) : null
             ]),
 
             h(SelectInput, {

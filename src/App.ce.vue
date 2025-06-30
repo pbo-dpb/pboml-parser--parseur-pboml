@@ -192,7 +192,7 @@ export default {
 }
 </script>
 <style>
-@import "./index.css" screen;
+@import "./index.css";
 @import "./print.css" print;
 
 th {

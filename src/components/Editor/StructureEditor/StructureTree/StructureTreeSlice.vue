@@ -17,7 +17,7 @@
                 <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor }}
                 </div>
             </div>
-            <button @click="toggleEditor" class="p-1 hover:bg-blue-100 rounded">
+            <button @click="toggleEditor" class="p-1 hover:bg-blue-100 rounded-sm">
                 <PencilIcon class="size-4 text-blue-200 group-hover:text-blue-800"></PencilIcon>
                 <span class="sr-only">{{ editorStrings.edit }}</span>
             </button>
