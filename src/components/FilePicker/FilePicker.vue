@@ -7,7 +7,7 @@
         </div>
         <div class="border border-gray-300 p-2 flex flex-row items-center w-fit">
             <div class="text-2xl w-12 text-center">📄</div>
-            <button class="rounded bg-blue-100 p-2 text-sm font-semibold text-blue-800"
+            <button class="rounded-sm bg-blue-100 p-2 text-sm font-semibold text-blue-800"
                 @click="handleNewFromScratch">New</button>
         </div>
     </div>

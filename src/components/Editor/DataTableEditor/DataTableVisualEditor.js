@@ -114,7 +114,7 @@ export default {
         }, [
 
             (!this.datatable.getAllUnitsUsedInTableForLanguage(language).length) ?
-                h('span', { 'class': 'rounded p-1 bg-orange-700 text-white text-xs flex flex-row gap-1 w-fit' }, [
+                h('span', { 'class': 'rounded-sm p-1 bg-orange-700 text-white text-xs flex flex-row gap-1 w-fit' }, [
                     h(ExclamationTriangleIcon, { 'class': 'h-4 w-4' }, () => []),
                     strings.data_table_has_no_units
                 ]) : null,

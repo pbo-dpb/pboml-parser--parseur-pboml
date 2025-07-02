@@ -6,12 +6,12 @@
         </div>
 
         <textarea v-if="multiline" ref="payloadArea" :value="modelValue" :id="eluid"
-            class="border border-gray-300 p-1 rounded h-96 w-full outline-purple-800 text-gray-800"
+            class="border border-gray-300 p-1 rounded-sm h-96 w-full outline-purple-800 text-gray-800"
             @input="emitUpdate($event.target.value)">
         </textarea>
 
         <input type="text" v-else ref="payloadArea" :value="modelValue" :id="eluid"
-            class="border border-gray-300 p-1 rounded w-full outline-purple-800  text-gray-800"
+            class="border border-gray-300 p-1 rounded-sm w-full outline-purple-800  text-gray-800"
             @input="emitUpdate($event.target.value)" />
 
         <PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>

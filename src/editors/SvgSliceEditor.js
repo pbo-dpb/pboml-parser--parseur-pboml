@@ -27,7 +27,7 @@ export default {
                     h('span', { class: 'font-semibold' }, '.svg'),
                     h('input', {
                         type: 'file',
-                        //class: 'border border-gray-300 rounded p-1 font-mono h-32 leading-tight',
+                        //class: 'border border-gray-300 rounded-sm p-1 font-mono h-32 leading-tight',
                         'onChange': (e) => {
                             const filename = e.target.files[0];
                             if (!filename) return;
@@ -78,7 +78,7 @@ export default {
                         h('span', { class: 'font-semibold' }, 'Source'),
                         h('textarea', {
                             value: this.slice.content[language],
-                            class: 'border border-gray-300 rounded p-1 font-mono h-32 leading-tight',
+                            class: 'border border-gray-300 rounded-sm p-1 font-mono h-32 leading-tight',
                             'onChange': (e) => {
 
                                 let updatedObject = {

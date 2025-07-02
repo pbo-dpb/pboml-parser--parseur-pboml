@@ -11,7 +11,7 @@ export default class SliceHtmlRenderer {
 
     getLabelStringsSpanVnodesForLanguage(language) {
         let labelStrings = this.slice.labelStrings[language];
-        return labelStrings.map((str, index) => h('span', { class: '[&:not(:last-child)]:after:content-["–"] after:mx-1 after:text-gray-500' + (labelStrings.length > 1 ? ` first:font-normal` : '') }, str))
+        return labelStrings.map((str, index) => h('span', { class: 'not-last:after:content-["–"] after:mx-1 after:text-gray-500' + (labelStrings.length > 1 ? ` first:font-normal` : '') }, str))
     }
 
     _renderLabelTitleVnode(language, force = false) {
@@ -163,8 +163,8 @@ export default class SliceHtmlRenderer {
     getSliceWrapperVnode() {
         let classes = ["flex flex-col gap-4 print:mt-4 @container/slice"];
         classes.push(this.slice.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.slice.presentation === "figure" ? "bg-gradient-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
-        classes.push(this.slice.presentation === "aside" ? "bg-gradient-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside" : "");
+        classes.push(this.slice.presentation === "figure" ? "bg-linear-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
+        classes.push(this.slice.presentation === "aside" ? "bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside" : "");
 
         let elType = 'section';
         if (this.slice.presentation === 'figure') elType = 'figure';

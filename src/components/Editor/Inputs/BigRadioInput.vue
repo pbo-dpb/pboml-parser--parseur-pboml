@@ -4,7 +4,7 @@
         <legend v-if="label" class="font-semibold">{{ label }}</legend>
 
         <div class="flex flex-row gap-2 items-center">
-            <label class=" select-none p-1 w-full rounded flex flex-row justify-center items-center font-semibold" :class="{
+            <label class=" select-none p-1 w-full rounded-sm flex flex-row justify-center items-center font-semibold" :class="{
                 'cursor-pointer border border-blue-100 bg-blue-100 text-blue-800': modelValue != value,
                 'cursor-pointer border border-orange-300 bg-gray-100 shadow-inner': modelValue == value,
             }" v-for="(value, label) in choices">
