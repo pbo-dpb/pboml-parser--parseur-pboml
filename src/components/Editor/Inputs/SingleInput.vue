@@ -1,5 +1,5 @@
 <template>
-    <fieldset class="flex flex-col p-1 gap-0.5 border border-gray-300 rounded">
+    <fieldset class="flex flex-col p-1 gap-0.5 border border-gray-300 rounded-sm">
         <legend v-if="label" class="font-semibold px-1">{{ label }}</legend>
 
 
@@ -17,7 +17,7 @@
 
 import MarkdownInput from "./MarkdownInput.vue"
 const props = defineProps(['modelValue', 'label', 'hint'])
-const emit = defineEmits(['update:modelValue', 'blur'])
+const emit = defineEmits(['update:modelValue', 'blur-sm'])
 
 
 const handleInput = (event) => {

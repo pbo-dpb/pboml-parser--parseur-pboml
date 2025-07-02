@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col gap-4">
-        <textarea v-model="code" class="font-mono h-96 p-2 border border-gray-300 rounded " :class="{
+        <textarea v-model="code" class="font-mono h-96 p-2 border border-gray-300 rounded-sm " :class="{
             'border-red-500 outline-red-500': hasError
         }" :invalid="hasError"></textarea>
 

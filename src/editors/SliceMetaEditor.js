@@ -27,7 +27,7 @@ export default {
                             ]),
                     ]),
                     h('span', { class: 'font-semibold uppercase' }, editorStrings[document.documentElement.lang][`slice_meta_type_${this.meta_type}`]),
-                    (this.slice[this.meta_type] && this.slice[this.meta_type].length) ? h('span', { class: 'rounded bg-gray-100 text-xs font-semibold px-1 text-gray-800' }, this.slice[this.meta_type].length) : null
+                    (this.slice[this.meta_type] && this.slice[this.meta_type].length) ? h('span', { class: 'rounded-sm bg-gray-100 text-xs font-semibold px-1 text-gray-800' }, this.slice[this.meta_type].length) : null
                 ]),
 
                 this.collapsed ? null : h('div', { class: "flex flex-col gap-2" }, [

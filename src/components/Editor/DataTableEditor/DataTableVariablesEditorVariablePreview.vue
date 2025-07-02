@@ -6,7 +6,7 @@
                 <HashtagIcon class="size-4" v-if="variable.type === 'number'" />
                 <MinusIcon class="size-4" v-if="variable.type === 'separator'" />
             </div>
-            <div v-if="groupAbbrev" class="bg-slate-100 rounded w-8 text-center text-xs">
+            <div v-if="groupAbbrev" class="bg-slate-100 rounded-sm w-8 text-center text-xs">
                 {{ groupAbbrev }}
             </div>
             <div class="overflow-hidden" :title="variable.key"><span class="overflow-hidden font-mono">{{ variable.key
@@ -14,7 +14,7 @@
         </div>
         <div class="flex flex-row gap-2 items-center">
             <StarIcon class="size-4" v-if="variable.emphasize" />
-            <KeyIcon class="size-4 text-yellow-600 drop-shadow" v-if="variable.is_descriptive" />
+            <KeyIcon class="size-4 text-yellow-600 drop-shadow-sm" v-if="variable.is_descriptive" />
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col gap-4 bg-slate-100 rounded p-4">
+    <div class="flex flex-col gap-4 bg-slate-100 rounded-sm p-4">
         <div class="flex flex-row justify-between gap-1 border-b border-slate-300 pb-4 items-center">
             <span class="font-semibold">{{ spanDisplay }}</span>
             <TinyButton @click="emit('delete', group)" :danger="true">

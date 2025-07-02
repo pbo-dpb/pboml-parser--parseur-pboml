@@ -8,7 +8,7 @@
         </template>
     </Suspense>
 </template>
-  
+
 <script>
 import yaml from 'js-yaml'
 import { Buffer } from 'buffer';
@@ -73,7 +73,6 @@ export default {
 }
 </script>
 <style>
-@import "./index.css" screen;
+@import "./index.css";
 @import "./print.css" print;
 </style>
-  

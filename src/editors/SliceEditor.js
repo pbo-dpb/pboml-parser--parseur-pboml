@@ -32,7 +32,7 @@ export default {
         if (this.slice.state.isPreviewing) {
             // Preview
             currentContext.push(
-                h('div', { class: 'border-4 border-slate-100 border-dashed p-4 rounded' }, [
+                h('div', { class: 'border-4 border-slate-100 border-dashed p-4 rounded-sm' }, [
                     h('div', { class: "uppercase text-xl font-bold text-slate-500 -mt-2 mb-2 pb-2 border-b-4 border-slate-100 border-dashed" }, `${editorStrings[this.language].editor_actions_preview} (${this.slice.state.isPreviewing})`),
                     Renderer.methods.renderSliceAsVnode(this.slice, this.slice.state.isPreviewing)
                 ])
@@ -65,15 +65,15 @@ export default {
             this.$attrs.onMoveSlice ? h(SliceEditorCollapser, { class: 'absolute -left-8', slice: this.slice }, () => []) : null,
 
             this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'selection-none relative h-24 overflow-hidden', inert: true }, [
-                h('div', { class: 'absolute bg-gradient-to-t from-white h-24 w-full z-10' }, ''),
+                h('div', { class: 'absolute bg-linear-to-t from-white h-24 w-full z-10' }, ''),
                 Renderer.methods.renderSliceAsVnode(this.slice, this.language),
             ]) : null,
 
-            this.slice.state.collapsed ? null : h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
+            this.slice.state.collapsed ? null : h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded-sm ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
                 [
 
                     h('legend',
-                        { class: ` text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded py-2 ${presentationSpecificHeading.join(' ')}` },
+                        { class: ` text-sm px-2 text-gray-800 border-2 flex flex-row gap-2 items-center w-full justify-between w-full rounded-sm py-2 ${presentationSpecificHeading.join(' ')}` },
                         [
 
                             h('div', { class: 'font-semibold text-lg flex flex-row gap-2' }, [(verbosePresentationStyle ? h('em', {}, verbosePresentationStyle) : null), (verboseSliceType ? verboseSliceType : null)]),

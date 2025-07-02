@@ -16,7 +16,7 @@
             </Button>
         </nav>
 
-        <div class="flex flex-col gap-2 bg-blue-100 shadow p-4" v-if="shouldDisplayExportActions">
+        <div class="flex flex-col gap-2 bg-blue-100 shadow-sm p-4" v-if="shouldDisplayExportActions">
             <nav class="flex flex-row gap-2 justify-end ">
                 <Button @click="shouldDisplayPreprintExporter = !shouldDisplayPreprintExporter"
                     v-if="shouldDisplayPreprintButton" :toggled="shouldDisplayPreprintExporter">
@@ -30,7 +30,7 @@
             <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
         </div>
 
-        <div class="flex flex-col gap-2 border-4 border-slate-100 border-dashed shadow-inner rounded p-4 -mx-4"
+        <div class="flex flex-col gap-2 border-4 border-slate-100 border-dashed shadow-inner rounded-sm p-4 -mx-4"
             v-if="shouldDisplayPreview">
             <nav class="flex flex-row gap-2 justify-end align-center">
                 <span

@@ -1,5 +1,5 @@
 <template>
-    <fieldset class="flex p-1  border border-gray-300 rounded flex-wrap @container" :class="{
+    <fieldset class="flex p-1  border border-gray-300 rounded-sm flex-wrap @container" :class="{
         'flex-col gap-0.5': inputSize !== 'lg',
         'flex-row': inputSize === 'lg'
     }">

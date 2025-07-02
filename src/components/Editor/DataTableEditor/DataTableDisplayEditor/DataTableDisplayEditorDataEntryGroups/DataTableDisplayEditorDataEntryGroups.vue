@@ -1,6 +1,6 @@
 <template>
 
-    <fieldset class="rounded border border-slate-300 p-4 flex flex-col gap-4">
+    <fieldset class="rounded-sm border border-slate-300 p-4 flex flex-col gap-4">
         <legend class="font-semibold">{{ strings.data_table_display_editor_data_entry_groups_label }}</legend>
         <DataTableDisplayEditorDataEntryGroupsGroup v-for="group in datatable.entrygroups" :group :datatable
             @delete="deleteGroup(group)" />

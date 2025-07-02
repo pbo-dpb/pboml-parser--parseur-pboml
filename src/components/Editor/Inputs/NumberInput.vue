@@ -1,8 +1,8 @@
 <template>
-    <fieldset :class="label ? `flex flex-col p-1 gap-0.5 border border-gray-300 rounded` : ''">
+    <fieldset :class="label ? `flex flex-col p-1 gap-0.5 border border-gray-300 rounded-sm` : ''">
         <legend v-if="label" class="font-semibold px-1">{{ label }}</legend>
 
-        <input ref="input" class="border border-gray-300 p-1 w-full rounded" :value="modelValue" type="number"
+        <input ref="input" class="border border-gray-300 p-1 w-full rounded-sm" :value="modelValue" type="number"
             @input="handleInput" @blur="handleBlur" />
 
         <span v-if="hint" class="text-sm italic text-gray-700 dark:text-gray-300">{{ hint }}</span>
