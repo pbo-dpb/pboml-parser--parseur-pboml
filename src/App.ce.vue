@@ -5,7 +5,7 @@
         <FilePicker v-if="edit" @pick="handlePick" :prefix="prefix"></FilePicker>
       </template>
       <template v-else>
-        <Editor v-if="edit" :pboml-document="pbomlDocument" :standalone="standalone" :prefix="prefix"></Editor>
+        <Editor v-if="edit" :pboml-document="pbomlDocument" :prefix="prefix"></Editor>
         <Renderer v-if="!edit && pbomlDocument" :pboml-document="pbomlDocument" :standalone="standalone"
           :language="language"></Renderer>
       </template>
