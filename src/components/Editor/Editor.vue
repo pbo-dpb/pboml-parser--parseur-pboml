@@ -1,8 +1,7 @@
 <template>
     <main class="flex flex-col gap-4">
 
-        <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw"
-            :standalone="standalone">
+        <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw">
             <Button @click="handleRawEditorToggle" :toggled="shouldEditRaw" :title="strings.editor_actions_source">
                 <CodeBracketIcon class="size-6"></CodeBracketIcon>
                 <span class="sr-only">{{ strings.editor_actions_source }}</span>
@@ -22,8 +21,7 @@
                             @click="currentTab = 'annotations'">
                             {{ strings.annotations_section_title }}
                         </Tab>
-                        <Tab v-if="!standalone" :controls="'meta'" :selected="currentTab === 'meta'"
-                            @click="currentTab = 'meta'">
+                        <Tab :controls="'meta'" :selected="currentTab === 'meta'" @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
                         </Tab>
                         <Tab :controls="'structure'" :selected="currentTab === 'structure'"
@@ -90,7 +88,7 @@
                         </div>
 
 
-                        <div v-if="!standalone && currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
+                        <div v-if="currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
                             aria-labelledby="tab-meta">
                             <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
                         </div>
@@ -134,7 +132,6 @@ import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon, RectangleGroupI
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
-        standalone: Boolean,
         prefix: String
     },
 
