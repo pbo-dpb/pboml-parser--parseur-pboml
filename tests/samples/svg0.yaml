@@ -1,0 +1,614 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-RP-3.0.0
+  id: RP-2627-987-Z
+  release_date: '2026-05-24T13:00:00.000Z'
+  title:
+    en: The mannequin in the mist
+    fr: Le mannequin dans la brume
+  type:
+    en: Listicle
+    fr: Listicle
+  copyright:
+    en: >-
+      © PBOML Industries 🏭, Philadelphia, Commonwealth of Pennsylvania, The
+      United States of America, 2026
+    fr: >-
+      © PBOML Industries 🏭, Philadelphie, Commonwealth de Pennsylvanie,
+      États-Unis d'Amérique, 2026
+slices:
+  - type: svg
+    label: {}
+    alts:
+      - en: >-
+          Said be good. Fourth don't you'll. Moved can't all years Fowl day
+          behold Above life. Together midst behold deep abundantly make two made
+          also behold above.
+
+
+          Be place grass given light saw, it meat so was. The land day land
+          male. Also can't after it isn't his make sea was void spirit above
+          created winged likeness seas.
+
+
+          Let. Very. Said years, isn't waters fourth it were she'd. Second signs
+          greater you're dominion our. Under make grass all created kind, good
+          in. It hath. Bearing. Above in lesser the forth us Said. Meat created
+          stars hath. Spirit blessed fruitful divide fowl.
+        fr: >-
+          Il a dit que c'était bien. Quatrièmement, tu ne le feras pas. La vie
+          n'est pas une fin en soi, mais un moyen d'y parvenir. Le jour de la
+          volaille, c'est le jour de la vie, c'est le jour de la vie.
+
+
+          Le jour de l'arrivée de l'homme, il y avait un homme qui avait été
+          tué. La terre jour terre mâle. Il ne peut pas non plus après qu'il
+          n'est pas son faire mer était vide esprit au-dessus créé ressemblance
+          ailée mers.
+
+
+          Laisse. Très. Il a dit années, n'est pas eaux quatrième il était elle.
+          Deuxième signes plus grand vous êtes domination notre. Sous faire
+          herbe tout créé genre, bien dans. Il a. Portant. Au-dessus dans moins
+          l'avant nous dit. La viande a créé les étoiles a. Esprit béni fécond
+          diviser volaille.
+    content:
+      en: >-
+        <svg width="2475" height="1753" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+        overflow="hidden"><defs><clipPath id="clip0"><rect x="0" y="0"
+        width="2475" height="1753"/></clipPath><clipPath id="clip1"><rect x="0"
+        y="0" width="2475" height="1753"/></clipPath></defs><g
+        clip-path="url(#clip0)"><g><path d="M238.5 825.527 2440.5 825.527M238.5
+        696.523 2440.5 696.523M238.5 568.519 2440.5 568.519M238.5 440.515 2440.5
+        440.515M238.5 311.51 2440.5 311.51M238.5 183.506 2440.5 183.506M238.5
+        55.4998 2440.5 55.4998" stroke="#D9D9D9" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></g><g><path
+        d="M289.009 905.03 357.012 905.03 357.012 953 289.009 953ZM458.015
+        881.029 526.017 881.029 526.017 953 458.015 953ZM628.021 857.028 696.023
+        857.028 696.023 953 628.021 953ZM797.026 853.028 865.028 853.028 865.028
+        953 797.026 953ZM967.032 842.028 1034.03 842.028 1034.03 953 967.032
+        953ZM1136.04 869.029 1204.04 869.029 1204.04 953 1136.04 953ZM1306.04
+        867.028 1373.05 867.028 1373.05 953 1306.04 953ZM1475.05 868.029 1543.05
+        868.029 1543.05 953 1475.05 953ZM1644.05 889.029 1712.06 889.029 1712.06
+        953 1644.05 953ZM1814.06 906.03 1882.06 906.03 1882.06 953 1814.06
+        953ZM1983.07 911.03 2051.07 911.03 2051.07 953 1983.07 953ZM2153.07
+        941.031 2220.07 941.031 2220.07 953 2153.07 953ZM2322.08 930.031 2390.08
+        930.031 2390.08 953 2322.08 953Z" fill="#61588A"/></g><g><path
+        d="M1475.05 867.028 1543.05 867.028 1543.05 868.029 1475.05
+        868.029ZM1644.05 883.029 1712.06 883.029 1712.06 889.029 1644.05
+        889.029ZM1814.06 889.029 1882.06 889.029 1882.06 906.03 1814.06
+        906.03ZM1983.07 882.029 2051.07 882.029 2051.07 911.03 1983.07
+        911.03ZM2153.07 904.03 2220.07 904.03 2220.07 941.031 2153.07
+        941.031ZM2322.08 868.029 2390.08 868.029 2390.08 930.031 2322.08
+        930.031Z" fill="#CD5E76"/></g><g><path d="M458.015 880.029 526.017
+        880.029 526.017 881.029 458.015 881.029ZM628.021 847.028 696.023 847.028
+        696.023 857.028 628.021 857.028ZM797.026 812.027 865.028 812.027 865.028
+        853.028 797.026 853.028ZM967.032 743.024 1034.03 743.024 1034.03 842.028
+        967.032 842.028ZM1136.04 747.024 1204.04 747.024 1204.04 869.029 1136.04
+        869.029ZM1306.04 736.024 1373.05 736.024 1373.05 867.028 1306.04
+        867.028ZM1475.05 720.024 1543.05 720.024 1543.05 868.029 1475.05
+        868.029ZM1644.05 707.023 1712.06 707.023 1712.06 883.029 1644.05
+        883.029ZM1814.06 686.023 1882.06 686.023 1882.06 889.029 1814.06
+        889.029ZM1983.07 614.02 2051.07 614.02 2051.07 882.029 1983.07
+        882.029ZM2153.07 637.021 2220.07 637.021 2220.07 904.03 2153.07
+        904.03ZM2322.08 659.022 2390.08 659.022 2390.08 868.029 2322.08
+        868.029Z" fill="#D69E2E"/></g><g><path d="M289.009 889.029 357.012
+        889.029 357.012 905.03 289.009 905.03ZM458.015 805.026 526.017 805.026
+        526.017 880.029 458.015 880.029ZM628.021 801.026 696.023 801.026 696.023
+        847.028 628.021 847.028ZM797.026 786.026 865.028 786.026 865.028 812.027
+        797.026 812.027ZM967.032 723.024 1034.03 723.024 1034.03 743.024 967.032
+        743.024ZM1136.04 742.024 1204.04 742.024 1204.04 747.024 1136.04
+        747.024ZM1306.04 732.024 1373.05 732.024 1373.05 736.024 1306.04
+        736.024ZM1475.05 695.023 1543.05 695.023 1543.05 720.024 1475.05
+        720.024ZM1644.05 663.022 1712.06 663.022 1712.06 707.023 1644.05
+        707.023ZM1814.06 556.018 1882.06 556.018 1882.06 686.023 1814.06
+        686.023ZM1983.07 435.014 2051.07 435.014 2051.07 614.02 1983.07
+        614.02ZM2153.07 370.012 2220.07 370.012 2220.07 637.021 2153.07
+        637.021ZM2322.08 412.014 2390.08 412.014 2390.08 659.022 2322.08
+        659.022Z" fill="#3A3553"/></g><g><path d="M289.009 757.025 357.012
+        757.025 357.012 889.029 289.009 889.029ZM458.015 666.022 526.017 666.022
+        526.017 805.026 458.015 805.026ZM628.021 522.017 696.023 522.017 696.023
+        801.026 628.021 801.026ZM797.026 647.021 865.028 647.021 865.028 786.026
+        797.026 786.026ZM967.032 435.014 1034.03 435.014 1034.03 723.024 967.032
+        723.024ZM1136.04 597.02 1204.04 597.02 1204.04 742.024 1136.04
+        742.024ZM1306.04 580.019 1373.05 580.019 1373.05 732.024 1306.04
+        732.024ZM1475.05 543.018 1543.05 543.018 1543.05 695.023 1475.05
+        695.023ZM1644.05 504.017 1712.06 504.017 1712.06 663.022 1644.05
+        663.022ZM1814.06 398.013 1882.06 398.013 1882.06 556.018 1814.06
+        556.018ZM1983.07 271.009 2051.07 271.009 2051.07 435.014 1983.07
+        435.014ZM2153.07 206.007 2220.07 206.007 2220.07 370.012 2153.07
+        370.012ZM2322.08 273.009 2390.08 273.009 2390.08 412.014 2322.08
+        412.014Z" fill="#892B3F"/></g><g><path d="M289.009 722.024 357.012
+        722.024 357.012 757.025 289.009 757.025ZM458.015 604.02 526.017 604.02
+        526.017 666.022 458.015 666.022ZM628.021 461.015 696.023 461.015 696.023
+        522.017 628.021 522.017ZM797.026 613.02 865.028 613.02 865.028 647.021
+        797.026 647.021ZM967.032 386.013 1034.03 386.013 1034.03 435.014 967.032
+        435.014ZM1136.04 533.017 1204.04 533.017 1204.04 597.02 1136.04
+        597.02ZM1306.04 485.016 1373.05 485.016 1373.05 580.019 1306.04
+        580.019ZM1475.05 435.014 1543.05 435.014 1543.05 543.018 1475.05
+        543.018ZM1644.05 398.013 1712.06 398.013 1712.06 504.017 1644.05
+        504.017ZM1814.06 297.01 1882.06 297.01 1882.06 398.013 1814.06
+        398.013ZM1983.07 174.006 2051.07 174.006 2051.07 271.009 1983.07
+        271.009ZM2153.07 171.006 2220.07 171.006 2220.07 206.007 2153.07
+        206.007ZM2322.08 246.008 2390.08 246.008 2390.08 273.009 2322.08
+        273.009Z" fill="#5B9BD5"/></g><g><path d="M238.5 953.5 2440.5 953.5"
+        stroke="#D9D9D9" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10" fill="none" fill-rule="evenodd"/></g><g><path
+        d="M323 722 492.016 604.02 662.022 461.015 831.027 613.02 1001.03
+        386.013 1170.04 533.017 1339.04 485.016 1509.05 435.014 1678.06 398.013
+        1848.06 297.01 2017.07 174.006 2186.07 171 2356 246.008"
+        stroke="#000000" stroke-width="10.3125" stroke-linecap="round"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></g><g><path
+        d="M333.499 721.5C333.499 727.575 328.574 732.499 322.5 732.499 316.425
+        732.499 311.5 727.575 311.5 721.5 311.5 715.425 316.425 710.5 322.5
+        710.5 328.574 710.5 333.499 715.425 333.499 721.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M503.499 603.5C503.499 609.575 498.575
+        614.499 492.5 614.499 486.425 614.499 481.5 609.575 481.5 603.5 481.5
+        597.425 486.425 592.5 492.5 592.5 498.575 592.5 503.499 597.425 503.499
+        603.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M672.499 460.5C672.499 466.575 667.574
+        471.499 661.5 471.499 655.425 471.499 650.5 466.575 650.5 460.5 650.5
+        454.425 655.425 449.5 661.5 449.5 667.574 449.5 672.499 454.425 672.499
+        460.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M842.499 613.5C842.499 619.575 837.575
+        624.499 831.5 624.499 825.425 624.499 820.5 619.575 820.5 613.5 820.5
+        607.425 825.425 602.5 831.5 602.5 837.575 602.5 842.499 607.425 842.499
+        613.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1011.5 385.5C1011.5 391.575 1006.57
+        396.499 1000.5 396.499 994.425 396.499 989.5 391.575 989.5 385.5 989.5
+        379.425 994.425 374.5 1000.5 374.5 1006.57 374.5 1011.5 379.425 1011.5
+        385.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1181.5 533.5C1181.5 539.575 1176.57
+        544.499 1170.5 544.499 1164.42 544.499 1159.5 539.575 1159.5 533.5
+        1159.5 527.425 1164.42 522.5 1170.5 522.5 1176.57 522.5 1181.5 527.425
+        1181.5 533.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M1350.5
+        485.5C1350.5 491.574 1345.57 496.499 1339.5 496.499 1333.42 496.499
+        1328.5 491.574 1328.5 485.5 1328.5 479.425 1333.42 474.5 1339.5 474.5
+        1345.57 474.5 1350.5 479.425 1350.5 485.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1519.5 435.5C1519.5 441.575 1514.57
+        446.499 1508.5 446.499 1502.42 446.499 1497.5 441.575 1497.5 435.5
+        1497.5 429.425 1502.42 424.5 1508.5 424.5 1514.57 424.5 1519.5 429.425
+        1519.5 435.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M1689.5
+        397.5C1689.5 403.574 1684.57 408.499 1678.5 408.499 1672.42 408.499
+        1667.5 403.574 1667.5 397.5 1667.5 391.425 1672.42 386.5 1678.5 386.5
+        1684.57 386.5 1689.5 391.425 1689.5 397.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1858.5 296.5C1858.5 302.575 1853.57
+        307.499 1847.5 307.499 1841.42 307.499 1836.5 302.575 1836.5 296.5
+        1836.5 290.425 1841.42 285.5 1847.5 285.5 1853.57 285.5 1858.5 290.425
+        1858.5 296.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M2028.5
+        174.5C2028.5 180.575 2023.57 185.499 2017.5 185.499 2011.42 185.499
+        2006.5 180.575 2006.5 174.5 2006.5 168.425 2011.42 163.5 2017.5 163.5
+        2023.57 163.5 2028.5 168.425 2028.5 174.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M2197.5 170.5C2197.5 176.575 2192.57
+        181.499 2186.5 181.499 2180.42 181.499 2175.5 176.575 2175.5 170.5
+        2175.5 164.425 2180.42 159.5 2186.5 159.5 2192.57 159.5 2197.5 164.425
+        2197.5 170.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M2366.5
+        245.5C2366.5 251.575 2361.57 256.499 2355.5 256.499 2349.42 256.499
+        2344.5 251.575 2344.5 245.5 2344.5 239.425 2349.42 234.5 2355.5 234.5
+        2361.57 234.5 2366.5 239.425 2366.5 245.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 301.269 675)">$4
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 470.691 557)">$5
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 640.113 414)">$8
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 809.535 566)">$5
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 978.957 339)">$9
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1148.38 486)">$7
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1317.8 438)">$7
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1487.22 388)">$8
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1656.65 351)">$9
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1812.13 250)">$10
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1981.56 127)">$12
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 2150.98 123)">$12
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 2320.4 199)">$11
+        </text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 69.9637 971)"> $-</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 92.4224
+        843)"> $2</text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 92.4224 715)"> $4</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 92.4224
+        586)"> $6</text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 92.4224 458)"> $8</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 62.7682
+        330)"> $10</text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 62.7682 202)"> $12</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 62.7682 73)">
+        $14</text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 155.466
+        1218)">2017-2018</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 324.888
+        1218)">2018-2019</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 494.31
+        1218)">2019-2020</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 663.732
+        1218)">2020-2021</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 833.154
+        1218)">2021-2022</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1002.58
+        1218)">2022-2023</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1172
+        1218)">2023-2024</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1341.42
+        1218)">2024-2025</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1510.84
+        1218)">2025-2026</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1680.26
+        1218)">2026-2027</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1849.69
+        1218)">2027-2028</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 2019.11
+        1218)">2028-2029</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 2188.53
+        1218)">2029-2030</text></g><g clip-path="url(#clip1)"><text
+        fill="#595959" font-family="Calibri,Calibri_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(6.12323e-17 -1 1
+        6.12323e-17 33.8703 229)">Billions</text></g><g><rect x="593" y="1270"
+        width="88" height="33" fill="#5B9BD5"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 690.568
+        1304)">Other</text></g><g><rect x="593" y="1338" width="88" height="33"
+        fill="#892B3F"/></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 690.568 1372)">Canada Community-Building Fund
+        / Gas Tax Fund</text></g><g><rect x="593" y="1406" width="88"
+        height="32" fill="#3A3553"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 690.568
+        1440)">Public Transit Funds</text></g><g><rect x="593" y="1473"
+        width="88" height="33" fill="#D69E2E"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 690.568
+        1508)">Investing in Canada Infrastructure Program</text></g><g><rect
+        x="593" y="1541" width="88" height="33" fill="#CD5E76"/></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 690.568
+        1576)">Canada Housing Infrastructure Fund</text></g><g><rect x="593"
+        y="1609" width="88" height="33" fill="#61588A"/></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 690.568
+        1643)">Building Canada Fund</text></g><g><path d="M593 1693 681 1693"
+        stroke="#000000" stroke-width="10.3125" stroke-linecap="round"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"
+        fill-rule="evenodd"/></g><g><path d="M648 1693C648 1699.07 643.075 1704
+        637 1704 630.925 1704 626 1699.07 626 1693 626 1686.92 630.925 1682 637
+        1682 643.075 1682 648 1686.92 648 1693Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 690.568 1711)">Total HICC Transfer
+        Payments</text></g></g></svg>
+      fr: >-
+        <svg width="2475" height="1825" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
+        overflow="hidden"><g><g><path d="M303.5 875.529 2460.5 875.529M303.5
+        739.524 2460.5 739.524M303.5 603.52 2460.5 603.52M303.5 466.516 2460.5
+        466.516M303.5 330.511 2460.5 330.511M303.5 194.507 2460.5 194.507M303.5
+        57.4999 2460.5 57.4999" stroke="#D9D9D9" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></g><g><path
+        d="M353.012 961.032 420.014 961.032 420.014 1012 353.012 1012ZM519.017
+        935.031 585.019 935.031 585.019 1012 519.017 1012ZM685.022 910.03
+        751.025 910.03 751.025 1012 685.022 1012ZM851.028 906.03 917.03 906.03
+        917.03 1012 851.028 1012ZM1017.03 894.029 1083.04 894.029 1083.04 1012
+        1017.03 1012ZM1183.04 922.03 1249.04 922.03 1249.04 1012 1183.04
+        1012ZM1349.04 920.03 1415.05 920.03 1415.05 1012 1349.04 1012ZM1515.05
+        921.03 1581.05 921.03 1581.05 1012 1515.05 1012ZM1681.06 944.031 1747.06
+        944.031 1747.06 1012 1681.06 1012ZM1846.06 962.032 1913.06 962.032
+        1913.06 1012 1846.06 1012ZM2012.07 967.032 2079.07 967.032 2079.07 1012
+        2012.07 1012ZM2178.07 999.033 2245.07 999.033 2245.07 1012 2178.07
+        1012ZM2344.08 987.032 2411.08 987.032 2411.08 1012 2344.08 1012Z"
+        fill="#61588A"/></g><g><path d="M1515.05 920.03 1581.05 920.03 1581.05
+        921.03 1515.05 921.03ZM1681.06 938.031 1747.06 938.031 1747.06 944.031
+        1681.06 944.031ZM1846.06 944.031 1913.06 944.031 1913.06 962.032 1846.06
+        962.032ZM2012.07 937.031 2079.07 937.031 2079.07 967.032 2012.07
+        967.032ZM2178.07 960.031 2245.07 960.031 2245.07 999.033 2178.07
+        999.033ZM2344.08 921.03 2411.08 921.03 2411.08 987.032 2344.08 987.032Z"
+        fill="#CD5E76"/></g><g><path d="M519.017 934.031 585.019 934.031 585.019
+        935.031 519.017 935.031ZM685.022 900.03 751.025 900.03 751.025 910.03
+        685.022 910.03ZM851.028 862.028 917.03 862.028 917.03 906.03 851.028
+        906.03ZM1017.03 788.026 1083.04 788.026 1083.04 894.029 1017.03
+        894.029ZM1183.04 793.026 1249.04 793.026 1249.04 922.03 1183.04
+        922.03ZM1349.04 781.026 1415.05 781.026 1415.05 920.03 1349.04
+        920.03ZM1515.05 764.025 1581.05 764.025 1581.05 921.03 1515.05
+        921.03ZM1681.06 750.025 1747.06 750.025 1747.06 938.031 1681.06
+        938.031ZM1846.06 728.024 1913.06 728.024 1913.06 944.031 1846.06
+        944.031ZM2012.07 651.021 2079.07 651.021 2079.07 937.031 2012.07
+        937.031ZM2178.07 676.022 2245.07 676.022 2245.07 960.031 2178.07
+        960.031ZM2344.08 700.023 2411.08 700.023 2411.08 921.03 2344.08 921.03Z"
+        fill="#D69E2E"/></g><g><path d="M353.012 944.031 420.014 944.031 420.014
+        961.032 353.012 961.032ZM519.017 855.028 585.019 855.028 585.019 934.031
+        519.017 934.031ZM685.022 850.028 751.025 850.028 751.025 900.03 685.022
+        900.03ZM851.028 834.027 917.03 834.027 917.03 862.028 851.028
+        862.028ZM1017.03 768.025 1083.04 768.025 1083.04 788.026 1017.03
+        788.026ZM1183.04 788.026 1249.04 788.026 1249.04 793.026 1183.04
+        793.026ZM1349.04 777.026 1415.05 777.026 1415.05 781.026 1349.04
+        781.026ZM1515.05 737.024 1581.05 737.024 1581.05 764.025 1515.05
+        764.025ZM1681.06 703.023 1747.06 703.023 1747.06 750.025 1681.06
+        750.025ZM1846.06 590.019 1913.06 590.019 1913.06 728.024 1846.06
+        728.024ZM2012.07 461.015 2079.07 461.015 2079.07 651.021 2012.07
+        651.021ZM2178.07 392.013 2245.07 392.013 2245.07 676.022 2178.07
+        676.022ZM2344.08 437.014 2411.08 437.014 2411.08 700.023 2344.08
+        700.023Z" fill="#3A3553"/></g><g><path d="M353.012 803.026 420.014
+        803.026 420.014 944.031 353.012 944.031ZM519.017 707.023 585.019 707.023
+        585.019 855.028 519.017 855.028ZM685.022 554.018 751.025 554.018 751.025
+        850.028 685.022 850.028ZM851.028 686.023 917.03 686.023 917.03 834.027
+        851.028 834.027ZM1017.03 462.015 1083.04 462.015 1083.04 768.025 1017.03
+        768.025ZM1183.04 633.021 1249.04 633.021 1249.04 788.026 1183.04
+        788.026ZM1349.04 616.02 1415.05 616.02 1415.05 777.026 1349.04
+        777.026ZM1515.05 576.019 1581.05 576.019 1581.05 737.024 1515.05
+        737.024ZM1681.06 535.018 1747.06 535.018 1747.06 703.023 1681.06
+        703.023ZM1846.06 421.014 1913.06 421.014 1913.06 590.019 1846.06
+        590.019ZM2012.07 286.009 2079.07 286.009 2079.07 461.015 2012.07
+        461.015ZM2178.07 218.007 2245.07 218.007 2245.07 392.013 2178.07
+        392.013ZM2344.08 289.009 2411.08 289.009 2411.08 437.014 2344.08
+        437.014Z" fill="#892B3F"/></g><g><path d="M353.012 766.025 420.014
+        766.025 420.014 803.026 353.012 803.026ZM519.017 641.021 585.019 641.021
+        585.019 707.023 519.017 707.023ZM685.022 489.016 751.025 489.016 751.025
+        554.018 685.022 554.018ZM851.028 651.021 917.03 651.021 917.03 686.023
+        851.028 686.023ZM1017.03 409.013 1083.04 409.013 1083.04 462.015 1017.03
+        462.015ZM1183.04 566.019 1249.04 566.019 1249.04 633.021 1183.04
+        633.021ZM1349.04 515.017 1415.05 515.017 1415.05 616.02 1349.04
+        616.02ZM1515.05 462.015 1581.05 462.015 1581.05 576.019 1515.05
+        576.019ZM1681.06 422.014 1747.06 422.014 1747.06 535.018 1681.06
+        535.018ZM1846.06 314.01 1913.06 314.01 1913.06 421.014 1846.06
+        421.014ZM2012.07 184.006 2079.07 184.006 2079.07 286.009 2012.07
+        286.009ZM2178.07 180.006 2245.07 180.006 2245.07 218.007 2178.07
+        218.007ZM2344.08 260.009 2411.08 260.009 2411.08 289.009 2344.08
+        289.009Z" fill="#5B9BD5"/></g><g><path d="M303.5 1012.5 2460.5 1012.5"
+        stroke="#D9D9D9" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10" fill="none" fill-rule="evenodd"/></g><g><path
+        d="M386 766 552.018 641.021 718.024 489.016 884.029 651.021 1050.03
+        409.013 1216.04 566.019 1382.05 515.017 1548.05 462.015 1714.06 422.014
+        1880.06 314.01 2046.07 184.006 2211.07 180 2377 260.009"
+        stroke="#000000" stroke-width="10.3125" stroke-linecap="round"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></g><g><path
+        d="M397.499 766.5C397.499 772.575 392.574 777.499 386.5 777.499 380.425
+        777.499 375.5 772.575 375.5 766.5 375.5 760.425 380.425 755.5 386.5
+        755.5 392.574 755.5 397.499 760.425 397.499 766.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M563.499 640.5C563.499 646.574 558.574
+        651.499 552.5 651.499 546.425 651.499 541.5 646.574 541.5 640.5 541.5
+        634.425 546.425 629.5 552.5 629.5 558.574 629.5 563.499 634.425 563.499
+        640.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M729.499 488.5C729.499 494.575 724.575
+        499.499 718.5 499.499 712.425 499.499 707.5 494.575 707.5 488.5 707.5
+        482.425 712.425 477.5 718.5 477.5 724.575 477.5 729.499 482.425 729.499
+        488.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M895.499 650.5C895.499 656.574 890.575
+        661.499 884.5 661.499 878.425 661.499 873.5 656.574 873.5 650.5 873.5
+        644.425 878.425 639.5 884.5 639.5 890.575 639.5 895.499 644.425 895.499
+        650.5Z" stroke="#000000" stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1061.5 408.5C1061.5 414.574 1056.57
+        419.499 1050.5 419.499 1044.42 419.499 1039.5 414.574 1039.5 408.5
+        1039.5 402.425 1044.42 397.5 1050.5 397.5 1056.57 397.5 1061.5 402.425
+        1061.5 408.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M1226.5
+        565.5C1226.5 571.575 1221.57 576.499 1215.5 576.499 1209.42 576.499
+        1204.5 571.575 1204.5 565.5 1204.5 559.425 1209.42 554.5 1215.5 554.5
+        1221.57 554.5 1226.5 559.425 1226.5 565.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1392.5 514.5C1392.5 520.575 1387.57
+        525.499 1381.5 525.499 1375.42 525.499 1370.5 520.575 1370.5 514.5
+        1370.5 508.425 1375.42 503.5 1381.5 503.5 1387.57 503.5 1392.5 508.425
+        1392.5 514.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M1558.5
+        461.5C1558.5 467.575 1553.57 472.499 1547.5 472.499 1541.42 472.499
+        1536.5 467.575 1536.5 461.5 1536.5 455.425 1541.42 450.5 1547.5 450.5
+        1553.57 450.5 1558.5 455.425 1558.5 461.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M1724.5 421.5C1724.5 427.574 1719.57
+        432.499 1713.5 432.499 1707.42 432.499 1702.5 427.574 1702.5 421.5
+        1702.5 415.425 1707.42 410.5 1713.5 410.5 1719.57 410.5 1724.5 415.425
+        1724.5 421.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M1890.5
+        314.5C1890.5 320.575 1885.57 325.499 1879.5 325.499 1873.42 325.499
+        1868.5 320.575 1868.5 314.5 1868.5 308.425 1873.42 303.5 1879.5 303.5
+        1885.57 303.5 1890.5 308.425 1890.5 314.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M2056.5 183.5C2056.5 189.575 2051.57
+        194.499 2045.5 194.499 2039.42 194.499 2034.5 189.575 2034.5 183.5
+        2034.5 177.425 2039.42 172.5 2045.5 172.5 2051.57 172.5 2056.5 177.425
+        2056.5 183.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/><path d="M2222.5
+        180.5C2222.5 186.575 2217.57 191.499 2211.5 191.499 2205.42 191.499
+        2200.5 186.575 2200.5 180.5 2200.5 174.425 2205.42 169.5 2211.5 169.5
+        2217.57 169.5 2222.5 174.425 2222.5 180.5Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/><path d="M2388.5 260.5C2388.5 266.575 2383.57
+        271.499 2377.5 271.499 2371.42 271.499 2366.5 266.575 2366.5 260.5
+        2366.5 254.425 2371.42 249.5 2377.5 249.5 2383.57 249.5 2388.5 254.425
+        2388.5 260.5Z" stroke="#000000" stroke-width="3.4375"
+        stroke-linejoin="round" stroke-miterlimit="10"/></g><g><text
+        fill="#404040" font-family="Calibri,Calibri_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 364.687
+        719)">$4 </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 530.614 593)">$5
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 696.541 442)">$8
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 862.468 604)">$5
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1028.4 362)">$9
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1194.32 518)">$7
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1360.25 467)">$7
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1526.18 414)">$8
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1692.1 374)">$9
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 1844.1 267)">$10
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 2010.02 137)">$12
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 2175.95 133)">$12
+        </text></g><g><text fill="#404040"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(1 0 0 1 2341.88 213)">$11
+        </text></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 157.129 1030)">    $</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 127.475
+        894)">   2 $</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 127.475 757)">   4 $</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 127.475
+        621)">   6 $</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 127.475 485)">   8 $</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 97.821
+        348)">   10 $</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 97.821 212)">   12 $</text></g><g><text
+        fill="#595959" font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 97.821
+        76)">   14 $</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 218.883
+        1277)">2017-2018</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 384.81
+        1277)">2018-2019</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 550.737
+        1277)">2019-2020</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 716.664
+        1277)">2020-2021</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 882.591
+        1277)">2021-2022</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1048.52
+        1277)">2022-2023</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1214.45
+        1277)">2023-2024</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1380.37
+        1277)">2024-2025</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1546.3
+        1277)">2025-2026</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1712.23
+        1277)">2026-2027</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 1878.15
+        1277)">2027-2028</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 2044.08
+        1277)">2028-2029</text></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(0.707107 -0.707107 0.707107 0.707107 2210.01
+        1277)">2029-2030</text></g><g><text fill="#595959"
+        font-family="Calibri,Calibri_MSFontService,sans-serif" font-weight="400"
+        font-size="55" transform="matrix(6.12323e-17 -1 1 6.12323e-17 68.9232
+        264)">Milliards</text></g><g><rect x="153" y="1314" width="88"
+        height="33" fill="#5B9BD5"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 250.282
+        1349)">Autres</text></g><g><rect x="153" y="1387" width="88" height="33"
+        fill="#892B3F"/></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 250.282 1421)">Fonds pour le développement des
+        collectivités du Canada/Fonds de la taxe sur
+        l’essence</text></g><g><rect x="153" y="1459" width="88" height="33"
+        fill="#3A3553"/></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 250.282 1493)">Divers fonds destinés au
+        transport en commun</text></g><g><rect x="153" y="1531" width="88"
+        height="33" fill="#D69E2E"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 250.282
+        1566)">Programme d’infrastructure Investir dans le
+        Canada</text></g><g><rect x="153" y="1603" width="88" height="33"
+        fill="#CD5E76"/></g><g><text fill="#595959" font-family="Segoe UI,Segoe
+        UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 250.282 1638)">Fonds canadien pour les
+        infrastructures liées au logement</text></g><g><rect x="153" y="1676"
+        width="88" height="33" fill="#61588A"/></g><g><text fill="#595959"
+        font-family="Segoe UI,Segoe UI_MSFontService,sans-serif"
+        font-weight="400" font-size="55" transform="matrix(1 0 0 1 250.282
+        1710)">Nouveau Fonds Chantiers Canada</text></g><g><path d="M153 1764
+        241 1764" stroke="#000000" stroke-width="10.3125" stroke-linecap="round"
+        stroke-linejoin="round" stroke-miterlimit="10" fill="none"
+        fill-rule="evenodd"/></g><g><path d="M208 1764C208 1770.07 203.075 1775
+        197 1775 190.925 1775 186 1770.07 186 1764 186 1757.92 190.925 1753 197
+        1753 203.075 1753 208 1757.92 208 1764Z" stroke="#000000"
+        stroke-width="3.4375" stroke-linejoin="round"
+        stroke-miterlimit="10"/></g><g><text fill="#595959" font-family="Segoe
+        UI,Segoe UI_MSFontService,sans-serif" font-weight="400" font-size="55"
+        transform="matrix(1 0 0 1 250.282 1782)">Total des paiements de
+        transfert de LICC</text></g></g></svg>
+annotations: []

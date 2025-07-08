@@ -27,7 +27,9 @@ export default {
                     h('span', { class: 'font-semibold' }, '.svg'),
                     h('input', {
                         type: 'file',
-                        //class: 'border border-gray-300 rounded-sm p-1 font-mono h-32 leading-tight',
+                        style: "background-color: var(--color-gray-50); border-style:dashed;",
+                        accept: '.svg',
+                        class: 'border-2 border-blue-300 rounded-sm p-1 w-full py-6 px-4 font-semibold text-sm hover:text-blue-800 cursor-pointer',
                         'onChange': (e) => {
                             const filename = e.target.files[0];
                             if (!filename) return;

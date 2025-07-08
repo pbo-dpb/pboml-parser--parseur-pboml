@@ -14,13 +14,14 @@ export default {
         return h('div', {}, [
             h(TinyButton, {
                 onClick: (e) => {
-                    this.$refs.renderer.classList.remove('hidden');
+                    this.$refs.renderer.removeAttribute('hidden');
                     setTimeout(() => {
                         const bbox = this.$refs.renderer.querySelector('svg').getBBox();
+                        console.log(bbox);
                         this.$refs.renderer.querySelector('svg').setAttribute("viewBox", `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
 
                         setTimeout(() => {
-                            this.$refs.renderer.classList.add('hidden');
+                            this.$refs.renderer.setAttribute('hidden', true);
                             this.$emit('fit', this.$refs.renderer.querySelector('svg').outerHTML)
                         }, 200);
                     }, 200);
@@ -32,7 +33,7 @@ export default {
             ]),
 
 
-            h('div', { innerHTML: this.svg, class: 'hidden w-full dark:invert flex flex-col items-center', ref: 'renderer', hidden: true })
+            h('div', { innerHTML: this.svg, class: 'w-full dark:invert flex flex-col items-center', ref: 'renderer', hidden: true })
 
         ]);
     }
