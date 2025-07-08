@@ -50,10 +50,12 @@ export default {
              */
 
             // More regular Word
-            markdown = markdown.replaceAll('•	', '- ')
-                .replaceAll('×', '-')
-                .replaceAll('o	', '- ')
-                .replaceAll('	', '- ')
+            markdown = markdown
+                .replaceAll(' ', ' ') // Non-breaking space
+                .replaceAll('•	', '- ') // Bullet point
+                .replaceAll('×', '-') // Bullet multiplication
+                .replaceAll('o	', '- ') // Bullet point
+                .replaceAll('	', '- ') // Bullet point
                 // Catch weird word list rendering.
                 .replaceAll('·        ', '- ')
                 .replaceAll('·         ', '- ')
