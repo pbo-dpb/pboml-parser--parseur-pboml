@@ -10,7 +10,7 @@
                 {{ groupAbbrev }}
             </div>
             <div class="overflow-hidden" :title="variable.key"><span class="overflow-hidden font-mono">{{ variable.key
-                    }}</span></div>
+            }}</span></div>
         </div>
         <div class="flex flex-row gap-2 items-center">
             <StarIcon class="size-4" v-if="variable.emphasize" />

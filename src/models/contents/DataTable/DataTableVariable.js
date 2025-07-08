@@ -81,7 +81,10 @@ export default class DataTableVariable {
 
         let labelSpan;
         if (editorStyle) {
-            labelSpan = h('div', { class: `font-mono` }, this.key)
+            labelSpan = h('div', { class: `flex flex-col` }, [
+                h('div', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full prose-sm" }),
+                h('span', { class: 'font-mono text-xs opacity-50' }, this.key)
+            ])
 
         } else if (this.label[language]) {
             labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
