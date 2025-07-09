@@ -2,7 +2,7 @@ export default {
     en: {
         "close": "Close",
         "edit": "Edit",
-        "content_section_title": "Content",
+        "main_content_section_title": "Main Content",
         "structure_section_title": "Structure",
         "meta_section_title": "Document properties",
         "slices_section_title": "Slices",
@@ -132,7 +132,7 @@ export default {
     fr: {
         "close": "Fermer",
         "edit": "Éditer",
-        "content_section_title": "Contenu",
+        "main_content_section_title": "Contenu principal",
         "structure_section_title": "Structure",
         "meta_section_title": "Propriétés du document",
         "slices_section_title": "Tranches",

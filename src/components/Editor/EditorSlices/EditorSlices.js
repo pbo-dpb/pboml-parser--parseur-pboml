@@ -1,12 +1,21 @@
+import { defineAsyncComponent } from 'vue'
 import PBOMLDocument from "../../../models/PBOMLDocument";
 import { h } from 'vue'
 import SliceStager from "../SliceStager/SliceStager.vue"
+import Tab from "../Tabs/Tab.vue";
+import strings from "../../../editor-strings"
 
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
     },
 
+    data() {
+        return {
+            'currentTab': 'slices',
+            strings: strings[document.documentElement.lang],
+        }
+    },
     methods: {
 
         handleNewSlice(slice, index) {
@@ -26,10 +35,26 @@ export default {
 
     },
 
+    components: {
+        Tab
+    },
 
     render() {
         return h('main', { class: "flex flex-col gap-4" }, [
-            h('div', { 'class': 'flex flex-col gap-8' }, [
+
+
+            h('div', {
+                role: 'tablist', class: 'flex flex-row gap-4 mb-4 border-b border-gray-300'
+            }, {
+                default: () => [
+                    h(Tab, { size: "md", selected: this.currentTab === 'slices', onClick: () => { this.currentTab = 'slices' } }, { default: () => this.strings.slices_section_title }),
+                    h(Tab, { size: "md", selected: this.currentTab === 'structure', onClick: () => { this.currentTab = 'structure' } }, { default: () => this.strings.structure_section_title }),
+                ]
+            }),
+
+            this.currentTab === 'structure' ? h(defineAsyncComponent(() => import('../StructureEditor/StructureEditor.js')), { pbomlDocument: this.pbomlDocument }) : null,
+
+            this.currentTab === 'slices' ? h('div', { 'class': 'flex flex-col gap-8' }, [
 
                 h(SliceStager, {
                     soft: this.pbomlDocument.slices.length ? true : false,
@@ -56,7 +81,7 @@ export default {
                         }),
                     ]);
                 }) : null),
-            ]),
+            ]) : null,
 
         ]);
     }

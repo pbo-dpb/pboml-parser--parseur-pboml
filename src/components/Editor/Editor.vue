@@ -16,8 +16,9 @@
                     <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
                         <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'"
                             :warning="hasUnlockedSlices">
-                            {{ strings.slices_section_title }}
+                            {{ strings.main_content_section_title }}
                         </Tab>
+
                         <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
                             @click="currentTab = 'annotations'" :warning="hasUnlockedAnnotations">
                             {{ strings.annotations_section_title }}
@@ -25,10 +26,7 @@
                         <Tab :controls="'meta'" :selected="currentTab === 'meta'" @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
                         </Tab>
-                        <Tab :controls="'structure'" :selected="currentTab === 'structure'"
-                            @click="currentTab = 'structure'">
-                            {{ strings.structure_section_title }}
-                        </Tab>
+
                     </div>
                     <div v-if="currentTab === 'slices'" class="flex flex-row items-center gap-2">
 
@@ -84,10 +82,7 @@
                             <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
                         </div>
 
-                        <div id="structure" role="tabpanel" tabindex="0" aria-labelledby="tab-structure"
-                            v-if="currentTab === 'structure'">
-                            <structure-editor :pboml-document="pbomlDocument"></structure-editor>
-                        </div>
+
 
                     </div>
 
@@ -119,6 +114,7 @@ import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
 import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
 import { Bars3Icon, ArrowsPointingInIcon, ArrowsPointingOutIcon, RectangleGroupIcon, CodeBracketIcon } from '@heroicons/vue/24/solid';
+import { ChevronRightIcon } from '@heroicons/vue/20/solid';
 
 export default {
     props: {
@@ -147,12 +143,13 @@ export default {
         DocumentMetaEditor,
         Tab,
         AnnotationsEditor: defineAsyncComponent(() => import('./AnnotationsEditor/AnnotationsEditor.js')),
-        StructureEditor: defineAsyncComponent(() => import('./StructureEditor/StructureEditor.js')),
+
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
         ArrowsPointingInIcon,
         ArrowsPointingOutIcon,
-        RectangleGroupIcon
+        RectangleGroupIcon,
+        ChevronRightIcon
     },
 
     watch: {
@@ -176,7 +173,6 @@ export default {
 
     computed: {
         hasUnlockedSlices() {
-            console.log(this.pbomlDocument.slices.filter(slice => !slice.state._unlocked).length)
             return this.pbomlDocument.slices.some(slice => slice.state._unlocked);
         },
 
