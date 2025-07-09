@@ -5,6 +5,12 @@ import { h } from 'vue'
 import Annotation from "../../../models/Annotation"
 import AnnotationsEditorNewButton from "./AnnotationsEditorNewButton"
 import AnnotationEditor from "../../../editors/AnnotationEditor"
+
+
+import LockStateToggler from "../../LockStateToggler.js";
+
+
+
 export default {
     props: ["pbomlDocument"],
 
@@ -30,7 +36,10 @@ export default {
                 this.pbomlDocument.annotations = [];
 
             let newAnnotation = new Annotation({
-                id: this.pbomlDocument.annotations.length + 1
+                id: this.pbomlDocument.annotations.length + 1,
+                state: {
+                    _unlocked: true, // New annotations are always unlocked
+                }
             })
 
             if (index === 0 || index) {
@@ -47,9 +56,7 @@ export default {
                 this.$nextTick(() => {
                     setTimeout(() => {
                         button.scrollIntoView({
-                            behavior: 'instant',
-                            block: 'center',
-                            inline: 'center'
+                            behavior: 'smooth',
                         })
                     }, "300")
                 })
@@ -89,37 +96,45 @@ export default {
                     // Prepend the first one with an annotation
                     i === 0 ? h(AnnotationsEditorNewButton, { soft: true, "onClick": (e) => this.pushNewAnnotation(e, 0) }) : null,
 
-                    h(AnnotationEditor, {
-                        annotation,
-                        canMoveUp: i !== 0,
-                        canMoveDown: i !== this.pbomlDocument.annotations.length - 1,
-                        onDelete: () => {
-                            this.pbomlDocument.annotations.splice(this.pbomlDocument.annotations.indexOf(annotation), 1);
-                            this.renumberSlices();
-                        },
-                        onMove: (direction, e) => {
-                            const from = i;
-                            const to = direction === 'up' ? from - 1 : from + 1;
-                            const el = this.pbomlDocument.annotations.splice(from, 1)[0];
-                            this.pbomlDocument.annotations.splice(to, 0, el);
+                    h('div', { 'class': 'relative' }, [
 
-                            if (e && e.target) {
-                                const targetEl = e.target;
-                                this.$nextTick(() => {
-                                    targetEl.scrollIntoView({
-                                        behavior: 'instant',
-                                        block: 'center',
-                                        inline: 'center'
+                        h(LockStateToggler, { class: 'absolute -left-8', unlockableObject: annotation }, () => []),
+
+                        annotation.state._unlocked ? null : h('div', { 'aria-hidden': true, class: 'grid grid-cols-2 selection-none', inert: true }, [
+                            h('div', { class: '-mx-16 scale-85' }, [annotation.renderAsVnode('en')]),
+                            h('div', { class: '-mx-16 scale-85' }, [annotation.renderAsVnode('fr')]),
+                        ]),
+
+                        annotation.state._unlocked ? h(AnnotationEditor, {
+                            annotation,
+                            canMoveUp: i !== 0,
+                            canMoveDown: i !== this.pbomlDocument.annotations.length - 1,
+                            onDelete: () => {
+                                this.pbomlDocument.annotations.splice(this.pbomlDocument.annotations.indexOf(annotation), 1);
+                                this.renumberSlices();
+                            },
+                            onMove: (direction, e) => {
+                                const from = i;
+                                const to = direction === 'up' ? from - 1 : from + 1;
+                                const el = this.pbomlDocument.annotations.splice(from, 1)[0];
+                                this.pbomlDocument.annotations.splice(to, 0, el);
+
+                                if (e && e.target) {
+                                    const targetEl = e.target;
+                                    console.log("targetEl", targetEl)
+                                    this.$nextTick(() => {
+                                        targetEl.scrollIntoView({
+                                            behavior: 'smooth',
+                                        })
                                     })
-                                })
-                            }
+                                }
 
-                            this.renumberSlices()
+                                this.renumberSlices()
 
-                        },
-                        'readonlyId': this.keepOrganized
-                    }),
-
+                            },
+                            'readonlyId': this.keepOrganized
+                        }) : null,
+                    ]),
                     // Add a soft button after each slice except the last one
                     i === (this.pbomlDocument.annotations.length - 1) ? null : h(AnnotationsEditorNewButton, { soft: true, "onClick": (e) => this.pushNewAnnotation(e, i + 1) })
 

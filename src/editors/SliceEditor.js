@@ -10,7 +10,7 @@ import MoveButton from "../components/Editor/MoveButton";
 import Renderer from "../components/Renderer/Renderer";
 import SliceSourceCodeEditor from "../components/Editor/SliceSourceCodeEditor.vue";
 
-import SliceEditorLockStateToggler from "./SliceEditorLockStateToggler";
+import LockStateToggler from "../components/LockStateToggler.js";
 
 export default {
     props: ["slice", "language"],
@@ -62,7 +62,7 @@ export default {
 
 
         return h('section', { class: 'relative' }, [
-            this.$attrs.onMoveSlice ? h(SliceEditorLockStateToggler, { class: 'absolute -left-8', slice: this.slice }, () => []) : null,
+            this.$attrs.onMoveSlice ? h(LockStateToggler, { class: 'absolute -left-8', unlockableObject: this.slice }, () => []) : null,
 
             this.slice.state._unlocked ? null : h('div', { 'aria-hidden': true, class: 'grid grid-cols-2 selection-none', inert: true }, [
                 h('div', { class: '-mx-16 scale-75' }, [Renderer.methods.renderSliceAsVnode(this.slice, 'en')]),

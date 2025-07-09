@@ -59,6 +59,7 @@ export default {
             isDragging: false,
             isBeingDraggedOver: false,
             showEditor: false,
+            shouldLockSliceOnClose: null
         };
     },
     methods: {
@@ -74,6 +75,24 @@ export default {
             this.isBeingDraggedOver = true;
         },
         toggleEditor() {
+
+            if (this.showEditor) {
+                // Closing the editor
+
+                if (this.shouldLockSliceOnClose !== false) {
+                    // Lock the slice if it was not explicitly unlocked
+                    this.slice.state._unlocked = false;
+                }
+
+            } else {
+                // Opening the editor
+                if (this.slice.state._unlocked === true) {
+                    this.shouldLockSliceOnClose = false;
+                }
+
+                this.slice.state._unlocked = true;
+            }
+
             this.showEditor = !this.showEditor;
         }
     },
