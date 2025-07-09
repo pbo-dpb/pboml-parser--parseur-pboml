@@ -95,8 +95,6 @@ export default {
         'data_table_editor_delete': "Delete",
         'data_table_has_no_units': "No variable in the table has a unit specified.",
         'paste_from_office': "Paste from Microsoft Office",
-        'collapse_all': 'Collapse all',
-        'expand_all': 'Expand all',
         'open_enhanced_preview': 'Open enhanced preview',
         'close_enhanced_preview': 'Close enhanced preview',
         'enhanced_preview_title': 'Enhanced preview',
