@@ -68,7 +68,7 @@ export default class Slice {
             }
         }
 
-        this._unlocked = payload?.state?._unlocked !== undefined ? payload.state._unlocked : false;
+        this.state._unlocked = payload?.state?._unlocked !== undefined ? payload.state._unlocked : false;
 
     }
 

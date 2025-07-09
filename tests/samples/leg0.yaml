@@ -55,6 +55,8 @@ slices:
         pas reste perpétuel qui meublé. Nay affronting bed projection compliment
         instrument.
   - type: table
+    state:
+      _unlocked: true
     label:
       en: Multi-Year Cost
       fr: Coût sur plusieurs années

@@ -23,6 +23,8 @@ export default class Annotation {
             prefix: null,
         }
 
+        this.state._unlocked = payload?.state?._unlocked || false;
+
     }
 
     get annotationAnchor() {
@@ -50,7 +52,7 @@ export default class Annotation {
     }
 
     toArray() {
-        return {
+        let array = {
             id: this.id,
             content_type: this.content_type,
             content: {
@@ -58,6 +60,14 @@ export default class Annotation {
                 fr: this.content?.fr
             }
         }
+
+        if (this.state._unlocked) {
+            array.state = {
+                _unlocked: this.state._unlocked,
+            }
+        }
+
+        return array;
     }
 
 

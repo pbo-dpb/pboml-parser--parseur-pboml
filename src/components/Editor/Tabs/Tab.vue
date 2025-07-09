@@ -10,9 +10,15 @@
         }" role="tab" :aria-selected="selected" :aria-controls="controls" :id="`tab-${controls}`"
         :tabindex="selected ? 0 : -1">
         <slot></slot>
+
+        <span v-if="warning" class="text-orange-500 text-xs font-bold">
+            <ExclamationTriangleIcon class="w-4 h-4"></ExclamationTriangleIcon>
+        </span>
+
     </button>
 </template>
 <script>
+import { ExclamationTriangleIcon } from '@heroicons/vue/16/solid';
 export default {
     props: {
         "selected": Boolean,
@@ -20,7 +26,14 @@ export default {
         'size': {
             type: String,
             default: "lg"
+        },
+        "warning": {
+            type: Boolean,
+            default: false
         }
-    }
+    },
+    components: {
+        ExclamationTriangleIcon
+    },
 }
 </script>
