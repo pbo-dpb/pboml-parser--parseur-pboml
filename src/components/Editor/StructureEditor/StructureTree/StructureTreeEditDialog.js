@@ -12,7 +12,7 @@ export default {
 
 
         return h('dialog', {
-            class: "container w-full shadow-sm",
+            class: "container w-full shadow-sm self-center-safe justify-self-center-safe border border-gray-300",
             onClose: () => { this.$emit('close') }
         }, [
             h('div', { class: "flex justify-end px-8 py-4 border-b border-gray-300 text-blue-700 hover:text-blue-800 bg-gray-50 sticky top-0 z-10" }, [
