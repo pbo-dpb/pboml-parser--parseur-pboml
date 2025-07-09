@@ -32,7 +32,7 @@
                     <div v-if="currentTab === 'slices'" class="flex flex-row items-center gap-2">
 
                         <div class="flex flex-row gap-0.5" aria-hidden="true">
-                            <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)"
+                            <!-- <TinyButton :title="strings.collapse_all" @click="collapseSlices(true)"
                                 :aria-pressed="areAllSlicesCollapsed">
                                 <ArrowsPointingInIcon class="w-4 h-4"></ArrowsPointingInIcon>
                                 <span class="sr-only">{{ strings.collapse_all }}</span>
@@ -41,7 +41,7 @@
                                 :aria-pressed="areAllSlicesExpanded">
                                 <ArrowsPointingOutIcon class="w-4 h-4"></ArrowsPointingOutIcon>
                                 <span class="sr-only">{{ strings.expand_all }}</span>
-                            </TinyButton>
+                            </TinyButton> -->
                         </div>
                         <TinyButton
                             :title="enhancedPreviewWindow ? strings.close_enhanced_preview : strings.open_enhanced_preview"
@@ -184,20 +184,14 @@ export default {
     },
 
     computed: {
-        areAllSlicesCollapsed() {
-            return !this.pbomlDocument.slices.some(slice => !slice.state.collapsed);
-        },
-        areAllSlicesExpanded() {
-            return !this.pbomlDocument.slices.some(slice => slice.state.collapsed);
-        },
+        countOfUnlockedSlices() {
+            return this.pbomlDocument.slices.filter(slice => !slice.state._unlocked).length;
+        }
+
     },
 
     methods: {
-        collapseSlices(collapse) {
-            this.pbomlDocument.slices.forEach(slice => {
-                slice.state.collapsed = collapse
-            });
-        },
+
         handlePbomlUpdate(newContent) {
             this.workingPboml = newContent;
         },

@@ -129,6 +129,7 @@ export default {
             let newSlice = new button.type({});
 
             newSlice.id = crypto.randomUUID();
+            newSlice.state._unlocked = true;
 
             // Customize the slice presentation.
             if ([BitmapSlice, SvgSlice, TableSlice, HtmlSlice, ChartSlice].includes(button.type)) {

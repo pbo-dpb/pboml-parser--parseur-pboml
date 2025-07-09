@@ -222,8 +222,6 @@ export default {
         'data_table_editor_delete': "Supprimer",
         'data_table_has_no_units': "Aucune variable du tableau n'a d'unité spécifiée.",
         'paste_from_office': "Coller depuis Microsoft Office",
-        'collapse_all': 'Tout réduire',
-        'expand_all': 'Tout étendre',
         'open_enhanced_preview': 'Ouvrir l\'aperçu amélioré',
         'close_enhanced_preview': 'Fermer l\'aperçu amélioré',
         'enhanced_preview_title': 'Aperçu amélioré',

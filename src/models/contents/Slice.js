@@ -53,6 +53,7 @@ export default class Slice {
         this.content = payload.content;
 
 
+
         this.state = {
             isEditingSourceCode: false,
             isEditingMeta: false,
@@ -64,9 +65,10 @@ export default class Slice {
             callbacks: {
                 move: null,
                 delete: null
-            },
-            collapsed: false
+            }
         }
+
+        this._unlocked = payload?.state?._unlocked !== undefined ? payload.state._unlocked : false;
 
     }
 
@@ -164,8 +166,15 @@ export default class Slice {
             sources: this.sources.length ? this.sources : null,
             notes: this.notes.length ? this.notes : null,
             alts: this.alts.length ? this.alts : null,
-            content: this.content
+            content: this.content,
         };
+
+        if (this.state._unlocked) {
+            serialization.state = {
+                _unlocked: true,
+            }
+        }
+
 
         for (const [key, value] of Object.entries(defaults)) {
             if (serialization[key] === value) {

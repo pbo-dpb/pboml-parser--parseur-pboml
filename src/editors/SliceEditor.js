@@ -10,7 +10,7 @@ import MoveButton from "../components/Editor/MoveButton";
 import Renderer from "../components/Renderer/Renderer";
 import SliceSourceCodeEditor from "../components/Editor/SliceSourceCodeEditor.vue";
 
-import SliceEditorCollapser from "./SliceEditorCollapser";
+import SliceEditorLockStateToggler from "./SliceEditorLockStateToggler";
 
 export default {
     props: ["slice", "language"],
@@ -62,14 +62,15 @@ export default {
 
 
         return h('section', { class: 'relative' }, [
-            this.$attrs.onMoveSlice ? h(SliceEditorCollapser, { class: 'absolute -left-8', slice: this.slice }, () => []) : null,
+            this.$attrs.onMoveSlice ? h(SliceEditorLockStateToggler, { class: 'absolute -left-8', slice: this.slice }, () => []) : null,
 
-            this.slice.state.collapsed ? h('div', { 'aria-hidden': true, class: 'grid grid-cols-2 selection-none', inert: true }, [
+            this.slice.state._unlocked ? null : h('div', { 'aria-hidden': true, class: 'grid grid-cols-2 selection-none', inert: true }, [
                 h('div', { class: '-mx-16 scale-75' }, [Renderer.methods.renderSliceAsVnode(this.slice, 'en')]),
                 h('div', { class: '-mx-16 scale-75' }, [Renderer.methods.renderSliceAsVnode(this.slice, 'fr')]),
-            ]) : null,
+            ]),
 
-            this.slice.state.collapsed ? null : h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded-sm ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
+
+            this.slice.state._unlocked ? h('fieldset', { class: `border-2 border-slate-300 p-4 flex flex-col gap-4 rounded-sm ${this.slice.readonly ? ' filter grayscale opacity-80' : ''}` },
                 [
 
                     h('legend',
@@ -134,7 +135,8 @@ export default {
                         ]),
 
                     ...currentContext
-                ])
+                ]) : null,
+
         ])
 
     }
