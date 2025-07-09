@@ -131,10 +131,12 @@ export default {
             marked.use({
                 walkTokens: (token) => {
 
+                    let payload = { state: { _unlocked: true } };
                     if (token.type === 'heading') {
-                        let payload = { content: {} };
+                        payload.content = {};
                         payload.content[language] = token.text;
                         payload.level = token.depth - 1;
+                        payload.state._unlocked = false; // Headings do not need to be reviewed
                         slices.push(new HeadingSlice(payload));
                     } else if (token.type === 'paragraph') {
                         let previousSlice = slices.length ? slices[slices.length - 1] : null;
@@ -142,11 +144,11 @@ export default {
                         // Don't create a new slice if the previous slice was also a markdown slice
                         if (previousSlice && previousSlice.type === "markdown")
                             return;
-                        slices.push(new MarkdownSlice({}));
+                        slices.push(new MarkdownSlice(payload));
                     } else if (token.type === 'table') {
-                        slices.push(new TableSlice({}));
+                        slices.push(new TableSlice(payload));
                     } else if (token.type === 'image') {
-                        slices.push(new SvgSlice({}));
+                        slices.push(new SvgSlice(payload));
                     }
 
                 }
