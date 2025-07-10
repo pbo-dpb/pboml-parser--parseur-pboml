@@ -18,16 +18,10 @@
 
         <div class="flex flex-col gap-2 bg-blue-100 shadow-sm p-4" v-if="shouldDisplayExportActions">
             <nav class="flex flex-row gap-2 justify-end ">
-                <Button @click="shouldDisplayPreprintExporter = !shouldDisplayPreprintExporter"
-                    v-if="shouldDisplayPreprintButton" :toggled="shouldDisplayPreprintExporter">
-                    PDF
-                </Button>
                 <Button @click="downloadPboml">
                     PBOML
                 </Button>
             </nav>
-
-            <preprint-exporter v-if="shouldDisplayPreprintExporter" :pboml-document="pbomlDocument"></preprint-exporter>
         </div>
 
         <div class="flex flex-col gap-2 border-4 border-slate-100 border-dashed shadow-inner rounded-sm p-4 -mx-4"
@@ -49,7 +43,7 @@
             <Renderer :pboml-document="pbomlDocument" :language="shouldDisplayPreview"></Renderer>
 
             <span class="mr-auto uppercase text-xl font-bold text-slate-500">/{{ strings.editor_actions_preview
-            }}</span>
+                }}</span>
 
         </div>
 
@@ -58,9 +52,7 @@
     </div>
 </template>
 <script>
-import PreprintExporter from './PreprintExporter/PreprintExporter.vue';
 import PBOMLDocument from '../../models/PBOMLDocument';
-import PdfRenderer from "./PreprintExporter/PdfRenderer.js"
 import Button from './Button.vue';
 import Renderer from '../Renderer/Renderer';
 import strings from "../../editor-strings"
@@ -74,13 +66,11 @@ export default {
     data() {
         return {
             shouldDisplayExportActions: false,
-            shouldDisplayPreprintExporter: false,
             shouldDisplayPreview: false,
             strings: strings[document.documentElement.lang]
         }
     },
     components: {
-        PreprintExporter,
         Button,
         Renderer,
         EyeIcon,
@@ -102,12 +92,6 @@ export default {
         }
     },
 
-    computed: {
-        shouldDisplayPreprintButton() {
-
-            return PdfRenderer.canRenderPdf;
-        }
-    }
 
 }
 </script>
