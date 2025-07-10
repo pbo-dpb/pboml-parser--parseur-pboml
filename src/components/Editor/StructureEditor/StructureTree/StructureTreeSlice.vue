@@ -13,8 +13,12 @@
             <div class="flex items-center">
                 <div :title="localizedSliceType" class="font-semibold w-12">{{
                     localizedSliceTypeAbbr
-                }}</div>
-                <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor }}
+                    }}</div>
+                <div v-if="this.slice.state._unlocked">
+                    <LockOpenIcon class="size-4 text-red-500 pr-2"></LockOpenIcon>
+                </div>
+                <div v-if="descriptor" :class="{ 'font-semibold': this.slice.type === 'heading' }">{{ descriptor
+                    }}
                 </div>
             </div>
             <button @click="toggleEditor" class="p-1 hover:bg-blue-100 rounded-sm">
@@ -29,11 +33,12 @@
 <script>
 import Slice from '../../../../models/contents/Slice';
 import editorStrings from "../../../../editor-strings"
-import { ArrowsUpDownIcon, PencilIcon } from '@heroicons/vue/24/outline';
+import { ArrowsUpDownIcon, PencilIcon, LockOpenIcon } from '@heroicons/vue/24/outline';
+
 import StructureTreeEditDialog from './StructureTreeEditDialog';
 
 export default {
-    components: { ArrowsUpDownIcon, StructureTreeEditDialog, PencilIcon },
+    components: { ArrowsUpDownIcon, StructureTreeEditDialog, PencilIcon, LockOpenIcon },
     props: {
         slice: {
             type: Slice,
