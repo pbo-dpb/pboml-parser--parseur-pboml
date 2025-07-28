@@ -299,7 +299,7 @@ export default class DataTable {
         vnodes.push(h('div', {
             class: 'overflow-x-auto'
         }, [
-            h('table', { class: `min-w-full w-max lg:w-full table-fixed border-collapse break-inside-avoid lg:table print:table print:text-sm` },
+            h('table', { class: `min-w-full lg:w-full table-fixed border-collapse break-inside-avoid lg:table print:table print:text-sm` },
                 this.__buildTableNodes(language),
             ),
 

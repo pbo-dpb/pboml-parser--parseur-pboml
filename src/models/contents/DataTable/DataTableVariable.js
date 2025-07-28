@@ -21,7 +21,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
+    static #cellBaseClass = 'prose border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
 
     constructor(payload, key) {
 
@@ -73,7 +73,7 @@ export default class DataTableVariable {
 
     getTableHeaderVnode(scope = null, language, shouldIncludeUnit = true, editorStyle = false, owningDataTable) {
         const md = new MarkdownDriver;
-        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 `;
+        let cellClasses = `${DataTableVariable.#cellBaseClass} sticky z-50 -left-2 max-w-50-vw text-left px-2`;
 
         if (editorStyle && this.is_descriptive) {
             cellClasses += " border-l-yellow-500 border-l-2 ";
@@ -100,11 +100,6 @@ export default class DataTableVariable {
             groupSpan = h('span', { class: 'text-gray-800 dark:text-gray-200 font-normal bg-slate-100 rounded-sm w-fit px-1', innerHTML: md.render(this.group[language]) });
         }
 
-        if (owningDataTable?.presentation_style === 'accounting') {
-            cellClasses += " text-left px-2 ";
-        } else {
-            cellClasses += " text-center ";
-        }
 
         if (this.emphasize) {
             cellClasses += " bg-[rgba(254,249,195,0.8)] dark:bg-[rgba(133,77,14,0.8)]";
