@@ -21,7 +21,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'prose border border-gray-300 dark:border-gray-700 p-1 leading-snug leading-snug text-balance hyphens-auto';
+    static #cellBaseClass = 'prose border border-gray-300 dark:border-gray-700 p-1 leading-snug text-balance hyphens-auto';
 
     constructor(payload, key) {
 
@@ -82,12 +82,12 @@ export default class DataTableVariable {
         let labelSpan;
         if (editorStyle) {
             labelSpan = h('div', { class: `flex flex-col` }, [
-                h('div', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full prose-sm" }),
+                h('div', { innerHTML: md.render(this.label[language]), class: "pboml-prose  prose-p:leading-snug w-full prose-sm" }),
                 h('span', { class: 'font-mono text-xs opacity-50' }, this.key)
             ])
 
         } else if (this.label[language]) {
-            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose prose-p:leading-tight w-full" });
+            labelSpan = h('span', { innerHTML: md.render(this.label[language]), class: "pboml-prose  prose-p:leading-snug w-full" });
         }
 
         let unitSpan;
