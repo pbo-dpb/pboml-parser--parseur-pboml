@@ -145,7 +145,7 @@ export default class DataTableVariable {
 
         if (!editorStyle && this.type === 'separator') {
             const colspan = owningDataTable.content.length + 1;
-            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 shadow-inner`, role: "separator", colspan }, [
+            return h('td', { class: `${cellClasses}  bg-slate-100 lg:bg-slate-100 dark:bg-slate-800 dark:lg:bg-slate-800 py-0 shadow-inner`, colspan, ariaHidden: labelSpan ? false : true }, [
                 labelSpan ? h('div', { class: 'flex flex-row gap-0.5 w-full py-1 font-semibold' }, cellContent) : h('div', { class: "h-1" })
             ]);
         }

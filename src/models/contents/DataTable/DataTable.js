@@ -176,7 +176,7 @@ export default class DataTable {
         if (this.entrygroups.length > 0) {
             // Create a super row.
             let superRow = [
-                h('th', { colspan: shouldUseGroupsPresentation ? 2 : 1 }, [
+                h('th', { colspan: shouldUseGroupsPresentation ? 2 : 1, scope: 'col' }, [
                     h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label)
                 ]
                 ),
@@ -188,7 +188,7 @@ export default class DataTable {
                         classes = 'border-b-4 border-b-neutral-300 dark:border-b-neutral-700';
                     }
 
-                    return h('th', { colspan: entrygroup.span, class: `text-slate-700  dark:text-slate-300 ${classes}` }, [
+                    return h('th', { colspan: entrygroup.span, class: `text-slate-700  dark:text-slate-300 ${classes}`, scope: 'col' }, [
                         entrygroup.label[language] ? entrygroup.label[language] : [h('span', { class: 'sr-only' }, rendererStrings[language].empty_cell_label)]
                     ]);
                 })
