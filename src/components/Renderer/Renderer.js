@@ -92,12 +92,12 @@ export default {
       }
     });
 
-    return h('main', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
+    return h('div', { 'class': 'flex flex-col gap-8 print:block', 'ref': 'main' }, [
       ...this._buildHeaderVnodes(language),
       ...slices.map((slice) => {
         if (Array.isArray(slice)) {
 
-          let wrapperVnode = this.getSliceRenderer(slice[0]).getSliceWrapperVnode();
+          let wrapperVnode = this.getSliceRenderer(slice[0]).getSliceWrapperVnode(language);
           wrapperVnode.children = slice.map((s, i) => this.getSliceRenderer(s).buildVnodes(language, i > 0));
           return wrapperVnode;
         } else {

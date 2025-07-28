@@ -33,7 +33,7 @@ export default class SliceHtmlRenderer {
 
 
 
-        return h(labelNodeType, { class: labelNodeClasses.join(" ") },
+        return h(labelNodeType, { class: labelNodeClasses.join(" "), id: `${this.slice.anchor}-label` },
             this.getLabelStringsSpanVnodesForLanguage(language)
         );
     }
@@ -160,22 +160,35 @@ export default class SliceHtmlRenderer {
         ];
     }
 
-    getSliceWrapperVnode() {
-        let classes = ["flex flex-col gap-4 print:mt-4 @container/slice"];
-        classes.push(this.slice.print_only ? 'hidden print:flex' : 'flex')
-        classes.push(this.slice.presentation === "figure" ? "bg-linear-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure" : "");
-        classes.push(this.slice.presentation === "aside" ? "bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside" : "");
-
+    getSliceWrapperVnode(language) {
+        let props = {
+            class: "flex flex-col gap-4 print:mt-4 @container/slice" + (this.slice.print_only ? ' hidden print:flex' : ' flex'),
+            id: this.slice.anchor
+        }
         let elType = 'section';
-        if (this.slice.presentation === 'figure') elType = 'figure';
-        else if (this.slice.presentation === 'aside') elType = 'aside';
-        return h(elType, { class: classes.join(" "), id: this.slice.anchor }, []);
+        if (this.slice.presentation === 'figure') {
+            props = {
+                ...props,
+                "aria-labelledby": this.slice.label?.[language] ? `${this.slice.anchor}-label` : rendererStrings[language].figure_label,
+                class: props.class + " bg-linear-to-tr from-transparent to-zinc-100 dark:to-zinc-800 rounded-tr-3xl p-4 break-inside-avoid-page pb__figure",
+            };
+            elType = 'figure';
+        } else if (this.slice.presentation === 'aside') {
+            props = {
+                ...props,
+                "aria-labelledby": this.slice.label?.[language] ? `${this.slice.anchor}-label` : rendererStrings[language].aside_label,
+                class: props.class + " bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside",
+            };
+            elType = 'aside';
+        }
+
+        return h(elType, props, []);
     }
 
     renderAsVnode(language = document.documentElement.lang, wrap = true) {
 
         if (wrap) {
-            let sliceWrapper = this.getSliceWrapperVnode();
+            let sliceWrapper = this.getSliceWrapperVnode(language);
             sliceWrapper.children = this.buildVnodes(language);
             return sliceWrapper;
         }

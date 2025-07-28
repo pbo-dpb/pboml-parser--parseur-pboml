@@ -224,8 +224,6 @@ export default class DataTableVariable {
 
         if (this.is_descriptive && scope) {
             cellAttributes.scope = scope;
-        } else {
-            cellAttributes.role = 'cell';
         }
 
         return h(this.is_descriptive ? 'th' : 'td', cellAttributes);
