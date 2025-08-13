@@ -16,6 +16,8 @@ document:
 slices:
   - type: markdown
     display_label: false
+    state:
+      _unlocked: true
     label:
       en: Description
       fr: Description

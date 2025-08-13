@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-1 @sm:flex-row text-gray-700 focus-within:text-purple-800">
         <div class="flex flex-row justify-between items-center">
             <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
-            <PasteFromOfficeButton @click="handlePaste" class="@sm:hidden "></PasteFromOfficeButton>
+            <!--<PasteFromOfficeButton @click="handlePaste" class="@sm:hidden "></PasteFromOfficeButton>-->
         </div>
 
         <textarea v-if="multiline" ref="payloadArea" :value="modelValue" :id="eluid"
@@ -14,7 +14,7 @@
             class="border border-gray-300 p-1 rounded-sm w-full outline-purple-800  text-gray-800"
             @input="emitUpdate($event.target.value)" />
 
-        <PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>
+       <!--<PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>-->
     </div>
 </template>
 <script>
@@ -40,7 +40,23 @@ export default {
         }
     },
     components: { PasteFromOfficeButton },
+    mounted() {
+        this.registerToPasteEvent();
+    },
     methods: {
+        registerToPasteEvent() {
+            this.$el.addEventListener("paste", (event) => {
+            let data = event.clipboardData.getData('text/html');
+            if (!data) {
+                data = event.clipboardData.getData('text/plain');
+            }
+            const turndownService = new Turndown()
+            turndownService.use(gfmTables)
+            let markdown = turndownService.turndown(data)
+            this.sanitizeAndInsertMarkdown(markdown);
+            event.preventDefault();
+        });
+        },
         emitUpdate(value) {
             this.$emit('update:modelValue', value)
         },
@@ -97,6 +113,9 @@ export default {
 
             this.emitUpdate(textarea.value)
         },
+        /*
+        // Word stopped allowing us to paste HTML directly from the clipboard.
+
         async handlePaste() {
             try {
                 const permission = await navigator.permissions.query({
@@ -134,7 +153,7 @@ export default {
 
             }
 
-        }
+        }*/
     }
 }
 </script>
