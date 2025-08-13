@@ -30,7 +30,7 @@
     "latex.js": "^0.12.6",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
-    "marked": "^16.1.1",
+    "marked": "^16.1.2",
     "marked-katex-extension": "^5.1.5",
     "marked-linkify-it": "^3.1.13",
     "pdf-lib": "^1.17.1",
@@ -44,7 +44,7 @@
     "@vitejs/plugin-basic-ssl": "^2.1.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "happy-dom": "^18.0.1",
-    "vite": "^7.0.6",
+    "vite": "^7.1.2",
     "vitest": "^3.2.4"
   }
 }
