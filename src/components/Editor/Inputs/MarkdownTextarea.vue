@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         registerToPasteEvent() {
-            this.$el.addEventListener("paste", (event) => {
+            this.$refs.payloadArea.addEventListener("paste", (event) => {
             let data = event.clipboardData.getData('text/html');
             if (!data) {
                 data = event.clipboardData.getData('text/plain');
@@ -102,11 +102,8 @@ export default {
              */
             let textarea = this.$refs.payloadArea;
             if (textarea.selectionStart || textarea.selectionStart == '0') {
-                var startPos = textarea.selectionStart;
-                var endPos = textarea.selectionEnd;
-                textarea.value = textarea.value.substring(0, startPos)
-                    + markdown.trim()
-                    + textarea.value.substring(endPos, textarea.value.length);
+                const [start, end] = [textarea.selectionStart, textarea.selectionEnd];
+                textarea.setRangeText(markdown.trim(), start, end, 'select');
             } else {
                 textarea.value += markdown.trim();
             }
