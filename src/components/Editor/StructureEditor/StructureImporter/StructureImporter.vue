@@ -2,6 +2,13 @@
     <div class="flex flex-col gap-4 border border-blue-800 rounded-sm p-4">
 
         <div class="grid grid-cols-2 gap-2">
+            <StructureImporterDocxPicker @pick="handleFilePicked" language="en"></StructureImporterDocxPicker>
+            <StructureImporterDocxPicker @pick="handleFilePicked" language="fr"></StructureImporterDocxPicker>
+        </div>
+
+        <hr>
+
+        <div class="grid grid-cols-2 gap-2">
             <markdown-textarea v-model="en" label="EN"></markdown-textarea>
             <markdown-textarea v-model="fr" label="FR"></markdown-textarea>
         </div>
@@ -16,6 +23,7 @@
 </template>
 <script>
 import MarkdownTextarea from "../../Inputs/MarkdownTextarea.vue";
+import StructureImporterDocxPicker from "./StructureImporterDocxPicker.vue"
 import editorStrings from "../../../../editor-strings"
 import Button from "../../Button.vue";
 
@@ -31,7 +39,8 @@ export default {
     components: {
         Button,
         MarkdownTextarea,
-        RectangleGroupIcon
+        RectangleGroupIcon,
+        StructureImporterDocxPicker
     },
 
     data() {
@@ -123,6 +132,10 @@ export default {
     },
 
     methods: {
+
+        handleFilePicked(payload) {
+            this[payload.language] = payload.markdown;
+        },
 
         walkThroughMarkdown(markdown, language) {
 
