@@ -14,7 +14,7 @@
             class="border border-gray-300 p-1 rounded-sm w-full outline-purple-800  text-gray-800"
             @input="emitUpdate($event.target.value)" />
 
-       <!--<PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>-->
+        <!--<PasteFromOfficeButton @click="handlePaste" class="hidden @sm:block"></PasteFromOfficeButton>-->
     </div>
 </template>
 <script>
@@ -46,16 +46,16 @@ export default {
     methods: {
         registerToPasteEvent() {
             this.$refs.payloadArea.addEventListener("paste", (event) => {
-            let data = event.clipboardData.getData('text/html');
-            if (!data) {
-                data = event.clipboardData.getData('text/plain');
-            }
-            const turndownService = new Turndown()
-            turndownService.use(gfmTables)
-            let markdown = turndownService.turndown(data)
-            this.sanitizeAndInsertMarkdown(markdown);
-            event.preventDefault();
-        });
+                let data = event.clipboardData.getData('text/html');
+                if (!data) {
+                    data = event.clipboardData.getData('text/plain');
+                }
+                const turndownService = new Turndown({ headingStyle: 'atx', bulletListMarker: '-', emDelimiter: '*', })
+                turndownService.use(gfmTables)
+                let markdown = turndownService.turndown(data)
+                this.sanitizeAndInsertMarkdown(markdown);
+                event.preventDefault();
+            });
         },
         emitUpdate(value) {
             this.$emit('update:modelValue', value)
@@ -78,6 +78,8 @@ export default {
                 .replaceAll('o   ', '  - ')
                 .replaceAll('§  ', '    - ');
 
+            // Remove leftover comments
+            markdown = markdown.replace(/(\<!--.*?\-->)/g, "");
 
             // Remove all pasted references.
             markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')

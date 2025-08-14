@@ -30,6 +30,7 @@
     "latex.js": "^0.12.6",
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
+    "mammoth": "^1.10.0",
     "marked": "^16.1.2",
     "marked-katex-extension": "^5.1.5",
     "marked-linkify-it": "^3.1.13",
