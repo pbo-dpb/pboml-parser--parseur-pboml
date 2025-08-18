@@ -29,12 +29,12 @@
     "lodash.debounce": "^4.0.8",
     "lodash.merge": "^4.6.2",
     "mammoth": "^1.10.0",
-    "marked": "^16.1.2",
+    "marked": "^16.2.0",
     "marked-katex-extension": "^5.1.5",
     "marked-linkify-it": "^3.1.13",
     "pdf-lib": "^1.17.1",
-    "tailwindcss": "^4.1.11",
-    "turndown": "^7.2.0",
+    "tailwindcss": "^4.1.12",
+    "turndown": "^7.2.1",
     "vue": "^3.5.18"
   },
   "devDependencies": {
