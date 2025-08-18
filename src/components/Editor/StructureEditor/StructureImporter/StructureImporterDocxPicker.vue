@@ -14,7 +14,7 @@
 import mammoth from 'mammoth';
 
 
-import { ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import HtmlMarkdownConverter from '../../../../HtmlMarkdownConverter';
 
 const inputField = ref(null);

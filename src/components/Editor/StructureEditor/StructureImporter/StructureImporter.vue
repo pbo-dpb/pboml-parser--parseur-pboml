@@ -59,35 +59,37 @@ export default {
     computed: {
 
         visualStructureHtml() {
-            if (!this.en || !this.fr)
+            if (!this.en /*|| !this.fr*/)
                 return "";
 
             const containerUl = document.createElement("ol");
             containerUl.classList.add("text-sm", "list-decimal", "list-outside", "ml-4");
 
             this.importedStructure.forEach((slice) => {
-                if (typeof slice === "string") {
-                    const li = document.createElement("li");
-                    li.innerText = slice;
-                    li.classList.add("text-red-500");
-                    containerUl.appendChild(li);
-                } else {
-                    const li = document.createElement("li");
-                    li.classList.add("text-gray-500");
 
-                    let innerHTML = `<span class="font-semibold text-black mr-2">${this.editorStrings[`slice_type_${slice.type}`]}</span>`;
-
-                    let contents = [
-                        slice.content?.en ? `<span class="text-gray-500">${slice.content.en}</span>` : null,
-                        slice.content?.fr ? `<span class="text-gray-500">${slice.content.fr}</span>` : null
-                    ].filter((c) => c);
-
-                    innerHTML += contents.join(" ▪️ ");
-
-                    li.innerHTML = innerHTML;
-
-                    containerUl.appendChild(li);
+                const li = document.createElement("li");
+                li.classList.add("text-gray-500");
+                if (slice.state._structureImporterError) {
+                    li.classList.add("bg-red-300");
                 }
+
+                let innerHTML = `<span class="font-semibold text-black mr-2">${this.editorStrings[`slice_type_${slice.type}`]}</span>`;
+
+                let contents = [
+                    slice.content?.en ? `<span class="text-gray-500">${slice.content.en}</span>` : null,
+                    slice.content?.fr ? `<span class="text-gray-500">${slice.content.fr}</span>` : null
+                ].filter((c) => c);
+
+                if (slice.state._structureImporterError) {
+                    contents = [...contents, `<span class="text-red-500">${slice.state._structureImporterError}</span>`];
+                }
+
+                innerHTML += contents.join(" ▪️ ");
+
+                li.innerHTML = innerHTML;
+
+                containerUl.appendChild(li);
+
             })
 
             return containerUl.outerHTML;
@@ -111,13 +113,16 @@ export default {
                 counter++;
 
                 if (!frSlice || enSlice.type !== frSlice.type)
-                    return "❌ type mismatch";
+                    enSlice.state._structureImporterError = "❌ type mismatch";
 
-                if (frSlice.type === "heading" && enSlice.type === "heading" && frSlice.level !== enSlice.level)
-                    return "❗ heading level mismatch";
+                if (frSlice && (frSlice.type === "heading" && enSlice.type === "heading" && frSlice.level !== enSlice.level))
+                    enSlice.state._structureImporterError = "❗ heading level mismatch";
 
-                if (enSlice.type === "heading")
+                if (enSlice.type === "heading" && frSlice && frSlice.type === "heading") {
                     enSlice.content.fr = frSlice.content?.fr;
+                    enSlice.state._unlocked = false; // Heading with both French and English can be locked
+                }
+
 
                 return enSlice;
             });
@@ -126,7 +131,7 @@ export default {
         },
 
         canImport() {
-            return this.visualStructureHtml && this.importedStructure.filter((s) => typeof s === "string").length === 0;
+            return this.visualStructureHtml //&& this.importedStructure.filter((s) => typeof s === "string").length === 0;
         }
 
     },
@@ -149,7 +154,6 @@ export default {
                         payload.content = {};
                         payload.content[language] = token.text;
                         payload.level = token.depth - 1;
-                        payload.state._unlocked = false; // Headings do not need to be reviewed
                         slices.push(new HeadingSlice(payload));
                     } else if (token.type === 'paragraph') {
                         let previousSlice = slices.length ? slices[slices.length - 1] : null;
