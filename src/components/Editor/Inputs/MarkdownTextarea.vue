@@ -18,10 +18,7 @@
     </div>
 </template>
 <script>
-
-import Turndown from "turndown"
-import { tables as gfmTables } from 'joplin-turndown-plugin-gfm'
-
+import HtmlMarkdownConverter from "../../../HtmlMarkdownConverter.js"
 import PasteFromOfficeButton from "./PasteFromOfficeButton.vue"
 
 export default {
@@ -50,53 +47,17 @@ export default {
                 if (!data) {
                     data = event.clipboardData.getData('text/plain');
                 }
-                const turndownService = new Turndown({ headingStyle: 'atx', bulletListMarker: '-', emDelimiter: '*', })
-                turndownService.use(gfmTables)
-                let markdown = turndownService.turndown(data)
-                this.sanitizeAndInsertMarkdown(markdown);
+
+                this.sanitizeAndInsertHtml(data);
                 event.preventDefault();
             });
         },
         emitUpdate(value) {
             this.$emit('update:modelValue', value)
         },
-        sanitizeAndInsertMarkdown(markdown) {
-            /**
-             * Markdown customizations
-             */
+        sanitizeAndInsertHtml(html) {
 
-            // More regular Word
-            markdown = markdown
-                .replaceAll(' ', ' ') // Non-breaking space
-                .replaceAll('•	', '- ') // Bullet point
-                .replaceAll('×', '-') // Bullet multiplication
-                .replaceAll('o	', '- ') // Bullet point
-                .replaceAll('	', '- ') // Bullet point
-                // Catch weird word list rendering.
-                .replaceAll('·        ', '- ')
-                .replaceAll('·         ', '- ')
-                .replaceAll('o   ', '  - ')
-                .replaceAll('§  ', '    - ');
-
-            // Remove leftover comments
-            markdown = markdown.replace(/(\<!--.*?\-->)/g, "");
-
-            // Remove all pasted references.
-            markdown = markdown.replace(/\n\* \* \*\n((.|\n|\r)*)$/, '')
-
-            markdown = markdown.replaceAll((new RegExp('\\[\\\\\\[[0-9a-z]{1,}\\\\\\]\\]\\(([\\S])+\\)([\\s.,:;!?]{1})', 'g')), (match, p1, p2, p3) => {
-                return `[^🟠]${p2}`;
-            })
-            markdown = markdown.replaceAll((new RegExp('\[\\\[[0-9a-z]{1,}\\\]\]\(([^)])+\)', 'g')), '[^🟠]')
-
-            // Use first row as table headers when no header is present
-            markdown = markdown.replace(/^\|[ \|]{1,}\|\n\| [ \-\|]{1,}\ \|\n\| [^\n]{1,} \|\n/gm, (match) => {
-                // Return the replacement leveraging the parameters.
-                const headerArr = match.split("\n")
-                if (headerArr.length != 4) return match;
-                return [headerArr[2], headerArr[1], headerArr[4]].join("\n")
-            });
-
+            let markdown = (new HtmlMarkdownConverter).convert(html);
 
 
             /**
