@@ -103,7 +103,8 @@ export default {
 
                 let contents = [
                     annotation.content?.en ? `<span class="text-gray-500te">${annotation.content.en.substring(0, 50) + "…"}</span>` : null,
-                    annotation.content?.fr ? `<span class="text-gray-500te">${annotation.content.fr.substring(0, 50) + "…"}</span>` : null
+                    annotation.content?.en ? `<span class="text-gray-500">${annotation.content.en.substring(0, 50) + "…"}</span>` : null,
+                    annotation.content?.fr ? `<span class="text-gray-500">${annotation.content.fr.substring(0, 50) + "…"}</span>` : null
                 ].filter((c) => c);
 
                 innerHTML += contents.join(" ▪️ ");
