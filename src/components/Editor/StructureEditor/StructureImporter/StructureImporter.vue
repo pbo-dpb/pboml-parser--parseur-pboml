@@ -33,6 +33,7 @@ import HeadingSlice from "../../../../models/contents/HeadingSlice";
 import MarkdownSlice from "../../../../models/contents/MarkdownSlice";
 import TableSlice from "../../../../models/contents/TableSlice";
 import SvgSlice from "../../../../models/contents/SvgSlice";
+import Annotation from "../../../../models/Annotation";
 
 export default {
     props: ["pbomlDocument"],
@@ -65,7 +66,8 @@ export default {
             const containerUl = document.createElement("ol");
             containerUl.classList.add("text-sm", "list-decimal", "list-outside", "ml-4");
 
-            this.importedStructure.forEach((slice) => {
+
+            this.importedStructure.slices.forEach((slice) => {
 
                 const li = document.createElement("li");
                 li.classList.add("text-gray-500");
@@ -92,6 +94,26 @@ export default {
 
             })
 
+            this.importedStructure.annotations.forEach((annotation) => {
+
+                const li = document.createElement("li");
+                li.classList.add("text-gray-500");
+
+                let innerHTML = `<span class="font-semibold text-purple-900 mr-2">Note</span>`;
+
+                let contents = [
+                    annotation.content?.en ? `<span class="text-gray-500te">${annotation.content.en.substring(0, 50) + "…"}</span>` : null,
+                    annotation.content?.fr ? `<span class="text-gray-500te">${annotation.content.fr.substring(0, 50) + "…"}</span>` : null
+                ].filter((c) => c);
+
+                innerHTML += contents.join(" ▪️ ");
+
+                li.innerHTML = innerHTML;
+
+                containerUl.appendChild(li);
+
+            })
+
             return containerUl.outerHTML;
         },
 
@@ -104,12 +126,12 @@ export default {
                 englishStructure = this.walkThroughMarkdown(this.en, "en");
                 frenchStructure = this.walkThroughMarkdown(this.fr, "fr");
             } catch (e) {
-                return [];
+                return {};
             }
 
             let counter = 0;
-            return englishStructure.map((enSlice) => {
-                let frSlice = frenchStructure[counter];
+            const slices = englishStructure.slices.map((enSlice) => {
+                let frSlice = frenchStructure.slices[counter];
                 counter++;
 
                 if (!frSlice || enSlice.type !== frSlice.type)
@@ -127,11 +149,26 @@ export default {
                 return enSlice;
             });
 
+            counter = 0;
+            const annotations = englishStructure.annotations.map((enAnnotation) => {
+                let frAnnotation = frenchStructure.annotations?.[counter] ?? {};
+                counter++;
 
+                if (enAnnotation.content?.['en'] && frAnnotation.content?.['fr']) {
+                    enAnnotation.content.fr = frAnnotation.content.fr;
+                }
+
+                return enAnnotation;
+            });
+
+            return {
+                slices,
+                annotations
+            }
         },
 
         canImport() {
-            return this.visualStructureHtml //&& this.importedStructure.filter((s) => typeof s === "string").length === 0;
+            return this.visualStructureHtml
         }
 
     },
@@ -144,28 +181,49 @@ export default {
 
         walkThroughMarkdown(markdown, language) {
 
-            let slices = []
+            let slices = [];
+            let annotations = [];
+            let importingAnnotations = false;
+            let counter = 0;
             const marked = new Marked();
             marked.use({
                 walkTokens: (token) => {
-
                     let payload = { state: { _unlocked: true } };
                     if (token.type === 'heading') {
                         payload.content = {};
                         payload.content[language] = token.text;
                         payload.level = token.depth - 1;
-                        slices.push(new HeadingSlice(payload));
-                    } else if (token.type === 'paragraph') {
-                        let previousSlice = slices.length ? slices[slices.length - 1] : null;
 
+                        if (payload.content[language] === "Notes" && payload.level === 0) {
+                            importingAnnotations = true; // Once we meet a heading named 'Notes', we are importing the rest as annotations.
+                        } else {
+                            slices.push(new HeadingSlice(payload));
+                        }
+
+                    } else if (!importingAnnotations && token.type === 'paragraph') {
+                        let previousSlice = slices.length ? slices[slices.length - 1] : null;
                         // Don't create a new slice if the previous slice was also a markdown slice
                         if (previousSlice && previousSlice.type === "markdown")
                             return;
                         slices.push(new MarkdownSlice(payload));
-                    } else if (token.type === 'table') {
+                    } else if (!importingAnnotations && token.type === 'table') {
                         slices.push(new TableSlice(payload));
-                    } else if (token.type === 'image') {
+                    } else if (!importingAnnotations && token.type === 'image') {
                         slices.push(new SvgSlice(payload));
+                    } else if (importingAnnotations && token.type === 'list_item') {
+                        payload.content = {};
+                        // Token text finishes with [↑](#endnote-ref-x). The [↑] and everything after can be stripped.
+                        let positionOfStripping = token.text.indexOf("[↑]");
+
+                        // Each raw content starts with a number followed by a point (e.g.  1. or 12.). Extract this and assign it as the annotation's id.
+                        payload.id = parseInt(token.text.match(/^\d+\./)?.[0] || counter + 1);
+
+                        counter++;
+
+                        payload.content[language] = (positionOfStripping !== -1 ? token.text.slice(0, positionOfStripping) : token.text)?.trim();
+
+                        annotations.push(new Annotation(payload));
+
                     }
 
                 }
@@ -173,14 +231,20 @@ export default {
 
             marked.parse(markdown);
 
-            return slices;
+            return { slices, annotations };
         },
 
         handleImportAction() {
 
+            let structure = this.importedStructure;
+
             this.pbomlDocument.slices = [
                 ...this.pbomlDocument.slices,
-                ...this.importedStructure
+                ...structure.slices
+            ]
+            this.pbomlDocument.annotations = [
+                ...this.pbomlDocument.annotations,
+                ...structure.annotations
             ]
             this.$emit("close");
 

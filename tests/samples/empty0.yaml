@@ -1,0 +1,17 @@
+pboml:
+  version: 1.0.0
+document:
+  form: T-LEG-3.0.2
+  id: PLA-2526-982-X
+  release_date: '2025-05-04T13:00:00.000Z'
+  title:
+    en: Lanterns of the Invisible Sea
+    fr: Lanternes de la mer invisible
+  type:
+    en: Whispers Beneath the Dreaming Moon
+    fr: Murmures sous la lune rêveuse
+  copyright:
+    en: © The Clockmaker’s Phantom Garden, Seoul, 2025
+    fr: © Le jardin fantôme de l'horloger, Séoul, 2025
+slices:
+annotations:

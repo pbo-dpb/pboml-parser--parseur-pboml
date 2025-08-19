@@ -34,7 +34,7 @@ export default {
             [
                 h(StructureTree, { pbomlDocument: this.pbomlDocument }),
                 this.displayImporter ?
-                    h(StructureImporter, { pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : h(TinyButton, { onClick: () => this.displayImporter = true }, () => [h(ClipboardDocumentListIcon, { 'class': "h-4 w-4" }), strings["append_structure_from_markdown"]])
+                    h(StructureImporter, { pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : h(TinyButton, { onClick: () => this.displayImporter = true }, () => [h(ClipboardDocumentListIcon, { 'class': "h-4 w-4" }), strings["append_structure_by_import"]])
             ]
         );
 
