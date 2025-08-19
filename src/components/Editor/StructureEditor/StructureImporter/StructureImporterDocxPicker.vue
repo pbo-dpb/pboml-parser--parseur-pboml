@@ -11,7 +11,7 @@
     </div>
 </template>
 <script setup>
-import mammoth from 'mammoth';
+import * as mammoth from 'mammoth/mammoth.browser';
 
 
 import { ref } from 'vue';
