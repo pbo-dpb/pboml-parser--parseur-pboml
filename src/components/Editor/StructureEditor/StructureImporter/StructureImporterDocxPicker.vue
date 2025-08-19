@@ -2,7 +2,7 @@
     <div class="flex flex-col gap-2">
         <label :for="eluid" class="font-medium">
 
-            {{ language }}
+            .docx ({{ language }})
 
         </label>
         <input type="file" :id="eluid" @change="handleFileInputChange" accept=".docx" ref="inputField"
@@ -31,7 +31,18 @@ const readDocxFile = async (file) => {
 
     const { value: html, messages } = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
 
-    const markdown = (new HtmlMarkdownConverter).convert(html);
+    let cleanedHtml = "" + html;
+
+    const highlightsRegex = /<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>/i;
+    if (highlightsRegex.test(html)) {
+        // This is a regular report. Only keep whatever comes after the first H1 that isn't the highlights H1.
+        cleanedHtml = cleanedHtml.replace(/.*?(?=<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>)/i, "");
+        cleanedHtml = cleanedHtml.replace(highlightsRegex, "");
+        const firstHeadingIndex = cleanedHtml.indexOf("<h1>");
+        cleanedHtml = firstHeadingIndex !== -1 ? cleanedHtml.substring(firstHeadingIndex) : cleanedHtml
+    }
+
+    const markdown = (new HtmlMarkdownConverter).convert(cleanedHtml);
 
     emit('pick', { markdown, language: props.language });
 
