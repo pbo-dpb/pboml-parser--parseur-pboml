@@ -60,7 +60,7 @@ export default {
     computed: {
 
         visualStructureHtml() {
-            if (!this.en /*|| !this.fr*/)
+            if (!this.en)
                 return "";
 
             const containerUl = document.createElement("ol");
@@ -156,6 +156,7 @@ export default {
 
                 if (enAnnotation.content?.['en'] && frAnnotation.content?.['fr']) {
                     enAnnotation.content.fr = frAnnotation.content.fr;
+                    enAnnotation.state._unlocked = false;
                 }
 
                 return enAnnotation;
