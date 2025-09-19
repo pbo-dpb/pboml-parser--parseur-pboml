@@ -3,6 +3,7 @@ import TinyButton from "../TinyButton.vue"
 import StructureTree from "./StructureTree/StructureTree.js"
 import { h, defineAsyncComponent } from 'vue'
 import { ClipboardDocumentListIcon } from '@heroicons/vue/24/outline'
+import Button from "../Button.vue"
 const StructureImporter = defineAsyncComponent(() => import('./StructureImporter/StructureImporter.vue'))
 
 export default {
@@ -34,7 +35,7 @@ export default {
             [
                 h(StructureTree, { pbomlDocument: this.pbomlDocument }),
                 this.displayImporter ?
-                    h(StructureImporter, { pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : h(TinyButton, { onClick: () => this.displayImporter = true }, () => [h(ClipboardDocumentListIcon, { 'class': "h-4 w-4" }), strings["append_structure_by_import"]])
+                    h(StructureImporter, { pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : h(Button, { onClick: () => this.displayImporter = true }, () => [h(ClipboardDocumentListIcon, { 'class': "h-4 w-4" }), strings["append_structure_by_import"]])
             ]
         );
 
