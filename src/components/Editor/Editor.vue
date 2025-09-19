@@ -11,9 +11,9 @@
                         <Tab :controls="'meta'" :selected="currentTab === 'meta'" @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
                         </Tab>
-                        <Tab :controls="'developer'" :selected="currentTab === 'developer'"
-                            @click="currentTab = 'developer'">
-                            {{ strings.developer_section_title }}
+                        <Tab :controls="'advanced'" :selected="currentTab === 'advanced'"
+                            @click="currentTab = 'advanced'">
+                            {{ strings.advanced_section_title }}
                         </Tab>
                     </div>
                 </div>
@@ -33,9 +33,9 @@
             <div v-if="currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0" aria-labelledby="tab-meta">
                 <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
             </div>
-            <div v-if="currentTab === 'developer'" id="developer" role="tabpanel" tabindex="0"
-                aria-labelledby="tab-developer">
-                <editor-developer :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></editor-developer>
+            <div v-if="currentTab === 'advanced'" id="advanced" role="tabpanel" tabindex="0"
+                aria-labelledby="tab-advanced">
+                <editor-advanced :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></editor-advanced>
             </div>
         </template>
     </main>
@@ -76,7 +76,7 @@ export default {
         Button,
         TinyButton,
         FileCode,
-        EditorDeveloper: defineAsyncComponent(() => import('./EditorDeveloper/EditorDeveloper.vue')),
+        EditorAdvanced: defineAsyncComponent(() => import('./EditorAdvanced/EditorAdvanced.vue')),
         DocumentMetaEditor,
         Tab,
         ArrowsPointingInIcon,

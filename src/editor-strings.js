@@ -5,7 +5,7 @@ export default {
         "main_content_section_title": "Content",
         "structure_section_title": "Structure",
         "meta_section_title": "Properties",
-        "developer_section_title": "Developer",
+        "advanced_section_title": "Advanced",
         "slices_section_title": "Slices",
         "annotations_section_title": "Notes",
         "document_title_label": "Document title",
@@ -134,7 +134,7 @@ export default {
         "empty_slice_title": "No slice is present in the document.",
         "empty_slice_prompt": "Kickstart your PBOML document by importing .docx documents.",
         "toc_toggle": "Toggle table of contents",
-        "developer_section_code_tab": "Raw YAML",
+        "advanced_section_code_tab": "Source YAML",
     },
     fr: {
         "close": "Fermer",
@@ -142,7 +142,7 @@ export default {
         "main_content_section_title": "Contenu",
         "structure_section_title": "Structure",
         "meta_section_title": "Propriétés",
-        "developer_section_title": "Développeur",
+        "advanced_section_title": "Avancé",
         "slices_section_title": "Tranches",
         "annotations_section_title": "Notes",
         "document_title_label": "Titre du document",
@@ -269,6 +269,6 @@ export default {
         "empty_slice_title": "Aucune tranche n'est présente dans le document.",
         "empty_slice_prompt": "Démarrez votre document PBOML en important des documents .docx.",
         "toc_toggle": "Basculer la table des matières",
-        "developer_section_code_tab": "YAML brut",
+        "advanced_section_code_tab": "Code source YAML",
     }
 }

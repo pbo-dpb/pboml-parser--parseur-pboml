@@ -4,7 +4,7 @@
             <div class="flex flex-row justify-between items-center">
                 <div role="tablist" class="flex flex-row gap-4 mb-4">
                     <Tab :controls="'raw'" :selected="currentTab === 'raw'" @click="currentTab = 'raw'">
-                        {{ strings.developer_section_code_tab }}
+                        {{ strings.advanced_section_code_tab }}
                     </Tab>
 
                 </div>
