@@ -5,6 +5,7 @@ export default {
         "main_content_section_title": "Content",
         "structure_section_title": "Structure",
         "meta_section_title": "Properties",
+        "developer_section_title": "Developer",
         "slices_section_title": "Slices",
         "annotations_section_title": "Notes",
         "document_title_label": "Document title",
@@ -111,6 +112,7 @@ export default {
         "edit_source_code": "Edit source code",
         "stop_editing_source_code": "Stop editing source code",
         "apply": "Apply",
+        "commit_changes": "Commit changes",
         "slice_source_code_warning_type_mismatch": "Changing the slice type from the source code may cause the editor to malfunction. A page reload might be necessary.",
         "data_table_variables_presentation_type": "Presentation style",
         "data_table_variables_presentation_type_inherit": "Auto",
@@ -132,6 +134,7 @@ export default {
         "empty_slice_title": "No slice is present in the document.",
         "empty_slice_prompt": "Kickstart your PBOML document by importing .docx documents.",
         "toc_toggle": "Toggle table of contents",
+        "developer_section_code_tab": "Raw YAML",
     },
     fr: {
         "close": "Fermer",
@@ -139,6 +142,7 @@ export default {
         "main_content_section_title": "Contenu",
         "structure_section_title": "Structure",
         "meta_section_title": "Propriétés",
+        "developer_section_title": "Développeur",
         "slices_section_title": "Tranches",
         "annotations_section_title": "Notes",
         "document_title_label": "Titre du document",
@@ -243,6 +247,7 @@ export default {
         "edit_source_code": "Éditer le code source",
         "stop_editing_source_code": "Arrêter l'édition du code source",
         "apply": "Appliquer",
+        "commit_changes": "Appliquer les changements",
         "slice_source_code_warning_type_mismatch": "Changer le type de tranche depuis le code-source peut entraîner un dysfonctionnement de l'éditeur. Un rechargement de la page pourrait être nécessaire.",
         "data_table_variables_presentation_type": "Style de présentation",
         "data_table_variables_presentation_type_inherit": "Auto",
@@ -264,5 +269,6 @@ export default {
         "empty_slice_title": "Aucune tranche n'est présente dans le document.",
         "empty_slice_prompt": "Démarrez votre document PBOML en important des documents .docx.",
         "toc_toggle": "Basculer la table des matières",
+        "developer_section_code_tab": "YAML brut",
     }
 }

@@ -2,7 +2,6 @@
     <div class="flex flex-col gap-2">
         <nav class="flex flex-row justify-end gap-2">
 
-            <slot></slot>
             <Button :title="enhancedPreviewWindow ? strings.close_enhanced_preview : strings.open_enhanced_preview"
                 :aria-pressed="(enhancedPreviewWindow ? true : false)" @click="toggleEnhancedPreview">
                 <Columns2 class="size-6"></Columns2>

@@ -1,86 +1,51 @@
 <template>
-    <main class="flex flex-col gap-4">
+    <main class="flex flex-col gap-4 justify-between">
 
-        <editor-actions class="border-b border-gray-300 pb-4" :pboml-document="pbomlDocument" :disabled="shouldEditRaw">
-            <Button @click="handleRawEditorToggle" :toggled="shouldEditRaw" :title="strings.editor_actions_source">
-                <FileCode class="size-6"></FileCode>
-                <span class="sr-only">{{ strings.editor_actions_source }}</span>
-            </Button>
-        </editor-actions>
-
-        <template v-if="!shouldEditRaw">
-
-
+        <header class="flex flex-row justify-between items-center">
             <div class="tabs">
                 <div class="flex flex-row justify-between items-center">
-                    <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
-                        <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
+                    <div role="tablist" class="flex flex-row gap-4 mb-4">
+                        <Tab :controls="'content'" :selected="currentTab === 'content'" @click="currentTab = 'content'">
                             {{ strings.main_content_section_title }}
-                        </Tab>
-
-
-                        <Tab :controls="'structure'" :selected="currentTab === 'structure'"
-                            @click="currentTab = 'structure'">
-                            {{ strings?.structure_section_title ?? "Structure" }}
                         </Tab>
                         <Tab :controls="'meta'" :selected="currentTab === 'meta'" @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
                         </Tab>
-
+                        <Tab :controls="'developer'" :selected="currentTab === 'developer'"
+                            @click="currentTab = 'developer'">
+                            {{ strings.developer_section_title }}
+                        </Tab>
                     </div>
-
-
                 </div>
-
-
-
-                <div>
-
-                    <div>
-                        <div id="slices" role="tabpanel" tabindex="0" aria-labelledby="tab-slices"
-                            v-if="currentTab === 'slices'">
-                            <editor-slices :pboml-document="pbomlDocument"></editor-slices>
-                        </div>
-
-
-
-                        <div id="structure" role="tabpanel" tabindex="0" aria-labelledby="tab-structure"
-                            v-if="currentTab === 'structure'">
-                            <structure-editor :pboml-document="pbomlDocument"></structure-editor>
-                        </div>
-
-
-                        <div v-if="currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0"
-                            aria-labelledby="tab-meta">
-                            <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
-                        </div>
-
-
-
-                    </div>
-
-
-                </div>
-
-
-
 
             </div>
 
+            <editor-previews :pboml-document="pbomlDocument" :disabled="shouldEditRaw"></editor-previews>
+        </header>
 
 
+
+        <template v-if="!shouldEditRaw">
+            <div id="content" role="tabpanel" tabindex="0" aria-labelledby="tab-content"
+                v-if="currentTab === 'content'">
+                <editor-main-content :pboml-document="pbomlDocument"></editor-main-content>
+            </div>
+            <div v-if="currentTab === 'meta'" id="meta" role="tabpanel" tabindex="0" aria-labelledby="tab-meta">
+                <document-meta-editor :pboml-document="pbomlDocument"></document-meta-editor>
+            </div>
+            <div v-if="currentTab === 'developer'" id="developer" role="tabpanel" tabindex="0"
+                aria-labelledby="tab-developer">
+                <editor-developer :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></editor-developer>
+            </div>
         </template>
-
-        <yaml-editor v-if="shouldEditRaw" :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></yaml-editor>
-
     </main>
 </template>
 <script>
 
 import { defineAsyncComponent } from 'vue'
 import PBOMLDocument from '../../models/PBOMLDocument';
-import EditorActions from './EditorActions.vue';
-import EditorSlices from './EditorSlices/EditorSlices.js';
+import EditorPreviews from './EditorPreviews.vue';
+import EditorMainContent from './EditorMainContent/EditorMainContent.js';
 import Button from './Button.vue';
 import TinyButton from './TinyButton.vue';
 import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor"
@@ -99,24 +64,21 @@ export default {
     data() {
         return {
             shouldEditRaw: false,
-            workingPboml: '',
             strings: strings[document.documentElement.lang],
-            currentTab: "slices",
+            currentTab: "content",
 
         }
     },
 
     components: {
-        EditorActions,
-        EditorSlices,
+        EditorPreviews,
+        EditorMainContent,
         Button,
         TinyButton,
         FileCode,
-        YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
+        EditorDeveloper: defineAsyncComponent(() => import('./EditorDeveloper/EditorDeveloper.vue')),
         DocumentMetaEditor,
         Tab,
-        StructureEditor: defineAsyncComponent(() => import('./StructureEditor/StructureEditor.js')),
-
         ArrowsPointingInIcon,
         ArrowsPointingOutIcon,
         ChevronRightIcon
@@ -140,29 +102,13 @@ export default {
         }
     },
 
-
     methods: {
-
-        handlePbomlUpdate(newContent) {
-            this.workingPboml = newContent;
+        handlePbomlUpdate(newPbomlDocument) {
+            this.pbomlDocument = newPbomlDocument;
         },
-        handleRawEditorToggle() {
-            if (this.shouldEditRaw) {
-                try {
-                    this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml, this.prefix);
-                    this.shouldEditRaw = false;
-                } catch (e) {
-                }
-
-            } else {
-                this.shouldEditRaw = true;
-            }
-        },
-
-
-
-
     }
+
+
 
 }
 </script>
