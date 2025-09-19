@@ -26,7 +26,7 @@ export default {
                 onClick: () => {
                     this.displayImporter = true
                 }
-            }, this.strings.append_structure_by_import) : null,
+            }, () => this.strings.append_structure_by_import) : null,
             this.displayImporter ?
                 h(StructureImporter, { class: "bg-white", pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : null
         ])
