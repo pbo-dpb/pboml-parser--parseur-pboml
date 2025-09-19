@@ -80,7 +80,9 @@ export default {
                     this.$refs.stagerDialog.showModal();
                 });
             } else {
-                this.$refs.stagerDialog.close();
+                if (this.$refs.stagerDialog) {
+                    this.$refs.stagerDialog.close();
+                }
             }
         }
     },
