@@ -16,7 +16,7 @@
         <div v-html="visualStructureHtml"></div>
         <div>
             <Button @click="handleImportAction" :disabled="!canImport">
-                <RectangleGroupIcon class="h-4 w-4/12"></RectangleGroupIcon> Import
+                <Import class="size-4"></Import> Import
             </Button>
         </div>
     </div>
@@ -27,7 +27,7 @@ import StructureImporterDocxPicker from "./StructureImporterDocxPicker.vue"
 import editorStrings from "../../../../editor-strings"
 import Button from "../../Button.vue";
 
-import { RectangleGroupIcon } from '@heroicons/vue/24/outline'
+import { Import } from 'lucide-vue-next'
 import { Marked } from 'marked';
 import HeadingSlice from "../../../../models/contents/HeadingSlice";
 import MarkdownSlice from "../../../../models/contents/MarkdownSlice";
@@ -40,7 +40,7 @@ export default {
     components: {
         Button,
         MarkdownTextarea,
-        RectangleGroupIcon,
+        Import,
         StructureImporterDocxPicker
     },
 
