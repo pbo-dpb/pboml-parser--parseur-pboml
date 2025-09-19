@@ -4,6 +4,9 @@ import { h } from 'vue'
 import SliceStager from "../SliceStager/SliceStager.vue"
 import Tab from "../Tabs/Tab.vue";
 import strings from "../../../editor-strings"
+import { TableOfContents } from 'lucide-vue-next'
+import TinyButton from '../TinyButton.vue';
+
 
 export default {
     props: {
@@ -14,6 +17,7 @@ export default {
         return {
             'currentTab': 'slices',
             strings: strings[document.documentElement.lang],
+            shouldDisplayTableOfContents: false,
         }
     },
     methods: {
@@ -34,14 +38,14 @@ export default {
     },
 
     components: {
-        Tab
+        Tab,
     },
 
     render() {
         return h('main', { class: "flex flex-col gap-4" }, [
 
 
-            h('div', {
+            h('div', { class: "flex flex-row justify-between gap-4 items-center" }, [h('div', {
                 role: 'tablist', class: 'flex flex-row gap-4 mb-4 border-b border-gray-300'
             }, {
                 default: () => [
@@ -50,38 +54,55 @@ export default {
                 ]
             }),
 
-            this.currentTab === 'annotations' ? h(defineAsyncComponent(() => import('../AnnotationsEditor/AnnotationsEditor.js')), { pbomlDocument: this.pbomlDocument }) : null,
+            h(TinyButton, { toggled: this.shouldDisplayTableOfContents }, () => [
+                h(TableOfContents, { class: 'size-4', onClick: () => { this.shouldDisplayTableOfContents = !this.shouldDisplayTableOfContents }, title: this.strings.toc_toggle }),
+                h('span', { class: 'sr-only' }, this.strings.toc_toggle)
+            ])
+            ]),
 
-            this.currentTab === 'slices' ? h('div', { 'class': 'flex flex-col gap-8' }, [
+            h('div', { class: `grid gap-4 ${this.shouldDisplayTableOfContents ? 'grid-cols-5' : 'grid-cols-4'}` }, [
 
-                h(SliceStager, {
-                    soft: this.pbomlDocument.slices.length ? true : false,
-                    onNew: (slice) => {
-                        this.handleNewSlice(slice, 0)
-                    }
-                }),
+                h('div', { class: "col-span-4" }, [
+                    this.currentTab === 'annotations' ? h(defineAsyncComponent(() => import('../AnnotationsEditor/AnnotationsEditor.js')), { pbomlDocument: this.pbomlDocument }) : null,
 
-                this.pbomlDocument.slices.length === 0 ? h(defineAsyncComponent(() => import('./EditorSlicesEmpty.js')), { pbomlDocument: this.pbomlDocument }) : null,
+                    this.currentTab === 'slices' ? h('div', { 'class': 'flex flex-col gap-8' }, [
 
-                ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice, i) => {
-
-                    let sliceEditingVnode = slice.renderEditingVnode();
-                    sliceEditingVnode.props.onDeleteSlice = this.handleDeleteSlice;
-                    sliceEditingVnode.props.onDuplicateSlice = this.handleDuplicateSlice;
-                    sliceEditingVnode.props.onMoveSlice = this.handleMoveSlice;
-
-                    return h('div', {}, [
-                        sliceEditingVnode,
                         h(SliceStager, {
-                            class: 'my-8',
-                            soft: this.pbomlDocument.slices.length !== (i + 1),
+                            soft: this.pbomlDocument.slices.length ? true : false,
                             onNew: (slice) => {
-                                this.handleNewSlice(slice, i + 1)
+                                this.handleNewSlice(slice, 0)
                             }
                         }),
-                    ]);
-                }) : null),
-            ]) : null,
+
+                        this.pbomlDocument.slices.length === 0 ? h(defineAsyncComponent(() => import('./EditorSlicesEmpty.js')), { pbomlDocument: this.pbomlDocument }) : null,
+
+                        ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice, i) => {
+
+                            let sliceEditingVnode = slice.renderEditingVnode();
+                            sliceEditingVnode.props.onDeleteSlice = this.handleDeleteSlice;
+                            sliceEditingVnode.props.onDuplicateSlice = this.handleDuplicateSlice;
+                            sliceEditingVnode.props.onMoveSlice = this.handleMoveSlice;
+
+                            return h('div', {}, [
+                                sliceEditingVnode,
+                                h(SliceStager, {
+                                    class: 'my-8',
+                                    soft: this.pbomlDocument.slices.length !== (i + 1),
+                                    onNew: (slice) => {
+                                        this.handleNewSlice(slice, i + 1)
+                                    }
+                                }),
+                            ]);
+                        }) : null),
+                    ]) : null,
+                ]),
+
+                this.shouldDisplayTableOfContents ? h(defineAsyncComponent(() => import('../../Toc/Toc.js')), { 'pboml-document': this.pbomlDocument }) : null,
+
+
+            ])
+
+
 
         ]);
     }

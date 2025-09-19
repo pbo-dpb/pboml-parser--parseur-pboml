@@ -131,6 +131,7 @@ export default {
         "data_table_display_editor_data_entry_group_exceeds_content_span": "The span of this group exceeds the number of columns in the table.",
         "empty_slice_title": "No slice is present in the document.",
         "empty_slice_prompt": "Kickstart your PBOML document by importing .docx documents.",
+        "toc_toggle": "Toggle table of contents",
     },
     fr: {
         "close": "Fermer",
@@ -262,5 +263,6 @@ export default {
         "data_table_display_editor_data_entry_group_exceeds_content_span": "L'étendue de ce groupe dépasse le nombre de colonnes dans le tableau.",
         "empty_slice_title": "Aucune tranche n'est présente dans le document.",
         "empty_slice_prompt": "Démarrez votre document PBOML en important des documents .docx.",
+        "toc_toggle": "Basculer la table des matières",
     }
 }
