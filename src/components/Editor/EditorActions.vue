@@ -24,28 +24,32 @@
             </nav>
         </div>
 
-        <div class="flex flex-col gap-2 border-4 border-slate-100 border-dashed shadow-inner rounded-sm p-4 -mx-4"
-            v-if="shouldDisplayPreview">
-            <nav class="flex flex-row gap-2 justify-end align-center">
-                <span
-                    class="mr-auto uppercase text-xl font-bold text-slate-500 mb-2 pb-2 border-b-4 border-slate-100 border-dashed">{{
-                        strings.editor_actions_preview
-                    }} ({{ shouldDisplayPreview }})</span>
+        <dialog ref="previewDialog"
+            class="w-3/4 mx-auto h-3/4 mt-16 fborder-4 border-slate-100 border-dashed shadow-inner rounded-sm flex flex-col"
+            v-if="shouldDisplayPreview"
+            @click="$event.target === $event.currentTarget ? shouldDisplayPreview = false : null">
+            <div class="flex flex-col gap-2 h-full w-full p-4">
+                <nav class="flex flex-row gap-2 justify-end align-center">
+                    <Tab @click="shouldDisplayPreview = 'en'" :selected="shouldDisplayPreview === 'en'">
+                        EN
+                    </Tab>
+                    <Tab @click="shouldDisplayPreview = 'fr'" :selected="shouldDisplayPreview === 'fr'">
+                        FR
+                    </Tab>
 
-                <Button @click="shouldDisplayPreview = 'en'" :toggled="shouldDisplayPreview === 'en'">
-                    EN
-                </Button>
-                <Button @click="shouldDisplayPreview = 'fr'" :toggled="shouldDisplayPreview === 'fr'">
-                    FR
-                </Button>
-            </nav>
+                    <button @click="shouldDisplayPreview = false" class="ml-8 text-blue-500 hover:text-blue-800"
+                        :title="strings.close_preview">
+                        <X class="size-6" aria-hidden="true"></X>
+                        <span class="sr-only">{{ strings.close }}</span>
+                    </button>
 
-            <Renderer :pboml-document="pbomlDocument" :language="shouldDisplayPreview"></Renderer>
+                </nav>
 
-            <span class="mr-auto uppercase text-xl font-bold text-slate-500">/{{ strings.editor_actions_preview
-                }}</span>
+                <Renderer :pboml-document="pbomlDocument" :language="shouldDisplayPreview"></Renderer>
 
-        </div>
+
+            </div>
+        </dialog>
 
 
 
@@ -56,6 +60,8 @@ import PBOMLDocument from '../../models/PBOMLDocument';
 import Button from './Button.vue';
 import Renderer from '../Renderer/Renderer';
 import strings from "../../editor-strings"
+import Tab from '../Editor/Tabs/Tab.vue';
+import { X } from 'lucide-vue-next'
 import { EyeIcon, ArrowUpOnSquareStackIcon } from '@heroicons/vue/24/outline';
 
 export default {
@@ -74,7 +80,9 @@ export default {
         Button,
         Renderer,
         EyeIcon,
-        ArrowUpOnSquareStackIcon
+        ArrowUpOnSquareStackIcon,
+        Tab,
+        X
     },
 
     methods: {
@@ -92,6 +100,15 @@ export default {
         }
     },
 
+    watch: {
+        shouldDisplayPreview(newVal, oldVal) {
+            if (newVal && !oldVal) {
+                this.$nextTick(() => this.$refs.previewDialog.showModal());
+            } else if (!newVal) {
+                this.$refs.previewDialog?.close();
+            }
+        }
 
+    }
 }
 </script>
