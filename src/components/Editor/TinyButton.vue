@@ -1,5 +1,5 @@
 <template>
-    <button
+    <button :aria-pressed="toggled"
         class="rounded-sm text-xs w-fit p-1 flex flex-row gap-1 items-center place-content-center aria-pressed:outline-2 aria-pressed:outline-solid outline-yellow-600 disabled:filter disabled:grayscale disabled:opacity-80"
         :class="{
             'bg-red-100 enabled:hover:bg-red-300 text-red-800': danger,
@@ -10,6 +10,6 @@
 </template>
 <script>
 export default {
-    props: ['danger'],
+    props: ['danger', 'toggled'],
 }
 </script>

@@ -5,26 +5,29 @@
             <PlusCircleIcon aria-hidden="true" class="size-6" /><span class="sr-only">{{
                 strings.create_slice }}</span>
         </button>
-        <dialog :open="expanded"
-            class="bg-white w-1/2 mx-auto shadow-lg z-50 border-purple-800 border-2 p-4 rounded-sm ">
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-row justify-between gap-4 items-center">
-                    <span class="text-lg font-thin text-purple-900">{{
-                        strings.create_slice }}</span>
-                    <button @click="expanded = !expanded" class="ml-auto text-blue-500 hover:text-blue-800">
-                        <XCircleIcon v-if="expanded" aria-hidden="true" class="size-6" /><span v-if="expanded"
-                            class="sr-only">X</span>
-                    </button>
-                </div>
-
-                <div class="flex flex-col gap-2 " :id="stagerId">
-                    <div class="grid grid-cols-4 gap-4">
-                        <button
-                            class="rounded-sm bg-blue-800 hover:bg-blue-950 font-semibold text-sm  text-white p-2 inline-flex  gap-2 w-full text-center items-center justify-center"
-                            v-for="button in buttons" @click="generateSliceFromButton(button)">
-                            {{ button.label }}
-                            <BeakerIcon class="w-4 h-4" v-if="button.advanced" />
+        <dialog ref="stagerDialog" v-if="expanded"
+            class="bg-white w-1/2 mx-auto shadow-lg z-50 border-purple-800 border-2 rounded-sm mt-16"
+            @click="$event.target === $event.currentTarget ? expanded = false : null">
+            <div class="p-4">
+                <div class="flex flex-col gap-4">
+                    <div class="flex flex-row justify-between gap-4 items-center">
+                        <span class="text-lg font-thin text-purple-900">{{
+                            strings.create_slice }}</span>
+                        <button @click="expanded = !expanded" class="ml-auto text-blue-500 hover:text-blue-800">
+                            <XCircleIcon v-if="expanded" aria-hidden="true" class="size-6" /><span v-if="expanded"
+                                class="sr-only">X</span>
                         </button>
+                    </div>
+
+                    <div class="flex flex-col gap-2 " :id="stagerId">
+                        <div class="grid grid-cols-4 gap-4">
+                            <button
+                                class="rounded-sm bg-blue-800 hover:bg-blue-950 font-semibold text-sm  text-white p-2 inline-flex  gap-2 w-full text-center items-center justify-center"
+                                v-for="button in buttons" @click="generateSliceFromButton(button)">
+                                {{ button.label }}
+                                <BeakerIcon class="w-4 h-4" v-if="button.advanced" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -69,6 +72,19 @@ export default {
         XCircleIcon,
         XMarkIcon,
         BeakerIcon
+    },
+    watch: {
+        expanded(newValue) {
+            if (newValue) {
+                this.$nextTick(() => {
+                    this.$refs.stagerDialog.showModal();
+                });
+            } else {
+                if (this.$refs.stagerDialog) {
+                    this.$refs.stagerDialog.close();
+                }
+            }
+        }
     },
 
     computed: {

@@ -21,10 +21,13 @@ export default class HtmlMarkdownConverter {
             .replaceAll('•	', '- ') // Bullet point
             .replaceAll('×', '-') // Bullet multiplication
             .replaceAll('o	', '- ') // Bullet point
+            .replaceAll('o   ', '- ') // Bullet point
             .replaceAll('	', '- ') // Bullet point
             // Catch weird word list rendering.
             .replaceAll('·        ', '- ')
+            .replaceAll('·       ', '- ')
             .replaceAll('·         ', '- ')
+            .replaceAll('·         ', '- ')
             .replaceAll('o   ', '  - ')
             .replaceAll('§  ', '    - ');
 
