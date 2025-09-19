@@ -35,7 +35,8 @@
             </div>
             <div v-if="currentTab === 'advanced'" id="advanced" role="tabpanel" tabindex="0"
                 aria-labelledby="tab-advanced">
-                <editor-advanced :pboml-document="pbomlDocument" @update="handlePbomlUpdate"></editor-advanced>
+                <editor-advanced :pboml-document="pbomlDocument" @update="handlePbomlUpdate"
+                    :prefix="prefix"></editor-advanced>
             </div>
         </template>
     </main>

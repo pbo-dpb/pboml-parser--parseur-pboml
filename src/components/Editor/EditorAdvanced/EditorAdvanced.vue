@@ -33,6 +33,10 @@ import { GitCommit } from 'lucide-vue-next';
 export default {
     props: {
         pbomlDocument: PBOMLDocument,
+        prefix: {
+            type: String,
+            default: null
+        }
     },
 
     data() {
