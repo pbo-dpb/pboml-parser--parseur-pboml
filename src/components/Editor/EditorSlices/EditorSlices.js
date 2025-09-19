@@ -31,8 +31,6 @@ export default {
         handleMoveSlice(slice, direction) {
             this.pbomlDocument.moveSlice(slice, direction);
         }
-
-
     },
 
     components: {
@@ -62,6 +60,8 @@ export default {
                         this.handleNewSlice(slice, 0)
                     }
                 }),
+
+                this.pbomlDocument.slices.length === 0 ? h(defineAsyncComponent(() => import('./EditorSlicesEmpty.js')), { pbomlDocument: this.pbomlDocument }) : null,
 
                 ...(!!this.pbomlDocument.slices.forEach ? this.pbomlDocument.slices.map((slice, i) => {
 
