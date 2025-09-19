@@ -14,14 +14,14 @@
             <div class="tabs">
                 <div class="flex flex-row justify-between items-center">
                     <div role="tablist" class="flex flex-row gap-4 mb-4 border-b border-gray-300">
-                        <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'"
-                            :warning="hasUnlockedSlices">
+                        <Tab :controls="'slices'" :selected="currentTab === 'slices'" @click="currentTab = 'slices'">
                             {{ strings.main_content_section_title }}
                         </Tab>
 
-                        <Tab :controls="'annotations'" :selected="currentTab === 'annotations'"
-                            @click="currentTab = 'annotations'" :warning="hasUnlockedAnnotations">
-                            {{ strings.annotations_section_title }}
+
+                        <Tab :controls="'structure'" :selected="currentTab === 'structure'"
+                            @click="currentTab = 'structure'">
+                            {{ strings?.structure_section_title ?? "Structure" }}
                         </Tab>
                         <Tab :controls="'meta'" :selected="currentTab === 'meta'" @click="currentTab = 'meta'">
                             {{ strings.meta_section_title }}
@@ -46,10 +46,6 @@
                         </TinyButton>
                     </div>
 
-
-
-
-
                 </div>
 
 
@@ -71,9 +67,11 @@
                             </nav>
                         </div>
 
-                        <div id="annotations" role="tabpanel" tabindex="0" aria-labelledby="tab-annotations"
-                            v-if="currentTab === 'annotations'">
-                            <annotations-editor :pboml-document="pbomlDocument"></annotations-editor>
+
+
+                        <div id="structure" role="tabpanel" tabindex="0" aria-labelledby="tab-structure"
+                            v-if="currentTab === 'structure'">
+                            <structure-editor :pboml-document="pbomlDocument"></structure-editor>
                         </div>
 
 
@@ -142,8 +140,7 @@ export default {
         YamlEditor: defineAsyncComponent(() => import('./YamlEditor.vue')),
         DocumentMetaEditor,
         Tab,
-        AnnotationsEditor: defineAsyncComponent(() => import('./AnnotationsEditor/AnnotationsEditor.js')),
-
+        StructureEditor: defineAsyncComponent(() => import('./StructureEditor/StructureEditor.js')),
         Bars3Icon,
         Toc: defineAsyncComponent(() => import('../Toc/Toc.js')),
         ArrowsPointingInIcon,
@@ -171,16 +168,6 @@ export default {
         }
     },
 
-    computed: {
-        hasUnlockedSlices() {
-            return this.pbomlDocument.slices.some(slice => slice.state._unlocked);
-        },
-
-        hasUnlockedAnnotations() {
-            return this.pbomlDocument.annotations.some(annotation => annotation.state._unlocked);
-        }
-
-    },
 
     methods: {
 

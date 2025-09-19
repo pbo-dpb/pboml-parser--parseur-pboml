@@ -47,12 +47,12 @@ export default {
                 role: 'tablist', class: 'flex flex-row gap-4 mb-4 border-b border-gray-300'
             }, {
                 default: () => [
-                    h(Tab, { size: "md", selected: this.currentTab === 'slices', onClick: () => { this.currentTab = 'slices' } }, { default: () => this.strings.slices_section_title }),
-                    h(Tab, { size: "md", selected: this.currentTab === 'structure', onClick: () => { this.currentTab = 'structure' } }, { default: () => this.strings.structure_section_title }),
+                    h(Tab, { size: "md", selected: this.currentTab === 'slices', warning: this.pbomlDocument?.slices?.some(slice => slice.state._unlocked) ?? false, onClick: () => { this.currentTab = 'slices' } }, { default: () => this.strings.slices_section_title }),
+                    h(Tab, { size: "md", selected: this.currentTab === 'annotations', warning: this.pbomlDocument?.annotations?.some(annotation => annotation.state._unlocked) ?? false, onClick: () => { this.currentTab = 'annotations' } }, { default: () => this.strings.annotations_section_title }),
                 ]
             }),
 
-            this.currentTab === 'structure' ? h(defineAsyncComponent(() => import('../StructureEditor/StructureEditor.js')), { pbomlDocument: this.pbomlDocument }) : null,
+            this.currentTab === 'annotations' ? h(defineAsyncComponent(() => import('../AnnotationsEditor/AnnotationsEditor.js')), { pbomlDocument: this.pbomlDocument }) : null,
 
             this.currentTab === 'slices' ? h('div', { 'class': 'flex flex-col gap-8' }, [
 
