@@ -209,9 +209,13 @@ export default {
                             return;
                         slices.push(new MarkdownSlice(payload));
                     } else if (!importingAnnotations && token.type === 'table') {
-                        slices.push(new TableSlice(payload));
+                        let newSlice = new TableSlice(payload);
+                        newSlice.presentation = "figure";
+                        slices.push(newSlice);
                     } else if (!importingAnnotations && token.type === 'image') {
-                        slices.push(new SvgSlice(payload));
+                        let newSlice = new SvgSlice(payload);
+                        newSlice.presentation = "figure";
+                        slices.push(newSlice);
                     } else if (importingAnnotations && token.type === 'list_item') {
                         payload.content = {};
                         // Token text finishes with [↑](#endnote-ref-x). The [↑] and everything after can be stripped.
