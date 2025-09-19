@@ -70,7 +70,6 @@ export default {
 
             try {
                 this.$root.pbomlDocument = PBOMLDocument.initFromYaml(this.workingPboml, this.prefix);
-                this.shouldEditRaw = false;
             } catch (e) {
                 alert(this.strings.error_invalid_pboml + "\n\n" + e);
                 console.error(e);
