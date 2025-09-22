@@ -22,7 +22,12 @@ export default {
                 this.unlockableObject.state._unlocked = !this.unlockableObject.state._unlocked;
                 nextTick(() => {
                     if (this && this.$refs && this.$refs.toggle) {
-                        this.$refs.toggle.scrollIntoViewIfNeeded()
+
+                        setTimeout(() => {
+                            if (this && this.$refs && this.$refs.toggle) {
+                                this.$refs.toggle.scrollIntoViewIfNeeded()
+                            }
+                        }, 300)
                     }
                 })
 
