@@ -1,6 +1,11 @@
 <template>
     <main class="flex flex-col gap-4 justify-between">
 
+        <div class="text-orange-800 font-medium bg-orange-100 p-4 rounded" v-show="hasUnlockedContent">
+            <Unlock class="inline w-6 h-6 mr-2 align-middle" />
+            {{ strings.unlocked_content_warning }}
+        </div>
+
         <header class="flex flex-row justify-between items-center">
             <div class="tabs">
                 <div class="flex flex-row justify-between items-center">
@@ -54,7 +59,7 @@ import strings from "../../editor-strings"
 import Tab from "./Tabs/Tab.vue"
 import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from '@heroicons/vue/24/solid';
 import { ChevronRightIcon } from '@heroicons/vue/20/solid';
-import { FileCode } from 'lucide-vue-next'
+import { FileCode, Unlock } from 'lucide-vue-next'
 
 export default {
     props: {
@@ -82,7 +87,8 @@ export default {
         Tab,
         ArrowsPointingInIcon,
         ArrowsPointingOutIcon,
-        ChevronRightIcon
+        ChevronRightIcon,
+        Unlock
     },
 
     watch: {
@@ -100,13 +106,20 @@ export default {
                 document.dispatchEvent(event);
             },
             deep: true
-        }
+        },
+
     },
 
     methods: {
         handlePbomlUpdate(newPbomlDocument) {
             this.pbomlDocument = newPbomlDocument;
         },
+    },
+
+    computed: {
+        hasUnlockedContent() {
+            return (this.pbomlDocument?.slices?.some(slice => slice.state._unlocked) ?? false) || (this.pbomlDocument?.annotations?.some(annotation => annotation.state._unlocked) ?? false);
+        }
     }
 
 

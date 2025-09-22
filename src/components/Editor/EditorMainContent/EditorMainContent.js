@@ -32,8 +32,8 @@ export default {
                 role: 'tablist', class: 'flex flex-row gap-4 mb-4 border-b border-gray-300'
             }, {
                 default: () => [
-                    h(Tab, { size: "md", selected: this.currentTab === 'slices', warning: this.pbomlDocument?.slices?.some(slice => slice.state._unlocked) ?? false, onClick: () => { this.currentTab = 'slices' } }, { default: () => this.strings.slices_section_title }),
-                    h(Tab, { size: "md", selected: this.currentTab === 'annotations', warning: this.pbomlDocument?.annotations?.some(annotation => annotation.state._unlocked) ?? false, onClick: () => { this.currentTab = 'annotations' } }, { default: () => this.strings.annotations_section_title }),
+                    h(Tab, { size: "md", selected: this.currentTab === 'slices', onClick: () => { this.currentTab = 'slices' } }, { default: () => this.strings.slices_section_title }),
+                    h(Tab, { size: "md", selected: this.currentTab === 'annotations', onClick: () => { this.currentTab = 'annotations' } }, { default: () => this.strings.annotations_section_title }),
                     h('span', { class: 'self-center text-gray-400 select-none text-xl' }, '•'),
                     h(Tab, { size: "md", selected: this.currentTab === 'structure', onClick: () => { this.currentTab = 'structure' } }, { default: () => this.strings.structure_section_title }),
                 ]

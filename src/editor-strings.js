@@ -135,6 +135,7 @@ export default {
         "empty_slice_prompt": "Kickstart your PBOML document by importing .docx documents.",
         "toc_toggle": "Toggle table of contents",
         "advanced_section_code_tab": "Source YAML",
+        "unlocked_content_warning": "Some content in this document is unlocked. Unlocked content may prevent further processing of the document.",
     },
     fr: {
         "close": "Fermer",
@@ -270,5 +271,6 @@ export default {
         "empty_slice_prompt": "Démarrez votre document PBOML en important des documents .docx.",
         "toc_toggle": "Basculer la table des matières",
         "advanced_section_code_tab": "Code source YAML",
+        "unlocked_content_warning": "Certain contenu de ce document est déverrouillé. Le contenu déverrouillé peut empêcher le traitement ultérieur du document.",
     }
 }
