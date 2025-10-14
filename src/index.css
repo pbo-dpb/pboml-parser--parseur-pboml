@@ -47,6 +47,19 @@ input {
   @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
 }
 
+.pboml-prose>p {
+  @apply my-4;
+}
+
+.pboml-prose>p:first-child {
+  margin-top: 0;
+  ;
+}
+
+.pboml-prose>p:last-child {
+  margin-bottom: 0;
+}
+
 
 
 dialog::backdrop {
