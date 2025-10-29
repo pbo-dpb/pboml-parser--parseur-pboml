@@ -36,7 +36,7 @@ export default {
 
     _buildFooterVnodes(language) {
       if (this.standalone) return [];
-      return [h("footer", { class: "flex flex-row gap-2 text-xs text-gray-800 justify-center items-center print:mt-8" },
+      return [h("footer", { class: "flex flex-row gap-2 text-xs text-gray-800 dark:text-gray-200 justify-center items-center print:mt-8" },
         [
           this.pbomlDocument.copyright?.[language] ? h("div", { class: "", innerHTML: this.pbomlDocument.copyright[language] }) : null,
           (this.pbomlDocument.copyright?.[language] && this.pbomlDocument.id) ? h("div", { role: "separator", ariaHidden: true, innerHTML: "•", class: "text-gray-500" }) : null,

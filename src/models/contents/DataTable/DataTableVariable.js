@@ -21,7 +21,7 @@ const defaults = {
 }
 
 export default class DataTableVariable {
-    static #cellBaseClass = 'prose border border-gray-300 dark:border-gray-700 p-1 leading-snug text-balance hyphens-auto';
+    static #cellBaseClass = 'prose dark:prose-invert border border-gray-300 dark:border-gray-700 p-1 leading-snug text-balance hyphens-auto';
 
     constructor(payload, key) {
 
