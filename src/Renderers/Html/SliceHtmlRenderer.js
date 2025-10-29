@@ -41,13 +41,15 @@ export default class SliceHtmlRenderer {
 
     __renderMetaContentArrayVnodes(contentArray, language) {
         const md = new MarkdownDriver;
+        /*md.renderInline = true;*/
         let classes = [
             "pboml-prose", "prose-sm", "prose-p:my-0",
             "prose-td:border", "prose-td:border-gray-300", "dark:prose-td:border-gray-700", "prose-td:p-2",
             "prose-th:border", "prose-th:border-gray-300", "dark:prose-th:border-gray-700", "prose-th:font-semibold", "prose-th:p-2", "prose-th:text-left",
             "prose-table:table-fixed", "prose-table:w-full",
         ]
-        return h('div', { class: classes, innerHTML: contentArray.map(src => md.render(src[language])).join("") })
+
+        return h('div', { class: classes }, contentArray.map(src => h('div', { innerHTML: md.render(src[language]) })))
     }
 
     renderMetaVnodes(label, content, collapsible = false) {
