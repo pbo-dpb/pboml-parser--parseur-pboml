@@ -35,7 +35,9 @@ export default {
     },
 
     _buildFooterVnodes(language) {
-      if (this.standalone) return [];
+      // Hide footer if no copyright is set.
+      if (this.standalone || !this.pbomlDocument.copyright?.[language]) return [];
+
       return [h("footer", { class: "flex flex-row gap-2 text-xs text-gray-800 dark:text-gray-200 justify-center items-center print:mt-8" },
         [
           this.pbomlDocument.copyright?.[language] ? h("div", { class: "", innerHTML: this.pbomlDocument.copyright[language] }) : null,
