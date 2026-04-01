@@ -1,44 +1,42 @@
-import editorStrings from "../../../editor-strings"
-import TinyButton from "../TinyButton.vue"
-import StructureTree from "./StructureTree/StructureTree.js"
-import { h, defineAsyncComponent } from 'vue'
-import { ClipboardDocumentListIcon } from '@heroicons/vue/24/outline'
-import Button from "../Button.vue"
-const StructureImporter = defineAsyncComponent(() => import('./StructureImporter/StructureImporter.vue'))
+import editorStrings from "../../../editor-strings";
+import TinyButton from "../TinyButton.vue";
+import StructureTree from "./StructureTree/StructureTree.js";
+import { h, defineAsyncComponent } from "vue";
+import { ClipboardDocumentListIcon } from "@heroicons/vue/24/outline";
+import Button from "../Button.vue";
+const StructureImporter = defineAsyncComponent(
+    () => import("./StructureImporter/StructureImporter.vue"),
+);
 
 export default {
     props: ["pbomlDocument"],
-    components: {
-        StructureImporter,
-        ClipboardDocumentListIcon,
-        StructureTree
-    },
+    components: { StructureImporter, ClipboardDocumentListIcon, StructureTree },
 
     data() {
-        return {
-            displayImporter: false
-        }
+        return { displayImporter: false };
     },
 
-    mounted() {
+    mounted() {},
 
-
-    },
-
-    methods: {
-
-    },
+    methods: {},
 
     render() {
-        let strings = editorStrings[document.documentElement.lang]
-        return h("div", {},
-            [
-                h(StructureTree, { pbomlDocument: this.pbomlDocument }),
-                this.displayImporter ?
-                    h(StructureImporter, { pbomlDocument: this.pbomlDocument, onClose: () => this.displayImporter = false }) : h(Button, { onClick: () => this.displayImporter = true }, () => [h(ClipboardDocumentListIcon, { 'class': "h-4 w-4" }), strings["append_structure_by_import"]])
-            ]
-        );
-
-    }
-
-}
+        let strings = editorStrings[document.documentElement.lang];
+        return h("div", {}, [
+            h(StructureTree, { pbomlDocument: this.pbomlDocument }),
+            this.displayImporter
+                ? h(StructureImporter, {
+                      pbomlDocument: this.pbomlDocument,
+                      onClose: () => (this.displayImporter = false),
+                  })
+                : h(
+                      Button,
+                      { onClick: () => (this.displayImporter = true) },
+                      () => [
+                          h(ClipboardDocumentListIcon, { class: "h-4 w-4" }),
+                          strings["append_structure_by_import"],
+                      ],
+                  ),
+        ]);
+    },
+};

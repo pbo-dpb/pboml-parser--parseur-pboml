@@ -2,18 +2,16 @@
 
 @plugin '@tailwindcss/typography';
 
-
 @theme {
-  --height-128: 32rem;
+    --height-128: 32rem;
 }
 
 * {
-  @apply border-solid;
-
+    @apply border-solid;
 }
 
 input {
-  @apply bg-white;
+    @apply bg-white;
 }
 
 /*
@@ -25,65 +23,60 @@ input {
   color utility to any element that depends on these defaults.
 */
 @layer base {
-
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentcolor);
+    }
 }
 
 @utility text-balance {
-  text-wrap: balance;
+    text-wrap: balance;
 }
 
 @utility pboml-prose {
-  @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
+    @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
 }
 
 @utility pboml-non-reactive-prose {
-  @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
+    @apply prose dark:prose-invert max-w-none prose-headings:font-thin break-words prose-a:text-blue-800 dark:prose-a:text-blue-200 leading-relaxed;
 }
 
-.pboml-prose>p {
-  @apply my-4;
+.pboml-prose > p {
+    @apply my-4;
 }
 
-.pboml-prose>p:first-child {
-  margin-top: 0;
-  ;
+.pboml-prose > p:first-child {
+    margin-top: 0;
 }
 
-.pboml-prose>p:last-child {
-  margin-bottom: 0;
+.pboml-prose > p:last-child {
+    margin-bottom: 0;
 }
-
-
 
 dialog::backdrop {
-  @apply backdrop-blur-sm;
+    @apply backdrop-blur-sm;
 }
 
 dialog {
-  @apply rounded-lg border border-slate-200 bg-white shadow-lg;
+    @apply rounded-lg border border-slate-200 bg-white shadow-lg;
 }
 
 tbody th:not([scope]),
 tbody th:has(+ th:not([scope])) {
-  @apply text-slate-700 dark:text-slate-300 border-y-2 border-y-slate-200;
+    @apply text-slate-700 dark:text-slate-300 border-y-2 border-y-slate-200;
 }
 
-
-.prose> :first-child {
-  margin-top: 0;
+.prose > :first-child {
+    margin-top: 0;
 }
 
-.prose> :last-child {
-  margin-bottom: 0;
+.prose > :last-child {
+    margin-bottom: 0;
 }
 
 table p {
-  @apply m-0;
+    @apply m-0;
 }

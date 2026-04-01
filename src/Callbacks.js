@@ -3,7 +3,6 @@
  * a page owning a <pboml-parser></pboml-parser> can define as global variables.
  */
 export default class Callbacks {
-
     /**
      * This callback runs before markdown to HTML conversion. The string is provided
      * as the argument, while the return value will be processed
@@ -21,5 +20,4 @@ export default class Callbacks {
     static get getAfterMarkdownRendering() {
         return document?.pbomlCallbacks?.afterMarkdownRendering;
     }
-
 }

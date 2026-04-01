@@ -1,58 +1,63 @@
 <template>
     <div class="flex flex-col gap-2">
-        <label :for="eluid" class="font-medium">
-
-            .docx ({{ language }})
-
-        </label>
-        <input type="file" :id="eluid" @change="handleFileInputChange" accept=".docx" ref="inputField"
-            class="file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded" />
-
+        <label :for="eluid" class="font-medium"> .docx ({{ language }}) </label>
+        <input
+            type="file"
+            :id="eluid"
+            @change="handleFileInputChange"
+            accept=".docx"
+            ref="inputField"
+            class="file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded"
+        />
     </div>
 </template>
 <script setup>
-import * as mammoth from 'mammoth/mammoth.browser';
+    import * as mammoth from "mammoth/mammoth.browser";
 
+    import { ref } from "vue";
+    import HtmlMarkdownConverter from "../../../../HtmlMarkdownConverter";
 
-import { ref } from 'vue';
-import HtmlMarkdownConverter from '../../../../HtmlMarkdownConverter';
+    const inputField = ref(null);
 
-const inputField = ref(null);
+    const eluid = ref(Math.random().toString(36).substring(2));
+    const props = defineProps({ language: String });
 
-const eluid = ref(Math.random().toString(36).substring(2));
-const props = defineProps({
-    language: String
-});
+    const emit = defineEmits(["pick"]);
+    const readDocxFile = async (file) => {
+        const arrayBuffer = await file.arrayBuffer();
 
-const emit = defineEmits(['pick'])
-const readDocxFile = async (file) => {
+        const { value: html, messages } = await mammoth.convertToHtml({
+            arrayBuffer: arrayBuffer,
+        });
 
-    const arrayBuffer = await file.arrayBuffer();
+        let cleanedHtml = "" + html;
 
-    const { value: html, messages } = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
+        const highlightsRegex =
+            /<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>/i;
+        if (highlightsRegex.test(html)) {
+            // This is a regular report. Only keep whatever comes after the first H1 that isn't the highlights H1.
+            cleanedHtml = cleanedHtml.replace(
+                /.*?(?=<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>)/i,
+                "",
+            );
+            cleanedHtml = cleanedHtml.replace(highlightsRegex, "");
+            const firstHeadingIndex = cleanedHtml.indexOf("<h1>");
+            cleanedHtml =
+                firstHeadingIndex !== -1
+                    ? cleanedHtml.substring(firstHeadingIndex)
+                    : cleanedHtml;
+        }
 
-    let cleanedHtml = "" + html;
+        const markdown = new HtmlMarkdownConverter().convert(cleanedHtml);
 
-    const highlightsRegex = /<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>/i;
-    if (highlightsRegex.test(html)) {
-        // This is a regular report. Only keep whatever comes after the first H1 that isn't the highlights H1.
-        cleanedHtml = cleanedHtml.replace(/.*?(?=<h1>\s*<a\s+id="[^"]+"><\/a>\s*(Faits saillants|Highlights)\s*<\/h1>)/i, "");
-        cleanedHtml = cleanedHtml.replace(highlightsRegex, "");
-        const firstHeadingIndex = cleanedHtml.indexOf("<h1>");
-        cleanedHtml = firstHeadingIndex !== -1 ? cleanedHtml.substring(firstHeadingIndex) : cleanedHtml
-    }
+        emit("pick", { markdown, language: props.language });
 
-    const markdown = (new HtmlMarkdownConverter).convert(cleanedHtml);
+        inputField.value.value = null;
+    };
 
-    emit('pick', { markdown, language: props.language });
-
-    inputField.value.value = null;
-}
-
-const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    readDocxFile(file);
-}
-
+    const handleFileInputChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        readDocxFile(file);
+    };
 </script>

@@ -1,42 +1,42 @@
 name: compile-and-release
 on: [workflow_dispatch]
 jobs:
-  compile-assets-and-push-release:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - uses: actions/setup-node@v6
-        with:
-          node-version: '24'
-      - run: npm ci
-      - run: npm run build
-      - run: cp dist/.vite/manifest.json dist/manifest.json
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r dist.zip dist
-      - uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
-          files: |
-            dist.zip
-      - uses: shallwefootball/s3-upload-action@master
-        with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: ${{ secrets.AWS_BUCKET }}
-          source_dir: 'dist'
-          destination_dir: ''
-      - uses: chetan/invalidate-cloudfront-action@v2
-        continue-on-error: true
-        env:
-          DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION }}
-          PATHS: "/manifest.json /index.html /index.fr.html"
-          AWS_REGION: "us-east-1"
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+    compile-assets-and-push-release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - name: Reconfigure git to use HTTP authentication
+              run: >
+                  git config --global url."https://github.com/".insteadOf
+                  ssh://git@github.com/
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: "24"
+            - run: npm ci
+            - run: npm run build
+            - run: cp dist/.vite/manifest.json dist/manifest.json
+            - uses: montudor/action-zip@v1
+              with:
+                  args: zip -qq -r dist.zip dist
+            - uses: "marvinpinto/action-automatic-releases@latest"
+              with:
+                  repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                  automatic_release_tag: "latest"
+                  prerelease: false
+                  files: |
+                      dist.zip
+            - uses: shallwefootball/s3-upload-action@master
+              with:
+                  aws_key_id: ${{ secrets.AWS_KEY_ID }}
+                  aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+                  aws_bucket: ${{ secrets.AWS_BUCKET }}
+                  source_dir: "dist"
+                  destination_dir: ""
+            - uses: chetan/invalidate-cloudfront-action@v2
+              continue-on-error: true
+              env:
+                  DISTRIBUTION: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION }}
+                  PATHS: "/manifest.json /index.html /index.fr.html"
+                  AWS_REGION: "us-east-1"
+                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}

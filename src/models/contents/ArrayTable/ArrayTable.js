@@ -1,8 +1,7 @@
-import { h, defineAsyncComponent } from 'vue'
+import { h, defineAsyncComponent } from "vue";
 
 export default class ArrayTable {
     constructor(payload) {
-
         /**
          * A primitive objet or an array (object: key-value(s) or [[header1, header2], ['val1', 'val2']]).
          * Values that are strings or numbers will be treated litteraly. Values that are objects will
@@ -16,7 +15,7 @@ export default class ArrayTable {
         this.arraytable = payload.arraytable ? payload.arraytable : null;
 
         /**
-         * An optional object with possible format 
+         * An optional object with possible format
          * {
          *  x: {
          *      label: "__some_label__",
@@ -29,7 +28,6 @@ export default class ArrayTable {
          */
         this.axes = payload.axes ? payload.axes : null;
 
-
         this.colors = payload.colors ? payload.colors : null;
 
         /**
@@ -37,10 +35,7 @@ export default class ArrayTable {
          * Eg.: given config `{"myval": "_some_string_"}` and dicts `{'en': { '_some_string_': "Hello, world!"}}`
          * will render as `{"myval": "Hello, world!"}` when language set to `en`.
          */
-        this.strings = {
-            en: payload.strings?.en,
-            fr: payload.strings?.fr
-        }
+        this.strings = { en: payload.strings?.en, fr: payload.strings?.fr };
 
         /**
          * A type (string) or an array of types (array) for the chart (eg. line). If more than one type is passed,
@@ -49,12 +44,11 @@ export default class ArrayTable {
          */
 
         if (payload.chart_type) {
-            this.types = [payload.chart_type]
+            this.types = [payload.chart_type];
         } else {
-            this.types = payload.chart_types ? payload.chart_types : 'bar'
+            this.types = payload.chart_types ? payload.chart_types : "bar";
         }
     }
-
 
     localizeRecursively(content, language) {
         /**
@@ -63,13 +57,21 @@ export default class ArrayTable {
          */
         let rawContent = JSON.stringify(content);
         for (const [key, value] of Object.entries(this.strings[language])) {
-            rawContent = rawContent.replaceAll(`"${key}"`, JSON.stringify(value))
+            rawContent = rawContent.replaceAll(
+                `"${key}"`,
+                JSON.stringify(value),
+            );
         }
 
         return JSON.parse(rawContent);
     }
 
     renderReadonlyVnode(language) {
-        return h(defineAsyncComponent(() => import('../../../components/Renderer/ArrayTableTable')), { arraytable: this })
+        return h(
+            defineAsyncComponent(
+                () => import("../../../components/Renderer/ArrayTableTable"),
+            ),
+            { arraytable: this },
+        );
     }
 }

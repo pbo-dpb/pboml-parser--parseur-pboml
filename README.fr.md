@@ -33,7 +33,7 @@ Certaines publications existantes ont déjà été converties au format PBOML et
 
 ⚠️ Le composant Web est en cours de développement. Il est recommandé de ne pas l'utiliser en production car sa mise en œuvre pourrait changer radicalement.
 
-###  Récupérer la version actuelle du script
+### Récupérer la version actuelle du script
 
 Le script suivant permet de récupérer la dernière version du script en consultant le manifeste produit lors de sa compilation, et de l'injecter sur une page donnée.
 
@@ -47,7 +47,7 @@ function loadPbomlParser() {
         .then((data) => {
             for (const property in data) {
                 if (data[property].isEntry) {
-                    const script = document.createElement('script');
+                    const script = document.createElement("script");
                     script.src = `${PARSER_DOMAIN}${data[property].file}`;
                     script.type = "module";
                     document.head.appendChild(script);
@@ -55,8 +55,7 @@ function loadPbomlParser() {
             }
         });
 }
-if (!window.pboml_parser_loaded)
-    loadPbomlParser()
+if (!window.pboml_parser_loaded) loadPbomlParser();
 ```
 
 ### Intégrer le moteur de rendu
@@ -82,12 +81,16 @@ Où `pbomlDocument` est un document PBOML brut.
 L'éditeur visuel peut être intégré en ajoutant l'attribut `edit` avec la valeur `true`.
 
 ```html
-<pboml-parser edit="true" payload="data:text/yaml;base64,{pboml}"></pboml-parser>
+<pboml-parser
+    edit="true"
+    payload="data:text/yaml;base64,{pboml}"
+></pboml-parser>
 ```
 
 ## Développer et construire localement
 
 ### 1. Mise en route
+
 ```
 npm install
 ```
@@ -95,16 +98,19 @@ npm install
 ### 2. Compilation avec Vite
 
 ### Compilations et recharges à chaud pour le développement
+
 ```
 npm run dev
 ```
 
 ### Tests
+
 ```
 npm run test
 ```
 
 ### Compilation et miniaturisation pour la production
+
 ```
 npm run build
 ```

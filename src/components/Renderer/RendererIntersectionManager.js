@@ -1,26 +1,21 @@
-import Slice from "../../models/contents/Slice"
+import Slice from "../../models/contents/Slice";
 export default class {
-
     constructor() {
-        this.observers = {}
+        this.observers = {};
     }
-
 
     emitEventForSlice(slice) {
         const event = new CustomEvent("pboml-renderer-intersection-visible", {
             bubbles: true,
             cancelable: false,
             composed: true,
-            detail: {
-                anchor: slice.anchor
-            }
+            detail: { anchor: slice.anchor },
         });
         document.dispatchEvent(event);
     }
 
     startObservingForSlice(rendererEl, slice) {
-
-        if (!window.IntersectionObserver) return
+        if (!window.IntersectionObserver) return;
 
         const sliceId = slice.anchor;
 
@@ -29,16 +24,16 @@ export default class {
         const element = rendererEl.querySelector(`#${sliceId}`);
 
         if (!element) return;
-        new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.intersectionRatio === 1) {
-                    this.emitEventForSlice(slice);
-                }
-            });
-        }, {
-            threshold: 1.0,
-        }).observe(element);
-
+        new IntersectionObserver(
+            (entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.intersectionRatio === 1) {
+                        this.emitEventForSlice(slice);
+                    }
+                });
+            },
+            { threshold: 1.0 },
+        ).observe(element);
     }
 
     stopObserving() {

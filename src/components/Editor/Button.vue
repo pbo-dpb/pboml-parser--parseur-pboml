@@ -5,16 +5,13 @@
             'bg-blue-800 enabled:hover:bg-blue-700 text-white': primary,
             'bg-blue-100 enabled:hover:bg-blue-300 text-blue-800': !primary,
             'shadow-inner aria-pressed:bg-blue-600': primary && toggled,
-            'shadow-inner aria-pressed:bg-slate-600': !primary && toggled
-        }" :aria-pressed="toggled">
-
+            'shadow-inner aria-pressed:bg-slate-600': !primary && toggled,
+        }"
+        :aria-pressed="toggled"
+    >
         <slot></slot>
-
-
     </button>
 </template>
 <script>
-export default {
-    props: ['primary', 'toggled']
-}
+    export default { props: ["primary", "toggled"] };
 </script>

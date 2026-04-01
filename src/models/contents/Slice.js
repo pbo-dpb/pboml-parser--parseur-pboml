@@ -1,58 +1,61 @@
-import { h, defineAsyncComponent } from 'vue'
-import ChoiceRenderer from '../../components/Editor/Inputs/ChoiceRenderer.js';
-
+import { h, defineAsyncComponent } from "vue";
+import ChoiceRenderer from "../../components/Editor/Inputs/ChoiceRenderer.js";
 
 const defaults = {
     presentation: null,
     readonly: false,
     display_label: true,
-    print_only: false
-}
+    print_only: false,
+};
 
 export default class Slice {
     constructor(payload) {
         this.id = payload.id;
         this.type = payload.type;
-        this.readonly = payload.readonly !== undefined ? payload.readonly : defaults.readonly;
-        this.display_label = payload.display_label !== undefined ? payload.display_label : defaults.display_label;
-        this.presentation = payload.presentation !== undefined ? payload.presentation : defaults.presentation;
+        this.readonly =
+            payload.readonly !== undefined
+                ? payload.readonly
+                : defaults.readonly;
+        this.display_label =
+            payload.display_label !== undefined
+                ? payload.display_label
+                : defaults.display_label;
+        this.presentation =
+            payload.presentation !== undefined
+                ? payload.presentation
+                : defaults.presentation;
         this.choices = payload.choices;
-        this.print_only = payload.print_only !== undefined ? payload.print_only : defaults.print_only;
+        this.print_only =
+            payload.print_only !== undefined
+                ? payload.print_only
+                : defaults.print_only;
 
         this.referenced_as = {
             en: payload.referenced_as?.en,
-            fr: payload.referenced_as?.fr
+            fr: payload.referenced_as?.fr,
         };
 
-        this.label = {
-            en: payload.label?.en,
-            fr: payload.label?.fr
-        }
+        this.label = { en: payload.label?.en, fr: payload.label?.fr };
 
-        this.sources = payload.sources ? payload.sources.map(src => {
-            return {
-                en: src?.en,
-                fr: src?.fr
-            }
-        }) : [];
+        this.sources = payload.sources
+            ? payload.sources.map((src) => {
+                  return { en: src?.en, fr: src?.fr };
+              })
+            : [];
 
-        this.notes = payload.notes ? payload.notes.map(src => {
-            return {
-                en: src?.en,
-                fr: src?.fr
-            }
-        }) : [];
+        this.notes = payload.notes
+            ? payload.notes.map((src) => {
+                  return { en: src?.en, fr: src?.fr };
+              })
+            : [];
 
-        this.alts = payload.alts ? payload.alts.map(src => {
-            return {
-                en: src?.en,
-                fr: src?.fr
-            }
-        }) : [];
+        this.alts = payload.alts
+            ? payload.alts.map((src) => {
+                  return { en: src?.en, fr: src?.fr };
+              })
+            : [];
 
         this.content = payload.content;
-
-
 
         this.state = {
             isEditingSourceCode: false,
@@ -62,94 +65,130 @@ export default class Slice {
             prefix: null,
             canMoveUp: true,
             canMoveDown: true,
-            callbacks: {
-                move: null,
-                delete: null
-            }
-        }
+            callbacks: { move: null, delete: null },
+        };
 
-        this.state._unlocked = payload?.state?._unlocked !== undefined ? payload.state._unlocked : false;
-
+        this.state._unlocked =
+            payload?.state?._unlocked !== undefined
+                ? payload.state._unlocked
+                : false;
     }
-
 
     get labelStrings() {
         return {
-            en: [this.referenced_as['en'], this.label['en']].filter(x => x),
-            fr: [this.referenced_as['fr'], this.label['fr']].filter(x => x),
-        }
+            en: [this.referenced_as["en"], this.label["en"]].filter((x) => x),
+            fr: [this.referenced_as["fr"], this.label["fr"]].filter((x) => x),
+        };
     }
-
 
     _buildEditorInputVnodes() {
         return [];
     }
 
     _buildEditorChoicesInputVnode() {
-        return [new ChoiceRenderer(this).renderAsVnode()]
+        return [new ChoiceRenderer(this).renderAsVnode()];
     }
 
-
     __buildEditorsVnode() {
-
         return [
+            h("div", { class: "mb-4 empty:hidden" }, [
+                h(
+                    defineAsyncComponent(
+                        () =>
+                            import("../../components/Editor/SlicePresentationEditor.js"),
+                    ),
+                    {
+                        presentation: this.presentation,
+                        isEditing: this.state.isEditingMeta,
+                        "onUpdate:modelValue": (value) => {
+                            this.presentation = value;
+                        },
+                    },
+                ),
+            ]),
 
-            h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import("../../components/Editor/SlicePresentationEditor.js")), {
-                'presentation': this.presentation,
-                'isEditing': this.state.isEditingMeta,
-                'onUpdate:modelValue': (value) => {
-                    this.presentation = value;
-                }
-            })]),
+            h("div", { class: "mb-4 empty:hidden" }, [
+                h(
+                    defineAsyncComponent(
+                        () =>
+                            import("../../components/Editor/SliceReferenceEditor.js"),
+                    ),
+                    {
+                        referenced_as: this.referenced_as,
+                        isEditing: this.state.isEditingMeta,
+                        "onUpdate:modelValue": (value) => {
+                            this.referenced_as.en = value.en;
+                            this.referenced_as.fr = value.fr;
+                        },
+                    },
+                ),
+            ]),
 
-            h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceReferenceEditor.js')), {
-                'referenced_as': this.referenced_as,
-                'isEditing': this.state.isEditingMeta,
-                'onUpdate:modelValue': (value) => {
-                    this.referenced_as.en = value.en;
-                    this.referenced_as.fr = value.fr;
-                }
-            })]),
+            h("div", { class: "mb-4 empty:hidden" }, [
+                h(
+                    defineAsyncComponent(
+                        () =>
+                            import("../../components/Editor/SliceLabelEditor.js"),
+                    ),
+                    {
+                        label: this.label,
+                        isEditing: this.state.isEditingMeta,
+                        "onUpdate:modelValue": (value) => {
+                            this.label.en = value.en;
+                            this.label.fr = value.fr;
+                        },
+                    },
+                ),
+            ]),
 
+            h("div", { class: "mb-4 empty:hidden" }, [
+                h(
+                    defineAsyncComponent(
+                        () =>
+                            import("../../components/Editor/SliceIdEditor.js"),
+                    ),
+                    {
+                        id: this.id,
+                        isEditing: this.state.isEditingMeta,
+                        "onUpdate:modelValue": (value) => {
+                            this.id = value ? value : null;
+                        },
+                    },
+                ),
+            ]),
 
-            h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceLabelEditor.js')), {
-                'label': this.label,
-                'isEditing': this.state.isEditingMeta,
-                'onUpdate:modelValue': (value) => {
-                    this.label.en = value.en;
-                    this.label.fr = value.fr
-                }
-            })]),
+            ...(this.choices
+                ? this._buildEditorChoicesInputVnode()
+                : this._buildEditorInputVnodes()),
 
-
-            h('div', { class: 'mb-4 empty:hidden' }, [h(defineAsyncComponent(() => import('../../components/Editor/SliceIdEditor.js')), {
-                'id': this.id,
-                'isEditing': this.state.isEditingMeta,
-                'onUpdate:modelValue': (value) => {
-                    this.id = value ? value : null;
-                }
-            })]),
-
-            ...(this.choices ? this._buildEditorChoicesInputVnode() : this._buildEditorInputVnodes()),
-
-            h('div', { class: 'mt-4' }, [h(defineAsyncComponent(() => import('../../editors/SliceMetasEditor.js')), {
-                slice: this
-            })]),
+            h("div", { class: "mt-4" }, [
+                h(
+                    defineAsyncComponent(
+                        () => import("../../editors/SliceMetasEditor.js"),
+                    ),
+                    { slice: this },
+                ),
+            ]),
         ];
     }
 
-
     renderEditingVnode(language = document.documentElement.lang) {
-        return h(defineAsyncComponent(() => import('../../editors/SliceEditor.js')), { slice: this, language: language, id: this.anchor, key: this.anchor });
+        return h(
+            defineAsyncComponent(() => import("../../editors/SliceEditor.js")),
+            {
+                slice: this,
+                language: language,
+                id: this.anchor,
+                key: this.anchor,
+            },
+        );
     }
 
     get anchor() {
-        return `${this.state.prefix ? this.state.prefix + '-' : ''}${this.type}-${this.state.sequence}`
+        return `${this.state.prefix ? this.state.prefix + "-" : ""}${this.type}-${this.state.sequence}`;
     }
 
     toArray() {
-
-
         let serialization = {
             type: this.type,
             id: this.id,
@@ -158,11 +197,11 @@ export default class Slice {
             presentation: this.presentation,
             print_only: this.print_only,
             choices: this.choices,
-            referenced_as: (this.referenced_as.fr || this.referenced_as.en) ? this.referenced_as : null,
-            label: {
-                en: this.label?.en,
-                fr: this.label?.fr
-            },
+            referenced_as:
+                this.referenced_as.fr || this.referenced_as.en
+                    ? this.referenced_as
+                    : null,
+            label: { en: this.label?.en, fr: this.label?.fr },
             sources: this.sources.length ? this.sources : null,
             notes: this.notes.length ? this.notes : null,
             alts: this.alts.length ? this.alts : null,
@@ -170,11 +209,8 @@ export default class Slice {
         };
 
         if (this.state._unlocked) {
-            serialization.state = {
-                _unlocked: true,
-            }
+            serialization.state = { _unlocked: true };
         }
-
 
         for (const [key, value] of Object.entries(defaults)) {
             if (serialization[key] === value) {
@@ -182,16 +218,16 @@ export default class Slice {
             }
         }
 
-        return Object.fromEntries(Object.entries(serialization).filter(([_, v]) => v !== null));;
+        return Object.fromEntries(
+            Object.entries(serialization).filter(([_, v]) => v !== null),
+        );
     }
-
 
     static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
-            case 'html':
+            case "html":
                 return "SliceHtmlRenderer";
         }
         throw `No renderer object for renderer type ${rendererType}`;
     }
-
 }

@@ -1,22 +1,18 @@
-import { h } from "vue"
-import DOMPurify from 'dompurify';
+import { h } from "vue";
+import DOMPurify from "dompurify";
 import { twind, cssom, observe, install } from "@twind/core";
 import config from "../../twind.config.js";
 
 export default {
-    props: {
-        'payload': String,
-        'css': String,
-        'removeDefaultStyles': Boolean
-    },
+    props: { payload: String, css: String, removeDefaultStyles: Boolean },
     render() {
-        return h('div');
+        return h("div");
     },
     methods: {
         rebuildShadowDom() {
             let wrapper = document.createElement("div");
             wrapper.classList.add("w-full");
-            const shadowRoot = wrapper.attachShadow({ mode: 'open' });
+            const shadowRoot = wrapper.attachShadow({ mode: "open" });
             let wrapperElement = document.createElement("div");
             wrapperElement.classList.add([
                 "prose",
@@ -35,7 +31,6 @@ export default {
             wrapperElement.innerHTML = DOMPurify.sanitize(this.payload);
             shadowRoot.appendChild(wrapperElement);
 
-
             let sheets = [];
 
             if (!this.removeDefaultStyles) {
@@ -45,9 +40,7 @@ export default {
                 sheets.push(sheet.target);
 
                 observe(tw, shadowRoot);
-
             }
-
 
             if (this.css) {
                 const clientCss = new CSSStyleSheet();
@@ -56,14 +49,13 @@ export default {
             }
 
             shadowRoot.adoptedStyleSheets = sheets;
-            this.$el.replaceChildren(...[wrapper])
-
-        }
+            this.$el.replaceChildren(...[wrapper]);
+        },
     },
     mounted() {
         this.rebuildShadowDom();
     },
     updated() {
         this.rebuildShadowDom();
-    }
-}
+    },
+};

@@ -2,9 +2,7 @@ import { EquidistantColorPalette } from "./ColourPalettes";
 import Color from "color";
 
 export default class ArraytableDataSource {
-
     constructor(types, arraytable) {
-
         if (Array.isArray(types)) {
             this.types = types;
         } else {
@@ -19,7 +17,10 @@ export default class ArraytableDataSource {
         let colorForIndex = this.colorPalette[index];
         let color = colorForIndex ? colorForIndex : "#666666";
 
-        return Color(color).saturate(emphasize ? 1 : 0).darken(emphasize ? 0.5 : (emphasize === false ? -0.25 : 0)).hex();
+        return Color(color)
+            .saturate(emphasize ? 1 : 0)
+            .darken(emphasize ? 0.5 : emphasize === false ? -0.25 : 0)
+            .hex();
     }
 
     /**
@@ -48,7 +49,9 @@ export default class ArraytableDataSource {
             let emphasizes = data.map((v) => (v?.emphasize ? true : false));
             const hasEmphasizedContent = emphasizes.filter(Boolean).length;
 
-            const datasetType = this.types[index] ? this.types[index] : this.types[0];
+            const datasetType = this.types[index]
+                ? this.types[index]
+                : this.types[0];
 
             let datasetInfo = {
                 type: datasetType,
@@ -56,27 +59,44 @@ export default class ArraytableDataSource {
                 data: datasetdata,
                 backgroundColor: this.colorForIndex(index),
                 borderColor: this.colorForIndex(index),
-            }
+            };
 
-            if (datasetType === 'line') {
-                const pointColors = emphasizes.map(e => this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined)));
+            if (datasetType === "line") {
+                const pointColors = emphasizes.map((e) =>
+                    this.colorForIndex(
+                        index,
+                        e ? true : hasEmphasizedContent ? false : undefined,
+                    ),
+                );
                 datasetInfo.pointBackgroundColor = pointColors;
                 datasetInfo.pointBorderColor = pointColors;
-                datasetInfo.pointStyle = emphasizes.map(e => e ? 'triangle' : 'circle')
-                datasetInfo.radius = emphasizes.map(e => e ? 8 : 5)
-            } else if (datasetType === 'bar') {
-                datasetInfo.backgroundColor = emphasizes.map(e => this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined)));
-                datasetInfo.borderColor = emphasizes.map(e => Color(this.colorForIndex(index, e ? true : (hasEmphasizedContent ? false : undefined))).darken(e ? 1 : 0).hex());
+                datasetInfo.pointStyle = emphasizes.map((e) =>
+                    e ? "triangle" : "circle",
+                );
+                datasetInfo.radius = emphasizes.map((e) => (e ? 8 : 5));
+            } else if (datasetType === "bar") {
+                datasetInfo.backgroundColor = emphasizes.map((e) =>
+                    this.colorForIndex(
+                        index,
+                        e ? true : hasEmphasizedContent ? false : undefined,
+                    ),
+                );
+                datasetInfo.borderColor = emphasizes.map((e) =>
+                    Color(
+                        this.colorForIndex(
+                            index,
+                            e ? true : hasEmphasizedContent ? false : undefined,
+                        ),
+                    )
+                        .darken(e ? 1 : 0)
+                        .hex(),
+                );
             }
 
-            return datasetInfo
+            return datasetInfo;
         });
 
-        let data = {
-            labels: dataLabels,
-            datasets: datasets
-        }
-
+        let data = { labels: dataLabels, datasets: datasets };
 
         return data;
     }
@@ -98,6 +118,5 @@ export default class ArraytableDataSource {
         if (Array.isArray(this.arraytable)) {
             return this.convertArrayToGraphjsDataStructure();
         }
-
     }
 }

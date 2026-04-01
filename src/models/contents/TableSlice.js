@@ -1,24 +1,32 @@
-import { h, defineAsyncComponent } from 'vue'
+import { h, defineAsyncComponent } from "vue";
 import Slice from "./Slice";
-import DataTable from './DataTable/DataTable';
-
+import DataTable from "./DataTable/DataTable";
 
 export default class TableSlice extends Slice {
-
     constructor(payload) {
         super(payload);
-        this.type = "table"
+        this.type = "table";
         this.datatable = new DataTable(payload);
-        this.datatable.state.caption = this.labelStrings
+        this.datatable.state.caption = this.labelStrings;
     }
-
 
     _buildEditorInputVnodes() {
         let vnodes = super._buildEditorInputVnodes();
-        vnodes.push(h(defineAsyncComponent(() => import('../../editors/TableSliceEditor.js')), { slice: this, 'onUpdate:datatable': (datatable) => { this.datatable = datatable } }))
+        vnodes.push(
+            h(
+                defineAsyncComponent(
+                    () => import("../../editors/TableSliceEditor.js"),
+                ),
+                {
+                    slice: this,
+                    "onUpdate:datatable": (datatable) => {
+                        this.datatable = datatable;
+                    },
+                },
+            ),
+        );
         return vnodes;
     }
-
 
     toArray() {
         let array = super.toArray();
@@ -30,15 +38,11 @@ export default class TableSlice extends Slice {
         return array;
     }
 
-
-
     static rendererObjectForSliceRendererType(rendererType) {
         switch (rendererType) {
-            case 'html':
+            case "html":
                 return "TableSliceHtmlRenderer";
         }
         return super.rendererObjectForSliceRendererType(rendererType);
     }
-
-
 }

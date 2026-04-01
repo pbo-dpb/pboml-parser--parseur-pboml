@@ -7,26 +7,22 @@
 export default class AnnotationAnchorsRenderer {
     constructor(mainEl, annotations) {
         this.mainEl = mainEl;
-        this.annotations = annotations
+        this.annotations = annotations;
     }
-
 
     render() {
         if (!this.annotations) return;
-        this.annotations.forEach(annotation => {
-
+        this.annotations.forEach((annotation) => {
             if (!this.mainEl) return;
 
-            this.mainEl.querySelectorAll(".pboml-prose").forEach(el => {
+            this.mainEl.querySelectorAll(".pboml-prose").forEach((el) => {
                 while (el.innerHTML.includes(`[^${annotation.id}]`)) {
-                    el.innerHTML = el.innerHTML.replace(`[^${annotation.id}]`, annotation.getAnchorDomElement().outerHTML)
+                    el.innerHTML = el.innerHTML.replace(
+                        `[^${annotation.id}]`,
+                        annotation.getAnchorDomElement().outerHTML,
+                    );
                 }
-
-            })
-
-
+            });
         });
-
     }
-
 }

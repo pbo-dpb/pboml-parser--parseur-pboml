@@ -43,7 +43,7 @@ function loadPbomlParser() {
         .then((data) => {
             for (const property in data) {
                 if (data[property].isEntry) {
-                    const script = document.createElement('script');
+                    const script = document.createElement("script");
                     script.src = `${PARSER_DOMAIN}${data[property].file}`;
                     script.type = "module";
                     document.head.appendChild(script);
@@ -51,8 +51,7 @@ function loadPbomlParser() {
             }
         });
 }
-if (!window.pboml_parser_loaded)
-    loadPbomlParser()
+if (!window.pboml_parser_loaded) loadPbomlParser();
 ```
 
 ### Embed the renderer
@@ -78,12 +77,16 @@ Where `pbomlDocument` is a raw PBOML document.
 The visual editor can be embeded by adding and `edit` attribute set to `true`.
 
 ```html
-<pboml-parser edit="true" payload="data:text/yaml;base64,{pboml}"></pboml-parser>
+<pboml-parser
+    edit="true"
+    payload="data:text/yaml;base64,{pboml}"
+></pboml-parser>
 ```
 
 ## Develop and build locally
 
 ### 1. Project setup
+
 ```
 npm install
 ```
@@ -91,16 +94,19 @@ npm install
 ### 2. Compilation with Vite
 
 ### Compiles and hot-reloads for development
+
 ```
 npm run dev
 ```
 
 ### Run tests
+
 ```
 npm run test
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
