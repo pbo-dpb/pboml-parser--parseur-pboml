@@ -16,11 +16,7 @@
             ref="stagerDialog"
             v-if="expanded"
             class="bg-white w-1/2 mx-auto shadow-lg z-50 border-purple-800 border-2 rounded-sm mt-16"
-            @click="
-                $event.target === $event.currentTarget
-                    ? (expanded = false)
-                    : null
-            "
+            @click.self="expanded = false"
         >
             <div class="p-4">
                 <div class="flex flex-col gap-4">

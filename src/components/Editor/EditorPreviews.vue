@@ -44,11 +44,7 @@
             ref="previewDialog"
             class="w-3/4 mx-auto h-3/4 mt-16 fborder-4 border-slate-100 border-dashed shadow-inner rounded-sm flex flex-col"
             v-if="shouldDisplayPreview"
-            @click="
-                $event.target === $event.currentTarget
-                    ? (shouldDisplayPreview = false)
-                    : null
-            "
+            @click.self="shouldDisplayPreview = false"
         >
             <div class="flex flex-col gap-2 h-full w-full p-4">
                 <nav class="flex flex-row gap-2 justify-end align-center">
