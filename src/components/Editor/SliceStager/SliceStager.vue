@@ -34,7 +34,9 @@
                                 v-if="expanded"
                                 aria-hidden="true"
                                 class="size-6"
-                            /><span v-if="expanded" class="sr-only">X</span>
+                            /><span v-if="expanded" class="sr-only">{{
+                                strings.close
+                            }}</span>
                         </button>
                     </div>
 
