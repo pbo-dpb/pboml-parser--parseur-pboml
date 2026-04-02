@@ -25,38 +25,55 @@
 <script>
     /**
      * GET `tests.html` with the following URL parameters:
-     * - `test` the name of a test file (among ./tests/samples/*.yaml )
-     * - `lang` either `en` or `fr`
-     * - `edit` if "true" will open as en editor.
-     * */
-    const params = new URLSearchParams(window.location.search);
+     * - `test` the name of a test file (among ./tests/samples/*.yaml)
+     * - `lang` either `en` or `fr` (`en` by default)
+     * - `edit` if "true" will open as en editor
+     **/
 
-    let lang = params.get("lang");
-    if (!lang) lang = "en";
+    const params = new URLSearchParams(window.location.search);
+    const test = params.get("test");
+    const lang = params.get("lang") || "en";
+    const isEditing = params.get("edit") === "true";
+    const editorAttribute = isEditing ? 'edit="true"' : "";
+
     document.documentElement.setAttribute("lang", lang);
 
-    let test = params.get("test");
-    if (!test) test = null;
+    document.pbomlCallbacks = {
+        afterMarkdownRendering: function (content) {
+            return content.replace(
+                "smallness",
+                '<span class="text-xs font-semibold bg-gray-100 dark:bg-gray-800 rounded-sm p-1">smallness</span>',
+            );
+        },
+    };
 
     document.addEventListener("pboml-editor-document-updated", (e) => {
         const sideEl = document.getElementById("toc-container");
-        if (sideEl)
-            sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${btoa(unescape(encodeURIComponent(e.detail.pbomlDocument)))}"></pboml-toc>`;
+        if (sideEl) {
+            const encodedPayload = btoa(
+                unescape(encodeURIComponent(e.detail.pbomlDocument)),
+            );
+            sideEl.innerHTML = `<pboml-toc payload="data:text/yaml;base64,${encodedPayload}"></pboml-toc>`;
+        }
     });
+
+    if (test) {
+        loadTestPayload();
+    } else {
+        loadEditor();
+    }
 
     async function loadTestPayload() {
         document.title = `${test} - PBOML`;
-        const response = await fetch(
-            `./tests/samples/${test.replace(/[^0-9a-zA-Z\_\-]/gm, "")}.yaml`,
-        );
+
+        const safeTestName = test.replace(/[^0-9a-zA-Z\_\-]/gm, "");
+        const response = await fetch(`./tests/samples/${safeTestName}.yaml`);
         const rawPayload = await response.text();
         const encodedPayload = btoa(unescape(encodeURIComponent(rawPayload)));
         const mainEl = document.getElementById("body-container");
 
-        const isEditing = params.get("edit") === "true";
-        const editorAttribute = isEditing ? 'edit="true"' : "";
-
         mainEl.innerHTML = `<pboml-parser payload="data:text/yaml;base64,${encodedPayload}" ${editorAttribute}></pboml-parser>`;
+
         const sideEl = document.getElementById("toc-container");
 
         if (isEditing) {
@@ -73,24 +90,11 @@
 
         const mainEl = document.getElementById("body-container");
 
-        const editorAttribute =
-            params.get("edit") === "true" ? 'edit="true"' : "";
-
         mainEl.innerHTML = `<pboml-parser ${editorAttribute}></pboml-parser>`;
+
         const sideEl = document.getElementById("toc-container");
+
         sideEl.innerHTML = `<pboml-toc></pboml-toc>`;
     }
-
-    if (test) loadTestPayload();
-    else loadEditor();
-
-    document.pbomlCallbacks = {
-        afterMarkdownRendering: function (content) {
-            return content.replace(
-                "smallness",
-                '<span class="text-xs font-semibold bg-gray-100 dark:bg-gray-800 rounded-sm p-1">smallness</span>',
-            );
-        },
-    };
 </script>
 <script type="module" src="/src/main.js"></script>
