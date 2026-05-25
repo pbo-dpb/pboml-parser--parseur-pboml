@@ -22,7 +22,7 @@
     "chart.js": "^4.5.1",
     "color": "^5.0.3",
     "deep-equal": "^2.2.3",
-    "dompurify": "^3.3.1",
+    "dompurify": "^3.4.0",
     "joplin-turndown-plugin-gfm": "^1.0.12",
     "js-yaml": "^4.1.1",
     "latex.js": "^0.12.6",
