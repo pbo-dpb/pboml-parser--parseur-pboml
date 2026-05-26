@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <button
       @click="expanded = !expanded"
-      class="w-fit mx-auto text-blue-500 hover:text-blue-800"
+      class="mx-auto w-fit text-blue-500 hover:text-blue-800"
       :alt="strings.create_slice"
       :aria-expanded="expanded"
       :aria-controls="stagerId"
@@ -15,14 +15,14 @@
     <dialog
       ref="stagerDialog"
       v-if="expanded"
-      class="bg-white w-1/2 mx-auto shadow-lg z-50 border-purple-800 border-2 rounded-sm mt-16"
+      class="z-50 mx-auto mt-16 w-1/2 rounded-sm border-2 border-purple-800 bg-white shadow-lg"
       @click="
         $event.target === $event.currentTarget ? (expanded = false) : null
       "
     >
       <div class="p-4">
         <div class="flex flex-col gap-4">
-          <div class="flex flex-row justify-between gap-4 items-center">
+          <div class="flex flex-row items-center justify-between gap-4">
             <span class="text-lg font-thin text-purple-900">{{
               strings.create_slice
             }}</span>
@@ -41,12 +41,12 @@
           <div class="flex flex-col gap-2" :id="stagerId">
             <div class="grid grid-cols-4 gap-4">
               <button
-                class="rounded-sm bg-blue-800 hover:bg-blue-950 font-semibold text-sm text-white p-2 inline-flex gap-2 w-full text-center items-center justify-center"
+                class="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-blue-800 p-2 text-center text-sm font-semibold text-white hover:bg-blue-950"
                 v-for="button in buttons"
                 @click="generateSliceFromButton(button)"
               >
                 {{ button.label }}
-                <BeakerIcon class="w-4 h-4" v-if="button.advanced" />
+                <BeakerIcon class="h-4 w-4" v-if="button.advanced" />
               </button>
             </div>
           </div>

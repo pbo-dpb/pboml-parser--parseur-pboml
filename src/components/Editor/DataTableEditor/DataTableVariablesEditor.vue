@@ -7,15 +7,15 @@
         class="p-2 text-left"
         @click="currentVariableKey = key"
         :class="{
-          'bg-white cursor-pointer text-gray-700 hover:text-blue-800 hover:bg-blue-50 ':
+          'cursor-pointer bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-800':
             key !== currentVariableKey,
-          'bg-purple-100 cursor-default': key === currentVariableKey,
+          'cursor-default bg-purple-100': key === currentVariableKey,
         }"
       >
         <DataTableVariablesEditorVariablePreview :variable="variable" />
       </div>
       <button
-        class="flex flex-row gap-2 p-2 text-blue-700 hover:text-blue-800 font-semibold items-center text-sm"
+        class="flex flex-row items-center gap-2 p-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
         @click="handleNew"
       >
         <PlusIcon class="size-4" aria-hidden></PlusIcon>

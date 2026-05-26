@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-col gap-1 @sm:flex-row text-gray-700 focus-within:text-purple-800"
+    class="flex flex-col gap-1 text-gray-700 focus-within:text-purple-800 @sm:flex-row"
   >
-    <div class="flex flex-row justify-between items-center">
+    <div class="flex flex-row items-center justify-between">
       <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
       <PastePlainTextButton
         @pasted="handlePaste"
@@ -15,7 +15,7 @@
       ref="payloadArea"
       :value="modelValue"
       :id="eluid"
-      class="border border-gray-300 p-1 rounded-sm h-96 w-full outline-purple-800 text-gray-800"
+      class="h-96 w-full rounded-sm border border-gray-300 p-1 text-gray-800 outline-purple-800"
       @input="emitUpdate($event.target.value)"
     >
     </textarea>
@@ -26,7 +26,7 @@
       ref="payloadArea"
       :value="modelValue"
       :id="eluid"
-      class="border border-gray-300 p-1 rounded-sm w-full outline-purple-800 text-gray-800"
+      class="w-full rounded-sm border border-gray-300 p-1 text-gray-800 outline-purple-800"
       @input="emitUpdate($event.target.value)"
     />
     <PastePlainTextButton

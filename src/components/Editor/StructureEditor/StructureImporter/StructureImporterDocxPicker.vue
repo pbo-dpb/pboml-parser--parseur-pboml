@@ -7,7 +7,7 @@
       @change="handleFileInputChange"
       accept=".docx"
       ref="inputField"
-      class="file:bg-blue-500 file:text-white file:px-4 file:py-2 file:rounded"
+      class="file:rounded file:bg-blue-500 file:px-4 file:py-2 file:text-white"
     />
   </div>
 </template>

@@ -1,10 +1,10 @@
 <template>
-  <fieldset class="flex flex-col gap-1 w-full" :id="inputUuid">
+  <fieldset class="flex w-full flex-col gap-1" :id="inputUuid">
     <legend v-if="label" class="font-semibold">{{ label }}</legend>
 
-    <div class="flex flex-row gap-2 items-center">
+    <div class="flex flex-row items-center gap-2">
       <label
-        class="select-none p-1 w-full rounded-sm flex flex-row justify-center items-center font-semibold"
+        class="flex w-full flex-row items-center justify-center rounded-sm p-1 font-semibold select-none"
         :class="{
           'cursor-pointer border border-blue-100 bg-blue-100 text-blue-800':
             modelValue != value,

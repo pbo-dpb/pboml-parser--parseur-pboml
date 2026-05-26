@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-col gap-4 justify-between">
-    <div class="border border-gray-300 p-2 flex flex-row items-center w-fit">
-      <div class="text-2xl w-12 text-center">📁</div>
+  <div class="flex flex-col justify-between gap-4">
+    <div class="flex w-fit flex-row items-center border border-gray-300 p-2">
+      <div class="w-12 text-center text-2xl">📁</div>
       <file-picker-input
         v-if="shouldDisplayInput"
         @pick="handlePickedDocument"
         :prefix="prefix"
       ></file-picker-input>
     </div>
-    <div class="border border-gray-300 p-2 flex flex-row items-center w-fit">
-      <div class="text-2xl w-12 text-center">📄</div>
+    <div class="flex w-fit flex-row items-center border border-gray-300 p-2">
+      <div class="w-12 text-center text-2xl">📄</div>
       <button
         class="rounded-sm bg-blue-100 p-2 text-sm font-semibold text-blue-800"
         @click="handleNewFromScratch"

@@ -5,7 +5,7 @@
     class="bg-slate-100 text-slate-800"
     @click="handleClick"
   >
-    <TextCursorInput class="w-4 h-4"></TextCursorInput>
+    <TextCursorInput class="h-4 w-4"></TextCursorInput>
     <span class="sr-only">{{ pastePlainTextLabel }}</span>
   </TinyButton>
 </template>

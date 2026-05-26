@@ -8,7 +8,7 @@
       ></Toc>
     </div>
     <template #fallback>
-      <LoadingIndicator class="w-8 h-8" />
+      <LoadingIndicator class="h-8 w-8" />
     </template>
   </Suspense>
 </template>

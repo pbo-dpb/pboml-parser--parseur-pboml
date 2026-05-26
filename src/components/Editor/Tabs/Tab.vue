@@ -1,12 +1,12 @@
 <template>
   <button
-    class="font-semibold border-b-4 tracking-tighter px-2 flex flex-row gap-2 items-center select-none items-center"
+    class="flex flex-row items-center gap-2 border-b-4 px-2 font-semibold tracking-tighter select-none"
     :class="{
       'text-xl': size === 'lg',
       'text-lg': size === 'md',
       'text-base': size === 'sm',
-      'border-purple-800  text-purple-800 cursor-default': selected,
-      'border-gray-100 hover:border-blue-800 text-gray-600 hover:text-blue-800':
+      'cursor-default border-purple-800 text-purple-800': selected,
+      'border-gray-100 text-gray-600 hover:border-blue-800 hover:text-blue-800':
         !selected,
     }"
     role="tab"
@@ -17,8 +17,8 @@
   >
     <slot></slot>
 
-    <span v-if="warning" class="text-orange-500 text-xs font-bold">
-      <ExclamationTriangleIcon class="w-4 h-4"></ExclamationTriangleIcon>
+    <span v-if="warning" class="text-xs font-bold text-orange-500">
+      <ExclamationTriangleIcon class="h-4 w-4"></ExclamationTriangleIcon>
     </span>
   </button>
 </template>

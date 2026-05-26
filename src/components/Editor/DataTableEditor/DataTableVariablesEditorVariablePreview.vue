@@ -1,8 +1,8 @@
 <template>
   <div
-    class="font-semibold text-sm flex flex-row justify-between items-center -m-2 p-2"
+    class="-m-2 flex flex-row items-center justify-between p-2 text-sm font-semibold"
   >
-    <div class="flex flex-row items-center gap-2 min-w-0">
+    <div class="flex min-w-0 flex-row items-center gap-2">
       <div>
         <LanguageIcon class="size-4" v-if="variable.type === 'markdown'" />
         <HashtagIcon class="size-4" v-if="variable.type === 'number'" />
@@ -10,7 +10,7 @@
       </div>
       <div
         v-if="groupAbbrev"
-        class="bg-slate-100 rounded-sm w-8 text-center text-xs"
+        class="w-8 rounded-sm bg-slate-100 text-center text-xs"
       >
         {{ groupAbbrev }}
       </div>
@@ -18,7 +18,7 @@
         <span class="overflow-hidden font-mono">{{ variable.key }}</span>
       </div>
     </div>
-    <div class="flex flex-row gap-2 items-center">
+    <div class="flex flex-row items-center gap-2">
       <StarIcon class="size-4" v-if="variable.emphasize" />
       <KeyIcon
         class="size-4 text-yellow-600 drop-shadow-sm"

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col gap-4 bg-slate-100 rounded-sm p-4">
+  <div class="flex flex-col gap-4 rounded-sm bg-slate-100 p-4">
     <div
-      class="flex flex-row justify-between gap-1 border-b border-slate-300 pb-4 items-center"
+      class="flex flex-row items-center justify-between gap-1 border-b border-slate-300 pb-4"
     >
       <span class="font-semibold">{{ spanDisplay }}</span>
       <TinyButton @click="emit('delete', group)" :danger="true">
@@ -21,16 +21,16 @@
       :label="strings.data_table_display_editor_data_entry_group_span"
     />
 
-    <div class="bg-cyan-50 p-4 w-full" v-if="encompasses">
+    <div class="w-full bg-cyan-50 p-4" v-if="encompasses">
       <table class="w-full">
         <tbody>
           <tr>
             <td
               v-for="entry in encompasses"
               :width="`${100 / totalNumberOfEntries}%`"
-              class="text-xs text-center p-2"
+              class="p-2 text-center text-xs"
               :class="{
-                'font-semibold border-t-4 border-t-cyan-800': entry.isInRange,
+                'border-t-4 border-t-cyan-800 font-semibold': entry.isInRange,
                 'border-t-4 border-t-gray-300': !entry.isInRange,
               }"
             >
@@ -42,7 +42,7 @@
     </div>
 
     <div
-      class="bg-yellow-50 p-4 w-full text-yellow-700"
+      class="w-full bg-yellow-50 p-4 text-yellow-700"
       v-if="groupExceedsDataTableContentSpan"
     >
       {{

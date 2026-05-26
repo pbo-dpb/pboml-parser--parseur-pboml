@@ -1,5 +1,5 @@
 <template>
-  <fieldset class="rounded-sm border border-slate-300 p-4 flex flex-col gap-4">
+  <fieldset class="flex flex-col gap-4 rounded-sm border border-slate-300 p-4">
     <legend class="font-semibold">
       {{ strings.data_table_display_editor_data_entry_groups_label }}
     </legend>
@@ -11,12 +11,12 @@
     />
     <span
       v-if="!datatable.entrygroups.length"
-      class="bg-yellow-50 p-4 w-full text-yellow-700 text-sm font-semibold"
+      class="w-full bg-yellow-50 p-4 text-sm font-semibold text-yellow-700"
       >{{ strings.data_table_display_editor_data_entry_groups_empty }}</span
     >
 
     <TinyButton
-      class="flex flex-row gap-2 p-2 text-blue-700 hover:text-blue-800 font-semibold items-center text-sm"
+      class="flex flex-row items-center gap-2 p-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
       @click="createNewGroup"
     >
       <PlusIcon class="size-4" aria-hidden></PlusIcon>

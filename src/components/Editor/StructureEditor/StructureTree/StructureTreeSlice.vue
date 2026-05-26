@@ -1,7 +1,7 @@
 <template>
   <li
     draggable="true"
-    class="transition-all border border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group items-center"
+    class="group flex flex-row items-center gap-2 border border-gray-300 px-2 py-1 text-sm transition-all"
     @dragstart="handleDragStart"
     @dragend="resetDragCues"
     @dragover.prevent="handleDragover"
@@ -21,13 +21,13 @@
     <ArrowsUpDownIcon
       class="h-4 w-4 text-blue-200 group-hover:text-blue-800"
     ></ArrowsUpDownIcon>
-    <div class="flex flex-row justify-between w-full items-center">
+    <div class="flex w-full flex-row items-center justify-between">
       <div class="flex items-center">
-        <div :title="localizedSliceType" class="font-semibold w-12">
+        <div :title="localizedSliceType" class="w-12 font-semibold">
           {{ localizedSliceTypeAbbr }}
         </div>
         <div v-if="this.slice.state._unlocked">
-          <LockOpenIcon class="size-4 text-red-500 pr-2"></LockOpenIcon>
+          <LockOpenIcon class="size-4 pr-2 text-red-500"></LockOpenIcon>
         </div>
         <div
           v-if="descriptor"
@@ -36,7 +36,7 @@
           {{ descriptor }}
         </div>
       </div>
-      <button @click="toggleEditor" class="p-1 hover:bg-blue-100 rounded-sm">
+      <button @click="toggleEditor" class="rounded-sm p-1 hover:bg-blue-100">
         <PencilIcon
           class="size-4 text-blue-200 group-hover:text-blue-800"
         ></PencilIcon>

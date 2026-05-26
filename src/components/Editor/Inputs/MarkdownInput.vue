@@ -1,6 +1,6 @@
 <template>
   <input
-    class="border border-gray-300 p-1 rounded-sm"
+    class="rounded-sm border border-gray-300 p-1"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
   />

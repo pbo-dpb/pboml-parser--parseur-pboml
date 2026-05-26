@@ -3,7 +3,7 @@
     <label v-if="label" :for="eluid" class="font-semibold">{{ label }}</label>
     <textarea
       :id="eluid"
-      class="border border-gray-300 p-1 rounded-sm h-96 font-mono"
+      class="h-96 rounded-sm border border-gray-300 p-1 font-mono"
       :value="modelValue"
       @input="$emit('update:modelValue', $event.target.value)"
     >

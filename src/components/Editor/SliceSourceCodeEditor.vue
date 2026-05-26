@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-4">
     <textarea
       v-model="code"
-      class="font-mono h-96 p-2 border border-gray-300 rounded-sm"
+      class="h-96 rounded-sm border border-gray-300 p-2 font-mono"
       :class="{
         'border-red-500 outline-red-500': hasError,
       }"
@@ -14,13 +14,13 @@
         strings.apply
       }}</Button>
 
-      <div v-if="hasError" class="font-mono bg-red-50 p-4 w-full">
+      <div v-if="hasError" class="w-full bg-red-50 p-4 font-mono">
         <pre class="text-red-900">{{ hasError.message }}</pre>
       </div>
 
       <ul
         v-if="hasWarning"
-        class="bg-yellow-50 p-4 w-full text-yellow-700 list-inside list-disc"
+        class="w-full list-inside list-disc bg-yellow-50 p-4 text-yellow-700"
       >
         <li v-for="warning in hasWarning">{{ warning }}</li>
       </ul>

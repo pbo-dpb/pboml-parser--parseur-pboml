@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 border border-blue-800 rounded-sm p-4">
+  <div class="flex flex-col gap-4 rounded-sm border border-blue-800 p-4">
     <div class="grid grid-cols-2 gap-2">
       <StructureImporterDocxPicker
         @pick="handleFilePicked"

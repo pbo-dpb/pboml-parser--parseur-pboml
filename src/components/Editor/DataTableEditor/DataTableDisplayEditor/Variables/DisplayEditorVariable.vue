@@ -1,7 +1,7 @@
 <template>
   <li
     draggable="true"
-    class="transition-all border border-gray-300 px-2 py-1 text-sm flex flex-row gap-2 group items-center"
+    class="group flex flex-row items-center gap-2 border border-gray-300 px-2 py-1 text-sm transition-all"
     @dragstart="handleDragStart"
     @dragend="handleDragEnd"
     @dragover.prevent="handleDragover"

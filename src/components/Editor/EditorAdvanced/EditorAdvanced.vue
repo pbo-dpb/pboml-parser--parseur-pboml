@@ -1,8 +1,8 @@
 <template>
   <main class="flex flex-col">
     <div class="tabs">
-      <div class="flex flex-row justify-between items-center">
-        <div role="tablist" class="flex flex-row gap-4 mb-4">
+      <div class="flex flex-row items-center justify-between">
+        <div role="tablist" class="mb-4 flex flex-row gap-4">
           <Tab
             :controls="'raw'"
             :selected="currentTab === 'raw'"

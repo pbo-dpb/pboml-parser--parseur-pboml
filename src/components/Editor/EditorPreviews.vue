@@ -38,7 +38,7 @@
 
     <dialog
       ref="previewDialog"
-      class="w-3/4 mx-auto h-3/4 mt-16 fborder-4 border-slate-100 border-dashed shadow-inner rounded-sm flex flex-col"
+      class="fborder-4 mx-auto mt-16 flex h-3/4 w-3/4 flex-col rounded-sm border-dashed border-slate-100 shadow-inner"
       v-if="shouldDisplayPreview"
       @click="
         $event.target === $event.currentTarget
@@ -46,8 +46,8 @@
           : null
       "
     >
-      <div class="flex flex-col gap-2 h-full w-full p-4">
-        <nav class="flex flex-row gap-2 justify-end align-center">
+      <div class="flex h-full w-full flex-col gap-2 p-4">
+        <nav class="align-center flex flex-row justify-end gap-2">
           <Tab
             @click="shouldDisplayPreview = 'en'"
             :selected="shouldDisplayPreview === 'en'"

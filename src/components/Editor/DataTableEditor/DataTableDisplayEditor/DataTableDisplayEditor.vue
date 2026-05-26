@@ -7,9 +7,9 @@
         class="p-2 text-left font-semibold"
         @click="selectedTab = tab.key"
         :class="{
-          'bg-white cursor-pointer text-gray-700 hover:text-blue-800 hover:bg-blue-50 hover:last:shadow-sm':
+          'cursor-pointer bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-800 hover:last:shadow-sm':
             tab.key !== selectedTab,
-          'bg-purple-100 cursor-default': tab.key === selectedTab,
+          'cursor-default bg-purple-100': tab.key === selectedTab,
         }"
       >
         <span>{{ tab.label }}</span>

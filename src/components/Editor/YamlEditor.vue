@@ -2,12 +2,12 @@
   <section>
     <pre
       v-if="error"
-      class="h-32 overflow-y-scroll border border-red-300 text-red-800 w-full"
+      class="h-32 w-full overflow-y-scroll border border-red-300 text-red-800"
     >
         {{ error.message }}
     </pre>
     <div
-      class="h-32 border border-gray-300 flex items-center flex-col gap-2 justify-center text-green-600 font-mono font-semibold w-full"
+      class="flex h-32 w-full flex-col items-center justify-center gap-2 border border-gray-300 font-mono font-semibold text-green-600"
       v-else
     >
       <svg
@@ -17,7 +17,7 @@
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
-        class="w-6 h-6"
+        class="h-6 w-6"
       >
         <path
           stroke-linecap="round"
@@ -29,7 +29,7 @@
     </div>
     <textarea
       v-model="workingPboml"
-      class="h-screen font-mono border border-gray-300 p-4 w-full"
+      class="h-screen w-full border border-gray-300 p-4 font-mono"
     ></textarea>
   </section>
 </template>

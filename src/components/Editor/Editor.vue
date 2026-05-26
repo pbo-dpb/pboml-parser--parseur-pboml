@@ -1,17 +1,17 @@
 <template>
-  <main class="flex flex-col gap-4 justify-between">
+  <main class="flex flex-col justify-between gap-4">
     <div
-      class="text-orange-800 font-medium bg-orange-100 p-4 rounded"
+      class="rounded bg-orange-100 p-4 font-medium text-orange-800"
       v-show="hasUnlockedContent"
     >
-      <Unlock class="inline w-6 h-6 mr-2 align-middle" />
+      <Unlock class="mr-2 inline h-6 w-6 align-middle" />
       {{ strings.unlocked_content_warning }}
     </div>
 
-    <header class="flex flex-row justify-between items-center">
+    <header class="flex flex-row items-center justify-between">
       <div class="tabs">
-        <div class="flex flex-row justify-between items-center">
-          <div role="tablist" class="flex flex-row gap-4 mb-4">
+        <div class="flex flex-row items-center justify-between">
+          <div role="tablist" class="mb-4 flex flex-row gap-4">
             <Tab
               :controls="'content'"
               :selected="currentTab === 'content'"

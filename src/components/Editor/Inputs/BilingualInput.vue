@@ -1,12 +1,12 @@
 <template>
   <fieldset
-    class="flex p-1 border border-gray-300 rounded-sm flex-wrap @container"
+    class="@container flex flex-wrap rounded-sm border border-gray-300 p-1"
     :class="{
       'flex-col gap-0.5': inputSize !== 'lg',
       'flex-row': inputSize === 'lg',
     }"
   >
-    <legend v-if="label" class="font-semibold px-1 w-full">{{ label }}</legend>
+    <legend v-if="label" class="w-full px-1 font-semibold">{{ label }}</legend>
 
     <template v-if="inputSize !== 'lg'">
       <markdown-textarea
@@ -14,14 +14,14 @@
         :multiline="false"
         :model-value="modelValue?.en"
         @update:model-value="handleEnInput"
-        class="border border-gray-300 p-1 w-full"
+        class="w-full border border-gray-300 p-1"
       ></markdown-textarea>
       <markdown-textarea
         label="FR"
         :multiline="false"
         :model-value="modelValue?.fr"
         @update:model-value="handleFrInput"
-        class="border border-gray-300 p-1 w-full"
+        class="w-full border border-gray-300 p-1"
       ></markdown-textarea>
       <!--<label class="flex flex-col @sm:flex-row items-center text-left">
                 <span class="w-8 p-1 text-center tracking-tighter">EN</span>

@@ -1,18 +1,18 @@
 <template>
-  <fieldset class="flex flex-col p-1 gap-0.5 border border-gray-300 rounded-sm">
-    <legend v-if="label" class="font-semibold px-1">{{ label }}</legend>
+  <fieldset class="flex flex-col gap-0.5 rounded-sm border border-gray-300 p-1">
+    <legend v-if="label" class="px-1 font-semibold">{{ label }}</legend>
 
     <label class="flex flex-row items-center text-left">
       <markdown-input
         :value="modelValue"
         @input="handleInput"
         @blur="$emit('blur', $event)"
-        class="border border-gray-300 p-1 w-full"
+        class="w-full border border-gray-300 p-1"
       >
       </markdown-input>
     </label>
 
-    <span v-if="hint" class="text-sm italic text-gray-700 dark:text-gray-300">{{
+    <span v-if="hint" class="text-sm text-gray-700 italic dark:text-gray-300">{{
       hint
     }}</span>
   </fieldset>

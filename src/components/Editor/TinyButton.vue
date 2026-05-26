@@ -1,10 +1,10 @@
 <template>
   <button
     :aria-pressed="toggled"
-    class="rounded-sm text-xs w-fit p-1 flex flex-row gap-1 items-center place-content-center aria-pressed:outline-2 aria-pressed:outline-solid outline-yellow-600 disabled:filter disabled:grayscale disabled:opacity-80"
+    class="flex w-fit flex-row place-content-center items-center gap-1 rounded-sm p-1 text-xs outline-yellow-600 disabled:opacity-80 disabled:grayscale disabled:filter aria-pressed:outline-2 aria-pressed:outline-solid"
     :class="{
-      'bg-red-100 enabled:hover:bg-red-300 text-red-800': danger,
-      'bg-blue-100 enabled:hover:bg-blue-300 text-blue-800 ': !danger,
+      'bg-red-100 text-red-800 enabled:hover:bg-red-300': danger,
+      'bg-blue-100 text-blue-800 enabled:hover:bg-blue-300': !danger,
     }"
   >
     <slot></slot>
