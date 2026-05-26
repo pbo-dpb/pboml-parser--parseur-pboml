@@ -3,7 +3,7 @@ pboml:
 document:
   form: T-RP-3.0.0
   id: RP-2627-987-Z
-  release_date: '2026-05-24T13:00:00.000Z'
+  release_date: "2026-05-24T13:00:00.000Z"
   title:
     en: The mannequin in the mist
     fr: Le mannequin dans la brume

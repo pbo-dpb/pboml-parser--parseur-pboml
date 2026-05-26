@@ -1,6 +1,4 @@
 @media print {
-
-
   table {
     width: 100%;
   }
@@ -28,8 +26,6 @@
     break-inside: avoid-page;
   }
 
-
-
   h1,
   h2,
   h3,
@@ -39,7 +35,7 @@
   }
 
   .text-xl {
-    font-size: 1.2em
+    font-size: 1.2em;
   }
 
   .flex-row {
@@ -108,9 +104,9 @@
     page-break-inside: avoid;
   }
 
-  h1+p,
-  h2+p,
-  h3+p {
+  h1 + p,
+  h2 + p,
+  h3 + p {
     page-break-before: avoid;
   }
 
@@ -123,7 +119,7 @@
   .hidden,
   .print\:hidden,
   .sr-only {
-    display: none
+    display: none;
   }
 
   .font-semibold {
@@ -156,7 +152,6 @@
   }
 
   .justify-end {
-    text-align: right
+    text-align: right;
   }
-
 }

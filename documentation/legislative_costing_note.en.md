@@ -2,14 +2,13 @@
 
 Serialization of https://www.pbo-dpb.ca/en/publications/LEG-2223-017-M--canada-dental-benefit--prestation-dentaire-canadienne
 
-
 ```yaml
 pboml:
   version: 1.0.0
 document:
   form: LEG_2022
   id: LEG-2223-017-M
-  release_date: '2022-10-20T13:00:00.000Z'
+  release_date: "2022-10-20T13:00:00.000Z"
   title:
     en: Canada Dental Benefit
     fr: Prestation dentaire canadienne
@@ -251,7 +250,7 @@ slices:
             en: Eligible children
         value:
           content:
-            fr: 'BD/MSPS 29.0 et BD/MSPS Santé '
+            fr: "BD/MSPS 29.0 et BD/MSPS Santé "
             en: SPSD/M 29.0 and SPSD/M Health
       - key:
           content:
@@ -320,8 +319,8 @@ slices:
     readonly: false
     display_label: true
     label:
-      en: 'Supplementary Data: Detailed 5-Year Cost'
-      fr: 'Données supplémentaires : Coût détaillé sur 5 ans'
+      en: "Supplementary Data: Detailed 5-Year Cost"
+      fr: "Données supplémentaires : Coût détaillé sur 5 ans"
     content:
       - fiscalyear:
           en: 2022-23

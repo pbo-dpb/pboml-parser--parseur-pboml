@@ -3,7 +3,7 @@ pboml:
 document:
   form: T-LEG-3.0.2
   id: PLA-3233-089-L
-  release_date: '2025-05-04T13:00:00.000Z'
+  release_date: "2025-05-04T13:00:00.000Z"
   title:
     en: The Planet of the Sword
     fr: La planète de l'épée
@@ -231,8 +231,8 @@ slices:
         type: number
         is_descriptive: true
         unit:
-          en: '%'
-          fr: '%'
+          en: "%"
+          fr: "%"
         level: 1
       thethornoftheservants:
         label:

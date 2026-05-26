@@ -3,7 +3,7 @@ pboml:
 document:
   form: T-LEG-3.0.2
   id: HTM-3438-089-I
-  release_date: '2023-05-04T13:00:00.000Z'
+  release_date: "2023-05-04T13:00:00.000Z"
   title:
     en: Whispers of the Enchanted Forest
     fr: Les Murmures de la Forêt Enchantée
