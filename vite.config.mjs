@@ -29,6 +29,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "happy-dom",
+    onConsoleLog(log) {
+      if (log.includes("KaTeX")) {
+        return false;
+      }
+    },
   },
   optimizeDeps: {
     exclude: ["*.keep"],
