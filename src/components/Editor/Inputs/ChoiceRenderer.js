@@ -1,6 +1,26 @@
-import { h } from "vue";
+import { h, defineAsyncComponent } from "vue";
 import deepEqual from "deep-equal";
-import Renderer from "../../Renderer/Renderer";
+
+const SlicePreview = defineAsyncComponent(async () => {
+  const { default: Renderer } = await import("../../Renderer/Renderer");
+
+  return {
+    name: "SlicePreview",
+    props: {
+      slice: {
+        type: Object,
+        required: true,
+      },
+      language: {
+        type: String,
+        required: true,
+      },
+    },
+    render() {
+      return Renderer.methods.renderSliceAsVnode(this.slice, this.language);
+    },
+  };
+});
 
 export default class ChoiceRenderer {
   constructor(slice) {
@@ -56,8 +76,8 @@ export default class ChoiceRenderer {
           : h("div", { class: "w-6 h-6" }),
 
         h("div", { class: "flex flex-col gap-1" }, [
-          Renderer.methods.renderSliceAsVnode(clonedSlice, "en"),
-          Renderer.methods.renderSliceAsVnode(clonedSlice, "fr"),
+          h(SlicePreview, { slice: clonedSlice, language: "en" }),
+          h(SlicePreview, { slice: clonedSlice, language: "fr" }),
         ]),
       ],
     );
