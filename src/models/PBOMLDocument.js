@@ -9,21 +9,42 @@ import ChartSlice from "./contents/ChartSlice";
 import SvgSlice from "./contents/SvgSlice";
 import LaTeXSlice from "./contents/LaTeXSlice";
 import HtmlSlice from "./contents/HtmlSlice";
+import { PBOMLDocumentErrors } from "./PBOMLDocument.errors";
 
 export default class PBOMLDocument {
   static initFromYaml(yamlPayload, prefix = null) {
     let payload = yaml.loadAll(yamlPayload);
+
     return new PBOMLDocument(payload, prefix);
   }
 
   constructor(payload = [], prefix = null) {
-    const mainDocument = payload.find((element) => element.pboml?.version);
-    this.otherDocuments = payload.filter((dc) => dc != mainDocument);
+    if (payload.length === 0) throw new Error(PBOMLDocumentErrors.fileIsEmpty);
 
-    this.pbomlVersion = mainDocument?.pboml.version;
+    const mainDocument = payload.find(
+      (document) => document?.pboml !== undefined,
+    );
 
-    if (!mainDocument || !this.pbomlVersion)
-      throw "PBOML document is invalid : missing main document and/or PBOML version.";
+    this.otherDocuments = payload.filter(
+      (document) => document != mainDocument,
+    );
+
+    if (mainDocument === undefined)
+      throw new Error(PBOMLDocumentErrors.pbomlIsUndefined);
+
+    if (mainDocument.pboml === null)
+      throw new Error(PBOMLDocumentErrors.pbomlIsNull);
+
+    if (mainDocument.pboml.version === null)
+      throw new Error(PBOMLDocumentErrors.versionIsNull);
+
+    if (mainDocument.pboml.version === "")
+      throw new Error(PBOMLDocumentErrors.versionIsEmptyString);
+
+    if (mainDocument.pboml.version !== "1.0.0")
+      throw new Error(PBOMLDocumentErrors.versionIsNotSupported);
+
+    this.pbomlVersion = mainDocument.pboml.version;
 
     this.copyright = {
       en: mainDocument.document?.copyright?.en,
