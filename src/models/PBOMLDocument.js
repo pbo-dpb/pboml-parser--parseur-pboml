@@ -1,15 +1,22 @@
-import KvListSlice from "./contents/KvListSlice";
-import MarkdownSlice from "./contents/MarkdownSlice";
-import TableSlice from "./contents/TableSlice";
-import HeadingSlice from "./contents/HeadingSlice";
+// YAML
 import yaml from "js-yaml";
+
+// Errors
+import { PBOMLDocumentErrors } from "./PBOMLDocument.errors";
+
+// Annotations
 import Annotation from "./Annotation";
+
+// Slices
 import BitmapSlice from "./contents/BitmapSlice";
 import ChartSlice from "./contents/ChartSlice";
-import SvgSlice from "./contents/SvgSlice";
-import LaTeXSlice from "./contents/LaTeXSlice";
+import HeadingSlice from "./contents/HeadingSlice";
 import HtmlSlice from "./contents/HtmlSlice";
-import { PBOMLDocumentErrors } from "./PBOMLDocument.errors";
+import KvListSlice from "./contents/KvListSlice";
+import LaTeXSlice from "./contents/LaTeXSlice";
+import MarkdownSlice from "./contents/MarkdownSlice";
+import SvgSlice from "./contents/SvgSlice";
+import TableSlice from "./contents/TableSlice";
 
 export default class PBOMLDocument {
   static initFromYaml(yamlPayload, prefix = null) {
@@ -25,10 +32,7 @@ export default class PBOMLDocument {
       (document) => document?.pboml !== undefined,
     );
 
-    this.otherDocuments = payload.filter(
-      (document) => document != mainDocument,
-    );
-
+    // pboml
     if (mainDocument === undefined)
       throw new Error(PBOMLDocumentErrors.pbomlIsUndefined);
 
@@ -46,17 +50,11 @@ export default class PBOMLDocument {
 
     this.pbomlVersion = mainDocument.pboml.version;
 
-    this.copyright = {
-      en: mainDocument.document?.copyright?.en,
-      fr: mainDocument.document?.copyright?.fr,
-    };
-    this.form = mainDocument.document?.form;
-    this.type = mainDocument.document?.type;
-    this.user_data = mainDocument.document?.user_data;
-
+    // document
     this.id = mainDocument.document?.id;
 
     this.release_date = mainDocument.document?.release_date ?? null;
+
     if (this.release_date) {
       this.release_date = new Date(this.release_date);
     }
@@ -66,72 +64,96 @@ export default class PBOMLDocument {
       fr: mainDocument.document?.title?.fr,
     };
 
+    this.type = mainDocument.document?.type;
+
+    this.copyright = {
+      en: mainDocument.document?.copyright?.en,
+      fr: mainDocument.document?.copyright?.fr,
+    };
+
+    this.user_data = mainDocument.document?.user_data;
+
+    // slices
     let counter = 0;
+
     this.slices =
       mainDocument.slices
-        ?.map((el) => {
-          let sli = PBOMLDocument.provisionSliceFromPayload(el);
+        ?.map((element) => {
+          let slice = PBOMLDocument.provisionSliceFromPayload(element);
 
           counter++;
-          if (sli) {
-            sli.state.sequence = counter;
-            sli.state.prefix = prefix;
-            //sli.state.callbacks.move = (s) => this.handleSliceMove(s);
-            //sli.state.callbacks.delete = (s) => this.handleSliceDelete(s);
-            if (counter === 1) sli.state.canMoveUp = false;
-            if (counter === mainDocument.slices.length)
-              sli.state.canMoveDown = false;
-            return sli;
+
+          if (slice) {
+            slice.state.sequence = counter;
+            slice.state.prefix = prefix;
+            //slice.state.callbacks.move = (s) => this.handleSliceMove(s);
+            //slice.state.callbacks.delete = (s) => this.handleSliceDelete(s);
+            if (counter === 1) {
+              slice.state.canMoveUp = false;
+            }
+
+            if (counter === mainDocument.slices.length) {
+              slice.state.canMoveDown = false;
+
+              return slice;
+            }
           }
         })
         .filter((n) => n) ?? [];
 
-    try {
-      this.annotations = mainDocument.annotations
-        .map((el) => {
-          let ant = new Annotation(el);
-          ant.state.prefix = prefix;
-          return ant;
+    // annotations
+    this.annotations =
+      mainDocument.annotations
+        ?.map((element) => {
+          let annotation = new Annotation(element);
+
+          annotation.state.prefix = prefix;
+
+          return annotation;
         })
         .filter((n) => n)
         .sort((a, b) =>
           `${a.id}`.localeCompare(`${b.id}`, undefined, { numeric: true }),
-        );
-    } catch (error) {
-      this.annotations = [];
-    }
+        ) ?? [];
 
     this.state = {
       prefix,
     };
+
+    // Supports multiple PBOML documents in one file
+    this.otherDocuments = payload.filter(
+      (document) => document != mainDocument,
+    );
   }
 
-  static provisionSliceFromPayload(el) {
-    const sliceType = el.type;
+  static provisionSliceFromPayload(element) {
+    const sliceType = element.type;
+
     switch (sliceType) {
-      case "markdown":
-        return new MarkdownSlice(el);
-      case "table":
-        return new TableSlice(el);
-      case "kvlist":
-        return new KvListSlice(el);
-      case "chart":
-        return new ChartSlice(el);
-      case "heading":
-        return new HeadingSlice(el);
       case "bitmap":
-        return new BitmapSlice(el);
-      case "svg":
-        return new SvgSlice(el);
-      case "LaTeX":
-        return new LaTeXSlice(el);
+        return new BitmapSlice(element);
+      case "chart":
+        return new ChartSlice(element);
+      case "heading":
+        return new HeadingSlice(element);
       case "html":
-        return new HtmlSlice(el);
+        return new HtmlSlice(element);
+      case "kvlist":
+        return new KvListSlice(element);
+      case "LaTeX":
+        return new LaTeXSlice(element);
+      case "markdown":
+        return new MarkdownSlice(element);
+      case "svg":
+        return new SvgSlice(element);
+      case "table":
+        return new TableSlice(element);
     }
   }
 
   get localizedReleaseDate() {
     if (!this.release_date) return;
+
     return {
       fr: this.release_date.toLocaleDateString("fr-CA", {
         year: "numeric",
@@ -148,18 +170,17 @@ export default class PBOMLDocument {
 
   toArray() {
     const documents = [];
+
     let mainDocument = {
       pboml: {
         version: "1.0.0",
       },
       document: {
-        form: this.form,
         version: this.version,
         id: this.id,
         release_date: this.release_date
           ? this.release_date.toISOString()
           : null,
-        user_data: this.user_data,
         title: {
           en: this.title?.en,
           fr: this.title?.fr,
@@ -172,19 +193,24 @@ export default class PBOMLDocument {
           en: this.copyright?.en,
           fr: this.copyright?.fr,
         },
+        user_data: this.user_data,
       },
-      slices: this.slices.map((sl) => sl.toArray()),
-      annotations: this.annotations?.map((an) => an.toArray()) ?? [],
+
+      slices: this.slices.map((slice) => slice.toArray()),
+      annotations:
+        this.annotations?.map((annotation) => annotation.toArray()) ?? [],
     };
 
     documents.push(mainDocument);
-    this.otherDocuments.forEach((dc) => documents.push(dc));
+
+    this.otherDocuments.forEach((document) => documents.push(document));
+
     return documents;
   }
 
   serialize() {
     return this.toArray()
-      .map((doc) => yaml.dump(doc))
+      .map((document) => yaml.dump(document))
       .join("---\n");
   }
 
@@ -194,7 +220,9 @@ export default class PBOMLDocument {
     } else {
       this.slices.push(slice);
     }
+
     this.resetSlicesMoveability();
+
     this.scrollToSliceAtIndex(
       index || index === 0 ? index : this.slices.length - 1,
     );
@@ -207,18 +235,21 @@ export default class PBOMLDocument {
       location.hash = slice.anchor;
     } else {
       // Do not use hash navigation if hash seems to be used for single page application navigation purposes.
-      const evt = new CustomEvent("pbomlnavigate", {
+      const event = new CustomEvent("pbomlnavigate", {
         bubbles: true,
         detail: slice.anchor,
       });
-      dispatchEvent(evt);
+
+      dispatchEvent(event);
     }
   }
 
   resetSlicesMoveability() {
     let counter = 0;
+
     this.slices.forEach((slice) => {
       counter++;
+
       slice.state.sequence = counter;
       slice.state.canMoveUp = counter > 1;
       slice.state.canMoveDown = this.slices.length > counter;
@@ -228,19 +259,23 @@ export default class PBOMLDocument {
   moveSlice(slice, direction) {
     const from = slice.state.sequence - 1;
     const to = direction == "up" ? from - 1 : from + 1;
-    const el = this.slices.splice(from, 1)[0];
-    this.slices.splice(to, 0, el);
+    const element = this.slices.splice(from, 1)[0];
+
+    this.slices.splice(to, 0, element);
     this.resetSlicesMoveability();
     this.scrollToSliceAtIndex(to);
   }
 
   deleteSlice(slice) {
     let nearestSlicePosition = slice.state.sequence;
+
     if (this.slices.length === nearestSlicePosition) {
       // Slice was last
       nearestSlicePosition = this.slices.length - 1;
     }
+
     this.slices.splice(slice.state.sequence - 1, 1);
+
     this.resetSlicesMoveability();
 
     if (nearestSlicePosition > 0) {
@@ -250,6 +285,7 @@ export default class PBOMLDocument {
 
   duplicateSlice(slice) {
     let newSlice = PBOMLDocument.provisionSliceFromPayload(slice.toArray());
+
     this.addSlice(newSlice);
   }
 }
