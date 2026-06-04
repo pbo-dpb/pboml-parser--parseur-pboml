@@ -177,7 +177,6 @@ export default class PBOMLDocument {
         version: "1.0.0",
       },
       document: {
-        version: this.version,
         id: this.id,
         release_date: this.release_date
           ? this.release_date.toISOString()
