@@ -19,12 +19,6 @@ import SvgSlice from "./contents/SvgSlice";
 import TableSlice from "./contents/TableSlice";
 
 export default class PBOMLDocument {
-  static initFromYaml(yamlPayload, prefix = null) {
-    let payload = yaml.loadAll(yamlPayload);
-
-    return new PBOMLDocument(payload, prefix);
-  }
-
   constructor(payload = [], prefix = null) {
     if (payload.length === 0) throw new Error(PBOMLDocumentErrors.fileIsEmpty);
 
@@ -88,15 +82,16 @@ export default class PBOMLDocument {
             slice.state.prefix = prefix;
             //slice.state.callbacks.move = (s) => this.handleSliceMove(s);
             //slice.state.callbacks.delete = (s) => this.handleSliceDelete(s);
+
             if (counter === 1) {
               slice.state.canMoveUp = false;
             }
 
             if (counter === mainDocument.slices.length) {
               slice.state.canMoveDown = false;
-
-              return slice;
             }
+
+            return slice;
           }
         })
         .filter((n) => n) ?? [];
@@ -124,6 +119,12 @@ export default class PBOMLDocument {
     this.otherDocuments = payload.filter(
       (document) => document != mainDocument,
     );
+  }
+
+  static initFromYaml(yamlPayload, prefix = null) {
+    let payload = yaml.loadAll(yamlPayload);
+
+    return new PBOMLDocument(payload, prefix);
   }
 
   static provisionSliceFromPayload(element) {
@@ -227,42 +228,10 @@ export default class PBOMLDocument {
     );
   }
 
-  scrollToSliceAtIndex(index) {
-    let slice = this.slices[index];
+  duplicateSlice(slice) {
+    let newSlice = PBOMLDocument.provisionSliceFromPayload(slice.toArray());
 
-    if (!location.hash || /^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) {
-      location.hash = slice.anchor;
-    } else {
-      // Do not use hash navigation if hash seems to be used for single page application navigation purposes.
-      const event = new CustomEvent("pbomlnavigate", {
-        bubbles: true,
-        detail: slice.anchor,
-      });
-
-      dispatchEvent(event);
-    }
-  }
-
-  resetSlicesMoveability() {
-    let counter = 0;
-
-    this.slices.forEach((slice) => {
-      counter++;
-
-      slice.state.sequence = counter;
-      slice.state.canMoveUp = counter > 1;
-      slice.state.canMoveDown = this.slices.length > counter;
-    });
-  }
-
-  moveSlice(slice, direction) {
-    const from = slice.state.sequence - 1;
-    const to = direction == "up" ? from - 1 : from + 1;
-    const element = this.slices.splice(from, 1)[0];
-
-    this.slices.splice(to, 0, element);
-    this.resetSlicesMoveability();
-    this.scrollToSliceAtIndex(to);
+    this.addSlice(newSlice);
   }
 
   deleteSlice(slice) {
@@ -282,9 +251,41 @@ export default class PBOMLDocument {
     }
   }
 
-  duplicateSlice(slice) {
-    let newSlice = PBOMLDocument.provisionSliceFromPayload(slice.toArray());
+  moveSlice(slice, direction) {
+    const from = slice.state.sequence - 1;
+    const to = direction == "up" ? from - 1 : from + 1;
+    const element = this.slices.splice(from, 1)[0];
 
-    this.addSlice(newSlice);
+    this.slices.splice(to, 0, element);
+    this.resetSlicesMoveability();
+    this.scrollToSliceAtIndex(to);
+  }
+
+  resetSlicesMoveability() {
+    let counter = 0;
+
+    this.slices.forEach((slice) => {
+      counter++;
+
+      slice.state.sequence = counter;
+      slice.state.canMoveUp = counter > 1;
+      slice.state.canMoveDown = this.slices.length > counter;
+    });
+  }
+
+  scrollToSliceAtIndex(index) {
+    let slice = this.slices[index];
+
+    if (!location.hash || /^\#[a-zA-Z0-9]{1}.*/.test(location.hash)) {
+      location.hash = slice.anchor;
+    } else {
+      // Do not use hash navigation if hash seems to be used for single page application navigation purposes.
+      const event = new CustomEvent("pbomlnavigate", {
+        bubbles: true,
+        detail: slice.anchor,
+      });
+
+      dispatchEvent(event);
+    }
   }
 }

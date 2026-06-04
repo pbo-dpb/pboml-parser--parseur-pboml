@@ -1,0 +1,15 @@
+pboml:
+  version: 1.0.0
+slices:
+  - type: heading
+    id: 1
+    content:
+      en: Title 1
+      fr: Titre 1
+    level: 0
+  - type: heading
+    id: 3
+    content:
+      en: Title 3
+      fr: Titre 3
+    level: 0
