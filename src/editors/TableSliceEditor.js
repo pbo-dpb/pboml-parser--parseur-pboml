@@ -9,30 +9,31 @@ import DataTable from "../models/contents/DataTable/DataTable";
 import Renderer from "../components/Renderer/Renderer";
 
 export default {
-  props: ["slice"],
-  emits: ["update:datatable"],
-  setup(props, { emit }) {
-    if (props.slice.readonly) {
-      const md = new MarkdownDriver();
-      md.shouldRenderInline(true);
-      return () =>
-        h("div", { class: "grid grid-cols-2 gap-4" }, [
-          h("div", {
-            class: "col-span-2 font-bold",
-            innerHTML: md.render(
-              strings[document.documentElement.lang].readonly_slice,
-            ),
-          }),
-          Renderer.methods.renderSliceAsVnode(props.slice, "en"),
-          Renderer.methods.renderSliceAsVnode(props.slice, "fr"),
-        ]);
-    }
+    props: ["slice"],
+    emits: ["update:datatable"],
+    setup(props, { emit }) {
+        if (props.slice.readonly) {
+            const md = new MarkdownDriver();
+            md.shouldRenderInline(true);
+            return () =>
+                h("div", { class: "grid grid-cols-2 gap-4" }, [
+                    h("div", {
+                        class: "col-span-2 font-bold",
+                        innerHTML: md.render(
+                            strings[document.documentElement.lang]
+                                .readonly_slice,
+                        ),
+                    }),
+                    Renderer.methods.renderSliceAsVnode(props.slice, "en"),
+                    Renderer.methods.renderSliceAsVnode(props.slice, "fr"),
+                ]);
+        }
 
-    return () => [
-      h(DataTableEditor, {
-        datatable: props.slice.datatable,
-        "onUpdate:datatable": (d) => emit("update:datatable", d),
-      }),
-    ];
-  },
+        return () => [
+            h(DataTableEditor, {
+                datatable: props.slice.datatable,
+                "onUpdate:datatable": (d) => emit("update:datatable", d),
+            }),
+        ];
+    },
 };

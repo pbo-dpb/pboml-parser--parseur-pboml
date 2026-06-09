@@ -37,19 +37,19 @@ The following script allows you to retrieve the latest version of the script by 
 const PARSER_DOMAIN = "https://pboml.opbo-bdpb.ca/";
 
 function loadPbomlParser() {
-  window.pboml_parser_loaded = true;
-  fetch(`${PARSER_DOMAIN}manifest.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      for (const property in data) {
-        if (data[property].isEntry) {
-          const script = document.createElement("script");
-          script.src = `${PARSER_DOMAIN}${data[property].file}`;
-          script.type = "module";
-          document.head.appendChild(script);
-        }
-      }
-    });
+    window.pboml_parser_loaded = true;
+    fetch(`${PARSER_DOMAIN}manifest.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            for (const property in data) {
+                if (data[property].isEntry) {
+                    const script = document.createElement("script");
+                    script.src = `${PARSER_DOMAIN}${data[property].file}`;
+                    script.type = "module";
+                    document.head.appendChild(script);
+                }
+            }
+        });
 }
 if (!window.pboml_parser_loaded) loadPbomlParser();
 ```
@@ -78,9 +78,8 @@ The visual editor can be embeded by adding and `edit` attribute set to `true`.
 
 ```html
 <pboml-parser
-  edit="true"
-  payload="data:text/yaml;base64,{pboml}"
-></pboml-parser>
+    edit="true"
+    payload="data:text/yaml;base64,{pboml}"></pboml-parser>
 ```
 
 ## Develop and build locally

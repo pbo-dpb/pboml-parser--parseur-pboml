@@ -41,19 +41,19 @@ Le script suivant permet de récupérer la dernière version du script en consul
 const PARSER_DOMAIN = "https://pboml.opbo-bdpb.ca/";
 
 function loadPbomlParser() {
-  window.pboml_parser_loaded = true;
-  fetch(`${PARSER_DOMAIN}manifest.json`)
-    .then((response) => response.json())
-    .then((data) => {
-      for (const property in data) {
-        if (data[property].isEntry) {
-          const script = document.createElement("script");
-          script.src = `${PARSER_DOMAIN}${data[property].file}`;
-          script.type = "module";
-          document.head.appendChild(script);
-        }
-      }
-    });
+    window.pboml_parser_loaded = true;
+    fetch(`${PARSER_DOMAIN}manifest.json`)
+        .then((response) => response.json())
+        .then((data) => {
+            for (const property in data) {
+                if (data[property].isEntry) {
+                    const script = document.createElement("script");
+                    script.src = `${PARSER_DOMAIN}${data[property].file}`;
+                    script.type = "module";
+                    document.head.appendChild(script);
+                }
+            }
+        });
 }
 if (!window.pboml_parser_loaded) loadPbomlParser();
 ```
@@ -82,9 +82,8 @@ L'éditeur visuel peut être intégré en ajoutant l'attribut `edit` avec la val
 
 ```html
 <pboml-parser
-  edit="true"
-  payload="data:text/yaml;base64,{pboml}"
-></pboml-parser>
+    edit="true"
+    payload="data:text/yaml;base64,{pboml}"></pboml-parser>
 ```
 
 ## Développer et construire localement

@@ -5,24 +5,24 @@
  * loaded while parsing Markdown (and not after Vue has generated the DOM).
  */
 export default class AnnotationAnchorsRenderer {
-  constructor(mainEl, annotations) {
-    this.mainEl = mainEl;
-    this.annotations = annotations;
-  }
+    constructor(mainEl, annotations) {
+        this.mainEl = mainEl;
+        this.annotations = annotations;
+    }
 
-  render() {
-    if (!this.annotations) return;
-    this.annotations.forEach((annotation) => {
-      if (!this.mainEl) return;
+    render() {
+        if (!this.annotations) return;
+        this.annotations.forEach((annotation) => {
+            if (!this.mainEl) return;
 
-      this.mainEl.querySelectorAll(".pboml-prose").forEach((el) => {
-        while (el.innerHTML.includes(`[^${annotation.id}]`)) {
-          el.innerHTML = el.innerHTML.replace(
-            `[^${annotation.id}]`,
-            annotation.getAnchorDomElement().outerHTML,
-          );
-        }
-      });
-    });
-  }
+            this.mainEl.querySelectorAll(".pboml-prose").forEach((el) => {
+                while (el.innerHTML.includes(`[^${annotation.id}]`)) {
+                    el.innerHTML = el.innerHTML.replace(
+                        `[^${annotation.id}]`,
+                        annotation.getAnchorDomElement().outerHTML,
+                    );
+                }
+            });
+        });
+    }
 }

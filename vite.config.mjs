@@ -5,37 +5,37 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "./",
-  plugins: [
-    basicSsl(),
-    tailwindcss(),
-    vue({
-      compilerOptions: {
-        customElement: true,
-      },
-    }),
-  ],
-  build: {
-    manifest: true,
-    rollupOptions: {
-      input: [
-        "./src/main.js",
-        "./index.html",
-        "/index.fr.html",
-        "/editor.html",
-      ],
+    base: "./",
+    plugins: [
+        basicSsl(),
+        tailwindcss(),
+        vue({
+            compilerOptions: {
+                customElement: true,
+            },
+        }),
+    ],
+    build: {
+        manifest: true,
+        rollupOptions: {
+            input: [
+                "./src/main.js",
+                "./index.html",
+                "/index.fr.html",
+                "/editor.html",
+            ],
+        },
     },
-  },
-  test: {
-    globals: true,
-    environment: "happy-dom",
-    onConsoleLog(log) {
-      if (log.includes("KaTeX")) {
-        return false;
-      }
+    test: {
+        globals: true,
+        environment: "happy-dom",
+        onConsoleLog(log) {
+            if (log.includes("KaTeX")) {
+                return false;
+            }
+        },
     },
-  },
-  optimizeDeps: {
-    exclude: ["*.keep"],
-  },
+    optimizeDeps: {
+        exclude: ["*.keep"],
+    },
 });
