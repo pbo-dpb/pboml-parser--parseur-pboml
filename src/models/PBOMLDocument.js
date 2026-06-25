@@ -201,8 +201,8 @@ export default class PBOMLDocument {
             },
 
             slices: this.slices.map((slice) => slice.toArray()),
-            annotations: this.annotations.map((annotation) =>
-                annotation.toArray(),
+            annotations: this.annotations.map(
+                (annotation) => annotation.toArray() ?? [],
             ),
         };
 
