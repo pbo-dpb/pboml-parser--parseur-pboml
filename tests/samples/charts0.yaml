@@ -1,199 +1,199 @@
 pboml:
-  version: 1.0.0
+    version: 1.0.0
 document:
-  form: T-RP-3.0.0
-  id: RP-2627-987-Z
-  release_date: '1968-09-24T13:00:00.000Z'
-  title:
-    en: Charts! Charts!! Charts!!!
-    fr: Graphiques ! Graphiques !! Graphiques !!!
-  type:
-    en: Pop-up
-    fr: Spontané
-  copyright: {}
+    form: T-RP-3.0.0
+    id: RP-2627-987-Z
+    release_date: "1968-09-24T13:00:00.000Z"
+    title:
+        en: Charts! Charts!! Charts!!!
+        fr: Graphiques ! Graphiques !! Graphiques !!!
+    type:
+        en: Pop-up
+        fr: Spontané
+    copyright: {}
 slices:
-  - type: chart
-    label:
-      en: Snickerdoodle Wobble
-      fr: Tremblement des snickerdoodles
-    notes:
-      - en: >-
-          (*) Bearing appear rule darkness together under female creature night
-          replenish cattle said i wherein won't fowl.
-        fr: ' (*) Les animaux de la mer sont les mêmes que ceux de la mer, mais ils ne sont pas les mêmes. '
-    datatable:
-      variables:
-        year:
-          label:
-            en: Year
-            fr: Année
-          type: markdown
-          display_label: true
-          is_descriptive: true
-          skip_chart: false
-          chart_type: bar
-          group: null
-          unit: null
-        nifty:
-          label:
-            fr: Astucieux
-            en: Nifty
-          type: number
-          display_label: true
-          is_descriptive: false
-          skip_chart: false
-          chart_type: bar
-          group: null
-          unit: null
-        puffy:
-          label:
-            fr: Bouffi
-            en: Puffy
-          type: number
-          display_label: true
-          is_descriptive: false
-          skip_chart: false
-          chart_type: bar
-          group: null
-          unit: null
-        fluffy:
-          label:
-            en: Fluffy
-            fr: Moelleux
-          type: number
-          display_label: true
-          is_descriptive: false
-          skip_chart: false
-          chart_type: scatter
-          group: null
-          unit: null
-        bouncy:
-          label:
-            fr: Bouncy
-            en: Rebondissant
-          type: number
-          display_label: true
-          is_descriptive: false
-          skip_chart: false
-          chart_type: line
-          group: null
-          unit: null
-      content:
-        - year:
-            en: '2016'
-            fr: '2016'
-          nifty: 805
-          puffy: 602
-          fluffy: 867
-          bouncy: 556
-          emphasize: false
-        - year:
-            en: '2017'
-            fr: '2017'
-          nifty: 1296
-          puffy: 744
-          fluffy: 1265
-          bouncy: 619
-          emphasize: false
-        - year:
-            en: '2018'
-            fr: '2018'
-          nifty: 1348
-          puffy: 805
-          fluffy: 1507
-          bouncy: 541
-          emphasize: false
-        - year:
-            en: '2019'
-            fr: '2019'
-          nifty: 1020
-          puffy: 626
-          fluffy: 1558
-          bouncy: 507
-          emphasize: false
-        - year:
-            en: '2020'
-            fr: '2020'
-          nifty: 1794
-          puffy: 1184
-          fluffy: 2461
-          bouncy: 984
-          emphasize: false
-        - year:
-            en: '2021'
-            fr: '2021'
-          nifty: 2333
-          puffy: 1621
-          fluffy: 2864
-          bouncy: 1188
-          emphasize: false
-        - year:
-            en: 2022*
-            fr: 2022*
-          nifty: 1712
-          puffy: 1105
-          fluffy: 1853
-          bouncy: 690
-          emphasize: true
-      state:
-        caption: null
-  - type: chart
-    label:
-      en: Wobbleflop Mingles
-      fr: Rencontres avec les Wobbleflop
-#    notes:
-#      - en: >-
-#          In. Signs. Male moving seas together gathered. Very day said very Over
-#          him behold.
-#        fr: >-
-#          Dans. Signes. Mâle mouvant mers ensemble rassemblé. Très jour dit très
-#          Sur lui voir.
-    datatable:
-      variables:
-        year:
-          label:
-            en: Mingles
-            fr: Rencontres
-          type: number
-          display_label: true
-          is_descriptive: true
-          skip_chart: false
-          chart_type: bar
-          group: null
-          unit: null
-        wf:
-          label:
-            en: Wacky Flippers
-            fr: Flippers farfelus
-          type: number
-          display_label: true
-          skip_chart: false
-          chart_type: bar
-          group: null
-          unit: null
-        wj:
-          label:
-            en: Whimsy Jumbles
-            fr: Méli-Mélos de fantaisie
-          type: number
-          display_label: true
-          skip_chart: false
-          chart_type: line
-          group: null
-          unit: null
-      content:
-        - emphasize: false
-          year: 1
-          wf: 1
-          wj: 2
-        - emphasize: true
-          year: 0.5
-          wf: 5
-          wj: 4
-        - emphasize: false
-          year: 1.5
-          wf: 4
-          wj: 5
-      state:
-        caption: null
+    - type: chart
+      label:
+          en: Snickerdoodle Wobble
+          fr: Tremblement des snickerdoodles
+      notes:
+          - en: >-
+                (*) Bearing appear rule darkness together under female creature night
+                replenish cattle said i wherein won't fowl.
+            fr: " (*) Les animaux de la mer sont les mêmes que ceux de la mer, mais ils ne sont pas les mêmes. "
+      datatable:
+          variables:
+              year:
+                  label:
+                      en: Year
+                      fr: Année
+                  type: markdown
+                  display_label: true
+                  is_descriptive: true
+                  skip_chart: false
+                  chart_type: bar
+                  group: null
+                  unit: null
+              nifty:
+                  label:
+                      fr: Astucieux
+                      en: Nifty
+                  type: number
+                  display_label: true
+                  is_descriptive: false
+                  skip_chart: false
+                  chart_type: bar
+                  group: null
+                  unit: null
+              puffy:
+                  label:
+                      fr: Bouffi
+                      en: Puffy
+                  type: number
+                  display_label: true
+                  is_descriptive: false
+                  skip_chart: false
+                  chart_type: bar
+                  group: null
+                  unit: null
+              fluffy:
+                  label:
+                      en: Fluffy
+                      fr: Moelleux
+                  type: number
+                  display_label: true
+                  is_descriptive: false
+                  skip_chart: false
+                  chart_type: scatter
+                  group: null
+                  unit: null
+              bouncy:
+                  label:
+                      fr: Bouncy
+                      en: Rebondissant
+                  type: number
+                  display_label: true
+                  is_descriptive: false
+                  skip_chart: false
+                  chart_type: line
+                  group: null
+                  unit: null
+          content:
+              - year:
+                    en: "2016"
+                    fr: "2016"
+                nifty: 805
+                puffy: 602
+                fluffy: 867
+                bouncy: 556
+                emphasize: false
+              - year:
+                    en: "2017"
+                    fr: "2017"
+                nifty: 1296
+                puffy: 744
+                fluffy: 1265
+                bouncy: 619
+                emphasize: false
+              - year:
+                    en: "2018"
+                    fr: "2018"
+                nifty: 1348
+                puffy: 805
+                fluffy: 1507
+                bouncy: 541
+                emphasize: false
+              - year:
+                    en: "2019"
+                    fr: "2019"
+                nifty: 1020
+                puffy: 626
+                fluffy: 1558
+                bouncy: 507
+                emphasize: false
+              - year:
+                    en: "2020"
+                    fr: "2020"
+                nifty: 1794
+                puffy: 1184
+                fluffy: 2461
+                bouncy: 984
+                emphasize: false
+              - year:
+                    en: "2021"
+                    fr: "2021"
+                nifty: 2333
+                puffy: 1621
+                fluffy: 2864
+                bouncy: 1188
+                emphasize: false
+              - year:
+                    en: 2022*
+                    fr: 2022*
+                nifty: 1712
+                puffy: 1105
+                fluffy: 1853
+                bouncy: 690
+                emphasize: true
+          state:
+              caption: null
+    - type: chart
+      label:
+          en: Wobbleflop Mingles
+          fr: Rencontres avec les Wobbleflop
+      #    notes:
+      #      - en: >-
+      #          In. Signs. Male moving seas together gathered. Very day said very Over
+      #          him behold.
+      #        fr: >-
+      #          Dans. Signes. Mâle mouvant mers ensemble rassemblé. Très jour dit très
+      #          Sur lui voir.
+      datatable:
+          variables:
+              year:
+                  label:
+                      en: Mingles
+                      fr: Rencontres
+                  type: number
+                  display_label: true
+                  is_descriptive: true
+                  skip_chart: false
+                  chart_type: bar
+                  group: null
+                  unit: null
+              wf:
+                  label:
+                      en: Wacky Flippers
+                      fr: Flippers farfelus
+                  type: number
+                  display_label: true
+                  skip_chart: false
+                  chart_type: bar
+                  group: null
+                  unit: null
+              wj:
+                  label:
+                      en: Whimsy Jumbles
+                      fr: Méli-Mélos de fantaisie
+                  type: number
+                  display_label: true
+                  skip_chart: false
+                  chart_type: line
+                  group: null
+                  unit: null
+          content:
+              - emphasize: false
+                year: 1
+                wf: 1
+                wj: 2
+              - emphasize: true
+                year: 0.5
+                wf: 5
+                wj: 4
+              - emphasize: false
+                year: 1.5
+                wf: 4
+                wj: 5
+          state:
+              caption: null
 annotations: []

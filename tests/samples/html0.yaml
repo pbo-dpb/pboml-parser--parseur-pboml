@@ -1,707 +1,707 @@
 pboml:
-  version: 1.0.0
+    version: 1.0.0
 document:
-  form: T-LEG-3.0.2
-  id: HTM-3438-089-I
-  release_date: '2023-05-04T13:00:00.000Z'
-  title:
-    en: Whispers of the Enchanted Forest
-    fr: Les Murmures de la Forêt Enchantée
-  type:
-    en: The Secrets of Timeless Wisdom
-    fr: Les Secrets de la Sagesse Éternelle
-  copyright:
-    en: © Echoes of Forgotten Dreams, Glasgow, Scotland, UK, 2023
-    fr: © Échos des Rêves Oubliés, Glasgow, Scotland, UK, 2023
+    form: T-LEG-3.0.2
+    id: HTM-3438-089-I
+    release_date: "2023-05-04T13:00:00.000Z"
+    title:
+        en: Whispers of the Enchanted Forest
+        fr: Les Murmures de la Forêt Enchantée
+    type:
+        en: The Secrets of Timeless Wisdom
+        fr: Les Secrets de la Sagesse Éternelle
+    copyright:
+        en: © Echoes of Forgotten Dreams, Glasgow, Scotland, UK, 2023
+        fr: © Échos des Rêves Oubliés, Glasgow, Scotland, UK, 2023
 slices:
-  - type: html
-    label: {}
-    content:
-      en: >-
-        <p>In the early morning light, the dew glistened on the vibrant green
-        grass, and a gentle breeze rustled the leaves of the towering trees.
-        Birds sang their melodious songs, creating a peaceful atmosphere.</p>
+    - type: html
+      label: {}
+      content:
+          en: >-
+              <p>In the early morning light, the dew glistened on the vibrant green
+              grass, and a gentle breeze rustled the leaves of the towering trees.
+              Birds sang their melodious songs, creating a peaceful atmosphere.</p>
 
-        <p>As the sun rose higher in the sky, it cast a warm, golden hue over
-        the tranquil scene:¹</p>
+              <p>As the sun rose higher in the sky, it cast a warm, golden hue over
+              the tranquil scene:¹</p>
 
-        <ul>
+              <ul>
 
-        <li>
+              <li>
 
-        <p>The distant mountains stood tall and majestic, providing a
-        breathtaking backdrop to the serene landscape.</p>
+              <p>The distant mountains stood tall and majestic, providing a
+              breathtaking backdrop to the serene landscape.</p>
 
-        </li>
+              </li>
 
-        <li>
+              <li>
 
-        <p>This idyllic setting was the perfect place for relaxation and
-        contemplation, away from the hustle and bustle of everyday life.</p>
+              <p>This idyllic setting was the perfect place for relaxation and
+              contemplation, away from the hustle and bustle of everyday life.</p>
 
-        </li>
+              </li>
 
-        </ul>
+              </ul>
 
 
-        <h2>Whispers in the Wind</h2>
+              <h2>Whispers in the Wind</h2>
 
-        <table>
+              <table>
 
-        <thead>
+              <thead>
 
-        <tr>
+              <tr>
 
-        <th><strong>$ millions</strong></th>
+              <th><strong>$ millions</strong></th>
 
-        <th><strong>2022-23</strong></th>
+              <th><strong>2022-23</strong></th>
 
-        <th><strong>2023-24</strong></th>
+              <th><strong>2023-24</strong></th>
 
-        <th><strong>2024-25</strong></th>
+              <th><strong>2024-25</strong></th>
 
-        <th><strong>2025-26</strong></th>
+              <th><strong>2025-26</strong></th>
 
-        <th><strong>2026-27</strong></th>
+              <th><strong>2026-27</strong></th>
 
-        <th><strong>2027-28</strong></th>
+              <th><strong>2027-28</strong></th>
 
-        <th><strong>2028-29</strong></th>
+              <th><strong>2028-29</strong></th>
 
-        <th><strong>2029-30</strong></th>
+              <th><strong>2029-30</strong></th>
 
-        <th><strong>2030-31</strong></th>
+              <th><strong>2030-31</strong></th>
 
-        </tr>
+              </tr>
 
-        </thead>
+              </thead>
 
-        <tbody>
+              <tbody>
 
-        <tr>
+              <tr>
 
-        <td>Natural gas</td>
+              <td>Natural gas</td>
 
-        <td>47</td>
+              <td>47</td>
 
-        <td>62</td>
+              <td>62</td>
 
-        <td>76</td>
+              <td>76</td>
 
-        <td>90</td>
+              <td>90</td>
 
-        <td>103</td>
+              <td>103</td>
 
-        <td>116</td>
+              <td>116</td>
 
-        <td>129</td>
+              <td>129</td>
 
-        <td>141</td>
+              <td>141</td>
 
-        <td>153</td>
+              <td>153</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Propane</td>
+              <td>Propane</td>
 
-        <td>9</td>
+              <td>9</td>
 
-        <td>12</td>
+              <td>12</td>
 
-        <td>15</td>
+              <td>15</td>
 
-        <td>18</td>
+              <td>18</td>
 
-        <td>21</td>
+              <td>21</td>
 
-        <td>24</td>
+              <td>24</td>
 
-        <td>27</td>
+              <td>27</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>33</td>
+              <td>33</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Total</td>
+              <td>Total</td>
 
-        <td>57</td>
+              <td>57</td>
 
-        <td>74</td>
+              <td>74</td>
 
-        <td>92</td>
+              <td>92</td>
 
-        <td>108</td>
+              <td>108</td>
 
-        <td>124</td>
+              <td>124</td>
 
-        <td>140</td>
+              <td>140</td>
 
-        <td>155</td>
+              <td>155</td>
 
-        <td>171</td>
+              <td>171</td>
 
-        <td>186</td>
+              <td>186</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Eternal Echoes</td>
+              <td>Eternal Echoes</td>
 
-        <td>50</td>
+              <td>50</td>
 
-        <td>65</td>
+              <td>65</td>
 
-        <td>80</td>
+              <td>80</td>
 
-        <td>95</td>
+              <td>95</td>
 
-        <td>110</td>
+              <td>110</td>
 
-        <td>125</td>
+              <td>125</td>
 
-        <td>140</td>
+              <td>140</td>
 
-        <td>155</td>
+              <td>155</td>
 
-        <td>170</td>
+              <td>170</td>
 
-        </tr>
+              </tr>
 
-        </tbody>
+              </tbody>
 
-        </table>
+              </table>
 
-        <h2>The Labyrinth of Dreams</h2>
+              <h2>The Labyrinth of Dreams</h2>
 
-        <h3>A Song of Shadows</h3>
+              <h3>A Song of Shadows</h3>
 
-        <table>
+              <table>
 
-        <thead>
+              <thead>
 
-        <tr>
+              <tr>
 
-        <th><strong>$ millions</strong></th>
+              <th><strong>$ millions</strong></th>
 
-        <th><strong>2022-23</strong></th>
+              <th><strong>2022-23</strong></th>
 
-        <th><strong>2023-24</strong></th>
+              <th><strong>2023-24</strong></th>
 
-        <th><strong>2024-25</strong></th>
+              <th><strong>2024-25</strong></th>
 
-        <th><strong>2025-26</strong></th>
+              <th><strong>2025-26</strong></th>
 
-        <th><strong>2026-27</strong></th>
+              <th><strong>2026-27</strong></th>
 
-        <th><strong>2027-28</strong></th>
+              <th><strong>2027-28</strong></th>
 
-        <th><strong>2028-29</strong></th>
+              <th><strong>2028-29</strong></th>
 
-        <th><strong>2029-30</strong></th>
+              <th><strong>2029-30</strong></th>
 
-        <th><strong>2030-31</strong></th>
+              <th><strong>2030-31</strong></th>
 
-        </tr>
+              </tr>
 
-        </thead>
+              </thead>
 
-        <tbody>
+              <tbody>
 
-        <tr>
+              <tr>
 
-        <td>Natural gas</td>
+              <td>Natural gas</td>
 
-        <td>11</td>
+              <td>11</td>
 
-        <td>14</td>
+              <td>14</td>
 
-        <td>17</td>
+              <td>17</td>
 
-        <td>20</td>
+              <td>20</td>
 
-        <td>23</td>
+              <td>23</td>
 
-        <td>27</td>
+              <td>27</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>33</td>
+              <td>33</td>
 
-        <td>36</td>
+              <td>36</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Propane</td>
+              <td>Propane</td>
 
-        <td>1</td>
+              <td>1</td>
 
-        <td>2</td>
+              <td>2</td>
 
-        <td>2</td>
+              <td>2</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>4</td>
+              <td>4</td>
 
-        <td>4</td>
+              <td>4</td>
 
-        <td>5</td>
+              <td>5</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Total</td>
+              <td>Total</td>
 
-        <td>13</td>
+              <td>13</td>
 
-        <td>16</td>
+              <td>16</td>
 
-        <td>20</td>
+              <td>20</td>
 
-        <td>23</td>
+              <td>23</td>
 
-        <td>26</td>
+              <td>26</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>34</td>
+              <td>34</td>
 
-        <td>37</td>
+              <td>37</td>
 
-        <td>41</td>
+              <td>41</td>
 
-        </tr>
+              </tr>
 
-        </tbody>
+              </tbody>
 
-        </table>
+              </table>
 
 
-        <hr />
+              <hr />
 
-        <p>¹ In the heart of the bustling city, life moves at a relentless pace.
-        Skyscrapers reach for the sky, and the streets are alive with the energy
-        of a million stories, according to <a
-        href="https://www.parl.ca/DocumentViewer/en/44-1/bill/C-234/first-reading">Bill
-        C-234</a>.</p>
-      fr: >-
-        <p>Dans la lumière du petit matin, la rosée scintillait sur l'herbe d'un
-        vert éclatant et une brise légère faisait bruisser les feuilles des
-        arbres imposants. Les oiseaux chantaient leurs mélodies, créant une
-        atmosphère paisible.</p>
+              <p>¹ In the heart of the bustling city, life moves at a relentless pace.
+              Skyscrapers reach for the sky, and the streets are alive with the energy
+              of a million stories, according to <a
+              href="https://www.parl.ca/DocumentViewer/en/44-1/bill/C-234/first-reading">Bill
+              C-234</a>.</p>
+          fr: >-
+              <p>Dans la lumière du petit matin, la rosée scintillait sur l'herbe d'un
+              vert éclatant et une brise légère faisait bruisser les feuilles des
+              arbres imposants. Les oiseaux chantaient leurs mélodies, créant une
+              atmosphère paisible.</p>
 
-        <p>À mesure que le soleil s'élève dans le ciel, il donne une teinte
-        chaude et dorée à la scène paisible¹ :</p>
+              <p>À mesure que le soleil s'élève dans le ciel, il donne une teinte
+              chaude et dorée à la scène paisible¹ :</p>
 
-        <ul>
+              <ul>
 
-        <li>
+              <li>
 
-        <p>Les montagnes lointaines se dressent majestueusement, offrant une
-        toile de fond époustouflante à ce paysage serein.</p>
+              <p>Les montagnes lointaines se dressent majestueusement, offrant une
+              toile de fond époustouflante à ce paysage serein.</p>
 
-        </li>
+              </li>
 
-        <li>
+              <li>
 
-        <p>Ce cadre idyllique était l'endroit idéal pour la relaxation et la
-        contemplation, loin de l'agitation de la vie quotidienne.</p>
+              <p>Ce cadre idyllique était l'endroit idéal pour la relaxation et la
+              contemplation, loin de l'agitation de la vie quotidienne.</p>
 
-        </li>
+              </li>
 
-        </ul>
+              </ul>
 
 
-        <h2>Chuchotements dans le Vent</h2>
+              <h2>Chuchotements dans le Vent</h2>
 
-        <table>
+              <table>
 
-        <thead>
+              <thead>
 
-        <tr>
+              <tr>
 
-        <th><strong>En millions de $</strong></th>
+              <th><strong>En millions de $</strong></th>
 
-        <th><strong>2022-2023</strong></th>
+              <th><strong>2022-2023</strong></th>
 
-        <th><strong>2023-2024</strong></th>
+              <th><strong>2023-2024</strong></th>
 
-        <th><strong>2024-2025</strong></th>
+              <th><strong>2024-2025</strong></th>
 
-        <th><strong>2025-2026</strong></th>
+              <th><strong>2025-2026</strong></th>
 
-        <th><strong>2026-2027</strong></th>
+              <th><strong>2026-2027</strong></th>
 
-        <th><strong>2027-2028</strong></th>
+              <th><strong>2027-2028</strong></th>
 
-        <th><strong>2028-2029</strong></th>
+              <th><strong>2028-2029</strong></th>
 
-        <th><strong>2029-2030</strong></th>
+              <th><strong>2029-2030</strong></th>
 
-        <th><strong>2030-2031</strong></th>
+              <th><strong>2030-2031</strong></th>
 
-        </tr>
+              </tr>
 
-        </thead>
+              </thead>
 
-        <tbody>
+              <tbody>
 
-        <tr>
+              <tr>
 
-        <td>Gas naturel</td>
+              <td>Gas naturel</td>
 
-        <td>47</td>
+              <td>47</td>
 
-        <td>62</td>
+              <td>62</td>
 
-        <td>76</td>
+              <td>76</td>
 
-        <td>90</td>
+              <td>90</td>
 
-        <td>103</td>
+              <td>103</td>
 
-        <td>116</td>
+              <td>116</td>
 
-        <td>129</td>
+              <td>129</td>
 
-        <td>141</td>
+              <td>141</td>
 
-        <td>153</td>
+              <td>153</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Propane</td>
+              <td>Propane</td>
 
-        <td>9</td>
+              <td>9</td>
 
-        <td>12</td>
+              <td>12</td>
 
-        <td>15</td>
+              <td>15</td>
 
-        <td>18</td>
+              <td>18</td>
 
-        <td>21</td>
+              <td>21</td>
 
-        <td>24</td>
+              <td>24</td>
 
-        <td>27</td>
+              <td>27</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>33</td>
+              <td>33</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Total</td>
+              <td>Total</td>
 
-        <td>57</td>
+              <td>57</td>
 
-        <td>74</td>
+              <td>74</td>
 
-        <td>92</td>
+              <td>92</td>
 
-        <td>108</td>
+              <td>108</td>
 
-        <td>124</td>
+              <td>124</td>
 
-        <td>140</td>
+              <td>140</td>
 
-        <td>155</td>
+              <td>155</td>
 
-        <td>171</td>
+              <td>171</td>
 
-        <td>186</td>
+              <td>186</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Échos Éternels</td>
+              <td>Échos Éternels</td>
 
-        <td>50</td>
+              <td>50</td>
 
-        <td>65</td>
+              <td>65</td>
 
-        <td>80</td>
+              <td>80</td>
 
-        <td>95</td>
+              <td>95</td>
 
-        <td>110</td>
+              <td>110</td>
 
-        <td>125</td>
+              <td>125</td>
 
-        <td>140</td>
+              <td>140</td>
 
-        <td>155</td>
+              <td>155</td>
 
-        <td>170</td>
+              <td>170</td>
 
-        </tr>
+              </tr>
 
-        </tbody>
+              </tbody>
 
-        </table>
+              </table>
 
-        <h2>Le Labyrinthe des Rêves</h2>
+              <h2>Le Labyrinthe des Rêves</h2>
 
-        <h3>Un Chant des Ombres</h3>
+              <h3>Un Chant des Ombres</h3>
 
-        <table>
+              <table>
 
-        <thead>
+              <thead>
 
-        <tr>
+              <tr>
 
-        <th><strong>En millions de $</strong></th>
+              <th><strong>En millions de $</strong></th>
 
-        <th><strong>2022-2023</strong></th>
+              <th><strong>2022-2023</strong></th>
 
-        <th><strong>2023-2024</strong></th>
+              <th><strong>2023-2024</strong></th>
 
-        <th><strong>2024-2025</strong></th>
+              <th><strong>2024-2025</strong></th>
 
-        <th><strong>2025-2026</strong></th>
+              <th><strong>2025-2026</strong></th>
 
-        <th><strong>2026-2027</strong></th>
+              <th><strong>2026-2027</strong></th>
 
-        <th><strong>2027-2028</strong></th>
+              <th><strong>2027-2028</strong></th>
 
-        <th><strong>2028-2029</strong></th>
+              <th><strong>2028-2029</strong></th>
 
-        <th><strong>2029-2030</strong></th>
+              <th><strong>2029-2030</strong></th>
 
-        <th><strong>2030-2031</strong></th>
+              <th><strong>2030-2031</strong></th>
 
-        </tr>
+              </tr>
 
-        </thead>
+              </thead>
 
-        <tbody>
+              <tbody>
 
-        <tr>
+              <tr>
 
-        <td>Gas naturel</td>
+              <td>Gas naturel</td>
 
-        <td>11</td>
+              <td>11</td>
 
-        <td>14</td>
+              <td>14</td>
 
-        <td>17</td>
+              <td>17</td>
 
-        <td>20</td>
+              <td>20</td>
 
-        <td>23</td>
+              <td>23</td>
 
-        <td>27</td>
+              <td>27</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>33</td>
+              <td>33</td>
 
-        <td>36</td>
+              <td>36</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Propane</td>
+              <td>Propane</td>
 
-        <td>1</td>
+              <td>1</td>
 
-        <td>2</td>
+              <td>2</td>
 
-        <td>2</td>
+              <td>2</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>3</td>
+              <td>3</td>
 
-        <td>4</td>
+              <td>4</td>
 
-        <td>4</td>
+              <td>4</td>
 
-        <td>5</td>
+              <td>5</td>
 
-        </tr>
+              </tr>
 
-        <tr>
+              <tr>
 
-        <td>Total</td>
+              <td>Total</td>
 
-        <td>13</td>
+              <td>13</td>
 
-        <td>16</td>
+              <td>16</td>
 
-        <td>20</td>
+              <td>20</td>
 
-        <td>23</td>
+              <td>23</td>
 
-        <td>26</td>
+              <td>26</td>
 
-        <td>30</td>
+              <td>30</td>
 
-        <td>34</td>
+              <td>34</td>
 
-        <td>37</td>
+              <td>37</td>
 
-        <td>41</td>
+              <td>41</td>
 
-        </tr>
+              </tr>
 
-        </tbody>
+              </tbody>
 
-        </table>
+              </table>
 
 
 
-        <hr />
+              <hr />
 
-        <p>¹ Au cœur de la ville animée, la vie avance à un rythme effréné. Les
-        gratte-ciel s'élèvent vers le ciel, et les rues débordent de l'énergie
-        de mille histoires, tel que décrit dans le <a
-        href="https://www.parl.ca/DocumentViewer/fr/44-1/projet-loi/C-234/premiere-lecture">projet
-        de loi C-234</a>.</p>
-    css: >-
-      table{background-color: lavender} tr:nth-child(even):not(:first-child)
-      {background-color: pink} thead{background-color: bisque} @media
-      (prefers-color-scheme: dark) {table {rotate: -3deg}}
-  - type: html
-    label:
-      en: Unstyled content
-      fr: Contenu non-stylé
-    content:
-      en: |
+              <p>¹ Au cœur de la ville animée, la vie avance à un rythme effréné. Les
+              gratte-ciel s'élèvent vers le ciel, et les rues débordent de l'énergie
+              de mille histoires, tel que décrit dans le <a
+              href="https://www.parl.ca/DocumentViewer/fr/44-1/projet-loi/C-234/premiere-lecture">projet
+              de loi C-234</a>.</p>
+      css: >-
+          table{background-color: lavender} tr:nth-child(even):not(:first-child)
+          {background-color: pink} thead{background-color: bisque} @media
+          (prefers-color-scheme: dark) {table {rotate: -3deg}}
+    - type: html
+      label:
+          en: Unstyled content
+          fr: Contenu non-stylé
+      content:
+          en: |
 
-        <h3>Chronicles of the Lost World</h3>
-        <table>
-        <thead>
-        <tr>
-        <th><strong>$ millions</strong></th>
-        <th><strong>2022-23</strong></th>
-        <th><strong>2023-24</strong></th>
-        <th><strong>2024-25</strong></th>
-        <th><strong>2025-26</strong></th>
-        <th><strong>2026-27</strong></th>
-        <th><strong>2027-28</strong></th>
-        <th><strong>2028-29</strong></th>
-        <th><strong>2029-30</strong></th>
-        <th><strong>2030-31</strong></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td>Natural gas</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1</td>
-        <td>1</td>
-        </tr>
-        <tr>
-        <td>Propane</td>
-        <td>2</td>
-        <td>2</td>
-        <td>3</td>
-        <td>3</td>
-        <td>4</td>
-        <td>4</td>
-        <td>5</td>
-        <td>5</td>
-        <td>6</td>
-        </tr>
-        <tr>
-        <td>Total</td>
-        <td>2</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>4</td>
-        <td>5</td>
-        <td>5</td>
-        <td>6</td>
-        <td>6</td>
-        </tr>
-        </tbody>
-        </table>
-      fr: |-
-        <h3>Chroniques du Monde Perdu</h3>
-        <table>
-        <thead>
-        <tr>
-        <th><strong>En millions de $</strong></th>
-        <th><strong>2022-2023</strong></th>
-        <th><strong>2023-2024</strong></th>
-        <th><strong>2024-2025</strong></th>
-        <th><strong>2025-2026</strong></th>
-        <th><strong>2026-2027</strong></th>
-        <th><strong>2027-2028</strong></th>
-        <th><strong>2028-2029</strong></th>
-        <th><strong>2029-2030</strong></th>
-        <th><strong>2030-2031</strong></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td>Gas naturel</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>0</td>
-        <td>1</td>
-        <td>1</td>
-        </tr>
-        <tr>
-        <td>Propane</td>
-        <td>2</td>
-        <td>2</td>
-        <td>3</td>
-        <td>3</td>
-        <td>4</td>
-        <td>4</td>
-        <td>5</td>
-        <td>5</td>
-        <td>6</td>
-        </tr>
-        <tr>
-        <td>Total</td>
-        <td>2</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>4</td>
-        <td>5</td>
-        <td>5</td>
-        <td>6</td>
-        <td>6</td>
-        </tr>
-        </tbody>
-        </table>
-    remove_default_styles: true
+              <h3>Chronicles of the Lost World</h3>
+              <table>
+              <thead>
+              <tr>
+              <th><strong>$ millions</strong></th>
+              <th><strong>2022-23</strong></th>
+              <th><strong>2023-24</strong></th>
+              <th><strong>2024-25</strong></th>
+              <th><strong>2025-26</strong></th>
+              <th><strong>2026-27</strong></th>
+              <th><strong>2027-28</strong></th>
+              <th><strong>2028-29</strong></th>
+              <th><strong>2029-30</strong></th>
+              <th><strong>2030-31</strong></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td>Natural gas</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              </tr>
+              <tr>
+              <td>Propane</td>
+              <td>2</td>
+              <td>2</td>
+              <td>3</td>
+              <td>3</td>
+              <td>4</td>
+              <td>4</td>
+              <td>5</td>
+              <td>5</td>
+              <td>6</td>
+              </tr>
+              <tr>
+              <td>Total</td>
+              <td>2</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>4</td>
+              <td>5</td>
+              <td>5</td>
+              <td>6</td>
+              <td>6</td>
+              </tr>
+              </tbody>
+              </table>
+          fr: |-
+              <h3>Chroniques du Monde Perdu</h3>
+              <table>
+              <thead>
+              <tr>
+              <th><strong>En millions de $</strong></th>
+              <th><strong>2022-2023</strong></th>
+              <th><strong>2023-2024</strong></th>
+              <th><strong>2024-2025</strong></th>
+              <th><strong>2025-2026</strong></th>
+              <th><strong>2026-2027</strong></th>
+              <th><strong>2027-2028</strong></th>
+              <th><strong>2028-2029</strong></th>
+              <th><strong>2029-2030</strong></th>
+              <th><strong>2030-2031</strong></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td>Gas naturel</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>1</td>
+              </tr>
+              <tr>
+              <td>Propane</td>
+              <td>2</td>
+              <td>2</td>
+              <td>3</td>
+              <td>3</td>
+              <td>4</td>
+              <td>4</td>
+              <td>5</td>
+              <td>5</td>
+              <td>6</td>
+              </tr>
+              <tr>
+              <td>Total</td>
+              <td>2</td>
+              <td>2</td>
+              <td>3</td>
+              <td>4</td>
+              <td>4</td>
+              <td>5</td>
+              <td>5</td>
+              <td>6</td>
+              <td>6</td>
+              </tr>
+              </tbody>
+              </table>
+      remove_default_styles: true
 annotations: []

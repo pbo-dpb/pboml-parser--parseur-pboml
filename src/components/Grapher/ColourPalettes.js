@@ -6,8 +6,8 @@ export const EquidistantColorPalette = [
     "#a5598a",
     "#7b598e",
     "#e28146",
-    "#505685"
-]
+    "#505685",
+];
 
 export const SingleHueColorPalette = [
     "#2d5071",
@@ -18,8 +18,8 @@ export const SingleHueColorPalette = [
     "#227ec4",
     "#1c88d5",
     "#1291e7",
-    "#009bf9"
-]
+    "#009bf9",
+];
 
 export const DivergentColorPalette = [
     "#123050",
@@ -34,5 +34,5 @@ export const DivergentColorPalette = [
     "#a66469",
     "#8c4b46",
     "#713425",
-    "#532000"
-]
+    "#532000",
+];

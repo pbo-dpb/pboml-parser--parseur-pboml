@@ -1,162 +1,157 @@
 @media print {
+    table {
+        width: 100%;
+    }
 
+    table,
+    td,
+    th {
+        border: 1px solid #d1d5db;
+        word-break: break-word;
+        border-collapse: collapse;
+    }
 
-  table {
-    width: 100%;
-  }
+    td p,
+    th p {
+        margin: 0;
+    }
 
-  table,
-  td,
-  th {
-    border: 1px solid #d1d5db;
-    word-break: break-word;
-    border-collapse: collapse;
-  }
+    td,
+    th {
+        padding: 0.25em;
+        font-size: 0.875em;
+    }
 
-  td p,
-  th p {
-    margin: 0;
-  }
+    tr {
+        break-inside: avoid-page;
+    }
 
-  td,
-  th {
-    padding: 0.25em;
-    font-size: 0.875em;
-  }
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: lighter;
+        break-after: avoid;
+    }
 
-  tr {
-    break-inside: avoid-page;
-  }
+    .text-xl {
+        font-size: 1.2em;
+    }
 
+    .flex-row {
+        display: flex;
+        gap: 0.75em;
+    }
 
+    .text-center {
+        text-align: center;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: lighter;
-    break-after: avoid;
-  }
+    .bg-gray-100 {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        background-color: #f5f5f5;
+    }
 
-  .text-xl {
-    font-size: 1.2em
-  }
+    .pb__figure {
+        background-color: #f9fafb;
+    }
 
-  .flex-row {
-    display: flex;
-    gap: 0.75em;
-  }
+    .pb__aside {
+        background-color: #eff6ff;
+    }
 
-  .text-center {
-    text-align: center;
-  }
+    .pb__figure,
+    .pb__aside {
+        break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        padding: 1em;
+    }
 
-  .bg-gray-100 {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    background-color: #f5f5f5;
-  }
+    table,
+    blockquote,
+    pre,
+    code,
+    figure,
+    li,
+    hr,
+    ul,
+    ol,
+    a,
+    tr {
+        page-break-inside: avoid;
+    }
 
-  .pb__figure {
-    background-color: #f9fafb;
-  }
+    h2,
+    h3,
+    h4,
+    p,
+    a {
+        text-rendering: optimizeLegibility;
+        orphans: 3;
+        widows: 3;
+    }
 
-  .pb__aside {
-    background-color: #eff6ff;
-  }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dt {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+    }
 
-  .pb__figure,
-  .pb__aside {
-    break-inside: avoid;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-    padding: 1em;
-  }
+    h1 + p,
+    h2 + p,
+    h3 + p {
+        page-break-before: avoid;
+    }
 
-  table,
-  blockquote,
-  pre,
-  code,
-  figure,
-  li,
-  hr,
-  ul,
-  ol,
-  a,
-  tr {
-    page-break-inside: avoid;
-  }
+    img {
+        page-break-after: auto;
+        page-break-before: auto;
+        page-break-inside: avoid;
+    }
 
-  h2,
-  h3,
-  h4,
-  p,
-  a {
-    text-rendering: optimizeLegibility;
-    orphans: 3;
-    widows: 3;
-  }
+    .hidden,
+    .print\:hidden,
+    .sr-only {
+        display: none;
+    }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  dt {
-    page-break-after: avoid;
-    page-break-inside: avoid;
-  }
+    .font-semibold {
+        font-weight: 600;
+    }
 
-  h1+p,
-  h2+p,
-  h3+p {
-    page-break-before: avoid;
-  }
+    .border-l-2 {
+        border-left: 0.125rem solid #f3f4f6;
+        padding-left: 0.5rem;
+    }
 
-  img {
-    page-break-after: auto;
-    page-break-before: auto;
-    page-break-inside: avoid;
-  }
+    dd {
+        display: block;
+        margin-inline-start: 0;
+    }
 
-  .hidden,
-  .print\:hidden,
-  .sr-only {
-    display: none
-  }
+    font-normal {
+        font-weight: 400;
+    }
 
-  .font-semibold {
-    font-weight: 600;
-  }
+    dl {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
 
-  .border-l-2 {
-    border-left: 0.125rem solid #f3f4f6;
-    padding-left: 0.5rem;
-  }
+    .print\:list-none {
+        list-style: none;
+        padding-inline-start: 0;
+    }
 
-  dd {
-    display: block;
-    margin-inline-start: 0;
-  }
-
-  font-normal {
-    font-weight: 400;
-  }
-
-  dl {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-  }
-
-  .print\:list-none {
-    list-style: none;
-    padding-inline-start: 0;
-  }
-
-  .justify-end {
-    text-align: right
-  }
-
+    .justify-end {
+        text-align: right;
+    }
 }

@@ -1,25 +1,24 @@
-import { h } from "vue"
-import DOMPurify from 'dompurify';
-
+import { h } from "vue";
+import DOMPurify from "dompurify";
 
 export default {
-    props: ['payload'],
+    props: ["payload"],
     render() {
-        return h('div');
+        return h("div");
     },
     methods: {
         rebuildShadowDom() {
             let wrapper = document.createElement("div");
             wrapper.classList.add("w-full");
-            const shadowRoot = wrapper.attachShadow({ mode: 'open' });
+            const shadowRoot = wrapper.attachShadow({ mode: "open" });
             shadowRoot.innerHTML = DOMPurify.sanitize(this.payload);
-            this.$el.replaceChildren(...[wrapper])
-        }
+            this.$el.replaceChildren(...[wrapper]);
+        },
     },
     mounted() {
         this.rebuildShadowDom();
     },
     updated() {
         this.rebuildShadowDom();
-    }
-}
+    },
+};

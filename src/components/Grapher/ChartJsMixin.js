@@ -1,5 +1,5 @@
-import { h } from 'vue'
-import Chart from 'chart.js/auto';
+import { h } from "vue";
+import Chart from "chart.js/auto";
 import { EquidistantColorPalette } from "./ColourPalettes";
 import Color from "color";
 
@@ -9,35 +9,47 @@ export default {
     props: {
         language: {
             type: String,
-            required: true
+            required: true,
         },
     },
     data() {
         return {
             unid: unid,
             _chart: null,
-        }
+        };
     },
 
     render() {
-        if (!this.config) return (h('div', { class: 'text-red-800 font-semibold text-4xl' }, () => h('span', {}, `⚠️`)));
+        if (!this.config)
+            return h(
+                "div",
+                { class: "text-red-800 font-semibold text-4xl" },
+                () => h("span", {}, `⚠️`),
+            );
 
-        return h('div', { class: 'flex flex-row justify-center w-full h-96 md:h-128' }, [
-            h('canvas', { ref: 'chart', innerHTML: "", class: "w-full h-full" }, [
-            ])
-        ]);
+        return h(
+            "div",
+            { class: "flex flex-row justify-center w-full h-96 md:h-128" },
+            [
+                h(
+                    "canvas",
+                    { ref: "chart", innerHTML: "", class: "w-full h-full" },
+                    [],
+                ),
+            ],
+        );
     },
 
-
-
     mounted() {
-        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const textColor = isDark ? '#f9fafb' : '#111827';
+        const isDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+        ).matches;
+        const textColor = isDark ? "#f9fafb" : "#111827";
         let config = this.config;
-        if (!config) return
+        if (!config) return;
         config.options = {
             animation: {
-                duration: 0
+                duration: 0,
             },
             color: textColor,
             ...config.options,
@@ -47,23 +59,17 @@ export default {
             plugins: {
                 legend: {
                     ...config.options.plugins?.legend,
-                    position: "bottom"
+                    position: "bottom",
                 },
                 ...config.options.plugins,
             },
-
-
-        }
-        this._chart = new Chart(
-            this.$refs.chart.getContext('2d'),
-            config
-        );
+        };
+        this._chart = new Chart(this.$refs.chart.getContext("2d"), config);
     },
 
     methods: {
-
         emphasizeColor(color) {
-            return color.saturate(1).darken(0.5)
+            return color.saturate(1).darken(0.5);
         },
 
         colorForIndex(index, emphasize) {
@@ -74,12 +80,11 @@ export default {
             if (emphasize) {
                 color = this.emphasizeColor(color);
             }
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
                 color = color.lighten(0.05).saturate(0.25);
             }
 
             return color.hex();
-        }
-    }
-
-}
+        },
+    },
+};

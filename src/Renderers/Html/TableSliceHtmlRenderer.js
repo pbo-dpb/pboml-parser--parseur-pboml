@@ -1,11 +1,9 @@
-import SliceHtmlRenderer from './SliceHtmlRenderer';
-
+import SliceHtmlRenderer from "./SliceHtmlRenderer";
 
 export default class TableSliceHtmlRenderer extends SliceHtmlRenderer {
-
     renderReadonlyVnode(language) {
         let vnodes = super.renderReadonlyVnode(language);
-        vnodes.push(this.slice.datatable.renderReadonlyVnode(language))
+        vnodes.push(this.slice.datatable.renderReadonlyVnode(language));
         return vnodes;
     }
 
@@ -14,6 +12,4 @@ export default class TableSliceHtmlRenderer extends SliceHtmlRenderer {
         parentVnode.props.class = `${parentVnode.props.class} break-inside-avoid-page`;
         return parentVnode;
     }
-
-
 }
