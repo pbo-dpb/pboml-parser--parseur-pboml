@@ -99,11 +99,10 @@ export default class PBOMLDocument {
                 .filter((n) => n) ?? [];
 
         // annotations
-        this.annotations =
-            mainDocument.annotations
-                ?.map((element) => {
+        try {
+            this.annotations = mainDocument.annotations
+                .map((element) => {
                     let annotation = new Annotation(element);
-
                     annotation.state.prefix = prefix;
 
                     return annotation;
@@ -113,7 +112,10 @@ export default class PBOMLDocument {
                     `${a.id}`.localeCompare(`${b.id}`, undefined, {
                         numeric: true,
                     }),
-                ) ?? [];
+                );
+        } catch (error) {
+            this.annotations = [];
+        }
 
         this.state = {
             prefix,
