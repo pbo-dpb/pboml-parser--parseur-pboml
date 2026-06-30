@@ -1,0 +1,22 @@
+pboml:
+    version: 1.0.0
+slices: []
+annotations:
+    "0":
+        id: 1
+        content_type: markdown
+        content:
+            en: Note 1
+            fr: Note 1
+    "1":
+        id: 2
+        content_type: markdown
+        content:
+            en: Note 2
+            fr: Note 2
+    "2":
+        id: 3
+        content_type: markdown
+        content:
+            en: Note 3
+            fr: Note 3

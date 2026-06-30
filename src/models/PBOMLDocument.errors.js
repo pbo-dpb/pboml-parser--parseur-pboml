@@ -1,9 +1,13 @@
 export const PBOMLDocumentErrors = {
-    annotationsIsNull: "annotations is null.",
-    fileIsEmpty: "File is empty or pboml is missing.",
-    pbomlIsUndefined: "pboml is undefined.",
-    pbomlIsNull: "pboml is null.",
-    versionIsEmptyString: "version is empty string",
-    versionIsNotSupported: "version is not supported",
-    versionIsNull: "version is null",
+    annotationsIsNotArrayOrObject:
+        "The value of key 'annotations' is not an array or an object.",
+    annotationsIsNull: "The value of key 'annotations' is null.",
+    fileIsEmpty: "The YAML file is empty.",
+    pbomlIsUndefined: "The key 'pboml' is undefined.",
+    pbomlIsNull: "The value of key 'pboml' is null.",
+    slicesIsNotArrayOrObject:
+        "The value of key 'slices' is not an array or an object.",
+    versionIsEmptyString: "The value of key 'version' is an empty string.",
+    versionIsNotSupported: "The value of key 'version' is not supported.",
+    versionIsNull: "The value of key 'version' is null.",
 };

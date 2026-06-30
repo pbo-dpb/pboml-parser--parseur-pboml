@@ -1,0 +1,21 @@
+pboml:
+    version: 1.0.0
+slices:
+    "0":
+        id: 1
+        type: markdown
+        content:
+            en: Slice 1
+            fr: Tranche 1
+    "1":
+        id: 2
+        type: markdown
+        content:
+            en: Slice 2
+            fr: Tranche 2
+    "2":
+        id: 3
+        type: markdown
+        content:
+            en: Slice 3
+            fr: Tranche 3
