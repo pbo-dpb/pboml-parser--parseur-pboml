@@ -69,53 +69,71 @@ export default class PBOMLDocument {
         this.user_data = mainDocument.document?.user_data;
 
         // slices
+        const slices = mainDocument.slices;
+
+        if (slices === undefined || slices === null) {
+            this.slices = [];
+        } else if (Array.isArray(slices)) {
+            this.slices = slices;
+        } else if (typeof slices === "object") {
+            this.slices = Object.values(slices);
+        } else {
+            throw new Error(PBOMLDocumentErrors.slicesIsNotArrayOrObject);
+        }
+
         let counter = 0;
 
-        this.slices =
-            mainDocument.slices
-                ?.map((element) => {
-                    let slice =
-                        PBOMLDocument.provisionSliceFromPayload(element);
+        this.slices = this.slices
+            .map((element) => {
+                let slice = PBOMLDocument.provisionSliceFromPayload(element);
 
-                    counter++;
+                counter++;
 
-                    if (slice) {
-                        slice.state.sequence = counter;
-                        slice.state.prefix = prefix;
-                        //slice.state.callbacks.move = (s) => this.handleSliceMove(s);
-                        //slice.state.callbacks.delete = (s) => this.handleSliceDelete(s);
+                if (slice) {
+                    slice.state.sequence = counter;
+                    slice.state.prefix = prefix;
+                    //slice.state.callbacks.move = (s) => this.handleSliceMove(s);
+                    //slice.state.callbacks.delete = (s) => this.handleSliceDelete(s);
 
-                        if (counter === 1) {
-                            slice.state.canMoveUp = false;
-                        }
-
-                        if (counter === mainDocument.slices.length) {
-                            slice.state.canMoveDown = false;
-                        }
-
-                        return slice;
+                    if (counter === 1) {
+                        slice.state.canMoveUp = false;
                     }
-                })
-                .filter((n) => n) ?? [];
+
+                    if (counter === mainDocument.slices.length) {
+                        slice.state.canMoveDown = false;
+                    }
+
+                    return slice;
+                }
+            })
+            .filter((n) => n);
 
         // annotations
-        try {
-            this.annotations = mainDocument.annotations
-                .map((element) => {
-                    let annotation = new Annotation(element);
-                    annotation.state.prefix = prefix;
+        const annotations = mainDocument.annotations;
 
-                    return annotation;
-                })
-                .filter((n) => n)
-                .sort((a, b) =>
-                    `${a.id}`.localeCompare(`${b.id}`, undefined, {
-                        numeric: true,
-                    }),
-                );
-        } catch (error) {
+        if (annotations === undefined || annotations === null) {
             this.annotations = [];
+        } else if (Array.isArray(annotations)) {
+            this.annotations = annotations;
+        } else if (typeof annotations === "object") {
+            this.annotations = Object.values(annotations);
+        } else {
+            throw new Error(PBOMLDocumentErrors.annotationsIsNotArrayOrObject);
         }
+
+        this.annotations = this.annotations
+            .map((element) => {
+                let annotation = new Annotation(element);
+                annotation.state.prefix = prefix;
+
+                return annotation;
+            })
+            .filter((n) => n)
+            .sort((a, b) =>
+                `${a.id}`.localeCompare(`${b.id}`, undefined, {
+                    numeric: true,
+                }),
+            );
 
         this.state = {
             prefix,
