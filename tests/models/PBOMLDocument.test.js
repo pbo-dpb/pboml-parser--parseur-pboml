@@ -31,128 +31,141 @@ import versionIsNotSupported from "../samples/versionIsNotSupported.yaml?raw";
 import { PBOMLDocumentErrors } from "../../src/models/PBOMLDocument.errors.js";
 import { YAMLException } from "js-yaml";
 
-describe("PBOMLDocument", () => {
+describe("Class 'PBOMLDocument':", () => {
     it("throws an error when the YAML file is empty", () => {
         expect(() => PBOMLDocument.initFromYaml(fileIsEmpty)).toThrow(
             PBOMLDocumentErrors.fileIsEmpty,
         );
     });
 
-    it("throws an error when the key 'pboml' is undefined", () => {
-        expect(() => PBOMLDocument.initFromYaml(pbomlIsUndefined)).toThrow(
-            PBOMLDocumentErrors.pbomlIsUndefined,
-        );
+    describe("for key 'pboml':", () => {
+        it("throws an error when the key 'pboml' is undefined", () => {
+            expect(() => PBOMLDocument.initFromYaml(pbomlIsUndefined)).toThrow(
+                PBOMLDocumentErrors.pbomlIsUndefined,
+            );
+        });
+
+        it("throws an error when the value of key 'pboml' is null", () => {
+            expect(() => PBOMLDocument.initFromYaml(pbomlIsNull)).toThrow(
+                PBOMLDocumentErrors.pbomlIsNull,
+            );
+        });
     });
 
-    it("throws an error when the value of key 'pboml' is null", () => {
-        expect(() => PBOMLDocument.initFromYaml(pbomlIsNull)).toThrow(
-            PBOMLDocumentErrors.pbomlIsNull,
-        );
+    describe("for key 'version:'", () => {
+        it("throws an error when the value of key 'version' is null", () => {
+            expect(() => PBOMLDocument.initFromYaml(versionIsNull)).toThrow(
+                PBOMLDocumentErrors.versionIsNull,
+            );
+        });
+
+        it("throws an error when the value of key 'version' is an empty string", () => {
+            expect(() =>
+                PBOMLDocument.initFromYaml(versionIsEmptyString),
+            ).toThrow(PBOMLDocumentErrors.versionIsEmptyString);
+        });
+
+        it("throws an error when the value of key 'version' is not supported", () => {
+            expect(() =>
+                PBOMLDocument.initFromYaml(versionIsNotSupported),
+            ).toThrow(PBOMLDocumentErrors.versionIsNotSupported);
+        });
     });
 
-    it("throws an error when the value of key 'version' is null", () => {
-        expect(() => PBOMLDocument.initFromYaml(versionIsNull)).toThrow(
-            PBOMLDocumentErrors.versionIsNull,
-        );
+    describe("for key 'slices':", () => {
+        it("returns an empty array when the key 'slices' is undefined", () => {
+            const document = PBOMLDocument.initFromYaml(slicesIsUndefined);
+
+            expect(document.slices).toBeInstanceOf(Array);
+            expect(document.slices).toHaveLength(0);
+        });
+
+        it("returns an empty array when the value of key 'slices' is null", () => {
+            const document = PBOMLDocument.initFromYaml(slicesIsNull);
+
+            expect(document.slices).toBeInstanceOf(Array);
+            expect(document.slices).toHaveLength(0);
+        });
+
+        it("returns an array when the value of key 'slices' is an object", () => {
+            const document = PBOMLDocument.initFromYaml(slicesIsObject);
+
+            expect(document.annotations).toBeInstanceOf(Array);
+        });
+
+        it("throws an error when the value of key 'slices' is not an array or an object", () => {
+            expect(() =>
+                PBOMLDocument.initFromYaml(slicesIsNotArrayOrObject),
+            ).toThrow(PBOMLDocumentErrors.slicesIsNotArrayOrObject);
+        });
     });
 
-    it("throws an error when the value of key 'version' is an empty string", () => {
-        expect(() => PBOMLDocument.initFromYaml(versionIsEmptyString)).toThrow(
-            PBOMLDocumentErrors.versionIsEmptyString,
-        );
+    describe("for key 'annotations':", () => {
+        it("returns an empty array when the key 'annotations' is undefined", () => {
+            const document = PBOMLDocument.initFromYaml(annotationsIsUndefined);
+
+            expect(document.annotations).toBeInstanceOf(Array);
+            expect(document.annotations).toHaveLength(0);
+        });
+
+        it("returns an empty array when the value of key 'annotations' is null", () => {
+            const document = PBOMLDocument.initFromYaml(annotationsIsNull);
+
+            expect(document.annotations).toBeInstanceOf(Array);
+            expect(document.annotations).toHaveLength(0);
+        });
+
+        it("returns an array when the value of key 'annotations' is an object", () => {
+            const document = PBOMLDocument.initFromYaml(annotationsIsObject);
+
+            expect(document.annotations).toBeInstanceOf(Array);
+        });
+
+        it("throws an error when the value of key 'annotations' is not an array or an object", () => {
+            expect(() =>
+                PBOMLDocument.initFromYaml(
+                    annotationsIsNotArrayOrObject,
+                ).toThrow(PBOMLDocumentErrors.annotationsIsNotArrayOrObject),
+            );
+        });
     });
 
-    it("throws an error when the value of key 'version' is not supported", () => {
-        expect(() => PBOMLDocument.initFromYaml(versionIsNotSupported)).toThrow(
-            PBOMLDocumentErrors.versionIsNotSupported,
-        );
-    });
+    describe("otherwise:", () => {
+        it("adds a slice in the correct position to the slices array", () => {
+            const document = PBOMLDocument.initFromYaml(slicesHasTwoSlices);
+            const parsedSlice = yaml.load(sliceIsHeading)[0];
+            const slice = new HeadingSlice(parsedSlice);
 
-    it("returns an empty array when the key 'slices' is undefined", () => {
-        const document = PBOMLDocument.initFromYaml(slicesIsUndefined);
+            document.addSlice(slice, 1);
 
-        expect(document.slices).toBeInstanceOf(Array);
-        expect(document.slices).toHaveLength(0);
-    });
+            expect(document.slices).toHaveLength(3);
+            expect(document.slices.map((slice) => slice.id)).toEqual([1, 2, 3]);
+        });
 
-    it("returns an empty array when the value of key 'slices' is null", () => {
-        const document = PBOMLDocument.initFromYaml(slicesIsNull);
+        it("duplicates a slice and adds it to the end of the slices array", () => {
+            const document = PBOMLDocument.initFromYaml(slicesHasOneSlice);
+            const originalSlice = document.slices[0];
 
-        expect(document.slices).toBeInstanceOf(Array);
-        expect(document.slices).toHaveLength(0);
-    });
+            document.duplicateSlice(originalSlice);
 
-    it("returns an array when the value of key 'slices' is an object", () => {
-        const document = PBOMLDocument.initFromYaml(slicesIsObject);
+            expect(document.slices).toHaveLength(2);
+            expect(document.slices[1]).toHaveProperty(
+                "type",
+                originalSlice.type,
+            );
+            expect(document.slices[1]).toHaveProperty(
+                "content",
+                originalSlice.content,
+            );
+        });
 
-        expect(document.annotations).toBeInstanceOf(Array);
-    });
+        it("deletes a slice from the slices array", () => {
+            const document = PBOMLDocument.initFromYaml(slicesHasOneSlice);
+            const slice = document.slices[0];
 
-    it("throws an error when the value of key 'slices' is not an array or an object", () => {
-        expect(() =>
-            PBOMLDocument.initFromYaml(slicesIsNotArrayOrObject),
-        ).toThrow(PBOMLDocumentErrors.slicesIsNotArrayOrObject);
-    });
+            document.deleteSlice(slice);
 
-    it("returns an empty array when the key 'annotations' is undefined", () => {
-        const document = PBOMLDocument.initFromYaml(annotationsIsUndefined);
-
-        expect(document.annotations).toBeInstanceOf(Array);
-        expect(document.annotations).toHaveLength(0);
-    });
-
-    it("returns an empty array when the value of key 'annotations' is null", () => {
-        const document = PBOMLDocument.initFromYaml(annotationsIsNull);
-
-        expect(document.annotations).toBeInstanceOf(Array);
-        expect(document.annotations).toHaveLength(0);
-    });
-
-    it("returns an array when the value of key 'annotations' is an object", () => {
-        const document = PBOMLDocument.initFromYaml(annotationsIsObject);
-
-        expect(document.annotations).toBeInstanceOf(Array);
-    });
-
-    it("throws an error when the value of key 'annotations' is not an array or an object", () => {
-        expect(() =>
-            PBOMLDocument.initFromYaml(annotationsIsNotArrayOrObject).toThrow(
-                PBOMLDocumentErrors.annotationsIsNotArrayOrObject,
-            ),
-        );
-    });
-
-    it("adds a slice in the correct position to the slices array", () => {
-        const document = PBOMLDocument.initFromYaml(slicesHasTwoSlices);
-        const parsedSlice = yaml.load(sliceIsHeading)[0];
-        const slice = new HeadingSlice(parsedSlice);
-
-        document.addSlice(slice, 1);
-
-        expect(document.slices).toHaveLength(3);
-        expect(document.slices.map((slice) => slice.id)).toEqual([1, 2, 3]);
-    });
-
-    it("duplicates a slice and adds it to the end of the slices array", () => {
-        const document = PBOMLDocument.initFromYaml(slicesHasOneSlice);
-        const originalSlice = document.slices[0];
-
-        document.duplicateSlice(originalSlice);
-
-        expect(document.slices).toHaveLength(2);
-        expect(document.slices[1]).toHaveProperty("type", originalSlice.type);
-        expect(document.slices[1]).toHaveProperty(
-            "content",
-            originalSlice.content,
-        );
-    });
-
-    it("deletes a slice from the slices array", () => {
-        const document = PBOMLDocument.initFromYaml(slicesHasOneSlice);
-        const slice = document.slices[0];
-
-        document.deleteSlice(slice);
-
-        expect(document.slices).toHaveLength(0);
+            expect(document.slices).toHaveLength(0);
+        });
     });
 });
