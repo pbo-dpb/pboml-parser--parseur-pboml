@@ -89,7 +89,9 @@ describe("PBOMLDocument", () => {
     });
 
     it("throws an error when the value of key 'slices' is not an array or an object", () => {
-        expect(() => PBOMLDocument.initFromYaml(slicesIsNotArrayOrObject));
+        expect(() =>
+            PBOMLDocument.initFromYaml(slicesIsNotArrayOrObject),
+        ).toThrow(PBOMLDocumentErrors.slicesIsNotArrayOrObject);
     });
 
     it("returns an empty array when the key 'annotations' is undefined", () => {
