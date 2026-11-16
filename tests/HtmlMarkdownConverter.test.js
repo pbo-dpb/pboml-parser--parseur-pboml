@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vite-plus/vitest";
+import { describe, it, expect } from "vite-plus/test";
 import HtmlMarkdownConverter from "../src/HtmlMarkdownConverter";
 
 describe("HtmlMarkdownConverter", () => {

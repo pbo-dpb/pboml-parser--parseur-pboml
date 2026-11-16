@@ -106,86 +106,6 @@ export default {
             variable.key = key;
             return { key, variable };
         },
-
-        convertVariableToNumericWhenApplicable(variables, entries) {
-            // Traverse entries and spot all numerical variables
-            const englishFormattedNumberReg = new RegExp(
-                "^-?[0-9,]+\\.?[0-9]*$",
-                "",
-            );
-            const frenchFormattedNumberReg = new RegExp(
-                "^-?[0-9\\s]+\\,?[0-9]*$",
-                "",
-            );
-            variables.forEach((variable) => {
-                // Never convert descriptive variables so we don't accidentally convert years to numbers
-                if (variable.variable.is_descriptive) return;
-
-                let entriesAreOnlyNumeric = true;
-                entries.forEach((entry) => {
-                    if (entry[variable.key]?.is_descriptive)
-                        entriesAreOnlyNumeric = false;
-                    if (
-                        typeof entry[variable.key]?.en !== "undefined" &&
-                        entry[variable.key]?.en !== "-" &&
-                        entry[variable.key]?.en !== "" &&
-                        !englishFormattedNumberReg.test(entry[variable.key]?.en)
-                    )
-                        entriesAreOnlyNumeric = false;
-                    if (
-                        typeof entry[variable.key]?.fr !== "undefined" &&
-                        entry[variable.key]?.en !== "-" &&
-                        entry[variable.key]?.fr !== "" &&
-                        !frenchFormattedNumberReg.test(entry[variable.key]?.fr)
-                    )
-                        entriesAreOnlyNumeric = false;
-                });
-                if (entriesAreOnlyNumeric) variable.variable.type = "number";
-            });
-
-            // Transform numeric variable entries to numbers
-            entries.forEach((entry) => {
-                variables
-                    .filter((v) => v.variable.type === "number")
-                    .forEach((numVar) => {
-                        let firstValueForEntry;
-                        let languageOfFirstValueForEntry;
-
-                        for (const [
-                            lKey,
-                            languageSpecificValue,
-                        ] of Object.entries(entry[numVar.key])) {
-                            if (typeof languageSpecificValue !== "undefined") {
-                                firstValueForEntry = languageSpecificValue;
-                                languageOfFirstValueForEntry = lKey;
-                                break;
-                            }
-                        }
-
-                        if (firstValueForEntry) {
-                            let cleanedUpNumber;
-                            if (languageOfFirstValueForEntry === "en")
-                                cleanedUpNumber = firstValueForEntry.replaceAll(
-                                    ",",
-                                    "",
-                                );
-                            else if (languageOfFirstValueForEntry === "fr")
-                                cleanedUpNumber = firstValueForEntry
-                                    .replaceAll(" ", "")
-                                    .replaceAll(",", ".");
-
-                            if (
-                                cleanedUpNumber === "" ||
-                                cleanedUpNumber === "-"
-                            )
-                                entry[numVar.key] = null;
-                            else entry[numVar.key] = +cleanedUpNumber;
-                        }
-                    });
-            });
-
-            return { variables, entries };
-        },
     },
     computed: {
         dataTable() {
@@ -247,11 +167,6 @@ export default {
                     }
                 });
             });
-
-            let transformedVarAndEntries =
-                this.convertVariableToNumericWhenApplicable(variables, entries);
-            variables = transformedVarAndEntries.variables;
-            entries = transformedVarAndEntries.entries;
 
             let dataTable = new DataTable();
             dataTable.variables = Object.fromEntries(
