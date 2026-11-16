@@ -4,8 +4,7 @@
             v-if="error"
             class="h-32 w-full overflow-y-scroll border border-red-300 text-red-800">
         {{ error.message }}
-    </pre
-        >
+    </pre>
         <div
             class="flex h-32 w-full flex-col items-center justify-center gap-2 border border-gray-300 font-mono font-semibold text-green-600"
             v-else>

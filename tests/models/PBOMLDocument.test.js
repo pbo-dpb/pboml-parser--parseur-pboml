@@ -2,7 +2,7 @@
 import * as yaml from "js-yaml";
 
 // Vitest
-import { describe, test, expect } from "vitest";
+import { describe, test, expect } from "vite-plus/test";
 
 // Models
 import PBOMLDocument from "../../src/models/PBOMLDocument.js";

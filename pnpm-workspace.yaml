@@ -2,3 +2,12 @@ overrides:
     "js-beautify>glob": ^14.0.2
     "js-beautify>editorconfig": ^4.0.1
     "@tailwindcss/typography>postcss-selector-parser": ^6.1.6
+    vite@*: "catalog:"
+catalog:
+    vite: npm:@voidzero-dev/vite-plus-core@1.6.0
+    vite-plus: 1.6.0
+peerDependencyRules:
+    allowAny:
+        - vite
+    allowedVersions:
+        vite: "*"
