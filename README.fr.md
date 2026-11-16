@@ -86,6 +86,14 @@ L'éditeur visuel peut être intégré en ajoutant l'attribut `edit` avec la val
     payload="data:text/yaml;base64,{pboml}"></pboml-parser>
 ```
 
+## Documentation
+
+Le [wiki du projet](https://github.com/pbo-dpb/pboml-parser--parseur-pboml/wiki) est généré à partir du dossier [`wiki/`](./wiki) de ce dépôt. Le flux GitHub `publish-wiki` le publie à chaque poussée sur `main`.
+
+- **Modifiez la documentation dans `wiki/`, et non dans le wiki GitHub.** Les modifications faites directement dans le wiki sont écrasées à la synchronisation suivante.
+- **Mettez la documentation à jour dans la même demande de tirage (pull request) que le code.** Les pages pour les développeurs (`wiki/EN:-Dev-*.md` / `wiki/FR:-Dev-*.md`) décrivent la mise en œuvre de chaque type de tranche, du moteur de rendu et de l'éditeur. Mettez à jour les pages en anglais et en français.
+- Les demandes de tirage qui modifient `wiki/` font l'objet d'une vérification automatique des liens entre les pages.
+
 ## Développer et construire localement
 
 ### 1. Mise en route

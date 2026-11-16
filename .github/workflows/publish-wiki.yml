@@ -1,0 +1,63 @@
+name: publish-wiki
+
+# The wiki/ folder of this repository is the source of truth for the GitHub wiki.
+# - Pull requests that touch wiki/ get their internal links checked.
+# - Pushes to main that touch wiki/ publish the folder to the wiki
+#   (pages deleted from wiki/ are deleted from the wiki too).
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - "wiki/**"
+            - ".github/workflows/publish-wiki.yml"
+            - ".github/scripts/check-wiki-links.py"
+    pull_request:
+        paths:
+            - "wiki/**"
+    workflow_dispatch:
+
+concurrency:
+    group: publish-wiki
+    cancel-in-progress: false
+
+jobs:
+    check-links:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+            - name: Check internal wiki links
+              run: python3 .github/scripts/check-wiki-links.py wiki
+
+    publish:
+        needs: check-links
+        if: github.event_name != 'pull_request'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Clone the wiki repository
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  git clone --depth 1 \
+                    "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.wiki.git" \
+                    "$RUNNER_TEMP/wiki"
+
+            - name: Copy wiki/ into the wiki repository
+              run: rsync -a --delete --exclude ".git" wiki/ "$RUNNER_TEMP/wiki/"
+
+            - name: Commit and push changes
+              working-directory: ${{ runner.temp }}/wiki
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add -A
+                  if git diff --cached --quiet; then
+                    echo "Wiki already up to date."
+                    exit 0
+                  fi
+                  git commit -m "Sync from ${{ github.repository }}@${GITHUB_SHA::7}"
+                  git push

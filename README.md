@@ -82,6 +82,14 @@ The visual editor can be embeded by adding and `edit` attribute set to `true`.
     payload="data:text/yaml;base64,{pboml}"></pboml-parser>
 ```
 
+## Documentation
+
+The [project wiki](https://github.com/pbo-dpb/pboml-parser--parseur-pboml/wiki) is generated from the [`wiki/`](./wiki) folder of this repository. The `publish-wiki` GitHub workflow publishes it on every push to `main`.
+
+- **Edit documentation in `wiki/`, not in the GitHub wiki.** Direct wiki edits are overwritten by the next sync.
+- **Update the docs in the same pull request as the code.** The developer pages (`wiki/EN:-Dev-*.md` / `wiki/FR:-Dev-*.md`) describe the implementation of each slice type, the renderer and the editor. Update both the English and French pages.
+- Pull requests that change `wiki/` get an automatic check for broken links between pages.
+
 ## Develop and build locally
 
 ### 1. Project setup
