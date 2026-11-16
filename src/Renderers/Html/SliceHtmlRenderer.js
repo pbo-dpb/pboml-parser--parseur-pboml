@@ -272,7 +272,18 @@ export default class SliceHtmlRenderer {
                     : rendererStrings[language].aside_label,
                 class:
                     props.class +
-                    " bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page  pb__aside",
+                    " bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 rounded-tr-3xl p-4 break-inside-avoid-page pb__aside",
+            };
+            elType = "aside";
+        } else if (this.slice.presentation === "aside-2") {
+            props = {
+                ...props,
+                "aria-labelledby": this.slice.label?.[language]
+                    ? `${this.slice.anchor}-label`
+                    : rendererStrings[language].aside_label,
+                class:
+                    props.class +
+                    " bg-linear-to-tr from-sky-50 to-sky-100 dark:from-transparent dark:to-sky-900 border-l-3 border-l-blue-900 rounded-tr-3xl p-4 break-inside-avoid-page pb__aside-2",
             };
             elType = "aside";
         }

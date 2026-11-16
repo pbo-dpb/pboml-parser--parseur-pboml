@@ -48,7 +48,8 @@ export default {
         kv_slice_value_label: "Label for value",
         presentation_none: "Inline presentation (default)",
         presentation_figure: "Figure/Table (numbered)",
-        presentation_aside: "Box (Aside)",
+        presentation_aside: "Box (Aside) 1",
+        "presentation_aside-2": "Box (Aside) 2",
         annotation_id_label: "Annotation identifier",
         annotation_id_helper:
             "You can refer to this annotation using the following string: ",
@@ -198,7 +199,8 @@ export default {
         kv_slice_value_label: "Étiquette des valeurs",
         presentation_none: "Présentation au fil de la page (par défault)",
         presentation_figure: "Figure/tableau numéroté",
-        presentation_aside: "Boîte d'accompagnement (aside)",
+        presentation_aside: "Boîte d'accompagnement (aside) 1",
+        "presentation_aside-2": "Boîte d'accompagnement (aside) 2",
         annotation_id_label: "Identifiant de l'annotation",
         annotation_id_helper:
             "Vous pouvez référer à cette annotation en utilisant la chaine suivante : ",

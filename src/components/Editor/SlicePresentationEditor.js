@@ -1,6 +1,5 @@
 import { h } from "vue";
 import editorStrings from "../../editor-strings";
-import SelectInput from "../../components/Editor/Inputs/SelectInput.vue";
 import { CheckCircleIcon } from "@heroicons/vue/20/solid";
 
 export default {
@@ -14,19 +13,14 @@ export default {
                 label: editorStrings[document.documentElement.lang][
                     "presentation_none"
                 ],
-                classes: ["border-gray-100", "border-l-gray-300", ""],
+                classes: ["items-center", "border", "border-gray-300"],
             },
             {
                 value: "figure",
                 label: editorStrings[document.documentElement.lang][
                     "presentation_figure"
                 ],
-                classes: [
-                    "items-center",
-                    "border-gray-300",
-                    "bg-gray-100",
-                    "rounded-tr-lg",
-                ],
+                classes: ["items-center", "bg-gray-100", "rounded-tr-lg"],
             },
             {
                 value: "aside",
@@ -35,8 +29,24 @@ export default {
                 ],
                 classes: [
                     "items-center",
-                    "border-blue-300",
-                    "bg-blue-100",
+                    "bg-linear-to-tr",
+                    "from-sky-50",
+                    "to-sky-100",
+                    "rounded-tr-lg",
+                ],
+            },
+            {
+                value: "aside-2",
+                label: editorStrings[document.documentElement.lang][
+                    "presentation_aside-2"
+                ],
+                classes: [
+                    "items-center",
+                    "bg-linear-to-tr",
+                    "from-sky-50",
+                    "to-sky-100",
+                    "border-l-3",
+                    "border-l-sky-900",
                     "rounded-tr-lg",
                 ],
             },
@@ -44,13 +54,12 @@ export default {
         let contentNodes;
 
         if (this.isEditing) {
-            contentNodes = h("div", { class: "grid grid-cols-3 gap-4" }, [
+            contentNodes = h("div", { class: "grid grid-cols-4 gap-4" }, [
                 ...choicesMap.map((choiceType) => {
                     return h(
                         "label",
                         {
                             class: [
-                                "border-2",
                                 "p-2",
                                 "text-blue-800",
                                 "text-sm",
@@ -62,7 +71,8 @@ export default {
                             ].join(" "),
                         },
                         [
-                            h("span", {}, choiceType.label),
+                            // The input must come first: peer-checked: only
+                            // styles siblings that follow the peer in the DOM.
                             h("input", {
                                 class: "peer sr-only",
                                 type: "radio",
@@ -78,11 +88,12 @@ export default {
                             h(
                                 CheckCircleIcon,
                                 {
-                                    class: "self-center h-4 w-4 hidden peer-checked:block fill-green-800",
+                                    class: "self-center h-4 w-4 invisible peer-checked:visible fill-green-800",
                                     "aria-hidden": true,
                                 },
                                 () => [],
                             ),
+                            h("span", {}, choiceType.label),
                         ],
                     );
                 }),

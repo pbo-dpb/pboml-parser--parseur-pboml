@@ -54,15 +54,31 @@
     }
 
     .pb__figure {
-        background-color: #f9fafb;
+        background-color: transparent;
+        background-image: linear-gradient(
+            to top right in oklab,
+            transparent,
+            var(--color-zinc-100, oklch(96.7% 0.001 286.375))
+        );
     }
 
-    .pb__aside {
-        background-color: #eff6ff;
+    .pb__aside,
+    .pb__aside-2 {
+        background-color: transparent;
+        background-image: linear-gradient(
+            to top right in oklab,
+            var(--color-sky-50, oklch(97.7% 0.013 236.62)),
+            var(--color-sky-100, oklch(95.1% 0.026 236.824))
+        );
+    }
+
+    .pb__aside-2 {
+        border-left: 3px solid var(--color-sky-900, oklch(39.1% 0.09 240.876));
     }
 
     .pb__figure,
-    .pb__aside {
+    .pb__aside,
+    .pb__aside-2 {
         break-inside: avoid;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;

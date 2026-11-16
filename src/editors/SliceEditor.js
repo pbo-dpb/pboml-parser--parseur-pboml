@@ -80,14 +80,6 @@ export default {
         }
 
         let presentationSpecificHeading = [];
-        if (this.slice.presentation === "figure") {
-            presentationSpecificHeading.push(
-                "bg-slate-300",
-                "border-slate-300",
-            );
-        } else if (this.slice.presentation === "aside") {
-            presentationSpecificHeading.push("bg-blue-300", "border-blue-300");
-        }
 
         return h("section", { class: "relative" }, [
             this.$attrs.onMoveSlice
