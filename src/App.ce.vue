@@ -26,7 +26,7 @@
 </template>
 
 <script>
-    import yaml from "js-yaml";
+    import * as yaml from "js-yaml";
     import { Buffer } from "buffer";
     import debounce from "lodash.debounce";
 

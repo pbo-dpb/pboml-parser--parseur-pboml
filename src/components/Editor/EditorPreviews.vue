@@ -84,7 +84,7 @@
     import Renderer from "../Renderer/Renderer";
     import strings from "../../editor-strings";
     import Tab from "../Editor/Tabs/Tab.vue";
-    import { X, Eye, Columns2 } from "lucide-vue-next";
+    import { X, Eye, Columns2 } from "@lucide/vue";
 
     export default {
         props: {

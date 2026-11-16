@@ -10,7 +10,7 @@
 </template>
 <script setup>
     import TinyButton from "../TinyButton.vue";
-    import { TextCursorInput } from "lucide-vue-next";
+    import { TextCursorInput } from "@lucide/vue";
     import { ref } from "vue";
     import editorStrings from "../../../editor-strings";
     const emit = defineEmits(["pasted"]);

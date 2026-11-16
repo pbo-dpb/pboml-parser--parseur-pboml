@@ -36,7 +36,7 @@
     import editorStrings from "../../../../editor-strings";
     import Button from "../../Button.vue";
 
-    import { Import } from "lucide-vue-next";
+    import { Import } from "@lucide/vue";
     import { Marked } from "marked";
     import HeadingSlice from "../../../../models/contents/HeadingSlice";
     import MarkdownSlice from "../../../../models/contents/MarkdownSlice";

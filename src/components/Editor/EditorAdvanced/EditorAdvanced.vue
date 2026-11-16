@@ -42,7 +42,7 @@
     import strings from "../../../editor-strings";
     import Tab from "../Tabs/Tab.vue";
     import Button from "../Button.vue";
-    import { GitCommit } from "lucide-vue-next";
+    import { GitCommit } from "@lucide/vue";
 
     export default {
         props: {

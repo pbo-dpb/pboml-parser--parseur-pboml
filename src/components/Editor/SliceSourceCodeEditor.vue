@@ -33,7 +33,7 @@
 <script setup>
     import { onMounted, ref, computed } from "vue";
     import Slice from "../../models/contents/Slice";
-    import yaml from "js-yaml";
+    import * as yaml from "js-yaml";
     import editorStrings from "../../editor-strings";
     import Button from "./Button.vue";
 

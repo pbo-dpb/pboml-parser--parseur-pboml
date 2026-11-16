@@ -3,7 +3,7 @@ import PBOMLDocument from "../../../models/PBOMLDocument.js";
 import { h } from "vue";
 import Tab from "../Tabs/Tab.vue";
 import strings from "../../../editor-strings.js";
-import { TableOfContents } from "lucide-vue-next";
+import { TableOfContents } from "@lucide/vue";
 import TinyButton from "../TinyButton.vue";
 
 export default {

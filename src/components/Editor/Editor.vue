@@ -88,7 +88,7 @@
         ArrowsPointingOutIcon,
     } from "@heroicons/vue/24/solid";
     import { ChevronRightIcon } from "@heroicons/vue/20/solid";
-    import { FileCode, Unlock } from "lucide-vue-next";
+    import { FileCode, Unlock } from "@lucide/vue";
 
     export default {
         props: {

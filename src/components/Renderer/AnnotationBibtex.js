@@ -1,7 +1,6 @@
 import { Cite } from "@citation-js/core";
 import "@citation-js/plugin-bibtex";
 import "@citation-js/plugin-csl";
-import { data } from "happy-dom/lib/PropertySymbol.js";
 import { h } from "vue";
 
 export default {

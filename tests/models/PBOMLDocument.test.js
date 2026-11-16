@@ -1,5 +1,5 @@
 // YAML
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 
 // Vitest
 import { describe, test, expect } from "vitest";

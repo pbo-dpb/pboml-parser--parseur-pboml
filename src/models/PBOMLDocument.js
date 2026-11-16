@@ -1,5 +1,5 @@
 // YAML
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 
 // Errors
 import { PBOMLDocumentErrors } from "./PBOMLDocument.errors";

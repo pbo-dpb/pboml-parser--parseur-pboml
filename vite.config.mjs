@@ -17,7 +17,7 @@ export default defineConfig({
     ],
     build: {
         manifest: true,
-        rollupOptions: {
+        rolldownOptions: {
             input: [
                 "./src/main.js",
                 "./index.html",

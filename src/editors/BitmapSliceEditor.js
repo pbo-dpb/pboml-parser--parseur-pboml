@@ -8,7 +8,7 @@ import TinyButton from "../components/Editor/TinyButton.vue";
 import { ClipboardDocumentIcon } from "@heroicons/vue/24/solid";
 import Renderer from "../components/Renderer/Renderer";
 
-import yaml from "js-yaml";
+import * as yaml from "js-yaml";
 
 import BitmapSlice, {
     BITMAP_RESOLUTIONS,

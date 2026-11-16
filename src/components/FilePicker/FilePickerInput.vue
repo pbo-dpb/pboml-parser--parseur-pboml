@@ -19,7 +19,7 @@
 <script>
     import PBOMLDocument from "../../models/PBOMLDocument";
     import { PDFDocument } from "pdf-lib";
-    import yaml from "js-yaml";
+    import * as yaml from "js-yaml";
 
     export default {
         props: ["prefix"],
