@@ -9,6 +9,12 @@ export default class HtmlMarkdownConverter {
             emDelimiter: "*",
         });
         turndownService.use(gfmTables);
+
+        const defaultEscape = turndownService.escape.bind(turndownService);
+        
+        turndownService.escape = (text) =>
+            defaultEscape(text).replace(/\$/g, "\\$");
+
         let markdown = turndownService.turndown(html);
 
         /**
