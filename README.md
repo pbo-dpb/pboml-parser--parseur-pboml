@@ -87,7 +87,7 @@ The visual editor can be embeded by adding and `edit` attribute set to `true`.
 ### 1. Project setup
 
 ```
-npm install
+pnpm install
 ```
 
 ### 2. Compilation with Vite
@@ -95,17 +95,17 @@ npm install
 ### Compiles and hot-reloads for development
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 ### Run tests
 
 ```
-npm run test
+pnpm run test
 ```
 
 ### Compiles and minifies for production
 
 ```
-npm run build
+pnpm run build
 ```

@@ -91,7 +91,7 @@ L'éditeur visuel peut être intégré en ajoutant l'attribut `edit` avec la val
 ### 1. Mise en route
 
 ```
-npm install
+pnpm install
 ```
 
 ### 2. Compilation avec Vite
@@ -99,17 +99,17 @@ npm install
 ### Compilations et recharges à chaud pour le développement
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 ### Tests
 
 ```
-npm run test
+pnpm run test
 ```
 
 ### Compilation et miniaturisation pour la production
 
 ```
-npm run build
+pnpm run build
 ```
