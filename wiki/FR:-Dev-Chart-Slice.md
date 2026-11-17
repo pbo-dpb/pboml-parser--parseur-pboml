@@ -2,53 +2,55 @@
 
 > Référence pour les rédacteurs : [Tranche graphique](./FR:-Chart-Slice)
 
-***
-🌐  [English](./EN:-Dev-Chart-Slice) • Français • ⬆️ [Guide du développeur](./FR:-Guide-du-developpeur)
-***
+---
+
+🌐 [English](./EN:-Dev-Chart-Slice) • Français • ⬆️ [Guide du développeur](./FR:-Guide-du-developpeur)
+
+---
 
 ## En un coup d'œil
 
-| | |
-|:-|:-|
-| `type` YAML | `chart` |
-| Modèle | `src/models/contents/ChartSlice.js` + `DataTable/*` **ou** `ArrayTable/ArrayTable.js` |
-| Moteur de rendu HTML | `src/Renderers/Html/ChartSliceHtmlRenderer.js` |
-| Composants Chart.js | `src/components/Grapher/DataTableGrapher.js`, `ArrayTableGrapher.js`, `ArrayTableDataSource.js`, `ChartJsMixin.js`, `ColourPalettes.js` |
-| Éditeur | `src/editors/ChartSliceEditor.js` → `DataTableEditor` (avec `showChartProperties: true`) |
-| Dans le menu d'ajout de tranche | Oui (présentation par défaut `figure`) |
-| Bibliothèques | `chart.js/auto` (v4), `color` |
+|                                 |                                                                                                                                         |
+| :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| `type` YAML                     | `chart`                                                                                                                                 |
+| Modèle                          | `src/models/contents/ChartSlice.js` + `DataTable/*` **ou** `ArrayTable/ArrayTable.js`                                                   |
+| Moteur de rendu HTML            | `src/Renderers/Html/ChartSliceHtmlRenderer.js`                                                                                          |
+| Composants Chart.js             | `src/components/Grapher/DataTableGrapher.js`, `ArrayTableGrapher.js`, `ArrayTableDataSource.js`, `ChartJsMixin.js`, `ColourPalettes.js` |
+| Éditeur                         | `src/editors/ChartSliceEditor.js` → `DataTableEditor` (avec `showChartProperties: true`)                                                |
+| Dans le menu d'ajout de tranche | Oui (présentation par défaut `figure`)                                                                                                  |
+| Bibliothèques                   | `chart.js/auto` (v4), `color`                                                                                                           |
 
 ## Deux sources de données
 
 ```js
 // Constructeur de ChartSlice
 if (payload.arraytable) this.arraytable = new ArrayTable(payload.arraytable);
-else                    this.datatable  = new DataTable(payload.datatable);
+else this.datatable = new DataTable(payload.datatable);
 ```
 
-| | `datatable` (actuel) | `arraytable` (ancien) |
-|:-|:-|:-|
-| Modèle de données | Le même `DataTable` que la [tranche de tableau](./FR:-Dev-Table-Slice), sous une clé `datatable:` | Tableau 2D : première ligne = noms des séries, première colonne = étiquettes de l'axe des x |
-| Localisation | Valeurs et libellés `{en, fr}` | Chaînes de substitution remplacées à partir de `strings.{en,fr}` (`localizeRecursively`) |
-| Modifiable dans l'éditeur visuel | ✅ | ❌ Aperçu seulement. Modifier avec *Avancé → Code* (l'éditeur de code source de la tranche ne reconstruit pas l'`ArrayTable`). |
-| Équivalent textuel (« Version textuelle ») | Tableau généré par `DataTable.renderReadonlyVnode()` | `ArrayTableTable.js` |
+|                                            | `datatable` (actuel)                                                                              | `arraytable` (ancien)                                                                                                          |
+| :----------------------------------------- | :------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------- |
+| Modèle de données                          | Le même `DataTable` que la [tranche de tableau](./FR:-Dev-Table-Slice), sous une clé `datatable:` | Tableau 2D : première ligne = noms des séries, première colonne = étiquettes de l'axe des x                                    |
+| Localisation                               | Valeurs et libellés `{en, fr}`                                                                    | Chaînes de substitution remplacées à partir de `strings.{en,fr}` (`localizeRecursively`)                                       |
+| Modifiable dans l'éditeur visuel           | ✅                                                                                                | ❌ Aperçu seulement. Modifier avec _Avancé → Code_ (l'éditeur de code source de la tranche ne reconstruit pas l'`ArrayTable`). |
+| Équivalent textuel (« Version textuelle ») | Tableau généré par `DataTable.renderReadonlyVnode()`                                              | `ArrayTableTable.js`                                                                                                           |
 
-> ⚠️ Attention à la construction d'`ArrayTable` : `ChartSlice` lui passe `payload.arraytable`, et le constructeur d'`ArrayTable` lit ensuite `arraytable`, `axes`, `colors`, `strings` et `chart_type(s)` **dans cet objet**. Un graphique arraytable a donc besoin d'un objet **imbriqué** (`arraytable: { arraytable: [[…]], axes, strings, chart_type }`), comme le montre la page Tranche graphique pour les rédacteurs. L'ancien fichier `documentation/graph_slices.en.md` du dépôt (`type: graph`, avec les champs directement sur la tranche) est **périmé** et ne s'affiche pas avec l'analyseur actuel.
+> ⚠️ Attention à la construction d'`ArrayTable` : `ChartSlice` lui passe `payload.arraytable`, et le constructeur d'`ArrayTable` lit ensuite `arraytable`, `axes`, `colors`, `strings` et `chart_type(s)` **dans cet objet**. Un graphique arraytable a donc besoin d'un objet **imbriqué** (`arraytable: { arraytable: [[…]], axes, strings, chart_type }`), comme le montre la page Tranche graphique pour les rédacteurs.
 
 ## Graphiques `datatable` (`DataTableGrapher`)
 
 ### Correspondance avec Chart.js
 
-| Notion DataTable | Chart.js |
-|:-|:-|
+| Notion DataTable                                                                                                     | Chart.js                                                                                                                                                                                                              |
+| :------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Première variable avec `is_descriptive: true` (**obligatoire** ; sinon la configuration vaut `null` et ⚠️ s'affiche) | Valeurs de x. Axe par catégories si le `type` de la variable est `markdown` ; sinon axe **linéaire** avec `stepSize` = plus petit écart entre les valeurs. Le libellé de la variable devient le titre de l'axe des x. |
-| Chaque autre variable avec `skip_chart: false` | Une série. `label` → légende. |
-| Chaque entrée (`content[i]`) avec `skip_chart: false` | Un point par série (`{x, y}`). |
-| `variable.chart_type` | `type` de la série (`bar`, `line`, `scatter`, …). |
-| `variable.tension` | `"monotone"` → `cubicInterpolationMode: "monotone"` ; un nombre → `tension`. |
-| `variable.group[lang]` | `stack` de la série (groupes empilés). |
-| `variable.emphasize` | Couleur de la palette plus foncée et plus saturée pour toute la série. |
-| `entry.emphasize` | Ce point ou cette barre est plus foncé ; les barres reçoivent une bordure violette `#a855f7`, les points un rayon de 7. |
+| Chaque autre variable avec `skip_chart: false`                                                                       | Une série. `label` → légende.                                                                                                                                                                                         |
+| Chaque entrée (`content[i]`) avec `skip_chart: false`                                                                | Un point par série (`{x, y}`).                                                                                                                                                                                        |
+| `variable.chart_type`                                                                                                | `type` de la série (`bar`, `line`, `scatter`, …).                                                                                                                                                                     |
+| `variable.tension`                                                                                                   | `"monotone"` → `cubicInterpolationMode: "monotone"` ; un nombre → `tension`.                                                                                                                                          |
+| `variable.group[lang]`                                                                                               | `stack` de la série (groupes empilés).                                                                                                                                                                                |
+| `variable.emphasize`                                                                                                 | Couleur de la palette plus foncée et plus saturée pour toute la série.                                                                                                                                                |
+| `entry.emphasize`                                                                                                    | Ce point ou cette barre est plus foncé ; les barres reçoivent une bordure violette `#a855f7`, les points un rayon de 7.                                                                                               |
 
 Les séries reçoivent un `order` pour que **les points de nuage soient dessinés au-dessus des lignes, et les lignes au-dessus des barres**.
 
@@ -66,16 +68,16 @@ Les séries reçoivent un `order` pour que **les points de nuage soient dessiné
 
 ```yaml
 arraytable:
-  chart_type: bar            # ou chart_types: [bar, line, …] (une valeur par série)
-  axes:
-    y: { label: __Salary__, style: currency, currency: CAD }   # style : currency | percentage
-  strings:
-    en: { __Salary__: Salary, _S22_: "2022" }
-    fr: { __Salary__: Salaire, _S22_: "2022" }
-  arraytable:
-    - [Employee, _S22_]
-    - [Mike, 35000]
-    - [Bob, { data: 37000, emphasize: true }]
+    chart_type: bar # ou chart_types: [bar, line, …] (une valeur par série)
+    axes:
+        y: { label: __Salary__, style: currency, currency: CAD } # style : currency | percentage
+    strings:
+        en: { __Salary__: Salary, _S22_: "2022" }
+        fr: { __Salary__: Salaire, _S22_: "2022" }
+    arraytable:
+        - [Employee, _S22_]
+        - [Mike, 35000]
+        - [Bob, { data: 37000, emphasize: true }]
 ```
 
 - `ArrayTableDataSource` convertit le tableau en `{labels, datasets}`. Une cellule peut être `{data, emphasize}` ; les points mis en évidence deviennent des triangles (ligne) ou des barres plus foncées.
