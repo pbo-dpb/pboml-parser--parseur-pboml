@@ -111,9 +111,9 @@ describe("HTML slices (HtmlRenderer)", () => {
         const { container } = await mountVnode(() =>
             new HtmlSliceHtmlRenderer(slice).renderReadonlyVnode("en"),
         );
-        const html = shadowHtml(container);
-        expect(html).toContain("ok");
-        expectClean(html);
+        // HtmlRenderer is an async component: wait until it has rendered.
+        await vi.waitFor(() => expect(shadowHtml(container)).toContain("ok"));
+        expectClean(shadowHtml(container));
     });
 
     // KNOWN BUG: the fallback passes a function as the children of a plain

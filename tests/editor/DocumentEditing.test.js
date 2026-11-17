@@ -121,8 +121,11 @@ describe("EditorSlices (editing the document through the UI)", () => {
 
     it("shows the empty state for a document without slices", async () => {
         const { container } = await mountDoc([]);
-        expect(container.textContent).toContain(
-            "No slice is present in the document.",
+        // The empty-state message is an async component: wait for it.
+        await vi.waitFor(() =>
+            expect(container.textContent).toContain(
+                "No slice is present in the document.",
+            ),
         );
     });
 
