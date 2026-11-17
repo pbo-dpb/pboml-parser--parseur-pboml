@@ -14,7 +14,6 @@
 <script setup>
     import { ref, computed } from "vue";
     import DataTable from "../../../../../models/contents/DataTable/DataTable";
-    import editorStrings from "../../../../../editor-strings";
     import DisplayEditorVariable from "./DisplayEditorVariable.vue";
 
     const props = defineProps({
@@ -22,8 +21,6 @@
     });
 
     const currentlyDraggedVar = ref(null);
-
-    const strings = ref(editorStrings[document.documentElement.lang]);
 
     const variablesArray = computed(() => {
         return Object.values(props.datatable.variables);

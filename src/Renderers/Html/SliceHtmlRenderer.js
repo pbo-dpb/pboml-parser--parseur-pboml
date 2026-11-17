@@ -1,6 +1,5 @@
-import { h, defineAsyncComponent } from "vue";
+import { h } from "vue";
 import Details from "../../components/Details.js";
-import ChoiceRenderer from "../../components/Editor/Inputs/ChoiceRenderer.js";
 import rendererStrings from "../../renderer-strings.js";
 import MarkdownDriver from "../../MarkdownDriver.js";
 
@@ -61,7 +60,6 @@ export default class SliceHtmlRenderer {
 
     __renderMetaContentArrayVnodes(contentArray, language) {
         const md = new MarkdownDriver();
-        /*md.renderInline = true;*/
         let classes = [
             "pboml-prose",
             "prose-sm",
@@ -168,83 +166,6 @@ export default class SliceHtmlRenderer {
         return [];
     }
 
-    _buildEditorInputVnodes() {
-        return [];
-    }
-
-    _buildEditorChoicesInputVnode() {
-        return [new ChoiceRenderer(this).renderAsVnode()];
-    }
-
-    __buildEditorsVnode() {
-        return [
-            h("div", { class: "mb-4 empty:hidden" }, [
-                h(
-                    defineAsyncComponent(
-                        () =>
-                            import("../../components/Editor/SlicePresentationEditor.js"),
-                    ),
-                    {
-                        presentation: this.slice.presentation,
-                        isEditing: this.slice.state.isEditingMeta,
-                        "onUpdate:modelValue": (value) => {
-                            this.slice.presentation = value;
-                        },
-                    },
-                ),
-            ]),
-
-            h("div", { class: "mb-4 empty:hidden" }, [
-                h(
-                    defineAsyncComponent(
-                        () =>
-                            import("../../components/Editor/SliceReferenceEditor.js"),
-                    ),
-                    {
-                        referenced_as: this.slice.referenced_as,
-                        isEditing: this.slice.state.isEditingMeta,
-                        "onUpdate:modelValue": (value) => {
-                            this.slice.referenced_as.en = value.en;
-                            this.slice.referenced_as.fr = value.fr;
-                        },
-                    },
-                ),
-            ]),
-
-            h("div", { class: "mb-4 empty:hidden" }, [
-                h(
-                    defineAsyncComponent(
-                        () =>
-                            import("../../components/Editor/SliceLabelEditor.js"),
-                    ),
-                    {
-                        label: this.slice.label,
-                        isEditing: this.slice.state.isEditingMeta,
-                        "onUpdate:modelValue": (value) => {
-                            this.slice.label.en = value.en;
-                            this.slice.label.fr = value.fr;
-                        },
-                    },
-                ),
-            ]),
-
-            ...(this.slice.choices
-                ? this._buildEditorChoicesInputVnode()
-                : this._buildEditorInputVnodes()),
-
-            h("div", { class: "mt-4" }, [
-                h(
-                    defineAsyncComponent(
-                        () => import("../../editors/SliceMetasEditor.js"),
-                    ),
-                    {
-                        slice: this,
-                    },
-                ),
-            ]),
-        ];
-    }
-
     getSliceWrapperVnode(language) {
         let props = {
             class:
@@ -299,12 +220,5 @@ export default class SliceHtmlRenderer {
         }
 
         return this.buildVnodes(language);
-    }
-
-    renderEditingVnode(language = document.documentElement.lang) {
-        return h(
-            defineAsyncComponent(() => import("../../editors/SliceEditor.js")),
-            { slice: this.slice, language: language, id: this.slice.anchor },
-        );
     }
 }

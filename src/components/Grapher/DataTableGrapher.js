@@ -1,5 +1,4 @@
 import { h } from "vue";
-import Chart from "chart.js/auto";
 import Datatable from "../../models/contents/DataTable/DataTable";
 import ChartJsMixin from "./ChartJsMixin";
 import Color from "color";
@@ -69,7 +68,7 @@ export default {
         },
 
         datasets() {
-            let [descriptiveVariableKey, descriptiveVariable] =
+            let [descriptiveVariableKey] =
                 this.datatable.descriptiveVariableKeyPair;
 
             if (!descriptiveVariableKey)

@@ -1,11 +1,7 @@
 import { h } from "vue";
-
-import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue";
-import NumberInput from "../components/Editor/Inputs/NumberInput.vue";
 import strings from "../editor-strings";
 import MarkdownDriver from "../MarkdownDriver";
 import DataTableEditor from "../components/Editor/DataTableEditor/DataTableEditor.js";
-import DataTable from "../models/contents/DataTable/DataTable";
 import Renderer from "../components/Renderer/Renderer";
 
 export default {

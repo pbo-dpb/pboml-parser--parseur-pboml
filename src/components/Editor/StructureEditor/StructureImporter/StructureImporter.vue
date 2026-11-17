@@ -61,8 +61,6 @@
             };
         },
 
-        mounted() {},
-
         computed: {
             visualStructureHtml() {
                 if (!this.en) return "";

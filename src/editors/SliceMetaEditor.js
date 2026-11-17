@@ -1,5 +1,5 @@
 import editorStrings from "../editor-strings";
-import { h, defineAsyncComponent } from "vue";
+import { h } from "vue";
 import TinyButton from "../components/Editor/TinyButton.vue";
 import BilingualInput from "../components/Editor/Inputs/BilingualInput.vue";
 import { PlusIcon } from "@heroicons/vue/16/solid";

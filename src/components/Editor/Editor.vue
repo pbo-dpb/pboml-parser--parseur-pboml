@@ -35,42 +35,37 @@
                 </div>
             </div>
 
-            <editor-previews
-                :pboml-document="pbomlDocument"
-                :disabled="shouldEditRaw"></editor-previews>
+            <editor-previews :pboml-document="pbomlDocument"></editor-previews>
         </header>
 
-        <template v-if="!shouldEditRaw">
-            <div
-                id="content"
-                role="tabpanel"
-                tabindex="0"
-                aria-labelledby="tab-content"
-                v-if="currentTab === 'content'">
-                <editor-main-content
-                    :pboml-document="pbomlDocument"></editor-main-content>
-            </div>
-            <div
-                v-if="currentTab === 'meta'"
-                id="meta"
-                role="tabpanel"
-                tabindex="0"
-                aria-labelledby="tab-meta">
-                <document-meta-editor
-                    :pboml-document="pbomlDocument"></document-meta-editor>
-            </div>
-            <div
-                v-if="currentTab === 'advanced'"
-                id="advanced"
-                role="tabpanel"
-                tabindex="0"
-                aria-labelledby="tab-advanced">
-                <editor-advanced
-                    :pboml-document="pbomlDocument"
-                    @update="handlePbomlUpdate"
-                    :prefix="prefix"></editor-advanced>
-            </div>
-        </template>
+        <div
+            id="content"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="tab-content"
+            v-if="currentTab === 'content'">
+            <editor-main-content
+                :pboml-document="pbomlDocument"></editor-main-content>
+        </div>
+        <div
+            v-if="currentTab === 'meta'"
+            id="meta"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="tab-meta">
+            <document-meta-editor
+                :pboml-document="pbomlDocument"></document-meta-editor>
+        </div>
+        <div
+            v-if="currentTab === 'advanced'"
+            id="advanced"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="tab-advanced">
+            <editor-advanced
+                :pboml-document="pbomlDocument"
+                :prefix="prefix"></editor-advanced>
+        </div>
     </main>
 </template>
 <script>
@@ -78,17 +73,10 @@
     import PBOMLDocument from "../../models/PBOMLDocument";
     import EditorPreviews from "./EditorPreviews.vue";
     import EditorMainContent from "./EditorMainContent/EditorMainContent.js";
-    import Button from "./Button.vue";
-    import TinyButton from "./TinyButton.vue";
     import DocumentMetaEditor from "./DocumentMetaEditor/DocumentMetaEditor";
     import strings from "../../editor-strings";
     import Tab from "./Tabs/Tab.vue";
-    import {
-        ArrowsPointingInIcon,
-        ArrowsPointingOutIcon,
-    } from "@heroicons/vue/24/solid";
-    import { ChevronRightIcon } from "@heroicons/vue/20/solid";
-    import { FileCode, Unlock } from "@lucide/vue";
+    import { Unlock } from "@lucide/vue";
 
     export default {
         props: {
@@ -98,7 +86,6 @@
 
         data() {
             return {
-                shouldEditRaw: false,
                 strings: strings[document.documentElement.lang],
                 currentTab: "content",
             };
@@ -107,17 +94,11 @@
         components: {
             EditorPreviews,
             EditorMainContent,
-            Button,
-            TinyButton,
-            FileCode,
             EditorAdvanced: defineAsyncComponent(
                 () => import("./EditorAdvanced/EditorAdvanced.vue"),
             ),
             DocumentMetaEditor,
             Tab,
-            ArrowsPointingInIcon,
-            ArrowsPointingOutIcon,
-            ChevronRightIcon,
             Unlock,
         },
 
@@ -138,12 +119,6 @@
                     document.dispatchEvent(event);
                 },
                 deep: true,
-            },
-        },
-
-        methods: {
-            handlePbomlUpdate(newPbomlDocument) {
-                this.pbomlDocument = newPbomlDocument;
             },
         },
 

@@ -1,7 +1,5 @@
 import { h, defineAsyncComponent } from "vue";
 import Slice from "./Slice";
-import MarkdownDriver from "../../MarkdownDriver";
-
 export default class HeadingSlice extends Slice {
     constructor(payload) {
         super(payload);

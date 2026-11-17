@@ -20,7 +20,6 @@ export default {
                             const bbox = this.$refs.renderer
                                 .querySelector("svg")
                                 .getBBox();
-                            console.log(bbox);
                             this.$refs.renderer
                                 .querySelector("svg")
                                 .setAttribute(

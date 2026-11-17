@@ -71,4 +71,3 @@ Les outils modifient directement `slice.content[lang]` au lieu d'émettre des é
 - L'expression régulière de `SvgWhiteRemover`, `/#F{3,6}/gi`, reconnaît aussi le début de couleurs comme `#FFF000` ou `#FFFA`, ce qui laisse des couleurs invalides. Elle ignore aussi `white`, `rgb(255,255,255)`, etc.
 - Retirer `width`/`height` sans `viewBox` fait parfois revenir le SVG à la taille par défaut (300×150).
 - Les appels de note (`[^1]`) placés dans le texte d'un SVG ne deviennent pas des liens (contenu en Shadow DOM, hors `.pboml-prose`).
-- `src/models/contents/SvgRenderer.js` est un ancien moteur de rendu sans DOMPurify, inutilisé ; ne l'importez pas.

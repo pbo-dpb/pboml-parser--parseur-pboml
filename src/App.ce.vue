@@ -30,7 +30,7 @@
     import { Buffer } from "buffer";
     import debounce from "lodash.debounce";
 
-    import { ref, defineAsyncComponent, computed } from "vue";
+    import { defineAsyncComponent } from "vue";
     import LoadingIndicator from "./components/LoadingIndicator.vue";
     import Renderer from "./components/Renderer/Renderer.js";
     import PBOMLDocument from "./models/PBOMLDocument";

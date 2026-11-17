@@ -1,16 +1,10 @@
 import { h } from "vue";
-
-import strings from "../../../editor-strings";
 import Button from "../Button.vue";
 import editorStrings from "../../../editor-strings";
 import CheckboxInput from "../Inputs/CheckboxInput.vue";
 import SelectInput from "../Inputs/SelectInput.vue";
 import MarkdownTextarea from "../Inputs/MarkdownTextarea.vue";
-import {
-    ArrowLeftIcon,
-    ArrowRightIcon,
-    CheckCircleIcon,
-} from "@heroicons/vue/24/solid";
+import { CheckCircleIcon } from "@heroicons/vue/24/solid";
 import MarkdownDriver from "../../../MarkdownDriver";
 import DataTableVariable from "../../../models/contents/DataTable/DataTableVariable";
 import DataTableEntry from "../../../models/contents/DataTable/DataTableEntry";

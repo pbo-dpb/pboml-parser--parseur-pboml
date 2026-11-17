@@ -1,7 +1,5 @@
-import { h, defineAsyncComponent } from "vue";
-import KvListVariablePair from "../../models/contents/KvListVariablePair";
+import { h } from "vue";
 import SliceHtmlRenderer from "./SliceHtmlRenderer";
-const language = document.documentElement.lang;
 
 export default class KvListSliceHtmlRenderer extends SliceHtmlRenderer {
     renderReadonlyVnode(language) {

@@ -123,4 +123,3 @@ Both use `Grapher/ChartJsMixin.js` (canvas, dark mode, bottom legend, no animati
 - `RendererIntersectionManager.startObservingForSlice()` never saves its observers in `this.observers`, so `stopObserving()` does nothing. The observers stay alive after the component is unmounted.
 - `ChartSliceHtmlRenderer.renderAltsVnodes()` passes `language` as the third argument of `renderMetaVnodes(label, content, collapsible)`. It works only because a language string is truthy.
 - `src/Renderers/Html/HtmlSliceHtmlRenderer.js` exports a class named `SvgSliceHtmlRenderer` (copy/paste). It is harmless, because renderers are looked up by file name, but it is confusing in stack traces.
-- `src/models/contents/SvgRenderer.js` is an older copy of `components/SvgRenderer.js` without DOMPurify and is not imported anywhere.

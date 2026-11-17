@@ -71,4 +71,3 @@ The tools change `slice.content[lang]` directly instead of emitting events.
 - `SvgWhiteRemover`'s regex `/#F{3,6}/gi` also matches the beginning of colours such as `#FFF000` or `#FFFA`, which leaves invalid colour strings behind. It also ignores `white`, `rgb(255,255,255)`, and so on.
 - Removing `width`/`height` without a `viewBox` makes some SVGs collapse to the default size (300×150).
 - Annotation references (`[^1]`) inside SVG text are not linked (content is in a Shadow DOM, outside `.pboml-prose`).
-- `src/models/contents/SvgRenderer.js` is an unused older renderer without DOMPurify; do not import it.

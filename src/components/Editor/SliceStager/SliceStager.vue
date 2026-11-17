@@ -75,12 +75,9 @@
 
     import {
         PlusCircleIcon,
-        XMarkIcon,
         BeakerIcon,
         XCircleIcon,
     } from "@heroicons/vue/24/solid";
-
-    import TinyButton from "../TinyButton.vue";
 
     import editorStrings from "../../../editor-strings.js";
     const language = document.documentElement.lang;
@@ -99,10 +96,8 @@
             };
         },
         components: {
-            TinyButton,
             PlusCircleIcon,
             XCircleIcon,
-            XMarkIcon,
             BeakerIcon,
         },
         watch: {

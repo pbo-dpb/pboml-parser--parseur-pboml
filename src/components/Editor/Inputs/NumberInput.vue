@@ -12,7 +12,6 @@
         </legend>
 
         <input
-            ref="input"
             class="w-full rounded-sm border border-gray-300 p-1"
             :value="modelValue"
             type="number"
@@ -27,12 +26,8 @@
     </fieldset>
 </template>
 <script setup>
-    import { ref, onMounted } from "vue";
-
     defineProps(["modelValue", "label", "hint"]);
     const emit = defineEmits(["update:modelValue"]);
-
-    const input = ref(null);
 
     function handleInput(e) {
         let value = e.target.value;

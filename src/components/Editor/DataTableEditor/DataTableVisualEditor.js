@@ -2,7 +2,6 @@ import { h } from "vue";
 
 import BilingualInput from "../Inputs/BilingualInput.vue";
 import NumberInput from "../Inputs/NumberInput.vue";
-import strings from "../../../editor-strings";
 import TinyButton from "../TinyButton.vue";
 import editorStrings from "../../../editor-strings";
 import {
@@ -10,7 +9,6 @@ import {
     ChartBarIcon,
     StarIcon,
     TrashIcon,
-    ExclamationTriangleIcon,
 } from "@heroicons/vue/20/solid";
 import DataTableEntry from "../../../models/contents/DataTable/DataTableEntry";
 

@@ -1,4 +1,3 @@
-import Button from "../Button.vue";
 import editorStrings from "../../../editor-strings";
 import CheckboxInput from "../Inputs/CheckboxInput.vue";
 import { h } from "vue";
@@ -163,7 +162,6 @@ export default {
 
                                       if (e && e.target) {
                                           const targetEl = e.target;
-                                          console.log("targetEl", targetEl);
                                           this.$nextTick(() => {
                                               targetEl.scrollIntoView({
                                                   behavior: "smooth",

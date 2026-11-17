@@ -56,7 +56,7 @@ export default {
             const levels = {};
 
             flatArray.forEach((item) => {
-                const { level, ...rest } = item;
+                const { level } = item;
                 const node = {
                     labels: this.buildLabelContent(
                         item.content?.[this.language],

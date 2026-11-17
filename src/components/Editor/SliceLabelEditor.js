@@ -1,5 +1,4 @@
 import { h } from "vue";
-import TinyButton from "./TinyButton.vue";
 import BilingualInput from "../../components/Editor/Inputs/BilingualInput.vue";
 import strings from "../../editor-strings";
 export default {

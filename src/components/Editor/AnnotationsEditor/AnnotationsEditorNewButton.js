@@ -1,5 +1,4 @@
 import { h } from "vue";
-import Button from "../Button.vue";
 import editorStrings from "../../../editor-strings";
 import { PlusCircleIcon } from "@heroicons/vue/24/solid";
 
