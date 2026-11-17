@@ -17,7 +17,6 @@
                 }}</span>
             </Button>
             <Button
-                :disabled="disabled"
                 @click="
                     shouldDisplayPreview = shouldDisplayPreview ? false : 'en'
                 "
@@ -29,14 +28,6 @@
                 }}</span>
             </Button>
         </nav>
-
-        <!-- <div class="flex flex-col gap-2 bg-blue-100 shadow-sm p-4" v-if="shouldDisplayExportActions">
-            <nav class="flex flex-row gap-2 justify-end ">
-                <Button @click="downloadPboml">
-                    PBOML
-                </Button>
-            </nav>
-        </div> -->
 
         <dialog
             ref="previewDialog"
@@ -89,11 +80,9 @@
     export default {
         props: {
             pbomlDocument: PBOMLDocument,
-            disabled: Boolean,
         },
         data() {
             return {
-                shouldDisplayExportActions: false,
                 shouldDisplayPreview: false,
                 strings: strings[document.documentElement.lang],
                 enhancedPreviewWindow: null,
@@ -109,25 +98,6 @@
         },
 
         methods: {
-            downloadPboml() {
-                const rawtext = this.pbomlDocument.serialize();
-                const element = document.createElement("a");
-                element.setAttribute("aria-hidden", true);
-                element.setAttribute(
-                    "href",
-                    "data:text/pboml;charset=utf-8," +
-                        encodeURIComponent(rawtext),
-                );
-                element.setAttribute(
-                    "download",
-                    `${this.pbomlDocument.id}.pboml.yaml`,
-                );
-
-                element.style.display = "none";
-                document.body.appendChild(element);
-                element.click();
-                document.body.removeChild(element);
-            },
             injectEnhancedPreviewContent() {
                 if (!this.enhancedPreviewWindow) {
                     return;

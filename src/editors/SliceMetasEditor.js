@@ -1,5 +1,4 @@
-import editorStrings from "../editor-strings";
-import { h, defineAsyncComponent } from "vue";
+import { h } from "vue";
 import SliceMetaEditor from "./SliceMetaEditor";
 
 export default {

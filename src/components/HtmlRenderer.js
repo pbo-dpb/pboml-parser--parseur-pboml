@@ -1,6 +1,6 @@
 import { h } from "vue";
 import DOMPurify from "dompurify";
-import { twind, cssom, observe, install } from "@twind/core";
+import { twind, cssom, observe } from "@twind/core";
 import config from "../../twind.config.js";
 
 export default {

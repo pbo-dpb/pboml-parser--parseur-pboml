@@ -77,10 +77,6 @@ export default class Slice {
             prefix: null,
             canMoveUp: true,
             canMoveDown: true,
-            callbacks: {
-                move: null,
-                delete: null,
-            },
         };
 
         this.state._unlocked =

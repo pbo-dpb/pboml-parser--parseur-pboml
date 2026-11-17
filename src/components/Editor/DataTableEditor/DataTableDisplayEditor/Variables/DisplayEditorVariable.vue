@@ -1,19 +1,16 @@
 <template>
     <li
         draggable="true"
-        class="group flex flex-row items-center gap-2 border border-gray-300 px-2 py-1 text-sm transition-all"
+        class="group flex cursor-pointer flex-row items-center gap-2 border border-gray-300 px-2 py-1 text-sm transition-all"
         @dragstart="handleDragStart"
         @dragend="handleDragEnd"
         @dragover.prevent="handleDragover"
         :class="{
             'opacity-30': isDragging,
             ...draggedOverClasses,
-            'cursor-pointer': !showEditor,
         }"
-        @dragenter=""
         @dragleave="isBeingDraggedOver = false"
-        @drop.prevent="handleDrop"
-        @dblclick="toggleEditor">
+        @drop.prevent="handleDrop">
         <ArrowsUpDownIcon
             class="h-4 w-4 text-blue-200 group-hover:text-blue-800"></ArrowsUpDownIcon>
         <DataTableVariablesEditorVariablePreview :variable="variable" />
@@ -21,14 +18,12 @@
 </template>
 <script>
     import DataTableVariable from "../../../../../models/contents/DataTable/DataTableVariable";
-    import editorStrings from "../../../../../editor-strings";
     import DataTableVariablesEditorVariablePreview from "../../DataTableVariablesEditorVariablePreview.vue";
-    import { ArrowsUpDownIcon, PencilIcon } from "@heroicons/vue/24/outline";
+    import { ArrowsUpDownIcon } from "@heroicons/vue/24/outline";
 
     export default {
         components: {
             ArrowsUpDownIcon,
-            PencilIcon,
             DataTableVariablesEditorVariablePreview,
         },
         props: {
@@ -47,11 +42,8 @@
         },
         data() {
             return {
-                language: document.documentElement.lang,
-                editorStrings: editorStrings[document.documentElement.lang],
                 isDragging: false,
                 isBeingDraggedOver: false,
-                showEditor: false,
             };
         },
         methods: {
@@ -66,9 +58,6 @@
             handleDragover(event) {
                 event.preventDefault();
                 this.isBeingDraggedOver = true;
-            },
-            toggleEditor() {
-                this.showEditor = !this.showEditor;
             },
             handleDragEnd(e) {
                 this.$emit("dragend", e);

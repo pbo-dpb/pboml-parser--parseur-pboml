@@ -92,8 +92,6 @@ export default class PBOMLDocument {
                 if (slice) {
                     slice.state.sequence = counter;
                     slice.state.prefix = prefix;
-                    //slice.state.callbacks.move = (s) => this.handleSliceMove(s);
-                    //slice.state.callbacks.delete = (s) => this.handleSliceDelete(s);
 
                     if (counter === 1) {
                         slice.state.canMoveUp = false;

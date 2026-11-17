@@ -7,7 +7,9 @@
         "dev": "vp dev --port 8080 --host",
         "build": "vp build",
         "preview": "vp preview --host --port 8080",
-        "test": "vp test"
+        "test": "vp test",
+        "test:coverage": "vp test --coverage",
+        "test:slow": "vp test --config tests/slow-imports.config.mjs"
     },
     "dependencies": {
         "@citation-js/core": "^0.9.0",
@@ -43,7 +45,9 @@
         "@testing-library/vue": "^8.1.0",
         "@vitejs/plugin-basic-ssl": "^2.3.0",
         "@vitejs/plugin-vue": "^6.0.11",
+        "@vitest/coverage-v8": "5.1.0",
         "happy-dom": "^21.0.4",
+        "jsdom": "^31.0.1",
         "vite": "catalog:",
         "vite-plus": "catalog:"
     }

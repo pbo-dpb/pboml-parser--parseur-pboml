@@ -1,4 +1,4 @@
-import { h, defineAsyncComponent } from "vue";
+import { h } from "vue";
 import SliceHtmlRenderer from "./SliceHtmlRenderer";
 import MarkdownDriver from "../../MarkdownDriver";
 

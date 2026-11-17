@@ -1,4 +1,4 @@
-import { h, defineAsyncComponent, readonly } from "vue";
+import { h } from "vue";
 import editorStrings from "../editor-strings";
 import SelectInput from "../components/Editor/Inputs/SelectInput.vue";
 import MarkdownTextarea from "../components/Editor/Inputs/MarkdownTextarea.vue";

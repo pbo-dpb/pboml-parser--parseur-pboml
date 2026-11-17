@@ -1,4 +1,4 @@
-import { h, defineAsyncComponent, Suspense } from "vue";
+import { h, defineAsyncComponent } from "vue";
 import Slice from "./Slice";
 import DataTable from "./DataTable/DataTable";
 import ArrayTable from "./ArrayTable/ArrayTable";

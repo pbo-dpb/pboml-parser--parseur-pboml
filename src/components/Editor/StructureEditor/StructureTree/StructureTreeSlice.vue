@@ -13,7 +13,6 @@
             'bg-slate-50': this.slice.presentation === 'figure',
             'cursor-pointer': !showEditor,
         }"
-        @dragenter=""
         @dragleave="isBeingDraggedOver = false"
         @drop.prevent="resetDragCues"
         @dblclick="toggleEditor">

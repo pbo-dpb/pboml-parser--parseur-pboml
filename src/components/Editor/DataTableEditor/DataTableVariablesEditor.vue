@@ -34,7 +34,6 @@
 </template>
 <script>
     import DataTableVariableEditor from "./DataTableVariableEditor.js";
-    import Button from "../Button.vue";
     import editorStrings from "../../../editor-strings.js";
     import DataTableVariablesEditorVariablePreview from "./DataTableVariablesEditorVariablePreview.vue";
     import DataTableVariable from "../../../models/contents/DataTable/DataTableVariable.js";
@@ -50,7 +49,6 @@
         },
         components: {
             DataTableVariableEditor,
-            Button,
             PlusIcon,
             DataTableVariablesEditorVariablePreview,
         },

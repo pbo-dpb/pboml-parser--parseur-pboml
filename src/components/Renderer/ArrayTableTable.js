@@ -1,6 +1,5 @@
 import { h } from "vue";
 import ArrayTable from "../../models/contents/ArrayTable/ArrayTable";
-import DataTableVariable from "../../models/contents/DataTable/DataTableVariable";
 import RendererStrings from "../../renderer-strings";
 
 const cellBaseClass = `border border-gray-300 dark:border-gray-700 p-.5 text-center leading-snug`;

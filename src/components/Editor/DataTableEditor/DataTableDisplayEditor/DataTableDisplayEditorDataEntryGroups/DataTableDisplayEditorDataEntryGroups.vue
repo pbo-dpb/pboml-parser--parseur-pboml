@@ -28,7 +28,7 @@
     </fieldset>
 </template>
 <script setup>
-    import { ref, computed, onMounted } from "vue";
+    import { ref } from "vue";
     import DataTable from "../../../../../models/contents/DataTable/DataTable";
     import editorStrings from "../../../../../editor-strings";
     import DataTableDisplayEditorDataEntryGroupsGroup from "./DataTableDisplayEditorDataEntryGroupsGroup.vue";

@@ -3,10 +3,7 @@ import MarkdownDriver from "../../../MarkdownDriver";
 import rendererStrings from "../../../renderer-strings";
 import deepEqual from "deep-equal";
 import DataTableEntry from "./DataTableEntry";
-import {
-    ArrowTurnDownRightIcon,
-    ChevronDoubleRightIcon,
-} from "@heroicons/vue/16/solid";
+import { ArrowTurnDownRightIcon } from "@heroicons/vue/16/solid";
 
 const defaults = {
     skip_chart: false,

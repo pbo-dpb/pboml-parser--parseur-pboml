@@ -1,5 +1,4 @@
 import editorStrings from "../../../editor-strings";
-import TinyButton from "../TinyButton.vue";
 import StructureTree from "./StructureTree/StructureTree.js";
 import { h, defineAsyncComponent } from "vue";
 import { ClipboardDocumentListIcon } from "@heroicons/vue/24/outline";
@@ -10,21 +9,11 @@ const StructureImporter = defineAsyncComponent(
 
 export default {
     props: ["pbomlDocument"],
-    components: {
-        StructureImporter,
-        ClipboardDocumentListIcon,
-        StructureTree,
-    },
-
     data() {
         return {
             displayImporter: false,
         };
     },
-
-    mounted() {},
-
-    methods: {},
 
     render() {
         let strings = editorStrings[document.documentElement.lang];

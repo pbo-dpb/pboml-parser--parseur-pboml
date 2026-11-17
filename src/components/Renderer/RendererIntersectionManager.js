@@ -1,4 +1,3 @@
-import Slice from "../../models/contents/Slice";
 export default class {
     constructor() {
         this.observers = {};

@@ -24,18 +24,6 @@
                 :model-value="modelValue?.fr"
                 @update:model-value="handleFrInput"
                 class="w-full border border-gray-300 p-1"></markdown-textarea>
-            <!--<label class="flex flex-col @sm:flex-row items-center text-left">
-                <span class="w-8 p-1 text-center tracking-tighter">EN</span>
-                <markdown-input :value="modelValue?.en" @input="handleEnInput" class="border border-gray-300 p-1 w-full">
-                </markdown-input>
-            </label>
-
-            <label class="flex flex-col @sm:flex-row items-center text-left">
-                <span class=" w-8 p-1 text-center tracking-tighter">FR</span>
-                <markdown-input :value="modelValue?.fr" @input="handleFrInput" class="border border-gray-300 p-1 w-full">
-                </markdown-input>
-            </label>
-            -->
         </template>
         <template v-else>
             <markdown-textarea
@@ -52,7 +40,6 @@
     </fieldset>
 </template>
 <script setup>
-    import MarkdownInput from "./MarkdownInput.vue";
     import MarkdownTextarea from "./MarkdownTextarea.vue";
 
     const props = defineProps(["modelValue", "label", "inputSize"]);

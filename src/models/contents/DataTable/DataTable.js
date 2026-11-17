@@ -68,7 +68,7 @@ export default class DataTable {
     }
 
     get descriptiveVariableKey() {
-        const [key, value] = this.descriptiveVariableKeyPair;
+        const [key] = this.descriptiveVariableKeyPair;
         return key;
     }
 
@@ -114,7 +114,7 @@ export default class DataTable {
     getAllUnitsUsedInTableForLanguage(language) {
         let units = [];
         Object.entries(this.variables).forEach((entry) => {
-            const [key, variable] = entry;
+            const [, variable] = entry;
             if (variable.is_descriptive) return;
             const unit = (variable.unit?.[language] ?? "").trim();
             if (!unit || units.includes(unit)) return;

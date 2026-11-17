@@ -1,4 +1,4 @@
-import { h, defineAsyncComponent } from "vue";
+import { h } from "vue";
 import SliceHtmlRenderer from "./SliceHtmlRenderer";
 import SvgRenderer from "../../components/SvgRenderer.js";
 

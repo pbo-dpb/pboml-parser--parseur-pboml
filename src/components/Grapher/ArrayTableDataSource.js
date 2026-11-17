@@ -40,7 +40,7 @@ export default class ArraytableDataSource {
         let arraytable = JSON.parse(JSON.stringify(this.arraytable));
 
         let datasetsRow = arraytable.shift();
-        let datasetsLabelsInfo = datasetsRow.shift();
+        datasetsRow.shift(); // Drop the top-left cell (label of the label column).
         let dataLabels = arraytable.map((dataRow) => dataRow.shift());
 
         let datasets = datasetsRow.map((label, index) => {
