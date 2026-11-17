@@ -22,7 +22,7 @@ import ChartSlice from "../../src/models/contents/ChartSlice";
 import BitmapSlice from "../../src/models/contents/BitmapSlice";
 import LaTeXSlice from "../../src/models/contents/LaTeXSlice";
 import HtmlSlice from "../../src/models/contents/HtmlSlice";
-import { flush, waitForSelector, yamlDocument } from "../helpers";
+import { flush, waitForSelector, yamlDocument, waitUntil } from "../helpers";
 
 const md = (en) => ({ type: "markdown", content: { en, fr: `${en}-fr` } });
 
@@ -122,7 +122,7 @@ describe("EditorSlices (editing the document through the UI)", () => {
     it("shows the empty state for a document without slices", async () => {
         const { container } = await mountDoc([]);
         // The empty-state message is an async component: wait for it.
-        await vi.waitFor(() =>
+        await waitUntil(() =>
             expect(container.textContent).toContain(
                 "No slice is present in the document.",
             ),

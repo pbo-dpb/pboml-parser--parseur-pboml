@@ -15,7 +15,7 @@ import MoveButton from "../../src/components/Editor/MoveButton";
 import PreviewingButton from "../../src/components/Editor/PreviewingButton";
 import SliceSourceCodeEditButton from "../../src/components/Editor/SliceSourceCodeEditButton";
 import MarkdownSlice from "../../src/models/contents/MarkdownSlice";
-import { flush, waitForSelector } from "../helpers";
+import { flush, waitForSelector, waitUntil } from "../helpers";
 
 const makeSlice = (extra = {}) =>
     reactive(
@@ -161,7 +161,7 @@ describe("SliceEditor", () => {
         const slice = unlocked({ id: "old-id" });
         slice.state.isEditingMeta = true;
         const { container } = await mountEditor(slice);
-        const idInput = await vi.waitFor(() => findIdInput(container));
+        const idInput = await waitUntil(() => findIdInput(container));
         expect(idInput.value).toBe("old-id");
         idInput.value = "new-id";
         await fireEvent.blur(idInput);
@@ -172,7 +172,7 @@ describe("SliceEditor", () => {
         const slice = unlocked({ id: "old-id" });
         slice.state.isEditingMeta = true;
         const { container } = await mountEditor(slice);
-        const idInput = await vi.waitFor(() => findIdInput(container));
+        const idInput = await waitUntil(() => findIdInput(container));
         idInput.value = "";
         await fireEvent.blur(idInput);
         expect(slice.id).toBeNull();

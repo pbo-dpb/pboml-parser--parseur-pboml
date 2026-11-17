@@ -48,6 +48,15 @@ export default defineConfig({
     test: {
         globals: true,
         environment: "happy-dom",
+        // Some editor tests wait for several lazy-loaded components in a row
+        // (up to 5 s each on a slow machine, see tests/helpers/index.js).
+        testTimeout: 15000,
+        coverage: {
+            provider: "v8",
+            include: ["src/**"],
+            exclude: ["src/env.d.ts"],
+            reporter: ["text", "html"],
+        },
         onConsoleLog(log) {
             if (log.includes("KaTeX")) {
                 return false;

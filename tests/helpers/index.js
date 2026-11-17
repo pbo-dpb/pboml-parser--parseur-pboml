@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { vi } from "vite-plus/test";
 import path from "node:path";
 import { h } from "vue";
 import { render } from "@testing-library/vue";
@@ -53,8 +54,28 @@ export function shadowHtml(container) {
         .join("\n");
 }
 
+/**
+ * How long tests wait for async components, uploads, etc. Generous on
+ * purpose: on a slow machine, a chain of lazy-loaded components can take
+ * more than a second. Tests still continue as soon as the content appears.
+ */
+export const ASYNC_TIMEOUT = 5000;
+
+/** vi.waitFor with the suite's timeout. Use this instead of vi.waitFor. */
+export function waitUntil(callback, options = {}) {
+    return vi.waitFor(callback, {
+        timeout: ASYNC_TIMEOUT,
+        interval: 20,
+        ...options,
+    });
+}
+
 /** Waits until `selector` matches inside the container (async components). */
-export async function waitForSelector(container, selector, timeout = 2000) {
+export async function waitForSelector(
+    container,
+    selector,
+    timeout = ASYNC_TIMEOUT,
+) {
     const start = Date.now();
     for (;;) {
         const el = container.querySelector(selector);

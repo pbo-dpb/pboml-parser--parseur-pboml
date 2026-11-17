@@ -21,7 +21,7 @@ import BitmapSlice from "../../src/models/contents/BitmapSlice";
 import SvgSliceHtmlRenderer from "../../src/Renderers/Html/SvgSliceHtmlRenderer";
 import HtmlSliceHtmlRenderer from "../../src/Renderers/Html/HtmlSliceHtmlRenderer";
 import BitmapSliceHtmlRenderer from "../../src/Renderers/Html/BitmapSliceHtmlRenderer";
-import { mountVnode, shadowHtml, yamlDocument } from "../helpers";
+import { mountVnode, shadowHtml, yamlDocument, waitUntil } from "../helpers";
 
 /**
  * PBOML files come from authors and are rendered on public pages, so any
@@ -112,7 +112,7 @@ describe("HTML slices (HtmlRenderer)", () => {
             new HtmlSliceHtmlRenderer(slice).renderReadonlyVnode("en"),
         );
         // HtmlRenderer is an async component: wait until it has rendered.
-        await vi.waitFor(() => expect(shadowHtml(container)).toContain("ok"));
+        await waitUntil(() => expect(shadowHtml(container)).toContain("ok"));
         expectClean(shadowHtml(container));
     });
 
